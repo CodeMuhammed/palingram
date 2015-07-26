@@ -1,0 +1,31 @@
+<div class="col-md-2 col-md-offset-1 sidebar-offcanvas primary-pane" id="sidebar1" > 
+ <h3>Trending Piveos</h3>
+ <p>Trending topic one.</p>
+ <p>This example is aed </p>
+ <p>This example is aed to topice.</p>
+ <p>Trending topic one.</p>
+ <p> is aed to topice.</p>
+ <p >Is aed to topice.</p>
+
+ <hr style="margin-bottom:1.5em;" />
+ 
+ <h4>Tags 
+    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
+ </h4>
+
+ <div class="input-group" style="padding-bottom:.4em;">
+	  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag">
+	  <span ng-click="addTag(newTag)" class="input-group-addon" style="padding-left:1em; padding-right:1em">
+		<i class="icon fa fa-plus"> add</i>
+	  </span>
+   </div>
+ <div class="tag-buttons">
+	<button class="btn btn-default btn-xs" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
+	   <span>{{tag}}</span> 
+	   <a class="badge">X</a>
+	</button>
+ </div>
+ <div class="copy-right"><i class="icon fa fa-copyright"></i>
+  piveo.com 2015
+ </div>
+</div>

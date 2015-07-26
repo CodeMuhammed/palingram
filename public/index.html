@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Static Top Navbar Example for Bootstrap</title>
+
+	<script src="js/ng_modules/angular.min.js"></script>
+	<script src="js/ng_modules/angular-resource.js"></script>
+	<script src="js/ng_modules/angular-ui-router.min.js"></script>
+	<script src="js/ng_modules/ng-file-upload.js"></script>
+	<script src="js/ng_modules/ng-file-upload-shim.js"></script>
+	
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="js/vendors/jquery.min.js"></script>
+	<script src="js/vendors/offcanvas.js"></script>
+	<script src="js/vendors/affix.js"></script>
+	<script src="js/vendors/transition.js"></script>
+	
+	<!--My Custom JS-->
+	<script src="js/controllers/piveo.js"></script>
+	<script src="js/controllers/upload.js"></script>
+	<script src="js/services/services.js"></script>
+	
+	<script type="text/javascript">
+		FileAPI = {
+			debug: true,
+		};
+	</script>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/navbar-static-top.css" rel="stylesheet">
+	<link href="css/custom.css" rel="stylesheet">
+
+  </head>
+
+  <body ng-app="piveo">
+     <ui-view></ui-view>
+  </body>
+
+</html>

@@ -1,0 +1,23 @@
+ <div class="post-img">
+   <div class="preview">
+		<img style="width:100%" ngf-src="files[0]" ng-show="files[0].type.indexOf('image') > -1" ng-model="files[0]">
+   </div>
+   <span class="pic-icon"
+        ng-model="files" 
+		 ngf-select
+		 ng-model-rejected="rejFiles"
+		 ngf-multiple="false" 
+		 ngf-accept="'image/*'"
+		 ngf-disabled="false" 
+		 ngf-capture="'camera'"
+		 ngf-min-size="" ngf-max-size=""
+		 ngf-allow-dir="false"
+		 ngf-drop-available="dropAvailable">
+   	   <i class="icon fa fa-photo"></i>
+   	   <span>Change pic </span>
+   	   
+   </span>
+</div>
+<ul style="clear:both" ng-show="rejFiles.length > 0" class="response">
+	The file selected is not valid
+</ul>
