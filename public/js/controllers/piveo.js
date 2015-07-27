@@ -126,7 +126,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
       $scope.logout = function(){
           User.logout().then(
             function(status){
-                $state.go('articles.topic');
+                $state.go('articles.topic' , {id : 1});
             } ,
             function(err){
                 alert('something went wrong while doing logout');
