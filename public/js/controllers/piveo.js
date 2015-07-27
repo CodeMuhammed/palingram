@@ -1,8 +1,14 @@
 var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 
-  app.config(function($stateProvider , $urlRouterProvider){
+// cors configurations to enable consuming the rest api
+  app.config(function($httpProvider){
+     $httpProvider.defaults.useXDomain = true;
+     $httpProvider.defaults.withCredentials = true;
+     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+  });  
 
-  	  
+//state configuration and routing
+  app.config(function($stateProvider , $urlRouterProvider){
       $stateProvider
          .state('articles' , {
           	 abstract : true,
@@ -24,7 +30,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
          })
  
          .state('articles.new' , {
-              url : '/new', 
+              url : '/new/1', 
               views :  {
              	'@articles' : {
                   templateUrl : 'views/editor.tpl.html',
@@ -32,21 +38,30 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
              	}
              },
              data : {}
-         })
-
-          .state('articles.new.edit' , {
+         }) 
+         .state('articles.new.edit' , {
               url : '/edit', 
               views :  {
-             	'@articles' : {
+              '@articles' : {
                   templateUrl : 'views/post.tpl.html',
                   controller : 'postCtrl'
-             	}
+              }
              },
              data : {}
+         })
+        .state('articles.auth' , {
+             url: '/auth/1',
+             views : {
+                '@articles' : {
+                  templateUrl : 'views/auth.tpl.html',
+                  controller : 'authCtrl'
+                }
+             }
          });
 
-         $urlRouterProvider.otherwise('/articles/all');
+         $urlRouterProvider.otherwise('/articles/1');
   }); 
+
  
  app.directive('sidebar' , function(){
    	return {
@@ -66,22 +81,66 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
      	}
    });
 
-   app.directive('user' , function(){
-      return {
-            templateUrl : 'views/user.tpl.html',
-            controller : 'userController'
-      }
-   });
+   app.controller('authCtrl' , function($scope , $state , User){
+      //initial view to display based ont the authentication status
 
-   app.controller('userController' , function($scope){
-        $scope.hello = 'userprofsiginouff';
+      $scope.auth = User.signedIn();
+      $scope.user = User.activeUser();
+
+      if($scope.auth){ 
+         $scope.view = 'profile';
+      } else {
+         $scope.view = 'signin';
+      }
+     
+
+      $scope.changeView = function(view){
+         $scope.view = view;
+      }
+
+      //signing in user 
+      $scope.signin = function(user){
+          User.signin(user).then(
+            function(status){
+                $state.go('articles.topic' , {id : 1});
+            } ,
+            function(err){
+                $scope.err = err;
+            }
+         );
+      };
+
+      //signing Up a new user
+      $scope.signup = function(newUser){
+          User.signup(newUser).then(
+            function(status){
+                $state.go('articles.topic' , {id : 1});
+            } ,
+            function(err){
+                $scope.err = err;
+            }
+         );
+      };
+
+      //Logging out a user 
+      $scope.logout = function(){
+          User.logout().then(
+            function(status){
+                $state.go('articles.topic');
+            } ,
+            function(err){
+                alert('something went wrong while doing logout');
+            }
+         );
+      };
+
    });
 
  app.controller('mainCtrl' , function($scope , $state , User){
 	  $scope.sidebar = '';
 	  $scope.dir = 'left';
 	  $scope.search = false;
-
+    
 	  $scope.toggleSidebar = function(dir){
 	  	  $scope.sidebar === '' ? $scope.sidebar='active' : $scope.sidebar='';
 	  	  $scope.dir = dir;
@@ -90,20 +149,57 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 	  $scope.toggleSearch = function(){
 	  	  $scope.search =! $scope.search ;
 	  }
-
-	  $scope.gotoState = function(state){
-           $state.go(state);
-	  }
-
-    $scope.signedIn = User.signedIn();
  });
  
 
  app.controller('topicCtrl' , function($scope , $state  ,Posts ,  User){
+     
+      displayPost();
+      //This displays the post based on the params id when user is browsing
+      //a specific post or a deffault post
+      function displayPost(){
 
-      //sidemenu controls
-       $scope.user = User.activeUser;
-       $scope.tags = User.tags();
+          $scope.tags = User.tags();
+          $scope.posts = Posts.query($scope.tags); 
+
+          if($state.params.id == '1'){
+             $scope.active = $scope.posts[0];
+           } else {
+               angular.forEach($scope.posts , function(post){
+                    post._id == $state.params.id  ? $scope.active=post : '';
+               }); 
+           }
+
+           // Checck if this post has beeen favourited by the user
+           if(User.signedIn()){
+              var user = User.activeUser();
+              $scope.isFavourite = ! user.favourites.indexOf($scope.active._id);
+           }
+ 
+           $scope.toggleFavourite = function(){
+               if(User.signedIn()){
+
+                 $scope.isFavourite = !$scope.isFavourite;
+
+                  //now update the user service so that the change is persisted
+                  if($scope.isFavourite){
+                      user.favourites.push($scope.active._id);
+                  }
+                  else {
+                     var index = user.favourites.indexOf($scope.active._id);
+                     user.favourites.splice(index);
+                  }
+
+                  User.updateUser(user).then(function(status){
+                      alert(status);
+                  }, function(err){
+                      console.log(err);
+                  });
+                } else {
+                    alert('Sign in to customize your experience');
+                }
+           };
+      }
 
        $scope.clearTags = function(){
             $scope.tags = [];
@@ -125,27 +221,26 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
           }
        };
 
-       //all the posts partaining to the given tags selection
-       $scope.posts = Posts.query($scope.tags);
-       
-       //To handle default routed to vs user routed to
-       if(angular.isDefined($state.current.data.post)){
-          $scope.active = $state.current.data.post;
-       } else {
-           $scope.active=  $scope.posts[0];
-       }
-
-      
        $scope.viewPost = function(post){
-          $state.current.data.post = angular.copy(post);
-          $state.go('articles.topic' , {id : post._id});
-       }
-
-       $scope.$on('$stateChangeStart', function(event, toState , toParams , fromState , fromParams){
-          if(angular.isDefined(toState.data) && angular.isDefined(fromState.data)){
-             toState.data.post = fromState.data.post;
+          if(User.signedIn()){
+              User.updateTags(post.tags).then(
+                function(status){
+                    $state.current.data.post = angular.copy(post);
+                    $state.go('articles.topic' , {id : post._id});
+                },
+                function(err){
+                   alert(angular.toJson(err));
+                }
+              );  
+          } else {
+               $state.current.data.post = angular.copy(post);
+               $state.go('articles.topic' , {id : post._id});
           }
-       });
+          
+       }
+      
+      //Toggles a post as being favourite or not
+
  });
   
   app.controller('editorCtrl' , function($scope){

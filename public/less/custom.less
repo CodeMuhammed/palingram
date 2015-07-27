@@ -130,43 +130,6 @@ body {
 	}
 }
 
-.vote-pack{
-   background: hsla(0  , 0  ,0 ,.9);
-   max-width:3em;
-   z-index:1011;
-   position:absolute;
-   right:5%;
-   top:20%;
-   .middle {
-      width:3em;
-	  height:3em;
-	  margin:.5em 0;
-	  background-color:#ccc;
-	  border-radius:20px;
-	  text-align:center;
-	  font-weight:bold;
-	  padding-top:.7em;
-    }
-	.first{
-	     font-size:3em; 
-	     &:hover{
-		    color: green;
-		 }
-	  }
-	  .last{
-	     font-size:3em;
-	     &:hover{
-		    color: red;
-		 }
-	  }
-	  .favourite{
-	     font-size:3em;
-	     &:hover{
-		    color: red;
-		 }
-	  }
-}
-
 .wiz {
   text-align:center;
   padding:3em;
@@ -294,6 +257,30 @@ body {
     margin-top: 5em;
     @media (max-width: @screen-sm-max) {
          margin-top: 8em;
+    }
+}
+
+.auth {
+ text-align:center;
+  margin-top: 5em;
+    @media (max-width: @screen-sm-max) {
+         margin-top: 8em;
+    }
+    >form {
+       .form-group {
+           border:1px solid #ccc;
+           margin-bottom:0;
+           input {
+           text-align:center;
+               border: none;
+               box-shadow: none;
+           }
+       }
+       button {
+          height: 3em;
+          margin-top:2em;
+          font-size: 1.4em;
+       }
     }
 }
 

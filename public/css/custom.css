@@ -958,42 +958,6 @@ fieldset[disabled] .tag-buttons > button:hover.active {
     padding-left: 1.5em !important;
   }
 }
-.vote-pack {
-  background: rgba(0, 0, 0, 0.9);
-  max-width: 3em;
-  z-index: 1011;
-  position: absolute;
-  right: 5%;
-  top: 20%;
-}
-.vote-pack .middle {
-  width: 3em;
-  height: 3em;
-  margin: .5em 0;
-  background-color: #ccc;
-  border-radius: 20px;
-  text-align: center;
-  font-weight: bold;
-  padding-top: .7em;
-}
-.vote-pack .first {
-  font-size: 3em;
-}
-.vote-pack .first:hover {
-  color: green;
-}
-.vote-pack .last {
-  font-size: 3em;
-}
-.vote-pack .last:hover {
-  color: red;
-}
-.vote-pack .favourite {
-  font-size: 3em;
-}
-.vote-pack .favourite:hover {
-  color: red;
-}
 .wiz {
   text-align: center;
   padding: 3em;
@@ -1108,6 +1072,29 @@ fieldset[disabled] .tag-buttons > button:hover.active {
   .main-view-area {
     margin-top: 8em;
   }
+}
+.auth {
+  text-align: center;
+  margin-top: 5em;
+}
+@media (max-width: 991px) {
+  .auth {
+    margin-top: 8em;
+  }
+}
+.auth > form .form-group {
+  border: 1px solid #ccc;
+  margin-bottom: 0;
+}
+.auth > form .form-group input {
+  text-align: center;
+  border: none;
+  box-shadow: none;
+}
+.auth > form button {
+  height: 3em;
+  margin-top: 2em;
+  font-size: 1.4em;
 }
 /*
  * Style tweaks
