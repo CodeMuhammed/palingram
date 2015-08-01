@@ -1050,6 +1050,9 @@ fieldset[disabled] .tag-buttons > button:hover.active {
   font-size: 1.2em;
   width: 100%;
 }
+.posts {
+  position: relative;
+}
 .posts .post {
   color: #555555;
   border-bottom: 1px solid #ccc;
@@ -1059,8 +1062,21 @@ fieldset[disabled] .tag-buttons > button:hover.active {
   padding-left: 0;
   padding-right: 0;
 }
+.posts .post .postEdit {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.posts .post .postEdit > i:first-child {
+  margin-right: 1em;
+  color: red;
+}
+.posts .post .postEdit > i:last-child {
+  color: #337ab7;
+}
 .posts .post:hover {
   border-bottom: 1px solid #337ab7;
+  background: #fbfbfb;
 }
 .posts .post:hover .post-heading h3 {
   color: #337ab7;

@@ -1,13 +1,14 @@
 <div class="col-sm-6 col-sm-offset-3" style="margin-top:10em;">
 	<div class="col-xs-12 new-post">
-	     <span class="save pull-right">
+	     <span class="save pull-right" ng-click="postArticle(post)">
 	     	<i class="icon fa fa-edit"> post</i>
 	     </span>
-		 <input class="post-title" placeholder="Enter title of post here">
+		 <input class="post-title" placeholder="Enter title of post here" ng-model="post.title">
 		 <hr />
-		 <uploader></uploader>
+		 <input class="form-control" placeholder="Enter url to header image here" style="margin-bottom:2em" ng-model="post.image">
+		 <!--<uploader></uploader>-->
 
-		  <textarea class="post-body" placeholder="Type your contents here"></textarea> 
+		  <textarea class="post-body" placeholder="Type your contents here"ng-model="post.body"></textarea> 
 	 </div>
 	</div>
-</div>
+</div> 

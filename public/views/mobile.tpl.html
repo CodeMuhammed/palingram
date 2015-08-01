@@ -1,52 +1,52 @@
-<div class="row row-offcanvas row-offcanvas-{{dir}} {{sidebar}} visible-xs"style="margin-top:5em"  >
-		  <sidebar ng-show="dir==='left'"></sidebar>
-		   
-	       <div class="col-xs-12 col-sm-4 col-md-3" >
-			 <div ng-repeat = "item in count" class="thumbnail-item thumbnail" ng-click="toggleSidebar('right')">
-				<div class="thumbnail-heading">
-				   <h2 class="thumbnail-title" >Title of post</h2>
-				   <h5 style="color:#ccc;">By Muhammed Ali on 5th April 2015</h5>
+<div class="row row-offcanvas row-offcanvas-{{dir}} {{sidebar}} visible-xs" >
+	  <sidebar ng-show="dir==='left'"></sidebar>
+	   
+       <div class="col-xs-12 col-sm-4 col-md-3 posts" >
+		 <a ng-repeat="post in posts" class="col-xs-12 post" ng-click="viewPost(post)" style="padding-bottom:0;">
+			<div class="post-heading col-xs-12">
+			   
+			   <h5 style="color:#ccc;">By {{post.author}} on {{post.date | date:'fullDate'}}</h5>
+			</div>
+			<div class="col-xs-12 post-body" style="padding:0;">
+				<div class="col-xs-6" style="padding:0;">
+					<img ng-src={{post.image}} style="width:100%;">
 				</div>
-				<img src="img/img.png" style="width:100%; margin-bottom:1em;">
-				<p>
-					This example is a quick exercise to illustrate how the default, static and fixed to top navbar work....
-				</p>
-				<hr>
-			 </div>
-		 </div>
+				<div class="col-xs-6">
+					<h3>{{post.title}}</h3>
+					<p>
+						{{post.body | limitTo : 90}}{{post.body.length>90? '...' : ''}}
+					</p>
+				</div>
+			</div>
+			
+		 </a>
+	</div>
 
-	        <div class="posted col-md-5 sidebar-offcanvas primary-pane" id="sidebar" ng-show="dir==='right'">
-			 <h3 ng-click="toggleSidebar('left')">
-			 	<span class="exp visible-xs"><i class="icon fa fa-arrow-left"></i> Title Of Post</span>
-			 	
-			 </h3>
-			 <h5 style="color:#ccc;" class="visible-xs"> 
-			 	By Muhammed Ali on 5th April 2015
-			 </h5>
-			 
-			  <div class="" style="margin-bottom:2em; ">
-				   <img src="img/img.png" style="width:100%;">
-				   <span class="vote-pack">
-					   <i class="icon fa fa-arrow-up first"></i>
-					   <div class="middle">
-						  vote
-					   </div>
-					   <i class="icon fa fa-arrow-down last"> </i>
-					   <i style="" class="icon fa fa-heart favourite"></i>
-				   </span>
-				</div>
+	         
+     <div ng-show="dir==='right'" class="posted col-md-5 sidebar-offcanvas primary-pane" id="sidebar">
+	     <h3 ng-click="toggleSidebar('left')">
+		 	<span class="exp"><i class="icon fa fa-arrow-left"></i> {{active.title}}</span>
+		 	
+		 </h3>
+		 <h5 style="color:#ccc;">By {{active.author}} on {{active.date | date:'fullDate'}}</h5>
+		 
+		  <div class="" style="margin-bottom:2em; ">
+			   <img ng-src="img/img.png" style="width:100%;">
+		  </div>
+			
+			<div style="background-color:#fff; 
+				padding:.1em .3em .1em .7em; margin-bottom:1em;">
+				<i style="color:#000;font-size:1.5em; padding-right:.2em;" class="icon fa fa-facebook"> </i>
+				<i style="color:#000; font-size:1.5em;padding-right:.2em;" class="icon fa fa-twitter"> </i>
+				<i style="color:#000;font-size:1.5em; padding-right:.2em;" class="icon fa fa-google-plus"> </i>
 				
-				<div style="background-color:#fff; 
-					 padding:.1em .3em .1em .7em; margin-bottom:1em;">
-					<i style="color:#ccc; font-size:1.3em; padding-right:.2em;" class="icon fa fa-share"> share </i>
-					<i style="color:#000;font-size:1.5em; padding-right:.2em;" class="icon fa fa-facebook"> </i>
-					<i style="color:#000; font-size:1.5em;padding-right:.2em;" class="icon fa fa-twitter"> </i>
-					<i style="color:#000;font-size:1.5em; padding-right:.2em;" class="icon fa fa-google-plus"> </i>
-				
-				</div>
-			 <p>
-				This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-			 <p>To see the difference between static and fixed top navbars, just scroll.</p>
-			<div >Comments</div>
-		 </div>
-	    </div>
+				<i ng-hide="isFavourite" ng-click="toggleFavourite()" style="color:#000;font-size:1.5em; margin-left:.2em;" class="icon fa fa-heart-o"></i>
+
+				<i ng-show="isFavourite" ng-click="toggleFavourite()" style="color:red;font-size:1.5em; margin-left:.2em;" class="icon fa fa-heart"></i>
+			
+			</div>
+		 <p>{{active.body}}</p>
+		<div >{{active.comment}}</div>
+     </div>
+
+</div>

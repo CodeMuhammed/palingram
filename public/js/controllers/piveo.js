@@ -10,7 +10,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 //state configuration and routing
   app.config(function($stateProvider , $urlRouterProvider){
       $stateProvider
-         .state('articles' , {
+         .state('articles' , { 
           	 abstract : true,
              url : '/articles',
              templateUrl : 'views/articles.tpl.html',
@@ -23,7 +23,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
                views :  {
              	'@articles' : {
                   templateUrl : 'views/topic.tpl.html',
-                  controller : 'topicCtrl'
+                  controller : 'topicsCtrl'
              	} 
              },
              data : {} 
@@ -59,7 +59,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
              }
          });
 
-         $urlRouterProvider.otherwise('/articles/1');
+         $urlRouterProvider.otherwise('/articles/auth/1');
   }); 
 
  
@@ -126,7 +126,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
       $scope.logout = function(){
           User.logout().then(
             function(status){
-                $state.go('articles.topic' , {id : 1});
+                $scope.view = 'signin';
             } ,
             function(err){
                 alert('something went wrong while doing logout');
@@ -152,31 +152,43 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
  });
  
 
- app.controller('topicCtrl' , function($scope , $state  ,Posts ,  User){
+ app.controller('topicsCtrl' , function($scope , $state  ,Posts ,  User){
      
       displayPost();
+
       //This displays the post based on the params id when user is browsing
       //a specific post or a deffault post
       function displayPost(){
 
           $scope.tags = User.tags();
-          $scope.posts = Posts.query($scope.tags); 
+          Posts.query($scope.tags).then(
+              function(result){
+                  $scope.posts = result;
+                  next();
+              } ,
+              function(err){
+                 console.log(err);
+              } 
+          ); 
+          
+          function next(){
+            if($state.params.id == '1'){
+               $scope.active = $scope.posts[0];
+             } else {
+                 angular.forEach($scope.posts , function(post){
+                      post._id == $state.params.id  ? $scope.active=post : '';
+                 }); 
+             }
 
-          if($state.params.id == '1'){
-             $scope.active = $scope.posts[0];
-           } else {
-               angular.forEach($scope.posts , function(post){
-                    post._id == $state.params.id  ? $scope.active=post : '';
-               }); 
-           }
-
-           // Checck if this post has beeen favourited by the user
-           if(User.signedIn()){
-              var user = User.activeUser();
-              $scope.isFavourite = ! user.favourites.indexOf($scope.active._id);
-           }
+             // Checck if this post has beeen favourited by the user
+             if(User.signedIn()){
+                var user = User.activeUser(); 
+                $scope.isFavourite = ! user.favourites.indexOf($scope.active._id);
+             }
+          }
+         
  
-           $scope.toggleFavourite = function(){
+          $scope.toggleFavourite = function(){
                if(User.signedIn()){
 
                  $scope.isFavourite = !$scope.isFavourite;
@@ -199,6 +211,8 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
                     alert('Sign in to customize your experience');
                 }
            };
+           //for the mobile experience
+           $scope.toggleSidebar('right');
       }
 
        $scope.clearTags = function(){
@@ -206,7 +220,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
        };
 
        $scope.addTag = function(newTag){
-           if(newTag && $scope.tags.length < 10){
+           if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
                 $scope.tags.push(newTag);
                 $scope.newTag = '';
                 $scope.posts = Posts.query($scope.tags);
@@ -238,13 +252,54 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
           }
           
        }
-      
-      //Toggles a post as being favourite or not
 
+       $scope.deletePost = function(post){
+            Posts.deletePost(post).then(
+                function(result){
+                     alert(result);
+                     displayPost();
+                },
+                function(err){
+                     alert('something wwent wronng while deleting | topicsCtrl');
+                }
+            );
+       };
+
+
+       $scope.editbuttons = function(bool){
+          $scope.showbuttons = bool;
+       }
  });
   
-  app.controller('editorCtrl' , function($scope){
-	  $scope.hello = 'Editor';
+  app.controller('editorCtrl' , function($scope , $state){
+       $scope.tags = ['general'];
+
+	     $scope.clearTags = function(){
+            $scope.tags = [];
+       };
+
+       $scope.addTag = function(newTag){
+           if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
+                $scope.tags.push(newTag);
+                $scope.newTag = '';
+           }
+       };
+
+       $scope.deleteTag = function(tag){
+          if(tag){
+            var index = $scope.tags.indexOf(tag);
+            $scope.tags.splice(index , 1);
+          }
+       };
+
+       $scope.editPost = function(){
+           $state.current.data.tags = angular.copy($scope.tags);
+           $state.go('articles.new.edit');
+       };
+
+       $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+           toState.data.tags = $scope.tags;
+       });
   });
   
   app.directive('post' , function(){
@@ -256,7 +311,38 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 		};
    });
    
-   app.controller('postCtrl' , function($scope){
-	    $scope.hello = 'post';
+   app.controller('postCtrl' , function($scope , $state , User , Posts){
+       //DO ADD A WRITE A POST A PICTURE URL AND  POST
+	    // alert(angular.toJson($state.current.data.tags)); 
+      if(User.signedIn()){
+
+         var user = User.activeUser();
+         $scope.post = {
+               "author": user.firstname + ' '+ user.lastname,
+               "username":user.username,
+               "title":"This First Post Title",
+               "date": Date.now(),
+               "image" : 'img/img.png',
+               "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
+               "comments_id":"",
+               "tags":['general']
+             };
+
+        $scope.post.tags = $state.current.data.tags; 
+        
+        //this sends post to the server
+        $scope.postArticle = function(post){
+           Posts.postArticle(post).then(function(result){
+               alert(result);
+           }, function(err){
+               alert('something went wrong');
+           });
+        };
+      } 
+      else {
+          //alert('Sign in to post an article');
+          $state.go('articles.auth');
+      }
+       
    });
   

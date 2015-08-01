@@ -1,6 +1,6 @@
   <!-- Static navbar -->
-   <nav class="navbar navbar-default navbar-fixed-top" >
-	   <div class="navbar-header">
+   <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" style="background:#000;">
+	   <div class="navbar-header text-center">
 		  <a class="navbar-brand" style="padding-top:0 !important" ng-click="toggleSidebar('left')" href="#/articles/1"><img src="img/logo.png" height="50"></a>
 	   </div>
 	   <div class="hidden-xs">
@@ -13,7 +13,7 @@
 		  </ul> 
 		  <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" placeholder="Search" class="form-control">
+              <input type="text" placeholder="Search" class="form-control" style="border-radius:30px">
             </div>
             <div class="btn hidden-xs">
 			   <a href="" ><i class="icon fa fa-search" style="font-size:1.4em;"></i></a>
@@ -26,7 +26,7 @@
   <ul class="nav navbar-nav" ng-hide="search">
 	<li class="navbar-right"><a ui-sref="articles.new"><i class="icon fa fa-plus" style="font-size:1.4em;"></i> new</a></li>
 	<li class="navbar-right"><a href=""><i class="icon fa fa-heart" style="font-size:1.4em;"></i> favourites</a></li>
-	<li class="navbar-right"><a href=""><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a></li>
+	<li class="navbar-right"><a ui-sref="articles.auth"><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a></li>
 	<li class="navbar-right" ng-click="toggleSearch()"><a href=""><i class="icon fa fa-search" style="font-size:1.4em;"></i> search</a></li>
   </ul> 
   <form class="searchbox" ng-show="search">

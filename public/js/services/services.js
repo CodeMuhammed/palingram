@@ -1,64 +1,66 @@
 angular.module('piveo')
    .constant('baseUrl' , 'http://localhost:3000')
+   //.constant('baseUrl' , 'https://purslr.herokuapp.com')
    .factory('Posts' , function($q , baseUrl , $http){
       //@TODO make this service fully functional and tied to the server
    	  var query = function (tags){
-   	  	return  [
-   	  	   {
-   	  	   	 "_id":"12344",
-   	  	   	 "author":"muhammed ali",
-   	  	   	 "title":"This First Post Title",
-   	  	   	 "date": Date.now(),
-   	  	   	 "image" : 'img/img.png',
-   	  	   	 "body":"Lorem ipsun is the very best wayy if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-   	  	   	 "comments_id":"234523",
-   	  	   	 "tags":['general']
-   	  	   },
-   	  	   {
-   	  	   	 "_id":"12355",
-   	  	   	 "author":"Isa ali",
-   	  	   	 "title":"This second Post Title",
-   	  	   	 "date": Date.now(),
-   	  	   	 "image" : 'img/img.png',
-   	  	   	 "body":"Lorem ipsun is the very best wayy if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-   	  	   	 "comments_id":"234524",
-   	  	   	 "tags":['startup']
-   	  	   },
-           {
-             "_id":"12377",
-             "author":"maryam ali",
-             "title":"This is a Post Title",
-             "date": Date.now(),
-             "image" : 'img/img.png',
-             "body":"Lorem ipsun is the very best wayy if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-             "comments_id":"234524",
-             "tags":[' bitcoin']
-           },
-           {
-             "_id":"12395",
-             "author":"rukkaya ali",
-             "title":"This another Post Title",
-             "date": Date.now(),
-             "image" : 'img/img.png',
-             "body":"Lorem ipsun is the very best wayy if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-             "comments_id":"234524",
-             "tags":['medicine']
-           },
-   	  	   {
-   	  	   	 "_id":"12366",
-   	  	   	 "author":"Brymo ali",
-   	  	   	 "title":"This third Post Title",
-   	  	   	 "date": Date.now(),
-   	  	   	 "image" : 'img/img.png',
-   	  	   	 "body":"Lorem ipsun is the very best wayy if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-   	  	   	 "comments_id":"234534",
-   	  	   	 "tags":['general']
-   	  	   }
-   	  	];
-   	  }
+        var promise = $q.defer();
+        //alert('get content called');
+        $http({
+            method : 'POST',
+            url : baseUrl+'/api/allPosts',
+            data : tags 
+        })
+        .success(function(data){
+             promise.resolve(data);
+        })
+        .error(function(err){
+            promise.reject(err);
+        });
 
+   	  	return promise.promise;
+   	  };
+
+      var postArticle = function(post){
+         var promise = $q.defer();
+         $http({
+              method : 'POST',
+              url : baseUrl+'/api/posts/123',
+              data : post 
+         })
+         .success(function(data){
+             promise.resolve(data);
+         })
+         .error(function(err){
+             promise.reject(err);
+         });
+
+         return promise.promise;
+      };
+       
+       //
+      var deletePost = function(post){
+           var promise = $q.defer();
+           $http({
+                method : 'DELETE',
+                url : baseUrl+'/api/posts/'+post._id,
+                params : post 
+           })
+           .success(function(data){
+               promise.resolve(data);
+           })
+           .error(function(err){
+               promise.reject(err);
+           });
+
+           return promise.promise;
+      };
+
+      //public xposed interface 
    	  return {
-          query : query
+          query : query,
+          postArticle  : postArticle,
+          deletePost : deletePost
    	  }
 
    })
@@ -107,7 +109,6 @@ angular.module('piveo')
 
             .error(function(err){
                 promise.reject(err);
-                $state.go('articles.topic' , {id : 1});
             });
             return promise.promise;
         }

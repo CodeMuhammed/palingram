@@ -233,6 +233,7 @@ body {
 }
 
 .posts {
+    position: relative;
     .post{
        color: @gray;
        border-bottom:1px solid #ccc; 
@@ -242,8 +243,21 @@ body {
           padding-right:0;
 
        }
+       .postEdit{
+          position: absolute;
+          top: 0;
+          right:0;
+          >i:first-child{
+             margin-right:1em;
+             color:red;
+          }
+          >i:last-child{
+             color:  @brand-primary;
+          }
+       }
        &:hover{
           border-bottom:1px solid @brand-primary; 
+          background:lighten(@gray-lighter , 5%);
           .post-heading {
               h3{
                  color:@brand-primary;

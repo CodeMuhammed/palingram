@@ -85,7 +85,14 @@
 		<div ng-show="view==='profile'">
 			User profile shows here while he is logged in 
 			<a ng-click="logout()">Log out</a>
-			<p>{{user}}</p>
+			<p>{{user._id}}</p>
+			<p>{{user.firstname}}</p>
+			<p>{{user.lastname}}</p>
+			<p>{{user.email}}</p>
+			<p>{{user.password}}</p>
+			<p>{{user.favourites}}</p>
+			<p>{{user.tags_id}}</p>
+			<p>{{user.username}}</p>
 		</div>
     </div>
 </div>
