@@ -11,7 +11,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
   app.config(function($stateProvider , $urlRouterProvider){
       $stateProvider
          .state('articles' , { 
-          	 abstract : true,
+             abstract : true,
              url : '/articles',
              templateUrl : 'views/articles.tpl.html',
              controller : 'mainCtrl',
@@ -21,10 +21,10 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
          .state('articles.topic' , {
               url : '/:id',
                views :  {
-             	'@articles' : {
+              '@articles' : {
                   templateUrl : 'views/topic.tpl.html',
                   controller : 'topicsCtrl'
-             	} 
+              } 
              },
              data : {} 
          })
@@ -32,10 +32,10 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
          .state('articles.new' , {
               url : '/new/1', 
               views :  {
-             	'@articles' : {
+              '@articles' : {
                   templateUrl : 'views/editor.tpl.html',
                   controller : 'editorCtrl'
-             	}
+              }
              },
              data : {}
          }) 
@@ -64,21 +64,21 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 
  
  app.directive('sidebar' , function(){
-   	return {
+    return {
           templateUrl : 'views/sidebar.tpl.html'
-   	}
+    }
  });
 
   app.directive('mobile' , function(){
-     	return {
+      return {
             templateUrl : 'views/mobile.tpl.html'
-     	}
+      }
    });
 
    app.directive('desktop' , function(){
-     	return {
+      return {
             templateUrl : 'views/desktop.tpl.html'
-     	}
+      }
    });
 
    app.controller('authCtrl' , function($scope , $state , User){
@@ -136,31 +136,58 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 
    });
 
- app.controller('mainCtrl' , function($scope , $state , User){
-	  $scope.sidebar = '';
-	  $scope.dir = 'left';
-	  $scope.search = false;
-    
-	  $scope.toggleSidebar = function(dir){
-	  	  $scope.sidebar === '' ? $scope.sidebar='active' : $scope.sidebar='';
-	  	  $scope.dir = dir;
-	  };
+ //
+ app.controller('mainCtrl' , function($scope ,$rootScope, $state , User , Posts){
 
-	  $scope.toggleSearch = function(){
-	  	  $scope.search =! $scope.search ;
-	  }
+    $scope.search = false;
+    
+    $scope.toggleSearch = function(){
+        $scope.search =! $scope.search ;
+    }
+
+    $scope.activatePosts = function(type){
+        Posts.type(type);
+        $rootScope.$broadcast('changeType' , {});
+        $state.go('articles.topic');
+    }
+
+    $scope.searchForTopic = function(searchText){
+         $rootScope.$broadcast('searchText' , {query : searchText.split(' ')});
+    };
+
  });
  
-
+ //
  app.controller('topicsCtrl' , function($scope , $state  ,Posts ,  User){
-     
+      
+      $scope.tags = User.tags();
+      
       displayPost();
+
+      //
+      $scope.$on('changeType' , function(e , a){
+          displayPost();
+      });
+
+      //
+      $scope.$on('searchText' , function(e , a){
+            if(angular.isArray(a.query) && a.query[0]){
+                User.reset( a.query);
+                $scope.tags = a.query;
+                Posts.refresh($scope.tags).then(
+                    function(result){
+                         displayPost();
+                    }
+                );
+            }
+            else {
+              alert('enter a valid search string');
+           }
+      });
 
       //This displays the post based on the params id when user is browsing
       //a specific post or a deffault post
       function displayPost(){
-
-          $scope.tags = User.tags();
           Posts.query($scope.tags).then(
               function(result){
                   $scope.posts = result;
@@ -172,7 +199,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
           ); 
           
           function next(){
-            if($state.params.id == '1'){
+            if($state.params.id.length<10){
                $scope.active = $scope.posts[0];
              } else {
                  angular.forEach($scope.posts , function(post){
@@ -180,30 +207,30 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
                  }); 
              }
 
-             // Checck if this post has beeen favourited by the user
-             if(User.signedIn()){
-                var user = User.activeUser(); 
-                $scope.isFavourite = ! user.favourites.indexOf($scope.active._id);
-             }
+             // Check if this post has beeen favourited by the user
+             if(! User.signedIn()){
+                $state.go('articles.auth');
+             }  
           }
-         
  
           $scope.toggleFavourite = function(){
                if(User.signedIn()){
-
-                 $scope.isFavourite = !$scope.isFavourite;
-
-                  //now update the user service so that the change is persisted
-                  if($scope.isFavourite){
-                      user.favourites.push($scope.active._id);
+                  var index = User.activeUser().favourites.indexOf($scope.active._id);
+                  
+                  if(index>=0){
+                      User.activeUser().favourites.splice(index , 1);
                   }
                   else {
-                     var index = user.favourites.indexOf($scope.active._id);
-                     user.favourites.splice(index);
+                      User.activeUser().favourites.push($scope.active._id);
                   }
 
-                  User.updateUser(user).then(function(status){
-                      alert(status);
+                  User.updateUser(User.activeUser()).then(function(status){
+                       Posts.refresh().then(
+                            function(result){
+                                 displayPost();
+                            }
+                       );
+                      
                   }, function(err){
                       console.log(err);
                   });
@@ -211,8 +238,14 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
                     alert('Sign in to customize your experience');
                 }
            };
-           //for the mobile experience
-           $scope.toggleSidebar('right');
+
+           $scope.isFavourite = function(id){
+               if(User.activeUser().favourites.indexOf(id)>=0){
+                  return true;
+               } else {
+                  return false;
+               }
+           }
       }
 
        $scope.clearTags = function(){
@@ -223,7 +256,12 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
            if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
                 $scope.tags.push(newTag);
                 $scope.newTag = '';
-                $scope.posts = Posts.query($scope.tags);
+
+                Posts.refresh($scope.tags).then(
+                    function(result){
+                         displayPost();
+                    }
+                );
            }
        };
 
@@ -231,7 +269,15 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
           if(tag){
             var index = $scope.tags.indexOf(tag);
             $scope.tags.splice(index , 1);
-            $scope.posts = Posts.query($scope.tags);
+            Posts.refresh($scope.tags).then(
+                function(result){
+                    displayPost();
+                },
+                function(){
+                    alert('refresh not done');
+                }
+            );
+
           }
        };
 
@@ -239,11 +285,9 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
           if(User.signedIn()){
               User.updateTags(post.tags).then(
                 function(status){
-                    $state.current.data.post = angular.copy(post);
                     $state.go('articles.topic' , {id : post._id});
                 },
                 function(err){
-                   alert(angular.toJson(err));
                 }
               );  
           } else {
@@ -256,7 +300,6 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
        $scope.deletePost = function(post){
             Posts.deletePost(post).then(
                 function(result){
-                     alert(result);
                      displayPost();
                 },
                 function(err){
@@ -264,17 +307,27 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
                 }
             );
        };
+       
+       var postToEdit;
+       $scope.editPost = function(post){
+           postToEdit  =post;
+           $state.go('articles.new.edit');
+       };
 
+       $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+          toState.data = postToEdit;
+       });
 
        $scope.editbuttons = function(bool){
           $scope.showbuttons = bool;
        }
- });
+  });
   
-  app.controller('editorCtrl' , function($scope , $state){
+  //
+  app.controller('editorCtrl' , function($scope , $state , User){
        $scope.tags = ['general'];
 
-	     $scope.clearTags = function(){
+       $scope.clearTags = function(){
             $scope.tags = [];
        };
 
@@ -292,51 +345,60 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
           }
        };
 
-       $scope.editPost = function(){
-           $state.current.data.tags = angular.copy($scope.tags);
+       $scope.newPost = function(){
            $state.go('articles.new.edit');
        };
 
        $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-           toState.data.tags = $scope.tags;
-       });
-  });
-  
-  app.directive('post' , function(){
-	   return {
-			restrict:'E',
-			controller : 'postCtrl',
-			templateUrl: 'views/post.tpl.html',
-			scope : true
-		};
-   });
-   
-   app.controller('postCtrl' , function($scope , $state , User , Posts){
-       //DO ADD A WRITE A POST A PICTURE URL AND  POST
-	    // alert(angular.toJson($state.current.data.tags)); 
-      if(User.signedIn()){
-
-         var user = User.activeUser();
-         $scope.post = {
-               "author": user.firstname + ' '+ user.lastname,
-               "username":user.username,
+         toState.data = {
+               "author": User.activeUser().firstname + ' '+ User.activeUser().lastname,
+               "username":User.activeUser().username,
                "title":"This First Post Title",
                "date": Date.now(),
                "image" : 'img/img.png',
                "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
                "comments_id":"",
-               "tags":['general']
+               "tags":$scope.tags
              };
+       });
 
-        $scope.post.tags = $state.current.data.tags; 
+  });
+  
+  app.directive('post' , function(){
+     return {
+      restrict:'E',
+      controller : 'postCtrl',
+      templateUrl: 'views/post.tpl.html',
+      scope : true
+    };
+  });
+   
+  app.controller('postCtrl' , function($scope , $state , Posts , User){
+       
+      if(User.signedIn()){
+
+        $scope.post = $state.current.data; 
+        var option = $state.current.data.comments_id == '' ? 'new' : 'old';
         
         //this sends post to the server
         $scope.postArticle = function(post){
-           Posts.postArticle(post).then(function(result){
-               alert(result);
-           }, function(err){
-               alert('something went wrong');
-           });
+           if(option == 'new'){
+             Posts.postArticle(post).then(function(result){
+                 alert(result);
+                 $state.go('articles.topic');
+             }, function(err){
+                 alert('something went wrong');
+             });
+           }
+           else {
+              Posts.updateArticle(post).then(function(result){
+                 alert(result);
+                 $state.go('articles.topic');
+             }, function(err){
+                 console.log(err);
+             });
+           }
+           
         };
       } 
       else {

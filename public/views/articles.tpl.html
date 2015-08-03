@@ -1,21 +1,21 @@
   <!-- Static navbar -->
    <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" style="background:#000;">
 	   <div class="navbar-header text-center">
-		  <a class="navbar-brand" style="padding-top:0 !important" ng-click="toggleSidebar('left')" href="#/articles/1"><img src="img/logo.png" height="50"></a>
+		  <a class="navbar-brand" style="padding-top:0 !important" ng-click="activatePosts('all')" ><img src="img/logo.png" height="50"></a>
 	   </div>
 	   <div class="hidden-xs">
 		  <ul class="nav navbar-nav col-md-3">
-			<li class="navbar-right" ui-sref="articles.new"><a><i class="icon fa fa-plus" style="font-size:1.4em;"></i> new</a></li>
-			<li class="navbar-right"><a href=""><i class="icon fa fa-heart" style="font-size:1.4em;"></i> favourites</a></li>
+			<li class="navbar-right" ui-sref="articles.new"><a><i class="icon fa fa-plus" style="font-size:1.4em;"></i> write new article</a></li>
+			<li ng-click="activatePosts('favourites')" class="navbar-right"><a href=""><i class="icon fa fa-heart" style="font-size:1.4em;"></i> favourites</a></li>
 		  </ul> 
 		  <ul class="nav navbar-nav" style="">
 			<li class="navbar-right" ><a ui-sref = "articles.auth"><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a></li>
 		  </ul> 
 		  <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" placeholder="Search" class="form-control" style="border-radius:30px">
+              <input type="text" placeholder="Search" class="form-control" style="border-radius:30px" ng-model = "searchText">
             </div>
-            <div class="btn hidden-xs">
+            <div class="btn hidden-xs" ng-click="searchForTopic(searchText)">
 			   <a href="" ><i class="icon fa fa-search" style="font-size:1.4em;"></i></a>
 			</div>
           </form>
@@ -24,10 +24,18 @@
 
  <div class="col-xs-12 subnav visible-xs">
   <ul class="nav navbar-nav" ng-hide="search">
-	<li class="navbar-right"><a ui-sref="articles.new"><i class="icon fa fa-plus" style="font-size:1.4em;"></i> new</a></li>
-	<li class="navbar-right"><a href=""><i class="icon fa fa-heart" style="font-size:1.4em;"></i> favourites</a></li>
-	<li class="navbar-right"><a ui-sref="articles.auth"><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a></li>
-	<li class="navbar-right" ng-click="toggleSearch()"><a href=""><i class="icon fa fa-search" style="font-size:1.4em;"></i> search</a></li>
+	<li class="navbar-right">
+	  <a ui-sref="articles.new"><i class="icon fa fa-plus" style="font-size:1.4em;"></i> new</a>
+	</li>
+	<li class="navbar-right">
+		<a href=""><i class="icon fa fa-heart" style="font-size:1.4em;"></i> favourites</a>
+	</li>
+	<li class="navbar-right">
+		<a ui-sref="articles.auth"><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a>
+	</li>
+	<li class="navbar-right" ng-click="toggleSearch()">
+		<a href=""><i class="icon fa fa-search" style="font-size:1.4em;"></i> search</a>
+	</li>
   </ul> 
   <form class="searchbox" ng-show="search">
   	<div class="input-group" style="padding-bottom:.4em;">

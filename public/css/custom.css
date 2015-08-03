@@ -1074,6 +1074,12 @@ fieldset[disabled] .tag-buttons > button:hover.active {
 .posts .post .postEdit > i:last-child {
   color: #337ab7;
 }
+.posts .post .post-body {
+  padding: 0;
+}
+.posts .post .post-body img {
+  max-height: 10em;
+}
 .posts .post:hover {
   border-bottom: 1px solid #337ab7;
   background: #fbfbfb;

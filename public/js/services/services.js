@@ -1,25 +1,70 @@
 angular.module('piveo')
    .constant('baseUrl' , 'http://localhost:3000')
    //.constant('baseUrl' , 'https://purslr.herokuapp.com')
-   .factory('Posts' , function($q , baseUrl , $http){
+   .factory('Posts' , function($q , baseUrl , $http , User){
       //@TODO make this service fully functional and tied to the server
-   	  var query = function (tags){
-        var promise = $q.defer();
-        //alert('get content called');
-        $http({
-            method : 'POST',
-            url : baseUrl+'/api/allPosts',
-            data : tags 
-        })
-        .success(function(data){
-             promise.resolve(data);
-        })
-        .error(function(err){
-            promise.reject(err);
-        });
+      var Posts;
+      var Favourites;
+      var PostType = 'all';
 
-   	  	return promise.promise;
-   	  };
+      var query = function (tags){
+          var promise = $q.defer();
+          if(PostType == 'all'){
+             doAll();
+          } 
+
+          else if(PostType == 'favourites'){
+            if(User.signedIn()){
+               doFavourites();
+            }
+            else {
+              alert('sign in to see your posts and bookmarks');
+            }
+            
+          }
+
+          function doAll(){
+            if(Posts){
+                promise.resolve(Posts);
+            }
+            else {
+                 $http({
+                      method : 'POST',
+                      url : baseUrl+'/api/allPosts',
+                      data : tags 
+                  })
+                  .success(function(data){
+                       Posts = data;
+                       promise.resolve(data);
+                  })
+                  .error(function(err){
+                      promise.reject(err);
+                  });
+            }
+          }
+
+          function doFavourites(){
+              if(Favourites){
+                  promise.resolve(Favourites);
+              }
+              else {
+                   $http({
+                        method : 'POST',
+                        url : baseUrl+'/api/allFavourites',
+                        data : User.activeUser().favourites
+                    })
+                    .success(function(data){
+                         Favourites = data;
+                         promise.resolve(data);
+                    })
+                    .error(function(err){
+                        promise.reject(err);
+                    });
+              }
+          }
+
+        return promise.promise;
+      };
 
       var postArticle = function(post){
          var promise = $q.defer();
@@ -29,7 +74,10 @@ angular.module('piveo')
               data : post 
          })
          .success(function(data){
-             promise.resolve(data);
+             Posts = undefined;
+             Favourites  = undefined;
+             User.activeUser().favourites.push(data._id);
+             promise.resolve('post inserted successfully');
          })
          .error(function(err){
              promise.reject(err);
@@ -37,6 +85,27 @@ angular.module('piveo')
 
          return promise.promise;
       };
+
+      //
+      var updateArticle = function(post){
+           var promise = $q.defer();
+
+           $http({
+                method : 'PUT',
+                url : baseUrl+'/api/posts/123',
+                data : post 
+           })
+           .success(function(data){
+               Posts = undefined;
+               Favourites  = undefined;
+               promise.resolve('post updated successfully');
+           })
+           .error(function(err){
+               promise.reject(err);
+           });
+
+           return promise.promise;
+      }
        
        //
       var deletePost = function(post){
@@ -47,6 +116,11 @@ angular.module('piveo')
                 params : post 
            })
            .success(function(data){
+               Posts.splice(Posts.indexOf(post) , 1);
+               if(Favourites){
+                  Favourites.splice(Favourites.indexOf(post) , 1);
+               }
+               
                promise.resolve(data);
            })
            .error(function(err){
@@ -56,40 +130,79 @@ angular.module('piveo')
            return promise.promise;
       };
 
+      //
+      var type = function(postType){
+          PostType = postType;
+      };
+
+      //
+      var refresh = function(tags){
+         var promise = $q.defer();
+
+         Posts=undefined; 
+         Favourites=undefined;
+         query(tags ? tags : User.tags()).then(function(data){  
+              if(PostType =='all'){
+                   Posts = data;
+                   promise.resolve();
+              }
+              else{
+                 Favourites = data;
+                 promise.resolve();
+              }  
+          },function(err){
+               alert('refresh failed');
+          }); 
+
+          return promise.promise;
+      };
+
       //public xposed interface 
-   	  return {
+      return {
           query : query,
           postArticle  : postArticle,
-          deletePost : deletePost
-   	  }
+          updateArticle : updateArticle,
+          deletePost : deletePost,
+          type : type,
+          refresh : refresh
+      }
 
    })
    
    .factory('User' , function($q , $http ,$state, baseUrl){
-
        
-   	    var tags = ['general'];
-   	    var user;
+        var tags;
+        var user;
 
-        //A utility function to reser the service preferences wheen user loggs out
-        function reset(){
-            tags = ['general'];
-            user=undefined;
+        //A utility function to reset the service preferences wheen user loggs out
+        function reset(newTags){
+            if(newTags){
+                tags = newTags;
+            }
+            else {
+               tags= undefined;
+               user=undefined;
+            }  
         }
 
         function activeUser(){
             return user;
         }
 
-         function Tags(){
-            return tags; 
+        function Tags(){
+            if(signedIn()){
+                return tags;
+            }
+            else{
+                return ['general'];
+            }
         }
 
-         function signedIn(){
+        function signedIn(){
               return user ? true : false;
         }
 
-/***************************FUNCTIONS WITH XHR ***************************************/
+/***************************FUNCTIONS WITH XHR***************************************/
 /*************************************************************************************/
         function signin(userCredential){
 
@@ -124,7 +237,6 @@ angular.module('piveo')
                data : newUser 
             })
             .success(function(data){
-                alert(angular.toJson(data));
                 user = data;
                 getTags(user.tags_id).then(function(){
                      promise.resolve('all done signed up correctly');
@@ -166,7 +278,6 @@ angular.module('piveo')
             })
 
             .error(function(err){
-                 alert(err);
             });
 
             return promise.promise;
@@ -194,6 +305,7 @@ angular.module('piveo')
        
         //This updates the user object on the server
         function updateUser(updatedUser){
+           console.log(updatedUser);
            var promise = $q.defer();
              
             $http({
@@ -223,6 +335,7 @@ angular.module('piveo')
            updateUser : updateUser,
            tags : Tags,
            updateTags : updateTags,
+           reset : reset,
            signedIn : signedIn,
            signin : signin,
            signup : signup,

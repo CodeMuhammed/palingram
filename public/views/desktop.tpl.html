@@ -6,11 +6,11 @@
 			   <h3>{{post.title}}</h3>
 			   <span class="postEdit"  ng-show="showbuttons">
 			   	   <i class="icon fa fa-times" ng-click="deletePost(post)"></i>
-			   	   <i class="icon fa fa-edit"></i>
+			   	   <i class="icon fa fa-edit" ng-click= "editPost(post)"></i>
 			   </span>
 			   <h5 style="color:#ccc;">By {{post.author}} on {{post.date | date:'fullDate'}}</h5>
 			</div>
-			<div class="col-xs-12 post-body" style="padding:0;">
+			<div class="col-xs-12 post-body">
 				<div class="col-xs-6" style="padding:0;">
 					<img ng-src={{post.image}} style="width:100%;">
 				</div>
@@ -20,8 +20,11 @@
 					</p>
 				</div>
 			</div>
-			
 		 </a>
+		 <div class="jumbotron text-center" style="padding: 1em;" ng-show="posts.length==0">
+              <h4>NO POSTS YET IN YOU TIMELINE...</h4>
+              <button class="icon fa fa-jet btn btn-success btn-block btn-lg"> Lets Get Started</button>
+		 </div>
 	</div>
 
     <div class="posted col-md-5">
@@ -38,9 +41,9 @@
 			<i style="color:#000; font-size:1.5em;padding-right:.2em;" class="icon fa fa-twitter"> </i>
 			<i style="color:#000;font-size:1.5em; padding-right:.2em;" class="icon fa fa-google-plus"> </i>
 			
-			<i ng-hide="isFavourite" ng-click="toggleFavourite()" style="color:#000;font-size:1.5em; margin-left:.2em;" class="icon fa fa-heart-o"></i>
+			<i ng-hide="isFavourite(active._id)" ng-click="toggleFavourite()" style="color:#000;font-size:1.5em; margin-left:.2em;" class="icon fa fa-heart-o"></i>
 
-			<i ng-show="isFavourite" ng-click="toggleFavourite()" style="color:red;font-size:1.5em; margin-left:.2em;" class="icon fa fa-heart"></i>
+			<i ng-show="isFavourite(active._id)" ng-click="toggleFavourite()" style="color:red;font-size:1.5em; margin-left:.2em;" class="icon fa fa-heart"></i>
 		
 		</div>
 	 <p>{{active.body}}</p>
