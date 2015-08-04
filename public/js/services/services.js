@@ -1,4 +1,4 @@
-angular.module('piveo')
+angular.module('palingram')
    .constant('baseUrl' , 'http://localhost:3000')
    //.constant('baseUrl' , 'https://purslr.herokuapp.com')
    .factory('Posts' , function($q , baseUrl , $http , User){
@@ -18,7 +18,7 @@ angular.module('piveo')
                doFavourites();
             }
             else {
-              alert('sign in to see your posts and bookmarks');
+              $state.go('articles.auth');
             }
             
           }
@@ -159,6 +159,7 @@ angular.module('piveo')
 
       //public xposed interface 
       return {
+
           query : query,
           postArticle  : postArticle,
           updateArticle : updateArticle,
@@ -168,8 +169,11 @@ angular.module('piveo')
       }
 
    })
-   
-   .factory('User' , function($q , $http ,$state, baseUrl){
+
+
+   /*************************************************************************************
+   *************************************************************************************/
+   .factory('User' , function($q , $http ,$state, $rootScope , baseUrl){
        
         var tags;
         var user;
@@ -203,7 +207,6 @@ angular.module('piveo')
         }
 
 /***************************FUNCTIONS WITH XHR***************************************/
-/*************************************************************************************/
         function signin(userCredential){
 
             var promise = $q.defer();
@@ -325,20 +328,42 @@ angular.module('piveo')
         }
 
         //Initial signin with credentials from cookies
-        signin(); 
-        /*************************************************************************************/
-        /*************************************************************************************/
+        signin().then(function(){
+            $rootScope.$broadcast('signedIn' , {});
+        }); 
+        /***************************END OF SERVICE IMPLEMENTATION**************************/
         
 
         return  {
+           /*This returns the current signed in user */
            activeUser : activeUser,
+
+           /*This  synchronizes any changes made by the user to thhe server*/
            updateUser : updateUser,
+
+           /*When a user is signed in, the top ten tags or topics based on the users
+             past exxperiences is used in customizing the initial contents shown to the user
+           */
            tags : Tags,
+
+           /*When ever a user clicks on a post, the tags attached to the post is synced on the server
+            to help customize the user experience*/
            updateTags : updateTags,
+
+           /*When a post is added or  edited,  the service is refereshed to sync the changges on the 
+             server and on the client*/
            reset : reset,
+
+           /*This returns aa bool indicating weather the  user is signed in or not*/
            signedIn : signedIn,
+
+           /*This initialtes the sign in dance given the users credentials*/
            signin : signin,
+
+           /*This takes care of signing up an new user*/
            signup : signup,
+
+           /**/
            logout : logout
         }
    });

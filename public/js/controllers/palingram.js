@@ -1,4 +1,4 @@
-var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
+var app = angular.module('palingram' , ['fileUpload' , 'ngResource' , 'ui.router']);
 
 // cors configurations to enable consuming the rest api
   app.config(function($httpProvider){
@@ -159,10 +159,13 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
  
  //
  app.controller('topicsCtrl' , function($scope , $state  ,Posts ,  User){
+      if(! User.signedIn()){
+          $state.go('articles.auth');
+      }else{
+         $scope.tags = User.tags(); 
+         displayPost();
+      }
       
-      $scope.tags = User.tags();
-      
-      displayPost();
 
       //
       $scope.$on('changeType' , function(e , a){
@@ -183,6 +186,12 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
             else {
               alert('enter a valid search string');
            }
+      });
+
+      //
+      $scope.$on('signedIn' , function(){
+          $scope.tags = User.tags();
+          displayPost();
       });
 
       //This displays the post based on the params id when user is browsing
@@ -236,6 +245,7 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
                   });
                 } else {
                     alert('Sign in to customize your experience');
+                    $state.go('articles.auth');
                 }
            };
 
@@ -320,48 +330,56 @@ var app = angular.module('piveo' , ['fileUpload' , 'ngResource' , 'ui.router']);
 
        $scope.editbuttons = function(bool){
           $scope.showbuttons = bool;
+       };
+
+       $scope.myPost = function(post){
+           return post.username == User.activeUser().username;
        }
   });
   
   //
   app.controller('editorCtrl' , function($scope , $state , User){
-       $scope.tags = ['general'];
+      if(! User.signedIn()){
+          $state.go('articles.auth');
+      }
+      else{
+    
+           $scope.tags = ['general'];
+           $scope.clearTags = function(){
+                $scope.tags = [];
+           };
 
-       $scope.clearTags = function(){
-            $scope.tags = [];
-       };
+           $scope.addTag = function(newTag){
+               if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
+                    $scope.tags.push(newTag);
+                    $scope.newTag = '';
+               }
+           };
 
-       $scope.addTag = function(newTag){
-           if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
-                $scope.tags.push(newTag);
-                $scope.newTag = '';
-           }
-       };
+           $scope.deleteTag = function(tag){
+              if(tag){
+                var index = $scope.tags.indexOf(tag);
+                $scope.tags.splice(index , 1);
+              }
+           };
 
-       $scope.deleteTag = function(tag){
-          if(tag){
-            var index = $scope.tags.indexOf(tag);
-            $scope.tags.splice(index , 1);
-          }
-       };
+           $scope.newPost = function(){
+               $state.go('articles.new.edit');
+           };
 
-       $scope.newPost = function(){
-           $state.go('articles.new.edit');
-       };
-
-       $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-         toState.data = {
-               "author": User.activeUser().firstname + ' '+ User.activeUser().lastname,
-               "username":User.activeUser().username,
-               "title":"This First Post Title",
-               "date": Date.now(),
-               "image" : 'img/img.png',
-               "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-               "comments_id":"",
-               "tags":$scope.tags
-             };
-       });
-
+           $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+             toState.data = {
+                   "author": User.activeUser().firstname + ' '+ User.activeUser().lastname,
+                   "username":User.activeUser().username,
+                   "title":"This First Post Title",
+                   "date": Date.now(),
+                   "image" : 'img/img.png',
+                   "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
+                   "comments_id":"",
+                   "tags":$scope.tags
+                 };
+           });
+       }
   });
   
   app.directive('post' , function(){

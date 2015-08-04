@@ -1,10 +1,10 @@
 <div class="row hidden-xs">
 	 <sidebar></sidebar>
       <div class="col-xs-12 col-sm-4 col-md-3 posts"  >
-		 <a ng-repeat="post in posts" class="col-xs-12 post" ng-click="viewPost(post)" ng-model = "editButtons" ng-mouseenter="editbuttons(true)"  ng-mouseleave="editbuttons(false)">
+		 <a ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 post" ng-click="viewPost(post)" ng-model = "editButtons" ng-mouseenter="editbuttons(true)"  ng-mouseleave="editbuttons(false)">
 			<div class="post-heading col-xs-12">
 			   <h3>{{post.title}}</h3>
-			   <span class="postEdit"  ng-show="showbuttons">
+			   <span class="postEdit"  ng-show="showbuttons &&  myPost(post)">
 			   	   <i class="icon fa fa-times" ng-click="deletePost(post)"></i>
 			   	   <i class="icon fa fa-edit" ng-click= "editPost(post)"></i>
 			   </span>
