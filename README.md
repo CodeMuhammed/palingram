@@ -1,2 +1,2 @@
-# piveo
-Collaborative blogging 
+# palingram
+Collaborative blogging platform
