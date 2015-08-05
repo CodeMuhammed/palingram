@@ -38,20 +38,6 @@ app.use(session({resave:true , secret:'this string' , saveUninitialized:true}));
 //app.use(less(path.join(__dirname , 'public' , 'less')));
 app.use(express.static(path.join(__dirname , 'public')));
 
-//Define routes and middle wares in a seperate module
-require('./routes')(app);
-
-
-//handle errors using custom or 3rd party middle-wares
-/*custom error handler can be created easily as follows
- *app.use(function(err  , req , res , next){
-	 //Do something here
-	 res.status(500).end(err);
- });
-*/
-
-//app.use(errorHandler());
-
 //Start the app
 app.listen(app.get('port') , function(){
 	console.log('Server running on port ' ,app.get('port'));
