@@ -1,2 +1,0 @@
-# palingram
-Collaborative blogging platform
