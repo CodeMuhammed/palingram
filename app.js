@@ -38,9 +38,6 @@ app.use(session({resave:true , secret:'this string' , saveUninitialized:true}));
 //app.use(less(path.join(__dirname , 'public' , 'less')));
 app.use(express.static(path.join(__dirname , 'public')));
 
-//Define routes and middle wares in a seperate module
-require('./routes')(app);
-
 
 //handle errors using custom or 3rd party middle-wares
 /*custom error handler can be created easily as follows
