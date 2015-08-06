@@ -78,6 +78,7 @@ angular.module('Tags' , [])
           return {
         	 set : set,
         	 get : get,
-           queryAll : queryAll
+           queryAll : queryAll,
+           update : update
           }
     });

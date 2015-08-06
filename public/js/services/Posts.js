@@ -56,9 +56,48 @@ angular.module('Posts' , ['Comments'])
 	        return promise.promise;
       };
 
- 	return {
-        set : set,
-        get : get,
-        setFavs: setFavs
- 	}
+       var postArticle = function(post){
+         var promise = $q.defer();
+         $http({
+              method : 'POST',
+              url : BaseUrl+'/api/posts/123',
+              data : post 
+         })
+         .success(function(data){
+             posts.push(data);
+             promise.resolve(data);
+         })
+         .error(function(err){
+             promise.reject(err);
+         });
+
+         return promise.promise;
+      };
+
+      //
+      var updateArticle = function(post){
+           var promise = $q.defer();
+
+           $http({
+                method : 'PUT',
+                url : BaseUrl+'/api/posts/123',
+                data : post 
+           })
+           .success(function(data){
+               promise.resolve('post updated successfully');
+           })
+           .error(function(err){
+               promise.reject(err);
+           });
+
+           return promise.promise;
+      }
+
+   	return {
+          set : set,
+          get : get,
+          setFavs: setFavs,
+          post : postArticle,
+          update: updateArticle
+   	}
  });

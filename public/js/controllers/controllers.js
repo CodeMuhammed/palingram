@@ -61,7 +61,7 @@ angular.module('palingram')
 
 
    //Logged in state
-   .controller('inController' , function($scope ,$rootScope ,  $state , Auth){       
+   .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User){       
         $scope.search = false; 
         $scope.toggleSearch = function(){
              $scope.search =! $scope.search ;
@@ -79,10 +79,9 @@ angular.module('palingram')
 
             $rootScope.$broadcast('searchText' , {query : newArr});
         };
-
-        var Nav;
+        
         $scope.goto = function(nav){
-            Nav = nav;
+            $scope.nav = nav;
             if(nav=='favourites'){
                 if($state.is('in.posts')){
                    $rootScope.$broadcast('favourites' , {});
@@ -100,22 +99,41 @@ angular.module('palingram')
                   $state.go('in.posts');
                 }
             } 
+            else if(nav=='editor'){
+                $state.go('in.editor');
+            }
            
         };
+
+
+         $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+             if($scope.nav == 'editor'){
+                toState.data = {
+                   "author": User.get().firstname + ' '+ User.get().lastname,
+                   "username":User.get().username,
+                   "title":"This First Post Title",
+                   "date": Date.now(),
+                   "image" : 'img/img.png',
+                   "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
+                   "comments_id":"",
+                   "tags":Tags.get()
+                 }; 
+               }
+           });
+
    })
 
    .controller('postsController' , function($scope , $state , Tags  ,Posts , User){
        $scope.posts = Posts.get();
-       $scope.viewPost = function(post){
-            $state.current.data.post = post;
-            $state.go('in.posts.post' , {id : post._id});
-       }
-
-        $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-          toState.data.post = fromState.data.post;
-       });
-
        $scope.tags = Tags.get();
+       $scope.sidebar = '';
+
+       $scope.viewPost = function(post){
+            Tags.update(post.tags , User.get().tags_id).then(function(result){
+                $state.current.data.post = post;
+                $state.go('in.posts.post' , {id : post._id});
+            });
+       };
 
        $scope.clearTags = function(){
             $scope.tags = [];
@@ -149,32 +167,42 @@ angular.module('palingram')
 
           }
        };
+      
+       var toggleSidebar = function(){
+           $scope.sidebar == '' ? $scope.sidebar = 'active' : $scope.sidebar = '';
+       }
+      //
+      $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+          toState.data.post = fromState.data.post;
+      });
 
        //
-      $scope.$on('searchText' , function(e , a){
-            if(angular.isArray(a.query) && a.query[0]){
-                $scope.tags = a.query;
-                alert($scope.tags);
-                Posts.set($scope.tags).then(
-                    function(result){
-                        $scope.posts = Posts.get();
-                    }
-                );
-            }
-            else {
-              alert('enter a valid search string');
-           }
-    });
+       $scope.$on('searchText' , function(e , a){
+          if(angular.isArray(a.query) && a.query[0]){
+              $scope.tags = a.query;
+              Posts.set($scope.tags).then(
+                  function(result){
+                      $scope.posts = Posts.get();
+                  }
+              );
+          }
+          else {
+            alert('enter a valid search string');
+        }
+       });
 
-    //
-    $scope.$on('favourites' ,  function(e , a){
-        Posts.setFavs(User.get().favourites).then(function(data){
-             $scope.posts = data;
-        });
-    });
-    $scope.$on('posts' ,  function(e , a){
-        $scope.posts = Posts.get();
-    });
+       //
+       $scope.$on('favourites' ,  function(e , a){
+          Posts.setFavs(User.get().favourites).then(function(data){
+               $scope.posts = data;
+          });
+       });
+
+       $scope.$on('posts' ,  function(e , a){
+          $scope.posts = Posts.get();
+          $scope.tags = Tags.get();
+          toggleSidebar();
+       });
 
    })
 
@@ -210,9 +238,79 @@ angular.module('palingram')
           }
       
    })
-   .controller('profileController' , function($scope){
-        $scope.hello ='This profile controller';
+   .controller('profileController' , function($scope ,$state, User  ,Auth){
+        $scope.user =User.get();
+
+        //Logging out a user 
+        $scope.logout = function(){
+            Auth.logout().then(
+              function(status){
+                  $state.go('out.homepage');
+              } ,
+              function(err){
+                  alert('something went wrong while doing logout');
+              }
+           );
+        };
+        
    })
-   .controller('editorController' , function($scope){
-        $scope.hello ='This editor controller';
+   .controller('editorController' , function($scope ,$state , User , Posts){
+
+         $scope.post = $state.current.data;
+         var option;
+         function init(){
+            $scope.tags = $scope.post.tags;
+            option = $scope.post.comments_id == '' ? 'new' : 'old';
+         }
+         
+         init();
+
+         $scope.clearTags = function(){
+              $scope.tags = [];
+         };
+
+         $scope.addTag = function(newTag){
+             if(newTag && $scope.tags.length < 7 && $scope.tags.indexOf(newTag) < 0){
+                  $scope.tags.push(newTag);
+                  $scope.newTag = '';
+             }
+         };
+
+         $scope.deleteTag = function(tag){
+            if(tag){
+              var index = $scope.tags.indexOf(tag);
+              $scope.tags.splice(index , 1);
+            }
+         };
+
+         $scope.edit = false;
+         $scope.cancelEdit = function(){
+            $state.go('in.posts');
+         };
+
+         $scope.next = function(){
+              $scope.edit = true;
+         }
+
+         //this sends post to the server
+        $scope.save = function(){
+           if(option == 'new'){
+             Posts.post($scope.post).then(function(data){
+                  alert('success');
+                  $scope.post = data;
+                  User.get().favourites.push(data._id);
+                  init();
+             }, function(err){
+                 alert('something went wrong');
+             });
+           }
+           else {
+              Posts.update($scope.post).then(function(result){
+                 alert(result);
+             }, function(err){
+                 console.log(err);
+             });
+           }
+           
+        };
    });

@@ -964,8 +964,10 @@ fieldset[disabled] .transition #body button:hover.active {
   font-weight: bold;
 }
 .subnav {
-  margin-top: 3em;
-  padding-top: 1em;
+  position: fixed;
+  top: 50px;
+  z-index: 100001;
+  padding-top: .8em;
   background: #eeeeee;
 }
 .subnav > ul {
@@ -1005,6 +1007,8 @@ fieldset[disabled] .transition #body button:hover.active {
   color: #555555;
 }
 .article {
+  padding-left: 0;
+  padding-right: 0;
   margin-top: 60px;
 }
 .article .header {
@@ -1052,52 +1056,201 @@ fieldset[disabled] .transition #body button:hover.active {
 .article .comments > div textarea {
   font-size: 1em;
 }
-.tag-buttons > button {
+.tag-buttons .btn {
   margin-right: .5em;
   margin-bottom: .5em;
 }
-.tag-buttons > button:hover {
+.tag-buttons .btn:hover {
   color: #ffffff;
   background-color: #d9534f;
   border-color: #d43f3a;
 }
-.tag-buttons > button:hover:hover,
-.tag-buttons > button:hover:focus,
-.tag-buttons > button:hover.focus,
-.tag-buttons > button:hover:active,
-.tag-buttons > button:hover.active,
-.open > .dropdown-toggle.tag-buttons > button:hover {
+.tag-buttons .btn:hover:hover,
+.tag-buttons .btn:hover:focus,
+.tag-buttons .btn:hover.focus,
+.tag-buttons .btn:hover:active,
+.tag-buttons .btn:hover.active,
+.open > .dropdown-toggle.tag-buttons .btn:hover {
   color: #ffffff;
   background-color: #c9302c;
   border-color: #ac2925;
 }
-.tag-buttons > button:hover:active,
-.tag-buttons > button:hover.active,
-.open > .dropdown-toggle.tag-buttons > button:hover {
+.tag-buttons .btn:hover:active,
+.tag-buttons .btn:hover.active,
+.open > .dropdown-toggle.tag-buttons .btn:hover {
   background-image: none;
 }
-.tag-buttons > button:hover.disabled,
-.tag-buttons > button:hover[disabled],
-fieldset[disabled] .tag-buttons > button:hover,
-.tag-buttons > button:hover.disabled:hover,
-.tag-buttons > button:hover[disabled]:hover,
-fieldset[disabled] .tag-buttons > button:hover:hover,
-.tag-buttons > button:hover.disabled:focus,
-.tag-buttons > button:hover[disabled]:focus,
-fieldset[disabled] .tag-buttons > button:hover:focus,
-.tag-buttons > button:hover.disabled.focus,
-.tag-buttons > button:hover[disabled].focus,
-fieldset[disabled] .tag-buttons > button:hover.focus,
-.tag-buttons > button:hover.disabled:active,
-.tag-buttons > button:hover[disabled]:active,
-fieldset[disabled] .tag-buttons > button:hover:active,
-.tag-buttons > button:hover.disabled.active,
-.tag-buttons > button:hover[disabled].active,
-fieldset[disabled] .tag-buttons > button:hover.active {
+.tag-buttons .btn:hover.disabled,
+.tag-buttons .btn:hover[disabled],
+fieldset[disabled] .tag-buttons .btn:hover,
+.tag-buttons .btn:hover.disabled:hover,
+.tag-buttons .btn:hover[disabled]:hover,
+fieldset[disabled] .tag-buttons .btn:hover:hover,
+.tag-buttons .btn:hover.disabled:focus,
+.tag-buttons .btn:hover[disabled]:focus,
+fieldset[disabled] .tag-buttons .btn:hover:focus,
+.tag-buttons .btn:hover.disabled.focus,
+.tag-buttons .btn:hover[disabled].focus,
+fieldset[disabled] .tag-buttons .btn:hover.focus,
+.tag-buttons .btn:hover.disabled:active,
+.tag-buttons .btn:hover[disabled]:active,
+fieldset[disabled] .tag-buttons .btn:hover:active,
+.tag-buttons .btn:hover.disabled.active,
+.tag-buttons .btn:hover[disabled].active,
+fieldset[disabled] .tag-buttons .btn:hover.active {
   background-color: #d9534f;
   border-color: #d43f3a;
 }
-.tag-buttons > button:hover .badge {
+.tag-buttons .btn:hover .badge {
   color: #d9534f;
   background-color: #ffffff;
+}
+.new-post {
+  margin-top: 10em;
+  padding: 0;
+}
+.new-post .post-title {
+  border: none;
+  font-size: 4em;
+}
+@media (max-width: 991px) {
+  .new-post .post-title {
+    margin-top: 0;
+    font-size: 2.5em;
+  }
+}
+.new-post .post-img {
+  position: relative;
+  min-height: 20em;
+  text-align: center;
+}
+.new-post .post-img .pic-icon {
+  position: absolute;
+  top: 0;
+  left: 30%;
+  padding: 2em;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.7);
+}
+.new-post .post-img .pic-icon > i {
+  font-size: 4em;
+  color: #fff;
+}
+.new-post .post-img .pic-icon span {
+  color: #fff;
+  font-size: 1.2em;
+}
+.new-post .post-img .preview img {
+  max-height: 30em;
+}
+.new-post .post-body {
+  min-height: 60em;
+  border: none;
+  font-size: 1.2em;
+  width: 100%;
+}
+.wiz {
+  text-align: center;
+  padding: 3em;
+  margin-top: 2em;
+}
+.wiz .wiz-pager {
+  border: 1px solid #eeeeee;
+  border-radius: 30px;
+  padding: 1em 3em;
+}
+.wiz .wiz-pager i {
+  font-size: 1.3em;
+}
+.wiz .wiz-pager:hover:first-child {
+  border: 1px solid #f0ad4e;
+}
+.wiz .wiz-pager:hover:first-child i {
+  color: #f0ad4e;
+}
+.wiz .wiz-pager:hover:last-child {
+  border: 1px solid #5cb85c;
+}
+.wiz .wiz-pager:hover:last-child i {
+  color: #5cb85c;
+}
+.tool-set {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: 5px solid #fff;
+  border-radius: 5px;
+  height: 4em;
+  position: fixed;
+  top: 55px;
+  z-index: 100002;
+}
+@media (max-width: 991px) {
+  .tool-set {
+    padding-top: .4em;
+    width: 100%;
+    border-radius: 0px;
+  }
+}
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+html,
+body {
+  overflow-x: hidden;
+  /* Prevent scroll on narrow devices */
+}
+footer {
+  padding: 30px 0;
+}
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 992px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -o-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+  .row-offcanvas-right {
+    right: 0;
+  }
+  .row-offcanvas-left {
+    left: 0;
+  }
+  .row-offcanvas-right .sidebar-offcanvas {
+    right: -93.7%;
+  }
+  .row-offcanvas-right.active {
+    right: 100%;
+    /* 6 columns */
+  }
+  .row-offcanvas-left .sidebar-offcanvas {
+    left: -95%;
+  }
+  .row-offcanvas-left.active {
+    left: 100%;
+  }
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 992px) and (max-width: 991px) {
+  .row-offcanvas-right.active {
+    right: 100%;
+  }
+}
+@media screen and (max-width: 992px) and (max-width: 991px) {
+  .row-offcanvas-left.active {
+    left: 100%;
+  }
+}
+@media screen and (max-width: 992px) and (max-width: 991px) {
+  .sidebar-offcanvas {
+    width: 100%;
+  }
 }
