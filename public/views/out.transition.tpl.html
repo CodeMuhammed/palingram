@@ -1,1 +1,25 @@
-{{hello}}
+<div class="col-sm-offset-3 col-sm-6 transition">
+	<!--transition is for when a user just siggned up for the service
+	<a href="" ng-click = "logout()">logout</a>
+	<a href="" ng-click = "proceed()">proceed</a>-->
+	<div classs="col-xs-12" id="header">
+       <a>
+      	 <img src="img/logo.png" height="60px"/>
+       </a>
+       
+    </div>
+
+    <div classs="col-xs-12" id="body">
+    	<h1>
+       	   Customize your homepage by selecting your favourite topics
+       </h1>
+       <button class="btn btn-default btn-lg" ng-class="{'btn-success' : isSelected(tag)}" ng-repeat="tag in tags" ng-click="select(tag)">
+       	    {{tag}}
+       </button>
+     
+       
+    </div>
+    <div class="col-xs-12 text-center footer">
+		<button class="btn btn-danger btn-lg" ng-click="proceed()">Continue to Posts</button>
+    </div>
+</div>

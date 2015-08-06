@@ -1,3 +1,63 @@
-<a ui-sref="out.homepage">go back out</a>
-<br>
-<ui-view></ui-view>
+<div class="main-view-area">
+	   <!-- Static navbar -->
+   <nav class="navbar navbar-default navbar-fixed-top" style="background:#fff;">
+	   <div class="navbar-header text-center">
+		  <a class="navbar-brand" style="padding-top:0 !important" ng-click="goto('posts')" ><img src="img/logo.png" height="50"></a>
+	   </div>
+	   <div class="hidden-xs">
+		  <ul class="nav navbar-nav col-md-5">
+			<li class="navbar-right">
+				<a  ui-sref = "in.editor">
+					<i class="icon fa fa-plus" style="font-size:1.4em;"></i> write new article
+				</a>
+			</li>
+			<li ng-click="goto('favourites')" class="navbar-right">
+				<a>
+					<i class="icon fa fa-heart" style="font-size:1.4em;"></i> 
+					favourites
+				</a>
+			</li>
+		  </ul> 
+		  <ul class="nav navbar-nav" style="">
+			<li class="navbar-right" ><a ui-sref = "in.profile"><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a></li>
+		  </ul> 
+		  <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Search" class="form-control" style="border-radius:30px" ng-model = "searchText">
+            </div>
+            <div class="btn hidden-xs" ng-click="searchForTopic(searchText)">
+			   <a href="" ><i class="icon fa fa-search" style="font-size:1.4em;"></i></a>
+			</div>
+          </form>
+       </div>		  
+ </nav>
+
+ <div class="col-xs-12 subnav visible-xs">
+	  <ul class="nav navbar-nav" ng-hide="search">
+		<li class="navbar-right">
+		  <a ui-sref="articles.new"><i class="icon fa fa-plus" style="font-size:1.4em;"></i> new</a>
+		</li>
+		<li class="navbar-right">
+			<a href=""><i class="icon fa fa-heart" style="font-size:1.4em;"></i> favourites</a>
+		</li>
+		<li class="navbar-right">
+			<a ui-sref="articles.auth"><i class="icon fa fa-user" style="font-size:1.4em;"></i> profile</a>
+		</li>
+		<li class="navbar-right" ng-click="toggleSearch()">
+			<a href=""><i class="icon fa fa-search" style="font-size:1.4em;"></i> search</a>
+		</li>
+	  </ul> 
+	  <form class="searchbox" ng-show="search">
+	  	<div class="input-group" style="padding-bottom:.4em;">
+	  		<span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click="toggleSearch()">
+			<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:#ccc"></i>
+		  </span>
+		  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Search for contact by email or username" ng-model="searchText">
+		  <span class="input-group-addon" style="background-color:#428bca; padding-left:1em; padding-right:1em" ng-click="search(searchText)">
+			<i class="icon fa fa-search" style="font-size:1.5em; font-weight:bold; color:#fff"></i>
+		  </span>
+	   </div>
+	  </form>
+   </div>
+   <ui-view name="inSpace"></ui-view>
+</div>

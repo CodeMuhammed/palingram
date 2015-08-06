@@ -1,60 +1,58 @@
+//Require dependencies phase
 var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var errorHandler = require('errorhandler');
+var logger = require('morgan');
+//var less = require('less-middleware');
+var jade = require('jade');
+var compression = require('compression');
+var methodOverride = require('method-override');
+var favicon = require('serve-favicon');
+var path = require('path');
+var busboy = require('connect-busboy');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
+//Instantiate a new express app
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+//Configure the express app
+app.set('view cache' , true);
+app.set('views' , path.join(__dirname , 'app_server' ,'views'));
+app.set('view engine' , 'jade');
+app.set('busboy' , busboy);
+app.set('port' , process.env.PORT || 3002);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+app.use(compression({threshold:1}));
+app.use(logger('combined'));
+app.use(methodOverride('_method'));
+app.use(favicon(path.join(__dirname , 'public', 'favicon.ico')));
+
+//configure router to use cookie-parser  ,body-parser 
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({resave:true , secret:'this string' , saveUninitialized:true}));
 
-app.use('/', routes);
-app.use('/users', users);
+//app.use(less(path.join(__dirname , 'public' , 'less')));
+app.use(express.static(path.join(__dirname , 'public')));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+//Define routes and middle wares in a seperate module
+require('./routes')(app);
+
+
+//handle errors using custom or 3rd party middle-wares
+/*custom error handler can be created easily as follows
+ *app.use(function(err  , req , res , next){
+	 //Do something here
+	 res.status(500).end(err);
+ });
+*/
+
+//app.use(errorHandler());
+
+//Start the app
+app.listen(app.get('port') , function(){
+	console.log('Server running on port ' ,app.get('port'));
 });
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
-
-module.exports = app;

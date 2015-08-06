@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+//loads all the routes the application depends on
+module.exports = function(app){
+	require('./upload.js')(app);
+	require('./main.js')(app);
+	require('./test.js')(app);
+	require('./resource.js')(app);
+};

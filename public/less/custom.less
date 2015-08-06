@@ -1,3 +1,20 @@
+// Core variables and mixins
+@import "variables.less";
+@import "mixins.less";
+
+// Reset and dependencies
+@import "normalize.less";
+@import "print.less";
+
+//Import components
+@import "button-groups.less";
+@import "buttons.less";
+
+body{
+	a{
+	   outline:none;
+	}
+}
 .homepage{
     padding:0; 
 	.navbar {
@@ -24,7 +41,8 @@
 	.header{
 	   height:30em; 
 	   padding:0; 
-	   background: url('../img/cover.jpg') center center no-repeat; background-size: cover;
+	   background: url('../img/cover.jpg') center center no-repeat;
+	   background-size: cover;
 	   .inner{
 	      height:30em;
 	      background-color:hsla(0 , 0 , 0 , .8);
@@ -87,4 +105,151 @@
           font-size: 1.4em;
        }
     }
+}
+
+.transition {
+	text-align:center;
+	#header{
+	   margin-bottom:3em;
+	   border-bottom:3px solid #ccc;
+	}
+
+	#body{
+	   h1{ 
+	      margin-bottom:2em;
+	   }
+	   button{
+	      margin-right:.2em;
+	      border-radius:2;
+	      outline : none;
+	      &:hover{
+	         .btn-primary;
+	      }
+	   }
+	}
+
+	.footer{
+	   margin-top:3em;
+	   padding-top:1em;
+	   border-top:3px solid #ccc;
+	}
+
+}
+
+.navbar {
+   .navbar-header{
+	   @media (max-width: @screen-sm) {
+	      margin-left:30% !important;
+	   }
+   }
+   li{
+      font-size:1.2em;
+      font-weight:bold;
+   }
+}
+
+.subnav{
+   margin-top:3em;
+   padding-top:1em;
+   background: @gray-lighter;
+   >ul{
+
+      text-align:center;
+      >li{
+        width:25%;
+        float:left;
+
+        >a{
+           outline:none;
+        }
+      }
+      
+   }
+}
+
+.panel{
+    padding-bottom:1em;
+   .header{
+      padding:0;
+      h5{
+        font-size: 1.3em;
+      }
+   }
+   .panel-body{
+     padding:0;
+     .img-div{
+         min-height: 20em;
+     }
+     .content {
+        padding-left:0;
+        padding-right:0;
+        h3{
+           font-size: 3em;
+        }
+        p{
+           font-size: 1.7em;
+           color : @gray;
+        }
+     }
+   }
+}
+
+.article {
+	margin-top:60px;
+	.header{
+	   height:30em; 
+	   padding:0; 
+	   .inner{
+	      height:30em;
+	      background-color:hsla(0 , 0 , 0 , .6);
+	      .text{
+	         text-align:center;
+	         margin-top: 5em;
+	         color:#fff;
+	         h1{
+	            font-size: 3em;
+	         }
+	      }
+	   }
+	}
+	.share-box{
+	   background:#ccc;
+	   i{
+	      padding:.5em;
+	      font-size:2em;
+	      &:hover{
+	        color:@brand-primary;
+	      }
+	   }
+	}
+	.body{
+	   margin-top:2em;
+	   p{
+	      font-size:1.7em;
+	   }
+	}
+	.comments{
+	   padding-left:0;
+	   padding-right:0;
+	   font-size:1.7em;
+	   margin-top: 2em;
+	   >div{
+	       padding: 1em;
+           background-color:lighten(@brand-primary , 30%);
+           textarea{
+               font-size:1em;
+           }
+	   }
+	}
+}
+
+
+.tag-buttons{
+   >button{
+      margin-right: .5em;
+      margin-bottom: .5em;
+      &:hover{
+	     .btn-danger;
+	  }
+   }
 }

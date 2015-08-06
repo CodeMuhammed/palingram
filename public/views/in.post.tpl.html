@@ -1,0 +1,29 @@
+<div class="col-sm-offset-2 col-sm-8 article">
+	<div class="col-xs-12 header" style="background: url({{post.image}}) center center no-repeat; background-size: cover;">
+		<div class="col-xs-12 inner" >
+			<div class="col-sm-8 col-sm-offset-2 text">
+				<h1>{{post.title}}</h1>
+				<h3>
+					by <a>{{post.author}}</a>
+				</h3>
+			</div>
+		</div>
+	</div>
+
+    <div class="col-xs-12 share-box">
+		<i class="icon fa fa-facebook"> </i>
+		<i class="icon fa fa-twitter"> </i>
+		<i class="icon fa fa-google-plus"> </i>
+		<i class="icon fa" ng-class="isFavourite() ? 'fa-heart':'fa-heart-o'" ng-click="toggleFavourite()" style="color:red"></i>
+	</div>
+
+	<div class="col-xs-12 body">
+		<p>{{post.body}}</p>
+	</div>
+	<div class="col-xs-12 comments">
+		<div class="col-xs-12" >
+            <textarea class="form-control" placeholder="Comment on this article ..."></textarea>
+		</div>
+	</div>
+	{{post.comments_id}}
+</div>
