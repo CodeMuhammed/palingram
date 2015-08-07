@@ -102,8 +102,15 @@ angular.module('palingram')
             else if(nav=='editor'){
                 $state.go('in.editor');
             }
+            else if(nav=='profile'){
+                $state.go('in.profile');
+            }
            
         };
+
+        $scope.active = function(item){
+            return $scope.nav==item;
+        }
 
 
          $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){

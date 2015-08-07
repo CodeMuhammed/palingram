@@ -963,22 +963,39 @@ fieldset[disabled] .transition #body button:hover.active {
   font-size: 1.2em;
   font-weight: bold;
 }
+.navbar li a:hover {
+  color: #d9534f !important;
+}
+.navbar li .active {
+  color: #d9534f !important;
+}
 .subnav {
+  min-height: 4.2em;
   position: fixed;
   top: 50px;
   z-index: 100001;
-  padding-top: .8em;
   background: #eeeeee;
 }
 .subnav > ul {
   text-align: center;
 }
 .subnav > ul > li {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 1em;
+  font-weight: bold;
   width: 25%;
   float: left;
 }
 .subnav > ul > li > a {
   outline: none;
+  color: #555555;
+}
+.subnav > ul > li .active {
+  color: #d9534f !important;
+}
+.subnav .searchbox {
+  margin-top: .5em;
 }
 .panel {
   padding-bottom: 1em;

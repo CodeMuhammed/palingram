@@ -143,29 +143,50 @@ body{
 	   }
    }
    li{
+      
       font-size:1.2em;
       font-weight:bold;
+      a{
+         &:hover{
+            color:@brand-danger !important;
+          }
+      }
+      .active{
+           color:@brand-danger !important;
+        }
    }
 }
 
 .subnav{
+   min-height:4.2em;
    position: fixed;
    top:50px;
    z-index:100001;
-   padding-top:.8em;
    background: @gray-lighter;
    >ul{
 
       text-align:center;
       >li{
+        white-space:nowrap; 
+        overflow:hidden;
+        font-size:1em;
+        font-weight:bold;
         width:25%;
         float:left;
 
         >a{
            outline:none;
+           color:@gray;
         }
+        .active{
+           color:@brand-danger !important;
+        }
+
       }
-      
+     
+   }
+   .searchbox{
+      margin-top:.5em;
    }
 }
 
