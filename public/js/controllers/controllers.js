@@ -63,6 +63,8 @@ angular.module('palingram')
    //Logged in state
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User){       
         $scope.search = false; 
+        $scope.nav = 'posts';
+        
         $scope.toggleSearch = function(){
              $scope.search =! $scope.search ;
         }
@@ -80,6 +82,12 @@ angular.module('palingram')
             $rootScope.$broadcast('searchText' , {query : newArr});
         };
         
+        
+
+        $scope.toggle = function(view){
+            $rootScope.$broadcast('toggle:'+ $scope.nav , {});
+        }
+
         $scope.goto = function(nav){
             $scope.nav = nav;
             if(nav=='favourites'){
@@ -104,8 +112,7 @@ angular.module('palingram')
             }
             else if(nav=='profile'){
                 $state.go('in.profile');
-            }
-           
+            } 
         };
 
         $scope.active = function(item){
@@ -121,6 +128,7 @@ angular.module('palingram')
                    "title":"This First Post Title",
                    "date": Date.now(),
                    "image" : 'img/img.png',
+                   "description":"A brief description of what the post is about",
                    "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
                    "comments_id":"",
                    "tags":Tags.get()
@@ -208,6 +216,9 @@ angular.module('palingram')
        $scope.$on('posts' ,  function(e , a){
           $scope.posts = Posts.get();
           $scope.tags = Tags.get();
+       });
+
+       $scope.$on('toggle:posts' ,  function(e , a){
           toggleSidebar();
        });
 
@@ -216,6 +227,8 @@ angular.module('palingram')
    .controller('postController' , function($scope , $state , Tags , Posts , User , Auth){
           if(Auth.isAuth()){
                 $scope.post = $state.current.data.post;
+                $scope.owned = User.get().username==$scope.post.username;
+                
                 $scope.isFavourite = function(){ 
                    return User.get().favourites.indexOf($scope.post._id)>=0;
                 }
@@ -299,6 +312,10 @@ angular.module('palingram')
               $scope.edit = true;
          }
 
+        $scope.back = function(){
+            $scope.edit = false;   
+        }
+        
          //this sends post to the server
         $scope.save = function(){
            if(option == 'new'){
@@ -317,7 +334,8 @@ angular.module('palingram')
              }, function(err){
                  console.log(err);
              });
-           }
-           
+           } 
         };
+
+
    });

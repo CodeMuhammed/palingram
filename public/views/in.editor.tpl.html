@@ -1,11 +1,13 @@
 
 <div class="col-sm-6 col-sm-offset-3 tool-set">
      <button class="btn btn-default pull-right" ng-click="save()">save</button>
-     <button class="btn btn-default pull-right" ui-sref="in.posts" style="margin-right:.2em">cancel</button>
+     <button class="btn btn-default" ng-click="back()" style="margin-right:.2em">back</button>
 </div>
-<div class="col-sm-6 col-sm-offset-3" style="margin-top:13em; padding:0" ng-hide="edit">
-	<div class="alert alert-info">Tags are a great way to target multiple categories at the same time.Get started by adding some</div>
-	<h4>Tags 
+<div class="col-sm-6 col-sm-offset-3 text-center" style="margin-top:13em; padding:0" ng-hide="edit">
+	 <h1>
+       	   Tags are a great for targeting multiple categories. 
+     </h1>
+	<h4>Add Tags 
 	    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
 	</h4>
 
@@ -22,18 +24,22 @@
 		</button>
 	 </div>
 	 <div class="wiz">
-	 	 <a class="wiz-pager" href="#/articles/all">
-	 	 	<i class="icon fa fa-times" ng-click="cancelEdit()" > cancel</i></a>
+	 	 <a class="wiz-pager">
+	 	 	<i class="icon fa fa-times" ng-click="cancelEdit()"> cancel</i></a>
 	 	 <a class="wiz-pager" ng-click ="next()">
 	 	 	<i class="icon fa fa-edit" > next</i></a>
 	 </div>
 </div>
 
-<div class="col-sm-6 col-sm-offset-3 new-post" ng-show="edit">
+
+<div class="col-sm-6 col-sm-offset-3 new-post" ng-show="edit" style="margin-bottom:5em;">
 	 <input class="post-title" placeholder="Enter title of post here" ng-model="post.title">
 	 <hr />
+     <h3>Cover image url</h3>
 	 <input class="form-control" placeholder="Enter url to header image here" style="margin-bottom:2em" ng-model="post.image">
-	 <!--<uploader></uploader>-->
-
-	  <textarea class="post-body" placeholder="Type your contents here"ng-model="post.body"></textarea> 
+	 <h3>Post description</h3>
+	 <input class="form-control" placeholder="Enter url to header image here" style="margin-bottom:2em" ng-model="post.description">
+	 <h3>Content</h3>
+     <div text-angular="text-angular" name="htmlcontent" ng-model="post.body" ta-disabled='false'>
+     </div>
 </div> 

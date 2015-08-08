@@ -15,10 +15,18 @@
 		<i class="icon fa fa-twitter"> </i>
 		<i class="icon fa fa-google-plus"> </i>
 		<i class="icon fa" ng-class="isFavourite() ? 'fa-heart':'fa-heart-o'" ng-click="toggleFavourite()" style="color:red"></i>
+		<div class="pull-right" ng-show="owned">
+			<button class="btn btn-default btn-xs">
+				<i class="icon fa fa-edit"></i>
+			</button>
+			<button class="btn btn-default btn-xs">
+				<i class="icon fa fa-trash"></i>
+			</button>
+		</div>
 	</div>
 
 	<div class="col-xs-12 body">
-		<p>{{post.body}}</p>
+		<p ng-bind-html="post.body"></p>
 	</div>
 	<div class="col-xs-12 comments">
 		<div class="col-xs-12" >

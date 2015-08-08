@@ -955,8 +955,8 @@ fieldset[disabled] .transition #body button:hover.active {
   border-top: 3px solid #ccc;
 }
 @media (max-width: 768px) {
-  .navbar .navbar-header {
-    margin-left: 30% !important;
+  .navbar .navbar-header a {
+    padding-left: 0 !important;
   }
 }
 .navbar li {
@@ -984,7 +984,7 @@ fieldset[disabled] .transition #body button:hover.active {
   overflow: hidden;
   font-size: 1em;
   font-weight: bold;
-  width: 25%;
+  width: 33.3333333%;
   float: left;
 }
 .subnav > ul > li > a {
@@ -1058,7 +1058,13 @@ fieldset[disabled] .transition #body button:hover.active {
   margin-top: 2em;
 }
 .article .body p {
-  font-size: 1.7em;
+  font-size: 1.3em;
+}
+.article .body img {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  max-width: 100%;
+  max-height: 100%;
 }
 .article .comments {
   padding-left: 0;
