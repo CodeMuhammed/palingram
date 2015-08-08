@@ -3,6 +3,12 @@ angular.module('palingram')
        $scope.hello = 'out homepage controller says hello';
    })
 
+   .controller('previewController' , function($scope , $state , Posts){
+       Posts.previewArticle($state.params.post_id).then(function(data){
+           $scope.post = data[0];
+       });
+   })
+
    .controller('signupController' , function($scope , $state , Auth){
        $scope.signup = function(newUser){
             Auth.signup(newUser).then(function(){

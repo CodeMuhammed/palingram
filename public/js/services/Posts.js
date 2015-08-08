@@ -60,7 +60,7 @@ angular.module('Posts' , ['Comments'])
          var promise = $q.defer();
          $http({
               method : 'POST',
-              url : BaseUrl+'/api/posts/123',
+              url : BaseUrl+'/api/posts/1',
               data : post 
          })
          .success(function(data){
@@ -80,7 +80,7 @@ angular.module('Posts' , ['Comments'])
 
            $http({
                 method : 'PUT',
-                url : BaseUrl+'/api/posts/123',
+                url : BaseUrl+'/api/posts/1',
                 data : updatedPost
            })
            .success(function(data){
@@ -136,6 +136,22 @@ angular.module('Posts' , ['Comments'])
 
            return promise.promise;
       };
+     
+     var previewArticle = function(post_id){
+          var promise = $q.defer();
+          $http({
+                method : 'GET',
+                url : BaseUrl+'/api/posts/1',
+                params : {post_id:post_id}
+           })
+           .success(function(data){             
+               promise.resolve(data);
+           })
+           .error(function(err){
+               alert(angular.toJson(err));
+           });
+          return promise.promise;
+     }
 
    	return {
           set : set,
@@ -143,6 +159,7 @@ angular.module('Posts' , ['Comments'])
           setFavs: setFavs,
           post : postArticle,
           update: updateArticle,
-          deleteArticle : deleteArticle
+          deleteArticle : deleteArticle,
+          previewArticle: previewArticle
    	}
  });

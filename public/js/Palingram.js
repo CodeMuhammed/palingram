@@ -22,6 +22,12 @@ angular.module('palingram' , ['ngResource' ,'textAngular', 'ui.router' , 'Auth']
          controller  : 'homepageController',
          data :{}
      })
+     .state('out.preview' , {
+         url : '/preview/:post_id',
+         templateUrl : 'views/out.preview.tpl.html',
+         controller  : 'previewController',
+         data :{}
+     })
      .state('out.signup' , {
          url : '/signup',
          templateUrl : 'views/out.signup.tpl.html',

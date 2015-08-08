@@ -851,7 +851,6 @@ body a {
 }
 .homepage .body {
   margin-bottom: 1em;
-  border-bottom: 10px solid #ccc;
 }
 .homepage .body .item {
   margin-top: 2em;
@@ -869,6 +868,8 @@ body a {
   margin-bottom: 3em;
 }
 .homepage .footer {
+  border-top: 10px solid #ccc;
+  padding-top: 2em;
   margin-bottom: 3em;
 }
 .auth {
