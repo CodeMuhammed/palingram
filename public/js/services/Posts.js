@@ -75,16 +75,36 @@ angular.module('Posts' , ['Comments'])
       };
 
       //
-      var updateArticle = function(post){
+      var updateArticle = function(updatedPost){
            var promise = $q.defer();
 
            $http({
                 method : 'PUT',
                 url : BaseUrl+'/api/posts/123',
-                data : post 
+                data : updatedPost
            })
            .success(function(data){
-               promise.resolve('post updated successfully');
+              alert('success update');
+              angular.forEach(posts , function(item){
+                   var index = -1;
+                   if(updatedPost._id == item._id){
+                       index = posts.indexOf(item);
+                        posts[index] = updatedPost;
+                   }
+                   
+               });
+
+              if(favourites){
+                angular.forEach(favourites , function(item){
+                     var index = -1;
+                     if(updatedPost._id == item._id){
+                         index = favourites.indexOf(item);
+                         favourites[index] = updatedPost;
+                     }
+                     
+                 });
+              }
+              
            })
            .error(function(err){
                promise.reject(err);
@@ -93,11 +113,36 @@ angular.module('Posts' , ['Comments'])
            return promise.promise;
       }
 
+
+      //
+      var deleteArticle = function(article){
+           var promise = $q.defer();
+           $http({
+                method : 'DELETE',
+                url : BaseUrl+'/api/posts/'+article._id,
+                params : article 
+           })
+           .success(function(data){
+               posts.splice(posts.indexOf(article) , 1);
+               if(favourites){
+                 favourites.splice(favourites.indexOf(article) , 1);  
+               }
+                            
+               promise.resolve(data);
+           })
+           .error(function(err){
+               promise.reject(err);
+           });
+
+           return promise.promise;
+      };
+
    	return {
           set : set,
           get : get,
           setFavs: setFavs,
           post : postArticle,
-          update: updateArticle
+          update: updateArticle,
+          deleteArticle : deleteArticle
    	}
  });

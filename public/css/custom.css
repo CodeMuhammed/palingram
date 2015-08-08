@@ -998,16 +998,13 @@ fieldset[disabled] .transition #body button:hover.active {
   margin-top: .5em;
 }
 .panel {
-  padding-bottom: 1em;
-}
-.panel .header {
+  border: none;
   padding: 0;
+  box-shadow: none;
+  padding-bottom: 1em;
 }
 .panel .header h5 {
   font-size: 1.3em;
-}
-.panel .panel-body {
-  padding: 0;
 }
 .panel .panel-body .img-div {
   min-height: 20em;
@@ -1049,7 +1046,7 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .article .share-box i {
   padding: .5em;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 .article .share-box i:hover {
   color: #337ab7;

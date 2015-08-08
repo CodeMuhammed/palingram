@@ -226,32 +226,46 @@ angular.module('palingram')
 
    .controller('postController' , function($scope , $state , Tags , Posts , User , Auth){
           if(Auth.isAuth()){
-                $scope.post = $state.current.data.post;
-                $scope.owned = User.get().username==$scope.post.username;
-                
-                $scope.isFavourite = function(){ 
-                   return User.get().favourites.indexOf($scope.post._id)>=0;
-                }
+            $scope.post = $state.current.data.post;
+            $scope.owned = User.get().username==$scope.post.username;
+            
+            $scope.isFavourite = function(){ 
+               return User.get().favourites.indexOf($scope.post._id)>=0;
+            }
 
-                $scope.toggleFavourite = function(){
-                     var index = User.get().favourites.indexOf($scope.post._id);
-                     
-                     if(index>=0){
-                         User.get().favourites.splice(index , 1);
-                     }
-                     else {
-                         User.get().favourites.push($scope.post._id);
-                     }
-                     
-                     User.update(User.get()).then(function(result){
-                         Posts.setFavs(User.get().favourites , true).then(function(result){
-                         });
-                     } , function(err){
-                         console.log(err);
+            $scope.toggleFavourite = function(){
+                 var index = User.get().favourites.indexOf($scope.post._id);
+                 
+                 if(index>=0){
+                     User.get().favourites.splice(index , 1);
+                 }
+                 else {
+                     User.get().favourites.push($scope.post._id);
+                 }
+                 
+                 User.update(User.get()).then(function(result){
+                     Posts.setFavs(User.get().favourites , true).then(function(result){
                      });
-                     
-                }
-              
+                 } , function(err){
+                     console.log(err);
+                 });
+                 
+            };
+
+             $scope.edit = function(){
+                  $state.go('in.editor');
+              };
+
+              $scope.delete = function(){
+                  Posts.deleteArticle($scope.post).then(function(status){
+                      $state.go('in.posts');
+                  });
+              };
+
+               $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+                  toState.data = angular.copy($scope.post);
+               });
+                      
           }
           else{
             $state.go('out.signin');
@@ -277,6 +291,7 @@ angular.module('palingram')
    .controller('editorController' , function($scope ,$state , User , Posts){
 
          $scope.post = $state.current.data;
+
          var option;
          function init(){
             $scope.tags = $scope.post.tags;
@@ -329,6 +344,7 @@ angular.module('palingram')
              });
            }
            else {
+              $scope.post.date = Date.now();
               Posts.update($scope.post).then(function(result){
                  alert(result);
              }, function(err){

@@ -1,6 +1,6 @@
 angular.module('Auth' , ['User', 'Tags' , 'Posts'])
-   //.constant('BaseUrl' , 'http://localhost:3000')
-   .constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
+   .constant('BaseUrl' , 'http://localhost:3000')
+   //.constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
    .factory('Auth' , function($http , $q ,$state ,$rootScope ,  Posts , Tags , User , BaseUrl){
          var isSignedIn;
 
@@ -39,7 +39,6 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
                 promise.resolve('sign in done');
             })
             .error(function(err){
-                alert('auth init b');
                 console.log(err);
             });
             return promise.promise;

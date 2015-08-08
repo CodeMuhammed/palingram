@@ -14,12 +14,13 @@
 		<i class="icon fa fa-facebook"> </i>
 		<i class="icon fa fa-twitter"> </i>
 		<i class="icon fa fa-google-plus"> </i>
+		<i class="icon fa fa-link"> </i>
 		<i class="icon fa" ng-class="isFavourite() ? 'fa-heart':'fa-heart-o'" ng-click="toggleFavourite()" style="color:red"></i>
 		<div class="pull-right" ng-show="owned">
-			<button class="btn btn-default btn-xs">
+			<button class="btn btn-default btn-xs" ng-click="edit()">
 				<i class="icon fa fa-edit"></i>
 			</button>
-			<button class="btn btn-default btn-xs">
+			<button class="btn btn-default btn-xs" ng-click="delete()">
 				<i class="icon fa fa-trash"></i>
 			</button>
 		</div>
