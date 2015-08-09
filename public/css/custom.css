@@ -810,6 +810,51 @@ input[type="reset"].btn-block,
 input[type="button"].btn-block {
   width: 100%;
 }
+.media {
+  margin-top: 15px;
+}
+.media:first-child {
+  margin-top: 0;
+}
+.media,
+.media-body {
+  zoom: 1;
+  overflow: hidden;
+}
+.media-body {
+  width: 10000px;
+}
+.media-object {
+  display: block;
+}
+.media-right,
+.media > .pull-right {
+  padding-left: 10px;
+}
+.media-left,
+.media > .pull-left {
+  padding-right: 10px;
+}
+.media-left,
+.media-right,
+.media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+.media-middle {
+  vertical-align: middle;
+}
+.media-bottom {
+  vertical-align: bottom;
+}
+.media-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.media-list {
+  padding-left: 0;
+  list-style: none;
+}
 body a {
   outline: none;
 }
@@ -1067,7 +1112,7 @@ fieldset[disabled] .transition #body button:hover.active {
 .article .comments {
   padding-left: 0;
   padding-right: 0;
-  font-size: 1.7em;
+  font-size: 1.3em;
   margin-top: 2em;
 }
 .article .comments > div {
@@ -1076,6 +1121,14 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .article .comments > div textarea {
   font-size: 1em;
+  border-radius: 0;
+  border: none;
+}
+.article .comments > div .footer {
+  padding: .3em .2em .3em 0;
+  background: #fff;
+  border-top: none;
+  margin-top: -1px;
 }
 .tag-buttons .btn {
   margin-right: .5em;

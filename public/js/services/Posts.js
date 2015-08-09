@@ -1,4 +1,4 @@
-angular.module('Posts' , ['Comments'])
+angular.module('Posts' , [])
  .factory('Posts' , function($http , $q , BaseUrl){
  	 var posts;
  	 var favourites;
@@ -80,7 +80,7 @@ angular.module('Posts' , ['Comments'])
 
            $http({
                 method : 'PUT',
-                url : BaseUrl+'/api/posts/1',
+                url : BaseUrl+'/api/posts/'+updatedPost._id,
                 data : updatedPost
            })
            .success(function(data){
@@ -141,7 +141,7 @@ angular.module('Posts' , ['Comments'])
           var promise = $q.defer();
           $http({
                 method : 'GET',
-                url : BaseUrl+'/api/posts/1',
+                url : BaseUrl+'/api/posts/'+post_id,
                 params : {post_id:post_id}
            })
            .success(function(data){             

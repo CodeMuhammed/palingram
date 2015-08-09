@@ -230,11 +230,25 @@ angular.module('palingram')
 
    })
 
-   .controller('postController' , function($scope , $state , Tags , Posts , User , Auth){
+   .controller('postController' , function($scope , $state , Tags , Posts , User , Auth , Comments){
           if(Auth.isAuth()){
+            //init 
             $scope.post = $state.current.data.post;
             $scope.owned = User.get().username==$scope.post.username;
-            
+
+            $scope.comment = {
+                body : '',
+                by : User.get().firstname+' '+User.get().lastname,
+                username: User.get().username,
+                date : '',
+                voters : []
+            };
+
+            Comments.get($scope.post.comments_id).then(function(comments){
+                 $scope.comments = comments;
+            });
+
+            //favourite handler
             $scope.isFavourite = function(){ 
                return User.get().favourites.indexOf($scope.post._id)>=0;
             }
@@ -258,6 +272,7 @@ angular.module('palingram')
                  
             };
 
+             //edit handler
              $scope.edit = function(){
                   $state.go('in.editor');
               };
@@ -271,7 +286,65 @@ angular.module('palingram')
                $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
                   toState.data = angular.copy($scope.post);
                });
-                      
+            
+            //comment handler 
+            $scope.postComment = function(){
+
+                if($scope.comment.body.trim()  == ''){
+                    alert('you have to type your comment into the box first');
+                }
+                else{
+                    $scope.comment.date = Date.now();
+                    Comments.postComment(angular.copy($scope.comment)).then(function(status){
+                       alert(status);
+                       $scope.comment.body  = '';
+                    } , function(err){
+                         alert(err);
+                    });
+                }
+            }; 
+             
+            $scope.deleteComment = function(comment){
+                var isMyPost = User.get().username == comment.username;
+                if(isMyPost){
+                     Comments.deleteComment(comment).then(function(status){
+                        alert(status);
+                    });
+                }
+                else {
+                  alert('not yourr post');
+                }
+            };
+
+            $scope.vote  = function(comment , count){
+                 var isMyPost = User.get().username == comment.username;
+                 var permitted = false;
+                 var temp = angular.copy(comment);
+                 var index  = temp.voters.indexOf(User.get().username);
+
+                 if(count == 1 && index<0){
+                     alert('upvote');
+                     temp.voters.push(User.get().username);
+                     permitted = true;
+                 } 
+                 else if(count == -1 && index>=0){
+                      alert('down vote');
+                      temp.voters.splice(index , 1); 
+                      permitted = true;
+                 }
+                 
+                 if(!isMyPost && permitted){
+                   Comments.updateComment(temp).then(function(status){
+                       alert(status);
+                       var index = $scope.comments.indexOf(comment);
+                       $scope.comments[index] = temp;
+                   });
+                 } else{
+                    alert('not allowed');
+                 }
+                 
+            }
+
           }
           else{
             $state.go('out.signin');
