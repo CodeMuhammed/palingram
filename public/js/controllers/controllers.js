@@ -130,11 +130,6 @@ angular.module('palingram')
             return $scope.nav==item;
         }
 
-
-        $scope.$on('navChanged' , function(e , a){
-             $scope.goto(a.nav);
-        });
-
          $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
              if($scope.nav == 'editor'){
                 toState.data = {
@@ -287,7 +282,10 @@ angular.module('palingram')
               by : User.get().firstname+' '+User.get().lastname,
               username: User.get().username,
               date : '',
-              voters : []
+              voters : {
+                 up : [],
+                 down:[]
+              }
           };
 
           Comments.get($scope.post.comments_id).then(function(comments){
@@ -368,21 +366,46 @@ angular.module('palingram')
           };
 
           $scope.vote  = function(comment , count){
-               var isMyPost = User.get().username == comment.username;
+
                var permitted = false;
                var temp = angular.copy(comment);
-               var index  = temp.voters.indexOf(User.get().username);
 
-               if(count == 1 && index<0){
-                   temp.voters.push(User.get().username);
+               var status = $scope.voteStatus(comment);
+
+               if(count == 1 && !status[0]){
+                   temp.voters.up.push(User.get().username);
                    permitted = true;
                } 
-               else if(count == -1 && index>=0){
-                    temp.voters.splice(index , 1); 
+               else if(count == -1 && !status[0]){
+                    temp.voters.down.push(User.get().username); 
                     permitted = true;
                }
-               
-               if(!isMyPost && permitted){
+               else if(count == 1 && status[0]){
+                   if(count == status[1]){
+                      alert('already voted up');
+                      permitted = false;
+                   }
+                   else{
+                       var index = temp.voters.down.indexOf(User.get().username);
+                       temp.voters.down.splice(index , 1);
+                       temp.voters.up.push(User.get().username);
+                       permitted = true;
+                   }
+               }
+               else if(count == -1 && status[0]){
+                   if(count == status[1]){
+                      alert('already voted down');
+                      permitted = false;
+                   }
+                   else{
+                       var index = temp.voters.up.indexOf(User.get().username);
+                       temp.voters.up.splice(index , 1);
+                       temp.voters.down.push(User.get().username);
+                       permitted = true;
+                   }
+               }
+
+               if(permitted){
                  Comments.updateComment(temp).then(function(status){
                      alert(status);
                      var index = $scope.comments.indexOf(comment);
@@ -393,6 +416,39 @@ angular.module('palingram')
                }
                
           };
+
+          $scope.voteStatus = function(comment){
+              var up = comment.voters.up.indexOf(User.get().username) >=0;
+              var down = comment.voters.down.indexOf(User.get().username) >=0;
+
+              if(!up && !down){
+                  return [false , false];
+              }
+              else {
+                 return [
+                    true,
+                    up?'1':'-1'
+                 ]
+              }
+          };
+
+          $scope.myComment = function(comment){
+              return User.get().username == comment.username;
+          };
+
+          $scope.getVoteClass = function(comment , dir){
+               var temp = $scope.voteStatus(comment);
+               if(temp[1] == dir && dir==1){
+                  return 'up-vote';
+               }
+               else if(temp[1] == dir && dir==-1){
+                    return 'down-vote';
+               }
+               else{
+                  return '';
+               }
+              
+          }
       
    })
 
@@ -459,7 +515,6 @@ angular.module('palingram')
              Posts.post($scope.post).then(function(data){
                   alert('success');
                   User.get().favourites.push(data._id);
-                  $rootScope.$broadcast('navChanged' , {nav:'posts'});
              }, function(err){
                  alert('something went wrong');
              });
@@ -468,7 +523,6 @@ angular.module('palingram')
               $scope.post.date = Date.now();
               Posts.update($scope.post).then(function(result){
                  alert(result);
-                 $rootScope.$broadcast('navChanged' , {nav:'posts'});
              }, function(err){
                  console.log(err);
              });

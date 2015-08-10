@@ -1053,6 +1053,7 @@ fieldset[disabled] .transition #body button:hover.active {
   font-size: 1.3em;
 }
 .panel .panel-body .img-div {
+  border-radius: 10px;
   min-height: 20em;
 }
 .panel .panel-body .content {
@@ -1109,26 +1110,64 @@ fieldset[disabled] .transition #body button:hover.active {
   max-width: 100%;
   max-height: 100%;
 }
-.article .comments {
+.article .comment-box {
   padding-left: 0;
   padding-right: 0;
   font-size: 1.3em;
   margin-top: 2em;
 }
-.article .comments > div {
+.article .comment-box > div {
   padding: 1em;
-  background-color: #a0c4e4;
+  background-color: #eff5fb;
 }
-.article .comments > div textarea {
+.article .comment-box > div textarea {
   font-size: 1em;
   border-radius: 0;
   border: none;
 }
-.article .comments > div .footer {
+.article .comment-box > div .footer {
   padding: .3em .2em .3em 0;
   background: #fff;
   border-top: none;
   margin-top: -1px;
+}
+.article #comment {
+  padding: 1em;
+}
+.article #comment hr {
+  padding: 1em;
+  z-index: 10000000;
+}
+.article #comment .comment-heading > div:first-child img {
+  width: 3em;
+  height: 3em;
+}
+.article #comment .comment-heading > div:last-child {
+  margin-bottom: 1em;
+}
+.article #comment .comment-heading > div:last-child h5 {
+  color: #ccc;
+  font-size: 1.2em;
+}
+.article #comment .comment-body {
+  color: #555555;
+  font-size: 1.3em;
+}
+.article #comment .comment-body .vote-box .up-vote {
+  color: #5cb85c;
+}
+.article #comment .comment-body .vote-box .down-vote {
+  color: #d9534f;
+}
+.article #comment .comment-body .vote-box > div {
+  text-align: center;
+  font-size: 1.1em;
+}
+.article #comment .comment-body .vote-box > div:first-child:hover {
+  color: #5cb85c;
+}
+.article #comment .comment-body .vote-box > div:last-child:hover {
+  color: #d9534f;
 }
 .tag-buttons .btn {
   margin-right: .5em;
