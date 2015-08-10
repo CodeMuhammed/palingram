@@ -15,7 +15,7 @@ angular.module('Posts' , [])
 	           promise.resolve('posts successful set');
 	      })
 	      .error(function(err){
-	          alert('set error in Posts');
+	          console.log(err);
 	      });
 
         return promise.promise;

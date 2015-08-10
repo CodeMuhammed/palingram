@@ -4,32 +4,30 @@ angular.module('Tags' , [])
           var tags;
         
           function set(tags_id){
+            var promise = $q.defer();
+
             if(angular.isArray(tags_id)){
                  tags = tags_id;
             }
-      	    var promise = $q.defer();
-      	    if(! tags){
-      	    	
-	            $http({
-	               method: 'POST',
-	               url : BaseUrl+'/api/tags',
-	               data : {
-	               	 id : tags_id
-	               }
-	            })
-
-	            .success(function(data){
-	            	tags  = data;
-	                promise.resolve('tags gotten ok');
-	            })
-
-	            .error(function(err){
-	            	alert('error in tags get');
-	            });
-            }
             else {
-               promise.resolve('tags already set');
+                $http({
+                     method: 'POST',
+                     url : BaseUrl+'/api/tags',
+                     data : {
+                       id : tags_id
+                     }
+                  })
+
+                  .success(function(data){
+                      tags  = data;
+                      promise.resolve('tags gotten ok');
+                  })
+
+                  .error(function(err){
+                    alert('error in tags get');
+                  });
             }
+    
             return promise.promise;
 	        }
           
