@@ -12,32 +12,42 @@
 
   <body>
 <div class="col-sm-offset-2 col-sm-8 article" style="margin-bottom:3em;">
-	<%for(var i=0; i<posts.length; i++){%>
-          <a style="padding:0;" href="/preview/<%=posts[i]._id %>" target = 'blank'>robot</a>
-     <%}%>
   <%for(var i=0; i<posts.length; i++){%>
-	<div class="col-xs-12 header" style="background: url(<%=posts[i].image%>) center center no-repeat; background-size: cover;">
-		<div class="col-xs-12 inner" >
-			<div class="col-sm-8 col-sm-offset-2 text">
-
-				<h1><%=posts[i].title%></h1>
-				<h3>
-					by <a><%=posts[i].author%></a> on <%=Date(posts[i].date%>
-				</h3>
-			</div>
-		</div>
-	</div>
-
-    <div class="col-xs-12 share-box">
-		<i class="icon fa fa-facebook"> </i>
-		<i class="icon fa fa-twitter"> </i>
-		<i class="icon fa fa-google-plus"> </i>
-		<i class="icon fa fa-link"> </i>
-		<i class="icon fa fa-heart-o"></i>
+	<div class="col-xs-12" >
+		 <a style="padding:0; top:0;" href="<%=BaseUrl%>/#/out/preview/<%=posts[i]._id%>" target = 'blank'>
+		 	<p><%=BaseUrl%>/#/out/preview/<%=posts[i]._id%></p>
+		 </a>
 		
 	</div>
+	<div class="col-xs-12">
+		<p>
+			<%for(var j=0; j<posts[i].tags.length; j++){%>
+			   <h5><%=posts[i].tags[j]%></h5>
+			<%}%>
+		</p>
+	</div>
+    <div class="col-xs-12" >
+		<h2><%=posts[i].title%></h2>
+	</div>
 
-	<div class="col-xs-12 body">
+	<div class="col-xs-12" >
+		<p><%=posts[i].author%></p>
+	</div>
+
+	<div class="col-xs-12" >
+		<p><%=posts[i].date%></p>
+	</div>
+
+	<div class="col-xs-12" >
+		<p><%=posts[i].image%></p>
+	</div>
+
+
+	<div class="col-xs-12" >
+		<p><%=posts[i].description%></p>
+	</div>
+
+	<div class="col-xs-12" style="margin-bottom:10em;">
 		<p><%-posts[i].body%></p>
 	</div>
 	

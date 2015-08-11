@@ -13,8 +13,15 @@ var favicon = require('serve-favicon');
 var path = require('path');
 
 var request = require('request');
+
+//ONLINE MODE
+//var palingramapi = 'https://palingramapi.herokuapp.com/api';
+//var BaseUrl = 'http://www.palingram.com';
+
+//OFFLINE MODE
 var palingramapi = 'http://palingramapi.herokuapp.com/api';
-//var palingramapi = 'http://localhost:3000/api/allPosts';
+var BaseUrl = 'http://localhost:3002';
+
 
 //Instantiate a new express app
 var app = express();
@@ -30,51 +37,24 @@ app.use(methodOverride('_method'));
 app.use(favicon(path.join(__dirname , 'public', 'favicon.ico')));
 
 //configure router to use cookie-parser  ,body-parser 
-app.get('/' , function(req , res){  
-	 request.get(palingramapi+'/allPosts' , function(err , response , body){
-         if(err){
-              res.status(500).send(err);
-         } 
-         else {
-         	res.render('index.ejs' , {posts:JSON.parse(body)});
-         }
-	 });
-    
-});
-
-//configure router to use cookie-parser  ,body-parser 
-app.get('/preview/:post_id' , function(req , res){  
-	 console.log(req.params.post_id);
-	 request.get(palingramapi+'/posts/'+req.params.post_id , function(err , response , body){
-         if(err){
-              res.status(500).send(err);
-         } 
-         else {
-         	var post = JSON.parse(body)[0];
-         	console.log(post.body);
-         	res.render('post.ejs' , {post:post});
-         }
-	 });
-});
+app.use(express.static(path.join(__dirname , 'public')));
 
 //configure router to use cookie-parser  ,body-parser 
 app.get('/allPosts.html' , function(req , res){ 
 	 console.log('gotten all');
 	 request.get(palingramapi+'/allPosts' , function(err , response , body){
          if(err){
-              res.status(500).send(err);
+              var all = require('fs').readFileSync('all.txt');
+              res.render('all.ejs' , {posts:JSON.parse(all) , BaseUrl : BaseUrl});
          } 
          else {
-         	res.render('all.ejs' , {posts:JSON.parse(body)});
+         	res.render('all.ejs' , {posts:JSON.parse(body) , BaseUrl : BaseUrl});
          }
 	 });
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-
-//app.use(less(path.join(__dirname , 'public' , 'less')));
-app.use(express.static(path.join(__dirname , 'public')));
 
 //test api call from front end code
 
