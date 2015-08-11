@@ -58,7 +58,7 @@ app.get('/preview/:post_id' , function(req , res){
 });
 
 //configure router to use cookie-parser  ,body-parser 
-app.get('/allPosts' , function(req , res){ 
+app.get('/allPosts.html' , function(req , res){ 
 	 console.log('gotten all');
 	 request.get(palingramapi+'/allPosts' , function(err , response , body){
          if(err){
