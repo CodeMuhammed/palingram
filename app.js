@@ -6,7 +6,7 @@ var session = require('express-session');
 var errorHandler = require('errorhandler');
 var logger = require('morgan');
 //var less = require('less-middleware');
-var jade = require('jade');
+
 var compression = require('compression');
 var methodOverride = require('method-override');
 var favicon = require('serve-favicon');
