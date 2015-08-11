@@ -16,9 +16,10 @@
 	<div class="col-xs-12 header" style="background: url(<%=posts[i].image%>) center center no-repeat; background-size: cover;">
 		<div class="col-xs-12 inner" >
 			<div class="col-sm-8 col-sm-offset-2 text">
+
 				<h1><%=posts[i].title%></h1>
 				<h3>
-					by <a><%=posts[i].author%></a>
+					by <a><%=posts[i].author%></a> on <%=Date(posts[i].date%>
 				</h3>
 			</div>
 		</div>
@@ -36,6 +37,7 @@
 	<div class="col-xs-12 body">
 		<p><%-posts[i].body%></p>
 	</div>
+	
 </div>
 <%}%>
   </body>
