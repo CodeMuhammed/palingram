@@ -57,6 +57,19 @@ app.get('/preview/:post_id' , function(req , res){
 	 });
 });
 
+//configure router to use cookie-parser  ,body-parser 
+app.get('/allPosts' , function(req , res){ 
+	 console.log('gotten all');
+	 request.get(palingramapi+'/allPosts' , function(err , response , body){
+         if(err){
+              res.status(500).send(err);
+         } 
+         else {
+         	res.render('all.ejs' , {posts:JSON.parse(body)});
+         }
+	 });
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
