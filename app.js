@@ -12,13 +12,16 @@ var methodOverride = require('method-override');
 var favicon = require('serve-favicon');
 var path = require('path');
 
+var request = require('request');
+var palingramapi = 'http://palingramapi.herokuapp.com/api/allPosts';
+
 //Instantiate a new express app
 var app = express();
 
 //Configure the express app
 app.set('view cache' , true);
-app.set('views' , path.join(__dirname , 'app_server' ,'views'));
-app.set('view engine' , 'jade');
+app.set('views' , 'views');
+app.set('view engine' , 'ejs');
 app.set('port' , process.env.PORT || 3002);
 
 app.use(compression({threshold:1}));
@@ -27,12 +30,30 @@ app.use(methodOverride('_method'));
 app.use(favicon(path.join(__dirname , 'public', 'favicon.ico')));
 
 //configure router to use cookie-parser  ,body-parser 
+app.get('/' , function(req , res){  
+	 request.get(palingramapi)
+	    .on('response' , function(response){
+              res.status(200).send(response);
+	    })
+	    .on('error' , function(err){
+             res.status(500).send(err);
+	    });
+    
+});
+
+//configure router to use cookie-parser  ,body-parser 
+app.get('/preview/:post_id' , function(req , res){  
+     res.render('post.ejs' , {post_id  : req.params.post_id});
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 //app.use(less(path.join(__dirname , 'public' , 'less')));
 app.use(express.static(path.join(__dirname , 'public')));
+
+//test api call from front end code
+
 
 //Start the app
 app.listen(app.get('port') , function(){

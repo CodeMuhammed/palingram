@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="palingram">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Collaborative Blogging Platform</title>
+
+    	<script src="js/ng_modules/angular.min.js"></script>
+    	<script src="js/ng_modules/angular-resource.js"></script>
+    	<script src="js/ng_modules/angular-ui-router.min.js"></script>
+
+      <!--TEXT angular attachments-->
+      <link rel='stylesheet' href='js/ng_modules/textAngular.css'>
+      <script src='js/ng_modules/textAngular-rangy.min.js'></script>
+      <script src='js/ng_modules/textAngular-sanitize.min.js'></script>
+      <script src='js/ng_modules/textAngular.min.js'></script>
+    	
+    	<!--My Custom JS  main entry and configurations-->
+    	<script src="js/Palingram.js"></script>
+
+	    <!--My Custom JS services-->
+	    <script src="js/services/Auth.js"></script>
+		<script src="js/services/User.js"></script>
+		<script src="js/services/Posts.js"></script>
+		<script src="js/services/Tags.js"></script>
+		<script src="js/services/Comments.js"></script>
+
+	    <!--My Custom JS controllers-->
+		<script src="js/controllers/controllers.js"></script>
+			
+	   <!-- Bootstrap core CSS -->
+	   <link href="css/bootstrap.min.css" rel="stylesheet">
+       <link href="css/font-awesome.css" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link href="css/custom.css" rel="stylesheet">
+  </head>
+
+  <body>
+     <%for(var i=0; i<posts.length; i++){%>
+          <a style="padding:0;position:fixed;bottom:0;left:0" href="/preview/<%=posts[i]._id %>" target = 'blank'>robot</a>
+     <%}%>
+     <ui-view></ui-view>
+  </body>
+
+</html>

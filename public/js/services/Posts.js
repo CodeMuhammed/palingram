@@ -84,7 +84,6 @@ angular.module('Posts' , [])
                 data : updatedPost
            })
            .success(function(data){
-              alert('success update');
               angular.forEach(posts , function(item){
                    var index = -1;
                    if(updatedPost._id == item._id){
@@ -104,6 +103,8 @@ angular.module('Posts' , [])
                      
                  });
               }
+
+              promise.resolve('update successful');
               
            })
            .error(function(err){
@@ -141,8 +142,7 @@ angular.module('Posts' , [])
           var promise = $q.defer();
           $http({
                 method : 'GET',
-                url : BaseUrl+'/api/posts/'+post_id,
-                params : {post_id:post_id}
+                url : BaseUrl+'/api/posts/'+post_id
            })
            .success(function(data){             
                promise.resolve(data);

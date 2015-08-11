@@ -5,11 +5,50 @@
 // Reset and dependencies
 @import "normalize.less";
 @import "print.less";
+@import "glyphicons.less";
 
-//Import components
-@import "button-groups.less";
+// Core CSS
+@import "scaffolding.less";
+@import "type.less";
+@import "code.less";
+@import "grid.less";
+@import "tables.less";
+@import "forms.less";
 @import "buttons.less";
+
+// Components
+@import "component-animations.less";
+@import "dropdowns.less";
+@import "button-groups.less";
+@import "input-groups.less";
+@import "navs.less";
+@import "navbar.less";
+@import "breadcrumbs.less";
+@import "pagination.less";
+@import "pager.less";
+@import "labels.less";
+@import "badges.less";
+@import "jumbotron.less";
+@import "thumbnails.less";
+@import "alerts.less";
+@import "progress-bars.less";
 @import "media.less";
+@import "list-group.less";
+@import "panels.less";
+@import "responsive-embed.less";
+@import "wells.less";
+@import "close.less";
+
+// Components w/ JavaScript
+@import "modals.less";
+@import "tooltip.less";
+@import "popovers.less";
+@import "carousel.less";
+
+// Utility classes
+@import "utilities.less";
+@import "responsive-utilities.less";
+
 
 body{
 	a{
@@ -300,6 +339,12 @@ body{
                   width: 3em;
                   height:3em;
                 }
+                 @media (max-width: @screen-sm-max) {
+                    img{
+                      width: 2.5em;
+                      height:2.5em;
+                    }
+                  }
              }
              &:last-child{
                 margin-bottom:1em;
@@ -346,6 +391,7 @@ body{
    .btn{
       margin-right: .5em;
       margin-bottom: .5em;
+      border-radius:30px;
       &:hover{
 	     .btn-danger;
 	  }
@@ -356,11 +402,18 @@ body{
     margin-top:10em;
     padding:0;
    .post-title{
+      width:100%;
       border: none;
-      font-size:4em;
+      font-size:2em;
+      &:first-child{
+         font-size:4em;
+      }
       @media (max-width: @screen-sm-max) {
         margin-top:0;
-        font-size:2.5em;
+        font-size:1.4em;
+         &:first-child{
+             font-size:2.5em;
+          }
       }
    }
    .post-img{
@@ -429,13 +482,16 @@ body{
 }
 
 .tool-set {
+   .pager{
+      margin-top:0;
+   }
+    border-bottom:3px solid #ccc;
+    padding:1em 0;
     background:#fff;
-    border:1px solid #ccc;
-    border-top:5px solid #fff;
     border-radius: 5px;
     height:4em;
     position:fixed;
-    top:55px; 
+    top:58px; 
     z-index:100002;
     @media (max-width: @screen-sm-max) {
         padding-top:.4em;

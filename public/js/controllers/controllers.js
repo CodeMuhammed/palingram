@@ -270,186 +270,201 @@ angular.module('palingram')
 
    })
 
-   .controller('postController' , function($scope , $state , Tags , Posts , User , Auth , Comments){
-          if(! Auth.isAuth()){
-             $state.go('out.signin');
-        }  
-          $scope.post = $state.current.data.post;
-          $scope.owned = User.get().username==$scope.post.username;
+   .controller('postController' , function($scope , $state ,$filter , Tags , Posts , User , Auth , Comments){
+          if(Auth.isAuth()){
+            
 
-          $scope.comment = {
-              body : '',
-              by : User.get().firstname+' '+User.get().lastname,
-              username: User.get().username,
-              date : '',
-              voters : {
-                 up : [],
-                 down:[]
-              }
-          };
+            $scope.post = $state.current.data.post;
+            $scope.owned = User.get().username==$scope.post.username;
 
-          Comments.get($scope.post.comments_id).then(function(comments){
-               $scope.comments = comments;
-          });
-
-          //favourite handler
-          $scope.isFavourite = function(){ 
-             return User.get().favourites.indexOf($scope.post._id)>=0;
-          }
-
-          $scope.toggleFavourite = function(){
-               var index = User.get().favourites.indexOf($scope.post._id);
-               var permitted = User.get().username != $scope.post.username;
-
-               if(index>=0 && permitted){
-                   User.get().favourites.splice(index , 1);
-               }
-               else if(index<0 && permitted){
-                   User.get().favourites.push($scope.post._id);
-               }
-               
-               if(permitted){
-                  User.update(User.get()).then(function(result){
-                       Posts.setFavs(User.get().favourites , true).then(function(result){
-                       });
-                   } , function(err){
-                       console.log(err);
-                   });
-               } 
-               else{
-                  alert('you cannot unfavourite your post');
-               }                 
-          };
-
-           //edit handler
-           $scope.edit = function(){
-                $state.go('in.editor');
+            $scope.comment = {
+                body : '',
+                by : User.get().firstname+' '+User.get().lastname,
+                username: User.get().username,
+                date : '',
+                voters : {
+                   up : [],
+                   down:[]
+                }
             };
 
-            $scope.delete = function(){
-                Posts.deleteArticle($scope.post).then(function(status){
-                    $state.go('in.posts');
-                });
+            Comments.get($scope.post.comments_id).then(function(comments){
+                 $scope.comments = comments;
+            });
+
+            //favourite handler
+            $scope.isFavourite = function(){ 
+               return User.get().favourites.indexOf($scope.post._id)>=0;
+            }
+
+            $scope.toggleFavourite = function(){
+                 var index = User.get().favourites.indexOf($scope.post._id);
+                 var permitted = User.get().username != $scope.post.username;
+
+                 if(index>=0 && permitted){
+                     User.get().favourites.splice(index , 1);
+                 }
+                 else if(index<0 && permitted){
+                     User.get().favourites.push($scope.post._id);
+                 }
+                 
+                 if(permitted){
+                    User.update(User.get()).then(function(result){
+                         Posts.setFavs(User.get().favourites , true).then(function(result){
+                         });
+                     } , function(err){
+                         console.log(err);
+                     });
+                 } 
+                 else{
+                    alert('you cannot unfavourite your post');
+                 }                 
             };
 
-             $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-                toState.data = angular.copy($scope.post);
-             });
-          
-          //comment handler 
-          $scope.postComment = function(){
+             //edit handler
+             $scope.edit = function(){
+                  $state.go('in.editor');
+              };
 
-              if($scope.comment.body.trim()  == ''){
-                  alert('you have to type your comment into the box first');
-              }
-              else{
-                  $scope.comment.date = Date.now();
-                  Comments.postComment(angular.copy($scope.comment)).then(function(status){
-                     alert(status);
-                     $scope.comment.body  = '';
-                  } , function(err){
-                       alert(err);
-                  });
-              }
-          }; 
-           
-          $scope.deleteComment = function(comment){
-              var isMyPost = User.get().username == comment.username;
-              if(isMyPost){
-                   Comments.deleteComment(comment).then(function(status){
+              $scope.delete = function(){
+                  Posts.deleteArticle($scope.post).then(function(status){
                       alert(status);
+                      $state.go('in.posts');
                   });
-              }
-              else {
-                alert('not yourr post');
-              }
-          };
+              };
 
-          $scope.vote  = function(comment , count){
+               $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+                  toState.data = angular.copy($scope.post);
+               });
+            
+            //comment handler 
+            $scope.postComment = function(){
 
-               var permitted = false;
-               var temp = angular.copy(comment);
+                if($scope.comment.body.trim()  == ''){
+                    alert('you have to type your comment into the box first');
+                }
+                else{
+                    $scope.comment.date = Date.now();
+                    Comments.postComment(angular.copy($scope.comment)).then(function(status){
+                       alert(status);
+                       $scope.comment.body  = '';
+                    } , function(err){
+                         alert(err);
+                    });
+                }
+            }; 
+             
+            $scope.deleteComment = function(comment){
+                var isMyPost = User.get().username == comment.username;
+                if(isMyPost){
+                     Comments.deleteComment(comment).then(function(status){
+                        alert(status);
+                    });
+                }
+                else {
+                  alert('not yourr post');
+                }
+            };
 
-               var status = $scope.voteStatus(comment);
+            $scope.vote  = function(comment , count){
 
-               if(count == 1 && !status[0]){
-                   temp.voters.up.push(User.get().username);
-                   permitted = true;
-               } 
-               else if(count == -1 && !status[0]){
-                    temp.voters.down.push(User.get().username); 
-                    permitted = true;
-               }
-               else if(count == 1 && status[0]){
-                   if(count == status[1]){
-                      alert('already voted up');
-                      permitted = false;
-                   }
-                   else{
-                       var index = temp.voters.down.indexOf(User.get().username);
-                       temp.voters.down.splice(index , 1);
-                       temp.voters.up.push(User.get().username);
-                       permitted = true;
-                   }
-               }
-               else if(count == -1 && status[0]){
-                   if(count == status[1]){
-                      alert('already voted down');
-                      permitted = false;
-                   }
-                   else{
-                       var index = temp.voters.up.indexOf(User.get().username);
-                       temp.voters.up.splice(index , 1);
-                       temp.voters.down.push(User.get().username);
-                       permitted = true;
-                   }
-               }
+                 var permitted = false;
+                 var temp = angular.copy(comment);
 
-               if(permitted){
-                 Comments.updateComment(temp).then(function(status){
-                     alert(status);
-                     var index = $scope.comments.indexOf(comment);
-                     $scope.comments[index] = temp;
-                 });
-               } else{
-                  alert('not allowed');
-               }
-               
-          };
+                 var status = $scope.voteStatus(comment);
 
-          $scope.voteStatus = function(comment){
-              var up = comment.voters.up.indexOf(User.get().username) >=0;
-              var down = comment.voters.down.indexOf(User.get().username) >=0;
+                 if(count == 1 && !status[0]){
+                     temp.voters.up.push(User.get().username);
+                     permitted = true;
+                 } 
+                 else if(count == -1 && !status[0]){
+                      temp.voters.down.push(User.get().username); 
+                      permitted = true;
+                 }
+                 else if(count == 1 && status[0]){
+                     if(count == status[1]){
+                        alert('already voted up');
+                        permitted = false;
+                     }
+                     else{
+                         var index = temp.voters.down.indexOf(User.get().username);
+                         temp.voters.down.splice(index , 1);
+                         temp.voters.up.push(User.get().username);
+                         permitted = true;
+                     }
+                 }
+                 else if(count == -1 && status[0]){
+                     if(count == status[1]){
+                        alert('already voted down');
+                        permitted = false;
+                     }
+                     else{
+                         var index = temp.voters.up.indexOf(User.get().username);
+                         temp.voters.up.splice(index , 1);
+                         temp.voters.down.push(User.get().username);
+                         permitted = true;
+                     }
+                 }
 
-              if(!up && !down){
-                  return [false , false];
-              }
-              else {
-                 return [
-                    true,
-                    up?'1':'-1'
-                 ]
-              }
-          };
+                 if(permitted){
+                   Comments.updateComment(temp).then(function(status){
+                       alert(status);
+                       var index = $scope.comments.indexOf(comment);
+                       $scope.comments[index] = temp;
+                   });
+                 } else{
+                    alert('not allowed');
+                 }
+                 
+            };
 
-          $scope.myComment = function(comment){
-              return User.get().username == comment.username;
-          };
+            $scope.voteStatus = function(comment){
+                var up = comment.voters.up.indexOf(User.get().username) >=0;
+                var down = comment.voters.down.indexOf(User.get().username) >=0;
 
-          $scope.getVoteClass = function(comment , dir){
-               var temp = $scope.voteStatus(comment);
-               if(temp[1] == dir && dir==1){
-                  return 'up-vote';
-               }
-               else if(temp[1] == dir && dir==-1){
-                    return 'down-vote';
-               }
-               else{
-                  return '';
-               }
-              
-          }
-      
+                if(!up && !down){
+                    return [false , false];
+                }
+                else {
+                   return [
+                      true,
+                      up?'1':'-1'
+                   ]
+                }
+            };
+
+            $scope.myComment = function(comment){
+                return User.get().username == comment.username;
+            };
+
+            $scope.getVoteClass = function(comment , dir){
+                 var temp = $scope.voteStatus(comment);
+                 if(temp[1] == dir && dir==1){
+                    return 'up-vote';
+                 }
+                 else if(temp[1] == dir && dir==-1){
+                      return 'down-vote';
+                 }
+                 else{
+                    return '';
+                 }
+                
+            }
+
+            //controls sorting
+            $scope.sortOptions = ['Most Popular' , 'Best Voted' , 'Most Recent'];
+            $scope.sortMenu = false;
+            $scope.sortCriteria = 'Most Popular';
+
+            $scope.toggleSortMenu = function(){
+                $scope.sortMenu = !$scope.sortMenu;
+            }
+
+            $scope.sort = function(criteria){
+                $scope.toggleSortMenu();
+                $scope.sortCriteria = criteria;
+            };
+       }
    })
 
    .controller('profileController' , function($scope ,$state, User  ,Auth){
@@ -513,8 +528,9 @@ angular.module('palingram')
         $scope.save = function(){
            if(option == 'new'){
              Posts.post($scope.post).then(function(data){
-                  alert('success');
-                  User.get().favourites.push(data._id);
+                alert('success');
+                User.get().favourites.push(data._id);
+                $state.go('in.posts');
              }, function(err){
                  alert('something went wrong');
              });
@@ -522,7 +538,8 @@ angular.module('palingram')
            else {
               $scope.post.date = Date.now();
               Posts.update($scope.post).then(function(result){
-                 alert(result);
+                alert(result);
+                  $state.go('in.posts');
              }, function(err){
                  console.log(err);
              });

@@ -95,4 +95,34 @@ angular.module('Comments' , [])
    	   	   deleteComment: deleteComment,
            updateComment : updateComment
    	   }
+   })
+
+   .filter('commentFilter' , function($filter){
+       return function(data , criteria){
+            if(data && angular.isArray(data)){
+                var sorted;
+                if(criteria == 'Most Popular'){
+                    var customSort = function(item){
+                       return item.voters.up.length + item.voters.down.length;
+                    }
+                    sorted = $filter('orderBy')(data , customSort);
+                }
+                
+                else if(criteria == 'Best Voted'){
+                   var customSort  = function(item){
+                        return item.voters.up.length;
+                   }
+                   sorted =  $filter('orderBy')(data , customSort);
+                }
+
+                else if(criteria == 'Most Recent'){
+                   sorted =  $filter('orderBy')(data , 'date');
+                }
+
+                return sorted.reverse();
+            }
+            else{
+                return data;
+            }
+       }
    });
