@@ -43,7 +43,7 @@
 
   <body>
      <%for(var i=0; i<posts.length; i++){%>
-          <a style="padding:0;position:fixed;bottom:0;left:0" href="/preview/<%=posts[i]._id %>" target = 'blank'>robot</a>
+          <a style="padding:0;" href="/preview/<%=posts[i]._id %>" target = 'blank'>robot</a>
      <%}%>
      <ui-view></ui-view>
   </body>
