@@ -8,6 +8,7 @@ angular.module('Tags' , [])
 
             if(angular.isArray(tags_id)){
                  tags = tags_id;
+                 promise.resolve('tags set ok');
             }
             else {
                 $http({
@@ -67,7 +68,7 @@ angular.module('Tags' , [])
               })
               
               .error(function(err){
-                  alert('query all error in tags');
+                  console.log(err);
               });
               return promise.promise;
           }

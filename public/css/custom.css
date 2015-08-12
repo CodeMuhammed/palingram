@@ -6735,6 +6735,15 @@ fieldset[disabled] .transition #body button:hover.active {
 .subnav .searchbox {
   margin-top: .5em;
 }
+.posts-container {
+  margin-top: 60px;
+  padding: 0;
+}
+@media (max-width: 991px) {
+  .posts-container {
+    margin-top: 120px;
+  }
+}
 .panel {
   border: none;
   padding: 0;

@@ -11,6 +11,9 @@ angular.module('palingram')
 
    .controller('signupController' , function($scope , $state , Auth){
        $scope.signup = function(newUser){
+            newUser.favourites = [];
+            newUser.image = 'img/img.png';
+            newUser.pageViews = 0;
             Auth.signup(newUser).then(function(){
                 $state.go('out.transition');
             });
@@ -31,23 +34,24 @@ angular.module('palingram')
 
    .controller('transitionController' , function($scope , $state , Auth , Posts , Tags , User){
        
-
-       $scope.proceed = function(){
-
-           if($scope.selected.length==0){
-              $scope.selected = $scope.tags[0];
-           }
-
-           Tags.set($scope.selected).then(function(status){
-                Posts.set(Tags.get()).then(function(status){
-                    $state.go('in.posts');
-               });
-            });
-       }
-
-       Tags.queryAll().then(function(data){
+     Tags.queryAll().then(function(data){
            $scope.tags = data;
            $scope.selected = [];
+
+           $scope.proceed = function(){
+               if($scope.selected.length==0){
+                  $scope.selected = ['general'];
+               }
+                
+
+               Tags.set($scope.selected).then(function(status){
+                   alert(status);
+                    Posts.set(Tags.get()).then(function(status){
+                        $state.go('in.posts');
+                   });
+                });
+            }
+
        });
 
        $scope.select = function(tag){

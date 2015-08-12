@@ -22,7 +22,6 @@ var request = require('request');
 var palingramapi = 'http://palingramapi.herokuapp.com/api';
 var BaseUrl = 'http://localhost:3002';
 
-
 //Instantiate a new express app
 var app = express();
 
