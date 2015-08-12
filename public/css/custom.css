@@ -6547,6 +6547,10 @@ button.close {
     display: none !important;
   }
 }
+body {
+  background: url('../img/bodybg1.jpg') center center no-repeat fixed;
+  background-size: cover;
+}
 body a {
   outline: none;
 }
@@ -6569,40 +6573,71 @@ body a {
   margin-right: 1em;
 }
 .homepage .header {
-  height: 30em;
+  height: 40em;
   padding: 0;
-  background: url('../img/cover.jpg') center center no-repeat;
+  background: url('../img/cover1.jpg') center center no-repeat;
   background-size: cover;
 }
 .homepage .header .inner {
-  height: 30em;
+  height: 40em;
   background-color: rgba(0, 0, 0, 0.8);
 }
 .homepage .header .inner .text {
-  text-align: center;
+  text-align: left;
   margin-top: 5em;
   color: #fff;
 }
 .homepage .header .inner .text h1 {
-  font-size: 3em;
+  font-size: 6em;
 }
-.homepage .body {
-  margin-bottom: 1em;
+.homepage .header .inner .text h3 {
+  font-size: 2em;
+  color: #337ab7;
 }
-.homepage .body .item {
-  margin-top: 2em;
+@media (max-width: 768px) {
+  .homepage .header .inner .text {
+    text-align: center;
+    margin-top: 5em;
+    color: #fff;
+  }
+  .homepage .header .inner .text h1 {
+    font-size: 3.5em;
+  }
+  .homepage .header .inner .text h3 {
+    font-size: 1.4em;
+    color: #337ab7;
+  }
+}
+.homepage .body .feature {
+  margin-top: 6em;
   font-weight: bold;
 }
-.homepage .body .item > div:first-child .icon {
-  padding: 1em;
+.homepage .body .feature .text {
+  padding: .5em;
   font-size: 4em;
-  border: 1px solid #ccc;
-  border-radius: 500px;
-  margin-bottom: .5em;
-}
-.homepage .body .item > div:last-child {
-  font-size: 1.8em;
   margin-bottom: 3em;
+}
+.homepage .body .feature .image {
+  padding: .5em;
+  background-color: #ccc;
+  height: 30em;
+  border-radius: 5px;
+}
+@media (max-width: 767px) {
+  .homepage .body .feature .image {
+    display: none !important;
+  }
+}
+.homepage .body .feature:hover {
+  color: #337ab7;
+}
+@media (max-width: 768px) {
+  .homepage .body .feature {
+    margin-top: 2em;
+  }
+  .homepage .body .feature .text {
+    margin-bottom: 1em;
+  }
 }
 .homepage .footer {
   border-top: 10px solid #ccc;

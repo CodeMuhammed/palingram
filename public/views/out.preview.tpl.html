@@ -11,13 +11,16 @@
 </div>
 
 <div class="col-sm-offset-2 col-sm-8 article" style="margin-bottom:3em;">
-	<div class="col-xs-12 header" style="background: url({{post.image}}) center center no-repeat; background-size: cover;">
+	<div class="col-xs-12 header" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
 		<div class="col-xs-12 inner" >
 			<div class="col-sm-8 col-sm-offset-2 text">
 				<h1>{{post.title}}</h1>
 				<h3>
 					by <a>{{post.author}}</a>
 				</h3>
+				<span>
+					<img ng-src={{post.image}} class="img-circle" width="70" height="70">
+				</span>
 			</div>
 		</div>
 	</div>

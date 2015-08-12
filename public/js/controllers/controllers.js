@@ -141,6 +141,7 @@ angular.module('palingram')
                    "username":User.get().username,
                    "title":"This First Post Title",
                    "date": Date.now(),
+                   "coverImage" : 'img/cover.jpg',
                    "image" : 'img/img.png',
                    "description":"A brief description of what the post is about",
                    "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
@@ -284,6 +285,7 @@ angular.module('palingram')
             $scope.comment = {
                 body : '',
                 by : User.get().firstname+' '+User.get().lastname,
+                image : User.get().image,
                 username: User.get().username,
                 date : '',
                 voters : {
