@@ -38,7 +38,7 @@ app.use(favicon(path.join(__dirname , 'public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname , 'public')));
 
 //configure router to use cookie-parser  ,body-parser 
-app.get('/allPosts.html' , function(req , res){ 
+app.get('/allPosts' , function(req , res){ 
 	 console.log('gotten all');
 	 request.get(palingramapi+'/allPosts' , function(err , response , body){
          if(err){
