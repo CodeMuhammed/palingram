@@ -6547,10 +6547,6 @@ button.close {
     display: none !important;
   }
 }
-body {
-  background: url('../img/bodybg1.jpg') center center no-repeat fixed;
-  background-size: cover;
-}
 body a {
   outline: none;
 }
@@ -6575,24 +6571,22 @@ body a {
 .homepage .header {
   height: 40em;
   padding: 0;
-  background: url('../img/cover1.jpg') center center no-repeat;
-  background-size: cover;
+  background: url('../img/cover.jpg') center center no-repeat fixed;
+  background-size: cover=;
 }
 .homepage .header .inner {
   height: 40em;
-  background-color: rgba(0, 0, 0, 0.8);
 }
 .homepage .header .inner .text {
   text-align: left;
   margin-top: 5em;
-  color: #fff;
+  color: #555555;
 }
 .homepage .header .inner .text h1 {
   font-size: 6em;
 }
 .homepage .header .inner .text h3 {
   font-size: 2em;
-  color: #337ab7;
 }
 @media (max-width: 768px) {
   .homepage .header .inner .text {
@@ -6609,24 +6603,19 @@ body a {
   }
 }
 .homepage .body .feature {
+  border-bottom: 10px solid #ccc;
   margin-top: 6em;
-  font-weight: bold;
+  maargin-bottom: 2em;
 }
 .homepage .body .feature .text {
+  text-align: right;
   padding: .5em;
   font-size: 4em;
-  margin-bottom: 3em;
 }
 .homepage .body .feature .image {
   padding: .5em;
   background-color: #ccc;
   height: 30em;
-  border-radius: 5px;
-}
-@media (max-width: 767px) {
-  .homepage .body .feature .image {
-    display: none !important;
-  }
 }
 .homepage .body .feature:hover {
   color: #337ab7;
@@ -6640,7 +6629,6 @@ body a {
   }
 }
 .homepage .footer {
-  border-top: 10px solid #ccc;
   padding-top: 2em;
   margin-bottom: 3em;
 }
@@ -6770,17 +6758,25 @@ fieldset[disabled] .transition #body button:hover.active {
 .subnav .searchbox {
   margin-top: .5em;
 }
+.main-view-area {
+  background: #000;
+  min-height: 300em;
+}
 .posts-container {
-  margin-top: 60px;
+  margin-top: 30px;
   padding: 0;
+  padding-top: 2em;
 }
 @media (max-width: 991px) {
   .posts-container {
-    margin-top: 120px;
+    margin-top: 85px;
+    padding: 0;
   }
 }
+.posts-container .side-menu {
+  color: #fff;
+}
 .panel {
-  border: none;
   padding: 0;
   box-shadow: none;
   padding-bottom: 1em;
@@ -6804,9 +6800,10 @@ fieldset[disabled] .transition #body button:hover.active {
   color: #555555;
 }
 .article {
+  background: #fff;
   padding-left: 0;
   padding-right: 0;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 .article .header {
   height: 30em;
@@ -7039,12 +7036,12 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
 }
 .tool-set {
   border-bottom: 3px solid #ccc;
-  padding: 1em 0;
-  background: #fff;
-  border-radius: 5px;
-  height: 4em;
+  padding: 1em;
+  background: #eee;
+  border-radius: 0px;
+  height: 3.7em;
   position: fixed;
-  top: 58px;
+  top: 57px;
   z-index: 100002;
 }
 .tool-set .pager {

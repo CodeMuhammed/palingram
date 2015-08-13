@@ -1,45 +1,46 @@
+<div class="container">
+	<nav class="col-sm-5 col-sm-offset-2 tool-set">
+	  <ul class="pager">
+	    <li class="previous" ng-click="back()" ng-show="edit"><a><span aria-hidden="true">&larr;</span> Back</a></li>
+	    <li class="previous" ng-show="!edit"><a ui-sref="in.posts"><span aria-hidden="true">&larr;</span> cancel</a></li>
+	    <li class="next" ng-click="save()" ng-show="edit"><a>Save <span aria-hidden="true">&rarr;</span></a></li>
+	    <li class="next" ng-click ="next()" ng-show="!edit"><a>Next <span aria-hidden="true">&rarr;</span></a></li>
+	  </ul>
+	</nav>
 
-<nav class="col-sm-6 col-sm-offset-3 tool-set">
-  <ul class="pager">
-    <li class="previous" ng-click="back()" ng-show="edit"><a><span aria-hidden="true">&larr;</span> Back</a></li>
-    <li class="previous" ng-show="!edit"><a ui-sref="in.posts"><span aria-hidden="true">&larr;</span> cancel</a></li>
-    <li class="next" ng-click="save()" ng-show="edit"><a>Save <span aria-hidden="true">&rarr;</span></a></li>
-    <li class="next" ng-click ="next()" ng-show="!edit"><a>Next <span aria-hidden="true">&rarr;</span></a></li>
-  </ul>
-</nav>
+	<div class="col-sm-6 col-sm-offset-3 text-center" style="margin-top:13em; padding:0; color:#fff" ng-hide="edit">
+		 <h1>
+	       	   Tags are a great for targeting multiple categories. 
+	     </h1>
+		<h4>Add Tags 
+		    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
+		</h4>
 
-<div class="col-sm-6 col-sm-offset-3 text-center" style="margin-top:13em; padding:0" ng-hide="edit">
-	 <h1>
-       	   Tags are a great for targeting multiple categories. 
-     </h1>
-	<h4>Add Tags 
-	    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
-	</h4>
+		 <div class="input-group" style="padding-bottom:.4em;">
+			  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag">
+			  <span ng-click="addTag(newTag)" class="input-group-addon" style="padding-left:1em; padding-right:1em">
+				<i class="icon fa fa-plus"> add</i>
+			  </span>
+		   </div>
+		 <div class="tag-buttons">
+			<button class="btn btn-default btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
+			   <span>{{tag}}</span> 
+			   <a class="badge">X</a>
+			</button>
+		 </div>
+	</div>
 
-	 <div class="input-group" style="padding-bottom:.4em;">
-		  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag">
-		  <span ng-click="addTag(newTag)" class="input-group-addon" style="padding-left:1em; padding-right:1em">
-			<i class="icon fa fa-plus"> add</i>
-		  </span>
-	   </div>
-	 <div class="tag-buttons">
-		<button class="btn btn-default btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
-		   <span>{{tag}}</span> 
-		   <a class="badge">X</a>
-		</button>
-	 </div>
+
+
+
+	<div class="col-sm-6 col-sm-offset-3 new-post" ng-show="edit" style="margin-bottom:5em;">
+		 <input class="post-title" placeholder="Enter title of post here" ng-model="post.title">
+		 <hr />
+		 <input class="post-title" placeholder="Cover image url" ng-model="post.coverImage">
+		 <hr />
+		 <input class="post-title" placeholder="Caption of post" ng-model="post.description">
+		 <hr />
+	     <div text-angular="text-angular" name="htmlcontent" ng-model="post.body" ta-disabled='false'>
+	     </div>
+	</div> 
 </div>
-
-
-
-
-<div class="col-sm-6 col-sm-offset-3 new-post" ng-show="edit" style="margin-bottom:5em;">
-	 <input class="post-title" placeholder="Enter title of post here" ng-model="post.title">
-	 <hr />
-	 <input class="post-title" placeholder="Cover image url" ng-model="post.coverImage">
-	 <hr />
-	 <input class="post-title" placeholder="Caption of post" ng-model="post.description">
-	 <hr />
-     <div text-angular="text-angular" name="htmlcontent" ng-model="post.body" ta-disabled='false'>
-     </div>
-</div> 

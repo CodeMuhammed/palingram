@@ -3,10 +3,21 @@ angular.module('palingram')
        $scope.hello = 'out homepage controller says hello';
    })
 
-   .controller('previewController' , function($scope , $state , Posts){
-       Posts.previewArticle($state.params.post_id).then(function(data){
-           $scope.post = data[0];
+   .controller('previewController' , function($scope , $state , Posts , Comments , Auth){
+       Posts.previewArticle($state.params.post_id , Auth.isAuth()).then(function(data){
+           $scope.post = data;
+            Comments.get($scope.post.comments_id).then(function(comments){
+                 console.log(comments);
+                 $scope.comments = comments;
+            });
+
+            $scope.auth = Auth.isAuth() == false || Auth.isAuth() == undefined ? false : true;
+
        });
+
+       $scope.back = function(toState){
+          $state.go(toState);
+       };
    })
 
    .controller('signupController' , function($scope , $state , Auth){
@@ -14,6 +25,8 @@ angular.module('palingram')
             newUser.favourites = [];
             newUser.image = 'img/img.png';
             newUser.pageViews = 0;
+            newUser.lastViewed = '';
+            newUser.bio = 'Write about your self here';
             Auth.signup(newUser).then(function(){
                 $state.go('out.transition');
             });
@@ -325,7 +338,12 @@ angular.module('palingram')
                  else{
                     alert('you cannot unfavourite your post');
                  }                 
-            };
+             };
+
+             //
+            $scope.back = function(){
+                 $state.go('in.posts');
+            }
 
              //edit handler
              $scope.edit = function(){
@@ -536,7 +554,7 @@ angular.module('palingram')
              Posts.post($scope.post).then(function(data){
                 alert('success');
                 User.get().favourites.push(data._id);
-                $state.go('in.posts');
+                $state.go('out.preview' , {post_id : data._id});
              }, function(err){
                  alert('something went wrong');
              });

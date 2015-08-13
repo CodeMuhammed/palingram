@@ -1,19 +1,19 @@
 <div class="container posts-container">
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" style="padding-left:0; margin-left:-1em;">
-             <h3>Favourite Topics 
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas side-menu" id="sidebar" style="padding-left:0; margin-left:-1em;">
+             <h3>Favourite Topics <br>
 			    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
 			 </h3>
 
 			 <div class="input-group" style="padding-bottom:.4em;">
-				  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag">
-				  <span ng-click="addTag(newTag)" class="input-group-addon" style="padding-left:1em; padding-right:1em">
+				  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag" style="border-radius: 15px 0 0 15px;" >
+				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0 15px 15px 0">
 					<i class="icon fa fa-plus"> add</i>
 				  </span>
 			 </div>
 
 			 <div class="tag-buttons">
-				<button class="btn btn-default btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
+				<button class="btn btn-default btn-sm btn-block" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
 				   <span>{{tag}}</span> 
 				   <a class="badge">X</a>
 				</button>

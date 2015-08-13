@@ -138,11 +138,13 @@ angular.module('Posts' , [])
            return promise.promise;
       };
      
-     var previewArticle = function(post_id){
+     var previewArticle = function(post_id , auth){
+          auth = auth == undefined || auth == 0 ? 1 : 0;
           var promise = $q.defer();
           $http({
                 method : 'GET',
-                url : BaseUrl+'/api/posts/'+post_id
+                url : BaseUrl+'/api/posts/'+post_id,
+                params :  {'p':auth}
            })
            .success(function(data){             
                promise.resolve(data);
