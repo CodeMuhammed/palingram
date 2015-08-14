@@ -57,19 +57,19 @@ body{
  }
 .homepage{
     padding:0; 
+    margin:0;
   .navbar {
-     margin-bottom:0;
+     margin:0;
      border-bottom:10px solid #ccc;
-     height: 6em;
+     height: 40px;
      padding:0;
      >span {
         &:first-child{
               img{
-                 height:50px;
+                 height:40px;
               }
         }
         &:last-child{
-           padding-top:.3em;
            >button{
                &:first-child{
                  margin-right:1em;  
@@ -79,30 +79,31 @@ body{
      }
   }
   .header{
-     height:40em; 
+     height:50em; 
      padding:0; 
-     background: url('../img/cover.jpg') center center no-repeat fixed;
-     background-size: cover=;
+     background: url('../img/cover.jpg') center center no-repeat;
+     background-size: cover;
      .inner{
-        height:40em;
+        height:50em;
         //background-color:hsla(0 , 0 , 0 , .8);
         .text{
            text-align:left;
            margin-top: 5em;
-           color:@gray;
+           color:#fff;
+           text-shadow: .2em .2em @gray;
            h1{
               font-size: 6em;
            }
            h3{
               font-size: 2em;
-           }
+           } 
         }
        
      }
      @media (max-width: @screen-sm) {
          .inner{
             .text{
-               text-align:center;
+             //  text-align:center;
                margin-top: 5em;
                color:#fff;
 
@@ -111,7 +112,6 @@ body{
                }
                h3{
                   font-size: 1.4em;
-                  color:@brand-primary;
                }
             }
          }
@@ -119,11 +119,13 @@ body{
   }
 
   .body{
-     .feature{
+      padding:0;
+     .feature{   
+         background:lighten(@brand-primary , 30%);
          border-bottom:10px solid #ccc;
-         margin-top:6em;
+         margin-top:0em;
          maargin-bottom:2em;
-          
+         padding:0;
            .text{
               text-align:right;
               padding : .5em;
@@ -141,7 +143,7 @@ body{
            }
 
            @media (max-width: @screen-sm) {
-               margin-top:2em;
+               margin-top:0;
                .text{
                   margin-bottom:1em;
                }
@@ -263,8 +265,8 @@ body{
 }
 
 .main-view-area{
-   background: #000;
-   min-height:300em;
+   background: url('../img/cover.jpg') center center no-repeat fixed;
+   min-height:60em;
 }
 
 .posts-container{
@@ -276,7 +278,7 @@ body{
          padding:0;
     }
     .side-menu{
-       color: #fff;
+      // color: #fff;
     }
 }
 .panel{
@@ -489,7 +491,7 @@ body{
        }
    }
    .post-body{
-      min-height:60em;
+      min-height:40em;
       border:none;
       font-size:1.2em;
       width: 100%;
@@ -543,6 +545,35 @@ body{
         width:100%;
         border-radius: 0px;
     }
+}
+
+.md-styles {
+    padding: .5em;
+   p{ 
+      font-size:1.3em !important;
+      font-weight:light !important;
+   }
+
+   h3 {
+        font-size: 32px;
+        font-weight:bolder;
+        line-height: 42px;
+    }
+
+    h4 {
+        font-size: 26px;
+        font-weight:bolder;
+        line-height: 32px;
+    }
+
+    blockquote {
+        border-left: 5px solid #555;
+        margin-left: -15px;
+        padding-left: 15px;
+        font-style: italic;
+        color: #555;
+    }
+
 }
 
 //custom offcanvas .less a the bottom to prevent interference

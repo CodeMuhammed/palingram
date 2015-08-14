@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" style="padding:0">
 	<nav class="col-sm-8 col-sm-offset-2 tool-set visible-xs">
 	  <ul class="pager">
 	    <li class="previous" ng-click="back()"><a><span aria-hidden="true">&larr;</span> Back to posts</a></li>
 	  </ul>
 	</nav>
 
-	<div class="col-sm-offset-2 col-sm-8 article">
+	<div class="col-sm-offset-2 col-sm-8 article clearfix">
 		<div class="col-xs-12 header" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
 			<div class="col-xs-12 inner" >
 				<div class="col-sm-8 col-sm-offset-2 text">
@@ -14,8 +14,13 @@
 						by <a>{{post.author}}</a>
 					</h3>
 					<span>
-						<img ng-src={{post.image}} class="img-circle" width="70" height="70">
+						<img ng-src={{post.image}} class="img-circle" width="70" height="70" style=" margin-bottom:2em">
 					</span>
+					<br/>
+					<code ng-show="linkshare" style="padding:.5em;">
+						{{link}}
+						<i class="icon fa fa-times fa-lg" ng-click="linkshare=!linkshare"></i>
+					</code>
 				</div>
 			</div>
 		</div>
@@ -23,8 +28,8 @@
 	    <div class="col-xs-12 share-box">
 			<i class="icon fa fa-facebook"> </i>
 			<i class="icon fa fa-twitter"> </i>
-			<i class="icon fa fa-google-plus"> </i>
-			<i class="icon fa fa-link"> </i>
+
+			<i class="icon fa fa-link" ng-click ="share('link')"> </i>
 			<i class="icon fa" ng-class="isFavourite() ? 'fa-heart':'fa-heart-o'" ng-click="toggleFavourite()" style="color:red"></i>
 			<div class="pull-right" ng-show="owned">
 				<button class="btn btn-default btn-xs" ng-click="edit()">
@@ -38,7 +43,7 @@
 
 		<div class="col-xs-12 body">
 			<p style="background:#EFF5FB;padding:1em;">{{post.description}}</p>
-			<p ng-bind-html="post.body"></p>
+			<p ng-bind-html="post.body" class="md-styles"></p>
 			<p style="margin-top:2em">
 				<div class="tag-buttons">
 				   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>

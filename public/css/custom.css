@@ -6552,35 +6552,34 @@ body a {
 }
 .homepage {
   padding: 0;
+  margin: 0;
 }
 .homepage .navbar {
-  margin-bottom: 0;
+  margin: 0;
   border-bottom: 10px solid #ccc;
-  height: 6em;
+  height: 40px;
   padding: 0;
 }
 .homepage .navbar > span:first-child img {
-  height: 50px;
-}
-.homepage .navbar > span:last-child {
-  padding-top: .3em;
+  height: 40px;
 }
 .homepage .navbar > span:last-child > button:first-child {
   margin-right: 1em;
 }
 .homepage .header {
-  height: 40em;
+  height: 50em;
   padding: 0;
-  background: url('../img/cover.jpg') center center no-repeat fixed;
-  background-size: cover=;
+  background: url('../img/cover.jpg') center center no-repeat;
+  background-size: cover;
 }
 .homepage .header .inner {
-  height: 40em;
+  height: 50em;
 }
 .homepage .header .inner .text {
   text-align: left;
   margin-top: 5em;
-  color: #555555;
+  color: #fff;
+  text-shadow: 0.2em 0.2em #555555;
 }
 .homepage .header .inner .text h1 {
   font-size: 6em;
@@ -6590,7 +6589,6 @@ body a {
 }
 @media (max-width: 768px) {
   .homepage .header .inner .text {
-    text-align: center;
     margin-top: 5em;
     color: #fff;
   }
@@ -6599,13 +6597,17 @@ body a {
   }
   .homepage .header .inner .text h3 {
     font-size: 1.4em;
-    color: #337ab7;
   }
 }
+.homepage .body {
+  padding: 0;
+}
 .homepage .body .feature {
+  background: #a0c4e4;
   border-bottom: 10px solid #ccc;
-  margin-top: 6em;
+  margin-top: 0em;
   maargin-bottom: 2em;
+  padding: 0;
 }
 .homepage .body .feature .text {
   text-align: right;
@@ -6622,7 +6624,7 @@ body a {
 }
 @media (max-width: 768px) {
   .homepage .body .feature {
-    margin-top: 2em;
+    margin-top: 0;
   }
   .homepage .body .feature .text {
     margin-bottom: 1em;
@@ -6759,8 +6761,8 @@ fieldset[disabled] .transition #body button:hover.active {
   margin-top: .5em;
 }
 .main-view-area {
-  background: #000;
-  min-height: 300em;
+  background: url('../img/cover.jpg') center center no-repeat fixed;
+  min-height: 60em;
 }
 .posts-container {
   margin-top: 30px;
@@ -6772,9 +6774,6 @@ fieldset[disabled] .transition #body button:hover.active {
     margin-top: 85px;
     padding: 0;
   }
-}
-.posts-container .side-menu {
-  color: #fff;
 }
 .panel {
   padding: 0;
@@ -7004,7 +7003,7 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   max-height: 30em;
 }
 .new-post .post-body {
-  min-height: 60em;
+  min-height: 40em;
   border: none;
   font-size: 1.2em;
   width: 100%;
@@ -7053,6 +7052,30 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
     width: 100%;
     border-radius: 0px;
   }
+}
+.md-styles {
+  padding: .5em;
+}
+.md-styles p {
+  font-size: 1.3em !important;
+  font-weight: light !important;
+}
+.md-styles h3 {
+  font-size: 32px;
+  font-weight: bolder;
+  line-height: 42px;
+}
+.md-styles h4 {
+  font-size: 26px;
+  font-weight: bolder;
+  line-height: 32px;
+}
+.md-styles blockquote {
+  border-left: 5px solid #555;
+  margin-left: -15px;
+  padding-left: 15px;
+  font-style: italic;
+  color: #555;
 }
 /*
  * Style tweaks

@@ -1,4 +1,4 @@
-angular.module('palingram' , ['ngResource' ,'textAngular', 'ui.router' , 'Auth' , 'Comments'])
+angular.module('palingram' , ['ngResource' , 'ngSanitize','angular-medium-editor' , 'djds4rce.angular-socialshare' ,  'ui.router' , 'Auth' , 'Comments'])
 
 // cors configurations to enable consuming the rest api
 .config(function($httpProvider){

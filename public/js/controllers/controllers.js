@@ -488,6 +488,20 @@ angular.module('palingram')
                 $scope.toggleSortMenu();
                 $scope.sortCriteria = criteria;
             };
+
+            //This takes care of socialshare button
+            $scope.share = function(socialtype){
+                 $scope.link = 'http://www.palingram.com/#/out/preview/'+$scope.post._id;
+                 switch(socialtype){
+                     case 'link': {
+                         $scope.linkshare = true;
+                         break;
+                     }
+                     default:{
+                        break;
+                     }
+                 }
+            };
        }
    })
 
@@ -554,7 +568,6 @@ angular.module('palingram')
              Posts.post($scope.post).then(function(data){
                 alert('success');
                 User.get().favourites.push(data._id);
-                $state.go('out.preview' , {post_id : data._id});
              }, function(err){
                  alert('something went wrong');
              });
@@ -563,7 +576,6 @@ angular.module('palingram')
               $scope.post.date = Date.now();
               Posts.update($scope.post).then(function(result){
                 alert(result);
-                  $state.go('in.posts');
              }, function(err){
                  console.log(err);
              });
