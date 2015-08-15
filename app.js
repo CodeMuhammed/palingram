@@ -49,7 +49,7 @@ app.get('/' ,  function(req , res , next){
                           res.render('post.ejs' , {post:JSON.parse(post) , BaseUrl:BaseUrl});
                      } 
                      else {
-                          res.render('post.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});
+                          res.render('index.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});
                      } 
                });
           }
