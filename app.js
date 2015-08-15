@@ -15,10 +15,10 @@ var path = require('path');
 var request = require('request');
 //ONLINE MODE
 var palingramapi = 'https://palingramapi.herokuapp.com/api';
-//var BaseUrl = 'http://www.palingram.com';
+var BaseUrl = 'http://www.palingram.com';
 
 //OFFLINE MODE
-var BaseUrl = 'http://localhost:3002';
+//var BaseUrl = 'http://localhost:3002';
 
 //Instantiate a new express app
 var app = express();
@@ -46,11 +46,11 @@ app.get('/' ,  function(req , res , next){
                      if(err){
                           console.log('called');
                           var post = require('fs').readFileSync('post.txt');
-                          res.render('post.ejs' , {post:JSON.parse(post)});
+                          res.render('post.ejs' , {post:JSON.parse(post) , BaseUrl:BaseUrl});
                      } 
                      else {
-                        res.render('post.ejs' , {post:JSON.parse(body)});
-                     }
+                          res.render('post.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});
+                     } 
                });
           }
 
