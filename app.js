@@ -49,7 +49,7 @@ app.get('/' ,  function(req , res , next){
                           res.render('post.ejs' , {post:JSON.parse(post) , BaseUrl:BaseUrl});
                      } 
                      else {
-                          res.render('index.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});
+                          res.render('post.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});
                      } 
                });
           }
@@ -59,7 +59,7 @@ app.get('/' ,  function(req , res , next){
             //accidentally included but not supposed to be 
             //crawled by search engines
             console.log(fragmentPathId);
-            next();
+            res.render('index.ejs');
           }    
      }
      else{
