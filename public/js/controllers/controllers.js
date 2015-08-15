@@ -491,7 +491,7 @@ angular.module('palingram')
 
             //This takes care of socialshare button
             $scope.share = function(socialtype){
-                 $scope.link = 'http://www.palingram.com/#/out/preview/'+$scope.post._id;
+                 $scope.link = 'http://www.palingram.com/#!/out/preview/'+$scope.post._id;
                  switch(socialtype){
                      case 'link': {
                          $scope.linkshare = true;

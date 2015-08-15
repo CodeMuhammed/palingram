@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="palingram">
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Collaborative Blogging Platform</title>
+			
+	    <!-- Bootstrap core CSS -->
+	    <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/font-awesome.css" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link href="css/custom.css" rel="stylesheet">
+
+      <!--Setting a base to support html 5 mode-->
+      <base href="/" />
+  </head>
+
+  <body>
+     <div class="col-sm-offset-2 col-sm-8 article">
+      <div class="col-xs-12 header" style="background: url(<%=post.coverImage%>) center center no-repeat; background-size: cover;">
+        <div class="col-xs-12 inner" >
+          <div class="col-sm-8 col-sm-offset-2 text">
+            <h1><%=post.title%></h1>
+            <h3>
+              by <a><%=post.author%></a>
+            </h3>
+            <span>
+              <img ng-src=<%=post.image%> class="img-circle" width="70" height="70">
+            </span>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-xs-12 share-box">
+        <i class="icon fa fa-facebook"> </i>
+        <i class="icon fa fa-twitter"> </i>
+        <i class="icon fa fa-google-plus"> </i>
+        <i class="icon fa fa-link"> </i>
+        <i class="icon fa fa-heart-o" style="color:red"></i>
+        
+      </div>
+
+      <div class="col-xs-12 body">
+        <p style="background:#EFF5FB;padding:1em;"><%=post.description%></p>
+        <p><%=post.body%></p>
+        <p style="margin-top:2em">
+          <div class="tag-buttons">
+             <%for(var i=0; i<post.tags.length; i++){%>
+                   <button class="btn btn-default btn-sm"><%=post.tags[i]%></button>
+             <%}%>
+          </div>
+        </p>
+      </div>
+    </div>
+  </body>
+
+</html>

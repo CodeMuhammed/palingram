@@ -13,13 +13,12 @@ var favicon = require('serve-favicon');
 var path = require('path');
 
 var request = require('request');
-
 //ONLINE MODE
 var palingramapi = 'https://palingramapi.herokuapp.com/api';
-var BaseUrl = 'http://www.palingram.com';
+//var BaseUrl = 'http://www.palingram.com';
 
 //OFFLINE MODE
-//var BaseUrl = 'http://localhost:3002';
+var BaseUrl = 'http://localhost:3002';
 
 //Instantiate a new express app
 var app = express();
@@ -34,7 +33,43 @@ app.use(compression({threshold:1}));
 app.use(methodOverride('_method'));
 app.use(favicon(path.join(__dirname , 'public', 'favicon.ico')));
 
-//configure router to use cookie-parser  ,body-parser 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
+app.get('/' ,  function(req , res , next){
+     if(req.query._escaped_fragment_){
+          console.log(req.query._escaped_fragment_);
+          var fragmentPathId = req.query._escaped_fragment_.split('/').reverse()[0].trim();
+
+          if(fragmentPathId.length > 15){
+              request.get(palingramapi+'/posts/'+fragmentPathId , function(err , response , body){
+                     if(err){
+                          console.log('called');
+                          var post = require('fs').readFileSync('post.txt');
+                          res.render('post.ejs' , {post:JSON.parse(post)});
+                     } 
+                     else {
+                        res.render('post.ejs' , {post:JSON.parse(body)});
+                     }
+               });
+          }
+
+          else{
+            //serves the index page for links that were
+            //accidentally included but not supposed to be 
+            //crawled by search engines
+            console.log(fragmentPathId);
+            next();
+          }    
+     }
+     else{
+         console.log('normal non crawler url requested');
+         next();
+     }
+     
+});
+
+//configure express static
 app.use(express.static(path.join(__dirname , 'public')));
 
 //configure router to use cookie-parser  ,body-parser 
@@ -50,12 +85,6 @@ app.get('/allPosts' , function(req , res){
          }
 	 });
 });
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-
-//test api call from front end code
-
 
 //Start the app
 app.listen(app.get('port') , function(){

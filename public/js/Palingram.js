@@ -1,5 +1,4 @@
-angular.module('palingram' , ['ngResource' , 'ngSanitize','angular-medium-editor' , 'djds4rce.angular-socialshare' ,  'ui.router' , 'Auth' , 'Comments'])
-
+angular.module('palingram' , ['ngResource' ,'ngRoute' , 'ngSanitize','angular-medium-editor' , 'djds4rce.angular-socialshare' ,  'ui.router' , 'Auth' , 'Comments'])
 // cors configurations to enable consuming the rest api
 .config(function($httpProvider){
    $httpProvider.defaults.useXDomain = true;
@@ -8,7 +7,10 @@ angular.module('palingram' , ['ngResource' , 'ngSanitize','angular-medium-editor
 })
 
 //state configuration and routing setup
-.config(function($stateProvider , $urlRouterProvider){
+.config(function($stateProvider , $urlRouterProvider  , $locationProvider){
+  //enabling HTML5 mode
+  $locationProvider.html5Mode(false).hashPrefix('!');
+
  //Logged out state
   $stateProvider
      .state('out' , { 

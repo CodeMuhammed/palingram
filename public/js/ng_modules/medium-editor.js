@@ -933,7 +933,7 @@ var ButtonsData;
             action: 'image',
             aria: 'image',
             tagNames: ['img'],
-            contentDefault: '<b>image</b>',
+            contentDefault: '<i class="fa fa-picture-o"></i>',
             contentFA: '<i class="fa fa-picture-o"></i>'
         },
         'quote': {
@@ -941,7 +941,7 @@ var ButtonsData;
             action: 'append-blockquote',
             aria: 'blockquote',
             tagNames: ['blockquote'],
-            contentDefault: '<b>&ldquo;</b>',
+            contentDefault: '<i class="fa fa-quote-right"></i>',
             contentFA: '<i class="fa fa-quote-right"></i>'
         },
         'orderedlist': {
@@ -950,7 +950,7 @@ var ButtonsData;
             aria: 'ordered list',
             tagNames: ['ol'],
             useQueryState: true,
-            contentDefault: '<b>1.</b>',
+            contentDefault: '<i class="fa fa-list-ol"></i>',
             contentFA: '<i class="fa fa-list-ol"></i>'
         },
         'unorderedlist': {
@@ -959,7 +959,7 @@ var ButtonsData;
             aria: 'unordered list',
             tagNames: ['ul'],
             useQueryState: true,
-            contentDefault: '<b>&bull;</b>',
+            contentDefault: '<i class="fa fa-list-ul"></i>',
             contentFA: '<i class="fa fa-list-ul"></i>'
         },
         'pre': {
@@ -967,7 +967,7 @@ var ButtonsData;
             action: 'append-pre',
             aria: 'preformatted text',
             tagNames: ['pre'],
-            contentDefault: '<b>0101</b>',
+            contentDefault: '<i class="fa fa-code fa-lg"></i>',
             contentFA: '<i class="fa fa-code fa-lg"></i>'
         },
         'indent': {
@@ -975,7 +975,7 @@ var ButtonsData;
             action: 'indent',
             aria: 'indent',
             tagNames: [],
-            contentDefault: '<b>&rarr;</b>',
+            contentDefault: '<i class="fa fa-indent"></i>',
             contentFA: '<i class="fa fa-indent"></i>'
         },
         'outdent': {
@@ -983,7 +983,7 @@ var ButtonsData;
             action: 'outdent',
             aria: 'outdent',
             tagNames: [],
-            contentDefault: '<b>&larr;</b>',
+            contentDefault: '<i class="fa fa-outdent"></i>',
             contentFA: '<i class="fa fa-outdent"></i>'
         },
         'justifyCenter': {
@@ -995,7 +995,7 @@ var ButtonsData;
                 prop: 'text-align',
                 value: 'center'
             },
-            contentDefault: '<b>C</b>',
+            contentDefault: '<i class="fa fa-align-center"></i>',
             contentFA: '<i class="fa fa-align-center"></i>'
         },
         'justifyFull': {
@@ -1007,7 +1007,7 @@ var ButtonsData;
                 prop: 'text-align',
                 value: 'justify'
             },
-            contentDefault: '<b>J</b>',
+            contentDefault: '<i class="fa fa-align-justify"></i>',
             contentFA: '<i class="fa fa-align-justify"></i>'
         },
         'justifyLeft': {
@@ -1019,7 +1019,7 @@ var ButtonsData;
                 prop: 'text-align',
                 value: 'left'
             },
-            contentDefault: '<b>L</b>',
+            contentDefault: '<i class="fa fa-align-left"></i>',
             contentFA: '<i class="fa fa-align-left"></i>'
         },
         'justifyRight': {
@@ -1031,7 +1031,7 @@ var ButtonsData;
                 prop: 'text-align',
                 value: 'right'
             },
-            contentDefault: '<b>R</b>',
+            contentDefault: '<i class="fa fa-align-right"></i>',
             contentFA: '<i class="fa fa-align-right"></i>'
         },
         'header1': {
