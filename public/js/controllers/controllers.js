@@ -289,10 +289,16 @@ angular.module('palingram')
    })
 
    .controller('postController' , function($scope , $state ,$filter , Tags , Posts , User , Auth , Comments){
-          if(Auth.isAuth()){
-            
+        if(Auth.isAuth()){
             $scope.post = $state.current.data.post;
             $scope.owned = User.get().username==$scope.post.username;
+
+            $scope.posts = Posts.get().slice(0 , 5);
+            Posts.getAuthorPosts($scope.post.username).then(function(result){
+               // $scope.authorPosts = result;
+               alert(result);
+            });
+            
 
             $scope.comment = {
                 body : '',
@@ -516,6 +522,18 @@ angular.module('palingram')
                      }
                  }
            };
+
+           $scope.viewPost = function(post){
+                Tags.update(post.tags , User.get().tags_id).then(function(result){
+                    console.log(result);
+                    $scope.nextView = post;
+                    $state.go('in.posts.post' , {id : post._id});
+                });
+           };
+
+           $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+               toState.data.post = $scope.nextView;
+           });
        }
    })
 

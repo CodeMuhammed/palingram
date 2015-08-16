@@ -6831,6 +6831,8 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .article .body p {
   font-size: 1.3em;
+  line-height: 2em;
+  letter-spacing: .02em;
 }
 .article .body img {
   margin-top: 2em;
@@ -6902,6 +6904,28 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .article #comment .comment-body .vote-box > div:last-child:hover {
   color: #d9534f;
+}
+.side-items {
+  padding-right: 0;
+}
+.side-items .ad-box {
+  background-color: #ccf;
+  min-height: 20em;
+  padding: .5em;
+}
+.side-items .suggestion {
+  padding: 0;
+  margin-bottom: 1.5em;
+  max-height: 15em;
+}
+.side-items .suggestion .img-div {
+  height: 7em;
+  background: #ccc;
+}
+.side-items .suggestion .text-b {
+  over-flow: hidden;
+  height: 7em;
+  background: #cce;
 }
 .tag-buttons .btn {
   margin-right: .5em;

@@ -18,10 +18,10 @@ var palingramapi = 'https://palingramapi.herokuapp.com/api';
 
 
 //ONLINE MODE
-var BaseUrl = 'http://www.palingram.com';
+//var BaseUrl = 'http://www.palingram.com';
 
 //OFFLINE MODE
-//var BaseUrl = 'http://localhost:3002';
+var BaseUrl = 'http://localhost:3002';
 
 //Instantiate a new express app
 var app = express();

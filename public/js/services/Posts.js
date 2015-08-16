@@ -155,6 +155,14 @@ angular.module('Posts' , [])
           return promise.promise;
      }
 
+     var getAuthorPosts = function(username){
+         var promise = $q.defer();
+          promise.resolve('Lets get getAuthorPosts yeah');
+
+          //@TODO get authors posts from route api/authorPosts/:username  from the rest api
+         return promise.promise;
+     };
+
    	return {
           set : set,
           get : get,
@@ -162,6 +170,7 @@ angular.module('Posts' , [])
           post : postArticle,
           update: updateArticle,
           deleteArticle : deleteArticle,
-          previewArticle: previewArticle
+          previewArticle: previewArticle,
+          getAuthorPosts : getAuthorPosts
    	}
  });
