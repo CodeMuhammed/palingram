@@ -13,8 +13,11 @@ var favicon = require('serve-favicon');
 var path = require('path');
 
 var request = require('request');
-//ONLINE MODE
+
 var palingramapi = 'https://palingramapi.herokuapp.com/api';
+
+
+//ONLINE MODE
 var BaseUrl = 'http://www.palingram.com';
 
 //OFFLINE MODE
@@ -53,7 +56,7 @@ app.get('/' ,  function(req , res , next){
                      } 
                });
           }
-
+ 
           else{
             //serves the index page for links that were
             //accidentally included but not supposed to be 

@@ -59,61 +59,35 @@ body{
     padding:0; 
     margin:0;
   .navbar {
-     margin:0;
-     border-bottom:10px solid #ccc;
-     height: 40px;
-     padding:0;
-     >span {
-        &:first-child{
-              img{
-                 height:40px;
-              }
-        }
-        &:last-child{
-           >button{
-               &:first-child{
-                 margin-right:1em;  
-            }
-           }
-        }
+     button{
+        padding: 1em 2em;
+        background:transparent;
+        border: 3px solid;
+         &:first-child{
+           margin-right:1em;  
+         }
      }
   }
   .header{
-     height:50em; 
      padding:0; 
-     background: url('../img/cover.jpg') center center no-repeat;
-     background-size: cover;
+     background: @brand-primary;
      .inner{
-        height:50em;
-        //background-color:hsla(0 , 0 , 0 , .8);
         .text{
-           text-align:left;
            margin-top: 5em;
            color:#fff;
            text-shadow: .2em .2em @gray;
            h1{
               font-size: 6em;
            }
-           h3{
-              font-size: 2em;
-           } 
-        }
-       
+        } 
      }
      @media (max-width: @screen-sm) {
          .inner{
-            .text{
-             //  text-align:center;
-               margin-top: 5em;
-               color:#fff;
-
-               h1{
-                  font-size: 3.5em;
-               }
-               h3{
-                  font-size: 1.4em;
-               }
-            }
+             .text{
+                h1{
+                    font-size: 4em;
+                }
+             }
          }
      }
   }
@@ -218,9 +192,11 @@ body{
    }
    li{
       
-      font-size:1.2em;
       font-weight:bold;
       a{
+         .icon{
+            font-size:2em;
+         }
          &:hover{
             color:@brand-danger !important;
           }
@@ -265,20 +241,24 @@ body{
 }
 
 .main-view-area{
-   background: url('../img/cover.jpg') center center no-repeat fixed;
+   background: #F5F8FA;
    min-height:60em;
 }
 
 .posts-container{
-   margin-top: 30px;
+   margin-top: 57px;
    padding:0;
    padding-top:2em;
    @media (max-width: @screen-sm-max) {
-        margin-top:85px;
+        margin-top:100px;
          padding:0;
     }
     .side-menu{
-      // color: #fff;
+       background: #fff;
+       padding-left:0; 
+       margin-left:-1em;
+       padding:1em; 
+       margin-right:1em;
     }
 }
 .panel{
@@ -286,13 +266,13 @@ body{
     box-shadow:none;
     padding-bottom:1em;
    .header{
+      padding-top:2em;
       h5{
         font-size: 1.3em;
       }
    }
    .panel-body{
      .img-div{
-         border-radius:10px;
          min-height: 20em;
      }
      .content {
@@ -314,6 +294,9 @@ body{
     padding-left:0;
     padding-right:0;
     margin-top:30px;
+    @media (max-width: @screen-sm-max) {
+        margin-top:85px;
+    }
   .header{
      height:30em; 
      padding:0; 
@@ -550,7 +533,7 @@ body{
 .md-styles {
     padding: .5em;
    p{ 
-      font-size:1.3em !important;
+      font-size:1.1em !important;
       font-weight:light !important;
    }
 

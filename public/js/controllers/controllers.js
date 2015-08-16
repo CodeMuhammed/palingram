@@ -291,7 +291,6 @@ angular.module('palingram')
    .controller('postController' , function($scope , $state ,$filter , Tags , Posts , User , Auth , Comments){
           if(Auth.isAuth()){
             
-
             $scope.post = $state.current.data.post;
             $scope.owned = User.get().username==$scope.post.username;
 
@@ -490,8 +489,8 @@ angular.module('palingram')
             };
 
             //This takes care of socialshare button
+            $scope.link = 'www.palingram.com/#!/out/preview/'+$scope.post._id;
             $scope.share = function(socialtype){
-                 $scope.link = 'http://www.palingram.com/#!/out/preview/'+$scope.post._id;
                  switch(socialtype){
                      case 'link': {
                          $scope.linkshare = true;
@@ -502,6 +501,21 @@ angular.module('palingram')
                      }
                  }
             };
+
+           //This computes and return the text to be shared
+           $scope.shareText = function(network){
+                switch(network){
+                     case 'twitter': {
+                         return  '@palingram'+' '+$scope.post.description.substr(0 , 100)+' '+$scope.link;
+                     }
+                     case 'facebook': {
+                         return $scope.post.description+' '+$scope.link;
+                     }
+                     default:{
+                        break;
+                     }
+                 }
+           };
        }
    })
 

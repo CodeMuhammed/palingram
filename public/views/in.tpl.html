@@ -1,54 +1,58 @@
 <div class="main-view-area">
-	   <!-- Static navbar -->
-   <nav class="navbar navbar-default navbar-fixed-top" style="background:#fff;border-bottom:2px solid #ccc">
-	   <div class="navbar-header text-center">
-		  <a class="navbar-brand" style="padding-top:0 !important" ng-click="toggle()">
-		  	<img src="img/logo.png" height="40">
-		  </a>
-		  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="toggleSearch()" style="margin-left:.2em">
-			<i class="icon fa fa-search" style="font-size:1.4em;"></i>
-		  </button>
-		  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="goto('editor')">
-			<i class="icon fa fa-edit" style="font-size:1.4em;"></i></button>
-		</li>
-	   </div>
-	   <div class="hidden-xs">
-	   	  <form class="nav navbar-nav navbar-form">
-			<div class="input-group" style="padding-bottom:.4em;">
-		  		
-			  <input type="text" class="form-control" style="border-radius: 15px 0 0 15px;" placeholder="Search palingram" ng-model="searchText">
-			  <span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0 15px 15px 0" ng-click="searchForTopic(searchText)">
-				 <a href="" ><i class="icon fa fa-search" style="font-size:1.4em;"></i></a>
-			  </span>
+   <!-- Static navbar -->
+  
+	   <nav class="navbar navbar-default navbar-fixed-top " style="background:#fff;border-bottom:2px solid #ccc">
+	   	 <div class="col-sm-10 col-sm-offset-1">
+		   <div class="navbar-header text-center">
+			  <a class="navbar-brand" style="padding-top:0 !important" ng-click="toggle()">
+			  	<img src="img/logo.png" height="40">
+			  </a>
+			  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="toggleSearch()" style="margin-left:.2em">
+				<i class="icon fa fa-search" style="font-size:1.4em;"></i>
+			  </button>
+			  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="goto('editor')">
+				<i class="icon fa fa-edit" style="font-size:1.4em;"></i></button>
+			</li>
 		   </div>
-          </form>
-		  <ul class="nav navbar-nav">
-			<li ng-click="goto('editor')" class="">
-				<a ng-class="{'active' : active('editor')}">
-					<i class="icon fa fa-plus-square" style="font-size:1.4em;"></i> 
-					Write new article
-				</a>
-			</li>
-			<li ng-click="goto('posts')" class="">
-				<a ng-class="{'active' : active('posts')}">
-					<i class="icon fa fa-list-alt" style="font-size:1.4em;"></i> 
-					All Posts
-				</a>
-			</li>
-			<li ng-click="goto('favourites')" class="">
-				<a ng-class="{'active' : active('favourites')}">
-					<i class="icon fa fa-heart" style="font-size:1.4em;"></i> 
-					Favourites
-				</a>
-			</li>
-			<li  ng-click="goto('profile')" class="" >
-				<a ng-class="{'active' : active('profile')}">
-					<i class="icon fa fa-user" style="font-size:1.4em;"></i> Profile</a>
-			</li>
-		  </ul> 
-		  
-       </div>		  
- </nav>
+		   <div class="hidden-xs">
+		   	  <form class="nav navbar-nav navbar-form navbar-right">
+				<div class="input-group" style="padding-bottom:.4em;">
+			  		
+				  <input type="text" class="form-control" style="border-radius: 15px 0 0 15px;" placeholder="Search palingram" ng-model="searchText">
+				  <span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0 15px 15px 0" ng-click="searchForTopic(searchText)">
+					 <a href="" ><i class="icon fa fa-search" style="font-size:1.4em;"></i></a>
+				  </span>
+			   </div>
+	          </form>
+			  <ul class="nav navbar-nav">
+				<li ng-click="goto('editor')" class="">
+					<a ng-class="{'active' : active('editor')}">
+						<i class="icon fa fa-plus-square" style="font-size:1.4em;"></i> 
+						Write new article
+					</a>
+				</li>
+				<li ng-click="goto('posts')" class="">
+					<a ng-class="{'active' : active('posts')}">
+						<i class="icon fa fa-list-alt" style="font-size:1.4em;"></i> 
+						All Posts
+					</a>
+				</li>
+				<li ng-click="goto('favourites')" class="">
+					<a ng-class="{'active' : active('favourites')}">
+						<i class="icon fa fa-heart" style="font-size:1.4em;"></i> 
+						Favourites
+					</a>
+				</li>
+				<li  ng-click="goto('profile')" class="" >
+					<a ng-class="{'active' : active('profile')}">
+						<i class="icon fa fa-user" style="font-size:1.4em;"></i> Profile</a>
+				</li>
+			  </ul> 
+			  
+	       </div>
+	      </div>		  
+	 </nav>
+ 
 
  <div class="col-xs-12 subnav visible-xs">
 	  <ul class="nav navbar-nav" ng-hide="search">

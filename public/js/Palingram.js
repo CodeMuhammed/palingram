@@ -1,4 +1,4 @@
-angular.module('palingram' , ['ngResource' ,'ngRoute' , 'ngSanitize','angular-medium-editor' , 'djds4rce.angular-socialshare' ,  'ui.router' , 'Auth' , 'Comments'])
+angular.module('palingram' , ['ngResource' ,'ngRoute' , 'ngSanitize', 'ngAnimate', 'mgcrea.ngStrap' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 // cors configurations to enable consuming the rest api
 .config(function($httpProvider){
    $httpProvider.defaults.useXDomain = true;

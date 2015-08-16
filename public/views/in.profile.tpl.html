@@ -1,4 +1,13 @@
-<div class="col-sm-offset-3 col-sm-6 article">
-	 <p>{{user}}</p>
+<div class="col-sm-offset-3 col-sm-6 article" style="padding-top: 3em;">
+	 <p>Total page views: {{user.pageViews}}</p>
+	 <p>Last viewed : {{user.lastViewed | date:'fullDate'}}</p>
+	 <p>Total ammount: NGN {{(user.pageViews*10)/100}}</p>
+	 <p>First name {{user.firstname}}</p>
+	 <p>Last name: {{user.lastname}}</p>
+	 <p>Email | username : {{user.username}}</p>
+	 <p>Password: {{'******'}}</p>
+	 <p>Profile image url : {{user.image}}</p>
+	 <p>Favourites : {{user.favourites.length}}</p>
+	 <p>Bio : {{user.bio}}</p>
 	<a ng-click="logout()">logout</a>
 </div>

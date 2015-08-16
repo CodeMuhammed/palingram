@@ -6554,29 +6554,19 @@ body a {
   padding: 0;
   margin: 0;
 }
-.homepage .navbar {
-  margin: 0;
-  border-bottom: 10px solid #ccc;
-  height: 40px;
-  padding: 0;
+.homepage .navbar button {
+  padding: 1em 2em;
+  background: transparent;
+  border: 3px solid;
 }
-.homepage .navbar > span:first-child img {
-  height: 40px;
-}
-.homepage .navbar > span:last-child > button:first-child {
+.homepage .navbar button:first-child {
   margin-right: 1em;
 }
 .homepage .header {
-  height: 50em;
   padding: 0;
-  background: url('../img/cover.jpg') center center no-repeat;
-  background-size: cover;
-}
-.homepage .header .inner {
-  height: 50em;
+  background: #337ab7;
 }
 .homepage .header .inner .text {
-  text-align: left;
   margin-top: 5em;
   color: #fff;
   text-shadow: 0.2em 0.2em #555555;
@@ -6584,19 +6574,9 @@ body a {
 .homepage .header .inner .text h1 {
   font-size: 6em;
 }
-.homepage .header .inner .text h3 {
-  font-size: 2em;
-}
 @media (max-width: 768px) {
-  .homepage .header .inner .text {
-    margin-top: 5em;
-    color: #fff;
-  }
   .homepage .header .inner .text h1 {
-    font-size: 3.5em;
-  }
-  .homepage .header .inner .text h3 {
-    font-size: 1.4em;
+    font-size: 4em;
   }
 }
 .homepage .body {
@@ -6723,8 +6703,10 @@ fieldset[disabled] .transition #body button:hover.active {
   }
 }
 .navbar li {
-  font-size: 1.2em;
   font-weight: bold;
+}
+.navbar li a .icon {
+  font-size: 2em;
 }
 .navbar li a:hover {
   color: #d9534f !important;
@@ -6761,30 +6743,39 @@ fieldset[disabled] .transition #body button:hover.active {
   margin-top: .5em;
 }
 .main-view-area {
-  background: url('../img/cover.jpg') center center no-repeat fixed;
+  background: #F5F8FA;
   min-height: 60em;
 }
 .posts-container {
-  margin-top: 30px;
+  margin-top: 57px;
   padding: 0;
   padding-top: 2em;
 }
 @media (max-width: 991px) {
   .posts-container {
-    margin-top: 85px;
+    margin-top: 100px;
     padding: 0;
   }
+}
+.posts-container .side-menu {
+  background: #fff;
+  padding-left: 0;
+  margin-left: -1em;
+  padding: 1em;
+  margin-right: 1em;
 }
 .panel {
   padding: 0;
   box-shadow: none;
   padding-bottom: 1em;
 }
+.panel .header {
+  padding-top: 2em;
+}
 .panel .header h5 {
   font-size: 1.3em;
 }
 .panel .panel-body .img-div {
-  border-radius: 10px;
   min-height: 20em;
 }
 .panel .panel-body .content {
@@ -6803,6 +6794,11 @@ fieldset[disabled] .transition #body button:hover.active {
   padding-left: 0;
   padding-right: 0;
   margin-top: 30px;
+}
+@media (max-width: 991px) {
+  .article {
+    margin-top: 85px;
+  }
 }
 .article .header {
   height: 30em;
@@ -7057,7 +7053,7 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   padding: .5em;
 }
 .md-styles p {
-  font-size: 1.3em !important;
+  font-size: 1.1em !important;
   font-weight: light !important;
 }
 .md-styles h3 {
