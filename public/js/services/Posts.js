@@ -139,7 +139,8 @@ angular.module('Posts' , [])
       };
      
      var previewArticle = function(post_id , auth){
-          auth = auth == undefined || auth == 0 ? 1 : 0;
+
+          auth = auth == undefined || auth == false ? 1 : 0;
           var promise = $q.defer();
           $http({
                 method : 'GET',
@@ -157,9 +158,17 @@ angular.module('Posts' , [])
 
      var getAuthorPosts = function(username){
          var promise = $q.defer();
-          promise.resolve('Lets get getAuthorPosts yeah');
+         $http({
+             method : 'GET',
+             url : BaseUrl+'/api/authorPosts/'+username
+         })
+         .success(function(data){             
+               promise.resolve(data);
+          })
+         .error(function(err){
+               alert(angular.toJson(err));
+          });
 
-          //@TODO get authors posts from route api/authorPosts/:username  from the rest api
          return promise.promise;
      };
 

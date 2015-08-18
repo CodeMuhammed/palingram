@@ -35,9 +35,7 @@
 				   <div class="col-xs-12 col-sm-11" style="padding:0;">
 				   	   <span style="color:#ccc; margin-right:1.5em; font-size:1.4em"><a>{{post.author}}</a> on {{post.date | date:'fullDate'}}
 				   	   </span><br />
-                       <span style="font-size:1.1em">
-				   	   	   Looking for a lazy Saturday recipe to whip up? Well we found it with this quick and simple recipe everyone will...
-				   	   </span>
+                       <span style="font-size:1.1em" ng-bind-html="post.bio"></span>
 				   	  
 				   </div>
 				</div>
@@ -55,6 +53,7 @@
 					<div class="clearfix"></div>
 					<hr />
 					<div class="tag-buttons">
+					   <button class="btn btn-primary btn-sm">{{post.views}} views</button>
 					   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
 					</div>
 					

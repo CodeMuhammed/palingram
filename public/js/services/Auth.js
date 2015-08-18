@@ -1,6 +1,6 @@
 angular.module('Auth' , ['User', 'Tags' , 'Posts'])
-   .constant('BaseUrl' , 'http://localhost:3000')
-   //.constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
+   //.constant('BaseUrl' , 'http://localhost:3000')
+   .constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
    .factory('Auth' , function($http , $q ,$state ,$rootScope ,  Posts , Tags , User , BaseUrl){
          var isSignedIn;
 
@@ -37,7 +37,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
                 promise.resolve('sign in done');
             })
             .error(function(err){
-                console.log(err);
+                promise.reject(err);
             });
             return promise.promise;
         }
@@ -61,24 +61,9 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
 
         function isAuth(){
             return isSignedIn;
-        }
+        };
 
-        //implement auto login for when page refreshes
-        signin().then(function(status){
-            Tags.set(User.get().tags_id).then(function(stats){
-                  Posts.set(Tags.get()).then(function(status){
-                      if($state.is('in.posts')){
-                           $rootScope.$broadcast('posts' , {});
-                        }
-                        else {
-                          $state.go('in.posts');
-                        }
-
-                 });
-            });
-        });
-
-         return {
+       return {
              signup : signup,
              signin : signin,
              logout : logout,

@@ -202,7 +202,7 @@ body{
           }
       }
       .active{
-           color:@brand-danger !important;
+           color:@brand-primary !important;
         }
    }
 }
@@ -243,6 +243,14 @@ body{
 .main-view-area{
    background: #F5F8FA;
    min-height:60em;
+   nav {
+      background:#f8f8f8;
+      border-bottom:2px solid #ccc; 
+      padding-right:2.1em !important;
+      @media (max-width: @screen-sm-max) {
+          padding-right:0 !important;
+      }
+   }
 }
 
 .posts-container{
@@ -417,13 +425,17 @@ body{
       }
   }
 
+  @media (max-width: @screen-sm-max) {
+      
+  }
+
 }
 
 .side-items{
      padding-right:0;
       .ad-box {
           background-color:#ccf;
-          min-height:20em;
+          height:20em;
           padding: .5em;
       }
       .suggestion{
@@ -439,6 +451,9 @@ body{
               height: 7em;
               background: #cce;
           }
+      }
+      @media (max-width: @screen-sm-max) {
+          padding-left:0;
       }
  }
 
@@ -544,7 +559,7 @@ body{
    }
     border-bottom:3px solid #ccc;
     padding:1em;
-    background:#eee;
+    background:#f8f8f8;
     border-radius: 0px;
     height:3.7em;
     position:fixed;
@@ -584,6 +599,25 @@ body{
         color: #555;
     }
 
+}
+
+.profile{
+    font-size:1.2em;
+    padding: 3em;
+    margin-top:80px;
+    border-top:10px solid @brand-primary;
+    box-shadow: .0em .3em .1em #ccc;
+    .bio{
+       margin-bottom:2em;
+       min-height:10em;
+       border:1px solid #ccc;
+       border-radius: 5px;
+    }
+    @media (max-width: @screen-sm-max) {
+       padding:0;
+       margin-top: 130px;
+       border-top:none;
+    }
 }
 
 //custom offcanvas .less a the bottom to prevent interference

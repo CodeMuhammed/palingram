@@ -55,7 +55,7 @@
 			</p>
 		</div>
 
-		<div class="col-xs-12">
+		<div class="col-xs-12" style="padding:0">
 			<div class="col-xs-12 comment-box" >
 	            <textarea class="form-control" placeholder="Comment on this article ..." ng-model="comment.body" style="border-radius:0;">
 	            </textarea>
@@ -120,16 +120,21 @@
 		</div>
 	</div>
 	<div class="col-sm-3 side-items">
-          <div class="col-xs-12 ad-box">
-          	   
+          <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
+          	   <h2>Place your ad here for free !!</h2>
+          	   <p>
+          	   	  Send your ad in the format<br>
+                  image url :: caption text :: category<br>
+                  to palingram@gmail.com
+          	   </p>
           </div>
           <div class="clearfix"></div>
 
           <hr />
 
-          <h3>
+          <h4>
           	 Related articles
-          </h3>
+          </h4>
 
           <hr />
 
@@ -146,28 +151,41 @@
           </div>
           
           <hr />
-          <div class="col-xs-12 ad-box">
-          	   
+          <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
+          	   <h2>Place your ad here for free !!</h2>
+          	   <p>
+          	   	  Send your ad in the format<br>
+                  image url :: caption text :: category<br>
+                  to palingram@gmail.com
+          	   </p>
           </div>
           <div class="clearfix"></div>
            <hr />
 
-          <h3>
-          	 By {{post.author}}
-          </h3>
+          <h4>
+          	 Latest from {{post.author}}
+          </h4>
 
           <hr />
-          <div class="col-xs-12 suggestion clearfix">
-          	  <div class="col-xs-6 img-div">
-          	  	
-          	  </div>
-          	  <div class="col-xs-6 text-b">
-          	  	
-          	  </div>
+         <div class="col-xs-12 suggestion clearfix" ng-repeat="item in authorPosts">
+          	   <a ng-click="viewPost(item)">
+	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
+	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
+	          	  	  <h4>{{item.title | limitTo : 40}}</h4>
+	          	  	  <h5 class="visible-xs">
+	          	  	  	  {{post.description}}
+	          	  	  </h5>
+	          	  </div>
+	           </a>
           </div>
           <hr />
-          <div class="col-xs-12 ad-box">
-          	   
+          <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
+          	   <h2>Place your ad here for free !!</h2>
+          	   <p>
+          	   	  Send your ad in the format<br>
+                  image url :: caption text :: category<br>
+                  to palingram@gmail.com
+          	   </p>
           </div>
 	</div>
 </div>

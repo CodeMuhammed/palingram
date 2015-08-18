@@ -6712,7 +6712,7 @@ fieldset[disabled] .transition #body button:hover.active {
   color: #d9534f !important;
 }
 .navbar li .active {
-  color: #d9534f !important;
+  color: #337ab7 !important;
 }
 .subnav {
   min-height: 4.2em;
@@ -6745,6 +6745,16 @@ fieldset[disabled] .transition #body button:hover.active {
 .main-view-area {
   background: #F5F8FA;
   min-height: 60em;
+}
+.main-view-area nav {
+  background: #f8f8f8;
+  border-bottom: 2px solid #ccc;
+  padding-right: 2.1em !important;
+}
+@media (max-width: 991px) {
+  .main-view-area nav {
+    padding-right: 0 !important;
+  }
 }
 .posts-container {
   margin-top: 57px;
@@ -6910,7 +6920,7 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .side-items .ad-box {
   background-color: #ccf;
-  min-height: 20em;
+  height: 20em;
   padding: .5em;
 }
 .side-items .suggestion {
@@ -6926,6 +6936,11 @@ fieldset[disabled] .transition #body button:hover.active {
   over-flow: hidden;
   height: 7em;
   background: #cce;
+}
+@media (max-width: 991px) {
+  .side-items {
+    padding-left: 0;
+  }
 }
 .tag-buttons .btn {
   margin-right: .5em;
@@ -7056,7 +7071,7 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
 .tool-set {
   border-bottom: 3px solid #ccc;
   padding: 1em;
-  background: #eee;
+  background: #f8f8f8;
   border-radius: 0px;
   height: 3.7em;
   position: fixed;
@@ -7096,6 +7111,26 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   padding-left: 15px;
   font-style: italic;
   color: #555;
+}
+.profile {
+  font-size: 1.2em;
+  padding: 3em;
+  margin-top: 80px;
+  border-top: 10px solid #337ab7;
+  box-shadow: .0em .3em .1em #ccc;
+}
+.profile .bio {
+  margin-bottom: 2em;
+  min-height: 10em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+@media (max-width: 991px) {
+  .profile {
+    padding: 0;
+    margin-top: 130px;
+    border-top: none;
+  }
 }
 /*
  * Style tweaks

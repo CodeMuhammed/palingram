@@ -4,20 +4,26 @@ angular.module('palingram')
    })
 
    .controller('previewController' , function($scope , $state , Posts , Comments , Auth){
-       Posts.previewArticle($state.params.post_id , Auth.isAuth()).then(function(data){
-           $scope.post = data;
-            Comments.get($scope.post.comments_id).then(function(comments){
-                 console.log(comments);
-                 $scope.comments = comments;
-            });
+        //implement auto login for when page refreshes
+        Auth.signin().then(function(status){
+            previewStart();
+        } , function(err){
+            previewStart();
+        });
+       function previewStart(){
+        $scope.auth = Auth.isAuth() == false || Auth.isAuth() == undefined ? false : true;
+         Posts.previewArticle($state.params.post_id , Auth.isAuth()).then(function(data){
+             $scope.post = data;
+              Comments.get($scope.post.comments_id).then(function(comments){
+                   console.log(comments);
+                   $scope.comments = comments;
+              });
+         });
 
-            $scope.auth = Auth.isAuth() == false || Auth.isAuth() == undefined ? false : true;
-
-       });
-
-       $scope.back = function(toState){
-          $state.go(toState);
-       };
+         $scope.back = function(toState){
+            $state.go(toState);
+         };
+       }
    })
 
    .controller('signupController' , function($scope , $state , Auth){
@@ -84,10 +90,25 @@ angular.module('palingram')
 
 
    //Logged in state
-   .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User){  
-        if(! Auth.isAuth()){
-             $state.go('out.signin');
-        }     
+   .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
+
+        //implement auto login for when page refreshes
+        Auth.signin().then(function(status){
+            Tags.set(User.get().tags_id).then(function(stats){
+                  Posts.set(Tags.get()).then(function(status){
+                      if($state.is('in.posts')){
+                           $rootScope.$broadcast('posts' , {});
+                        }
+                        else {
+                          $state.go('in.posts');
+                        }
+
+                 });
+            });
+        } , function(err){
+              $state.go('out.signin');
+        });
+   
         $scope.search = false; 
         $scope.nav = 'posts';
         
@@ -174,6 +195,7 @@ angular.module('palingram')
        $scope.posts = Posts.get();
        $scope.tags = Tags.get();
        $scope.sidebar = '';
+       $scope.user = User.get();
 
        $scope.viewPost = function(post){
             Tags.update(post.tags , User.get().tags_id).then(function(result){
@@ -295,8 +317,7 @@ angular.module('palingram')
 
             $scope.posts = Posts.get().slice(0 , 5);
             Posts.getAuthorPosts($scope.post.username).then(function(result){
-               // $scope.authorPosts = result;
-               alert(result);
+               $scope.authorPosts = result;
             });
             
 
@@ -495,7 +516,7 @@ angular.module('palingram')
             };
 
             //This takes care of socialshare button
-            $scope.link = 'www.palingram.com/#!/out/preview/'+$scope.post._id;
+            $scope.link = '\'www.palingram.com/#!/out/preview/\''+$scope.post._id;
             $scope.share = function(socialtype){
                  switch(socialtype){
                      case 'link': {
@@ -554,6 +575,12 @@ angular.module('palingram')
               }
            );
         };
+
+        $scope.save = function(){
+           User.update($scope.user).then(function(result){
+                alert(result);
+           });
+        }
         
    })
    
@@ -597,6 +624,8 @@ angular.module('palingram')
          //this sends post to the server
         $scope.save = function(){
            if(option == 'new'){
+             $scope.post.views = 0;
+             $scope.post.bio = User.get().bio;
              Posts.post($scope.post).then(function(data){
                 alert('success');
                 User.get().favourites.push(data._id);

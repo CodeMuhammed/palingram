@@ -1,13 +1,38 @@
-<div class="col-sm-offset-3 col-sm-6 article" style="padding-top: 3em;">
+<div class="col-sm-offset-3 col-sm-6 article profile" >
 	 <p>Total page views: {{user.pageViews}}</p>
+	 <hr>
 	 <p>Last viewed : {{user.lastViewed | date:'fullDate'}}</p>
-	 <p>Total ammount: NGN {{(user.pageViews*10)/100}}</p>
-	 <p>First name {{user.firstname}}</p>
-	 <p>Last name: {{user.lastname}}</p>
-	 <p>Email | username : {{user.username}}</p>
-	 <p>Password: {{'******'}}</p>
-	 <p>Profile image url : {{user.image}}</p>
+	  <hr>
 	 <p>Favourites : {{user.favourites.length}}</p>
-	 <p>Bio : {{user.bio}}</p>
-	<a ng-click="logout()">logout</a>
+	  <hr>
+	 <p>Total ammount: NGN {{(user.pageViews*10)/100}}</p>
+	  <hr>
+	 <p>First name {{user.firstname}}</p>
+	  
+	 <p>Last name: {{user.lastname}}</p>
+        <hr>
+	 <p>Email | username : {{user.username}}</p>
+	  <hr>
+	 <p>
+	 	Password: {{'******'}}
+	 </p>
+	  <hr>
+	 <p>
+	 	<form>
+	 		<label>Profile image url</label>
+            <input ng-model="user.image" class="form-control" placeholder="Enter link of image">
+         </form>
+	 </p>
+	  <hr>
+	 <p>
+	 	<form name="demo" style="background:#fff;" class="md-styles bio">
+	 		<label>Bio</label>
+            <div ng-model="user.bio" medium-editor options='{"placeholder": "Edit your bio here" , "buttons":["bold", "italic","underline", "anchor", "header1", "header2", "quote"]}'></div>
+         </form>
+	 </p>
+	  <hr>
+	 <div>
+	   <button class="btn btn-default btn-sm" ng-click="logout()">logout</button>
+	   <button class="btn btn-default btn-sm" ng-click="save()">save</button>
+     </div>
 </div>
