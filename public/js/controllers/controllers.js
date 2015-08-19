@@ -699,6 +699,7 @@ angular.module('palingram')
           else{
             $rootScope.$broadcast('loading:start' , {});
              $scope.post.bio = User.get().bio;
+             $scope.post.image = User.get().image;
              if(option == 'new'){
                $scope.post.views = 0;
                Posts.post($scope.post).then(function(data){
