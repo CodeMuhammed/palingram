@@ -6550,20 +6550,42 @@ button.close {
 body a {
   outline: none;
 }
+body .loader {
+  position: fixed;
+  min-height: 10em;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 2000000;
+  border-radius: 10px;
+  text-align: center;
+}
+body .loader i {
+  font-size: 3em;
+  color: #fff;
+}
+body .loader span {
+  color: #fff;
+}
 .homepage {
   padding: 0;
   margin: 0;
 }
 .homepage .navbar button {
-  padding: 1em 2em;
+  padding: 1em 3em;
   background: transparent;
   border: 3px solid;
-}
-.homepage .navbar button:first-child {
   margin-right: 1em;
+}
+.homepage .navbar button:last-child {
+  margin-right: 0;
+}
+@media (max-width: 768px) {
+  .homepage .navbar button:last-child {
+    margin-top: 2em;
+  }
 }
 .homepage .header {
   padding: 0;
+  padding-bottom: 6em;
   background: #337ab7;
 }
 .homepage .header .inner .text {
@@ -6572,18 +6594,18 @@ body a {
   text-shadow: 0.2em 0.2em #555555;
 }
 .homepage .header .inner .text h1 {
-  font-size: 6em;
+  font-size: 5em;
 }
 @media (max-width: 768px) {
   .homepage .header .inner .text h1 {
-    font-size: 4em;
+    font-size: 3em;
   }
 }
 .homepage .body {
   padding: 0;
 }
 .homepage .body .feature {
-  background: #a0c4e4;
+  background: #337ab7;
   border-bottom: 10px solid #ccc;
   margin-top: 0em;
   maargin-bottom: 2em;
@@ -6592,7 +6614,9 @@ body a {
 .homepage .body .feature .text {
   text-align: right;
   padding: .5em;
-  font-size: 4em;
+  font-size: 3em;
+  text-shadow: 0.1em 0.1em #555555;
+  color: #fff;
 }
 .homepage .body .feature .image {
   padding: .5em;

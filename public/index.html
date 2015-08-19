@@ -52,6 +52,10 @@
   </head>
 
   <body>
+     <div class="col-xs-12 col-sm-4 col-sm-offset-4 loader" ng-controller="loaderController" ng-show="loading">
+          <i class="icon fa fa-spinner fa-spin"></i><br>
+          <span>Loading please wait..</span>
+     </div>
      <ui-view></ui-view>
   </body>
 

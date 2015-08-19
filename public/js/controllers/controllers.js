@@ -1,10 +1,37 @@
 angular.module('palingram')
-  .controller('homepageController' , function($scope , Auth){
+  .controller('loaderController' , function($rootScope , $scope  , $timeout){
+       $scope.loading = false;
+      
+       $rootScope.$on('loading:start' , function(e , a){
+            $scope.loading = true;
+       });
+       
+        $rootScope.$on('loading:end' , function(e , a){
+            $timeout(function() {
+                $scope.loading = false;
+            }, 2000);
+       });
+
+  })
+
+  .controller('homepageController' , function($scope , $rootScope , $state , Auth , Tags , Posts , User){
        $scope.hello = 'out homepage controller says hello';
+       $scope.guestLogin = function(){
+           $rootScope.$broadcast('loading:start' , {});
+           Auth.signin({"username":"palingram@gmail.com" , "password":"0000"}).then(function(status){
+                Tags.set(User.get().tags_id).then(function(status){
+                      Posts.set(Tags.get()).then(function(status){
+                          $rootScope.$broadcast('loading:end' , {});
+                          $state.go('in.posts');
+                     });
+                });
+            });
+       };
    })
 
-   .controller('previewController' , function($scope , $state , Posts , Comments , Auth){
+   .controller('previewController' , function($scope , $rootScope ,  $state , Posts , Comments , Auth){
         //implement auto login for when page refreshes
+        $rootScope.$broadcast('loading:start' , {});
         Auth.signin().then(function(status){
             previewStart();
         } , function(err){
@@ -15,6 +42,7 @@ angular.module('palingram')
          Posts.previewArticle($state.params.post_id , Auth.isAuth()).then(function(data){
              $scope.post = data;
               Comments.get($scope.post.comments_id).then(function(comments){
+                   $rootScope.$broadcast('loading:end' , {});
                    console.log(comments);
                    $scope.comments = comments;
               });
@@ -26,24 +54,28 @@ angular.module('palingram')
        }
    })
 
-   .controller('signupController' , function($scope , $state , Auth){
+   .controller('signupController' , function($scope , $rootScope , $state , Auth){
        $scope.signup = function(newUser){
+            $rootScope.$broadcast('loading:start' , {});
             newUser.favourites = [];
             newUser.image = 'img/img.png';
             newUser.pageViews = 0;
             newUser.lastViewed = '';
             newUser.bio = 'Write about your self here';
             Auth.signup(newUser).then(function(){
+                $rootScope.$broadcast('loading:end' , {});
                 $state.go('out.transition');
             });
        }
    })
 
-   .controller('signinController' , function($scope , $state , Auth , Posts , Tags , User){
+   .controller('signinController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
        $scope.signin = function(credentials){
+          $rootScope.$broadcast('loading:start' , {});
            Auth.signin(credentials).then(function(status){
                 Tags.set(User.get().tags_id).then(function(status){
                       Posts.set(Tags.get()).then(function(status){
+                          $rootScope.$broadcast('loading:end' , {});
                           $state.go('in.posts');
                      });
                 });
@@ -51,13 +83,14 @@ angular.module('palingram')
        }
    })
 
-   .controller('transitionController' , function($scope , $state , Auth , Posts , Tags , User){
+   .controller('transitionController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
        
      Tags.queryAll().then(function(data){
            $scope.tags = data;
            $scope.selected = [];
 
            $scope.proceed = function(){
+               $rootScope.$broadcast('loading:start' , {});
                if($scope.selected.length==0){
                   $scope.selected = ['general'];
                }
@@ -66,6 +99,7 @@ angular.module('palingram')
                Tags.set($scope.selected).then(function(status){
                    alert(status);
                     Posts.set(Tags.get()).then(function(status){
+                        $rootScope.$broadcast('loading:end' , {});
                         $state.go('in.posts');
                    });
                 });
@@ -91,7 +125,7 @@ angular.module('palingram')
 
    //Logged in state
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
-
+        $rootScope.$broadcast('loading:start' , {});
         //implement auto login for when page refreshes
         Auth.signin().then(function(status){
             Tags.set(User.get().tags_id).then(function(stats){
@@ -99,10 +133,10 @@ angular.module('palingram')
                       if($state.is('in.posts')){
                            $rootScope.$broadcast('posts' , {});
                         }
-                        else {
-                          $state.go('in.posts');
-                        }
-
+                      else {
+                        $state.go('in.posts');
+                      }
+                      $rootScope.$broadcast('loading:end' , {});
                  });
             });
         } , function(err){
@@ -198,17 +232,21 @@ angular.module('palingram')
        $scope.user = User.get();
 
        $scope.viewPost = function(post){
+            $rootScope.$broadcast('loading:start' , {});
             Tags.update(post.tags , User.get().tags_id).then(function(result){
                 console.log(result);
                 $state.current.data.post = post;
+                $rootScope.$broadcast('loading:end' , {});
                 $state.go('in.posts.post' , {id : post._id});
             });
        };
 
        $scope.clearTags = function(){
+            $rootScope.$broadcast('loading:start' , {});
             $scope.tags = ['general'];
             Posts.set($scope.tags).then(
                 function(result){
+                    $rootScope.$broadcast('loading:end' , {});
                     $scope.posts = Posts.get();
                 },
                 function(err){
@@ -219,11 +257,13 @@ angular.module('palingram')
 
        $scope.addTag = function(newTag){
            if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
+                $rootScope.$broadcast('loading:start' , {});
                 $scope.tags.push(newTag);
                 $scope.newTag = '';
 
                 Posts.set($scope.tags).then(
                     function(result){
+                        $rootScope.$broadcast('loading:end' , {});
                         $scope.posts = Posts.get();
                     }
                 );
@@ -237,6 +277,7 @@ angular.module('palingram')
           var permitted = false;
 
           var refresh = function(){
+            $rootScope.$broadcast('loading:start' , {});
             Posts.set($scope.tags).then(
                   function(result){
                       $scope.posts = Posts.get();
@@ -244,6 +285,9 @@ angular.module('palingram')
                          Tags.set(['general']);
                          $scope.tags = Tags.get();
                          refresh();
+                      }
+                      else {
+                        $rootScope.$broadcast('loading:end' , {});
                       }
                   },
                   function(err){
@@ -279,10 +323,12 @@ angular.module('palingram')
 
        //
        $scope.$on('searchText' , function(e , a){
+          $rootScope.$broadcast('loading:start' , {});
           if(angular.isArray(a.query) && a.query[0]){
               $scope.tags = a.query;
               Posts.set($scope.tags).then(
                   function(result){
+                      $rootScope.$broadcast('loading:end' , {});
                       $scope.posts = Posts.get();
                   }
               );
@@ -294,14 +340,18 @@ angular.module('palingram')
 
        //
        $scope.$on('favourites' ,  function(e , a){
+          $rootScope.$broadcast('loading:start' , {});
           Posts.setFavs(User.get().favourites).then(function(data){
+               $rootScope.$broadcast('loading:end' , {});
                $scope.posts = data;
           });
        });
 
        $scope.$on('posts' ,  function(e , a){
+          $rootScope.$broadcast('loading:start' , {});
           $scope.posts = Posts.get();
           $scope.tags = Tags.get();
+          $rootScope.$broadcast('loading:end' , {});
        });
 
        $scope.$on('toggle:posts' ,  function(e , a){
@@ -310,17 +360,19 @@ angular.module('palingram')
 
    })
 
-   .controller('postController' , function($scope , $state ,$filter , Tags , Posts , User , Auth , Comments){
+   .controller('postController' , function($scope , $rootScope ,  $state ,$filter , Tags , Posts , User , Auth , Comments){
         if(Auth.isAuth()){
+            $rootScope.$broadcast('loading:start' , {});
             $scope.post = $state.current.data.post;
             $scope.owned = User.get().username==$scope.post.username;
 
             $scope.posts = Posts.get().slice(0 , 5);
             Posts.getAuthorPosts($scope.post.username).then(function(result){
                $scope.authorPosts = result;
+               $rootScope.$broadcast('loading:end' , {});
             });
             
-
+            $rootScope.$broadcast('loading:start' , {});
             $scope.comment = {
                 body : '',
                 by : User.get().firstname+' '+User.get().lastname,
@@ -335,6 +387,7 @@ angular.module('palingram')
 
             Comments.get($scope.post.comments_id).then(function(comments){
                  $scope.comments = comments;
+                 $rootScope.$broadcast('loading:end' , {});
             });
 
             //favourite handler
@@ -377,8 +430,9 @@ angular.module('palingram')
               };
 
               $scope.delete = function(){
+                  $rootScope.$broadcast('loading:start' , {});
                   Posts.deleteArticle($scope.post).then(function(status){
-                      alert(status);
+                      $rootScope.$broadcast('loading:end' , {});
                       $state.go('in.posts');
                   });
               };
@@ -388,27 +442,33 @@ angular.module('palingram')
                });
             
             //comment handler 
-            $scope.postComment = function(){
-
-                if($scope.comment.body.trim()  == ''){
-                    alert('you have to type your comment into the box first');
-                }
-                else{
-                    $scope.comment.date = Date.now();
-                    Comments.postComment(angular.copy($scope.comment)).then(function(status){
-                       alert(status);
-                       $scope.comment.body  = '';
-                    } , function(err){
-                         alert(err);
-                    });
+            $scope.postComment = function(){ 
+               if(User.get().firstname == 'guest'){
+                    alert('Sign up to comment on articles');
+               }
+               else{
+                  $rootScope.$broadcast('loading:start' , {});
+                  if($scope.comment.body.trim()  == ''){
+                      alert('you have to type your comment into the box first');
+                  }
+                  else{
+                      $scope.comment.date = Date.now();
+                      Comments.postComment(angular.copy($scope.comment)).then(function(status){
+                         $rootScope.$broadcast('loading:end' , {});
+                         $scope.comment.body  = '';
+                      } , function(err){
+                           alert(err);
+                      });
+                  }
                 }
             }; 
              
             $scope.deleteComment = function(comment){
+                $rootScope.$broadcast('loading:start' , {});
                 var isMyPost = User.get().username == comment.username;
                 if(isMyPost){
                      Comments.deleteComment(comment).then(function(status){
-                        alert(status);
+                        $rootScope.$broadcast('loading:end' , {});
                     });
                 }
                 else {
@@ -417,7 +477,7 @@ angular.module('palingram')
             };
 
             $scope.vote  = function(comment , count){
-
+                 $rootScope.$broadcast('loading:start' , {});
                  var permitted = false;
                  var temp = angular.copy(comment);
 
@@ -455,14 +515,15 @@ angular.module('palingram')
                          permitted = true;
                      }
                  }
-
-                 if(permitted){
+                 
+                 if(permitted && User.get().firstname != 'guest'){
                    Comments.updateComment(temp).then(function(status){
-                       alert(status);
+                       $rootScope.$broadcast('loading:end' , {});
                        var index = $scope.comments.indexOf(comment);
                        $scope.comments[index] = temp;
                    });
                  } else{
+                    $rootScope.$broadcast('loading:end' , {});
                     alert('not allowed');
                  }
                  
@@ -545,8 +606,9 @@ angular.module('palingram')
            };
 
            $scope.viewPost = function(post){
+                $rootScope.$broadcast('loading:start' , {});
                 Tags.update(post.tags , User.get().tags_id).then(function(result){
-                    console.log(result);
+                    $rootScope.$broadcast('loading:end' , {});
                     $scope.nextView = post;
                     $state.go('in.posts.post' , {id : post._id});
                 });
@@ -558,7 +620,7 @@ angular.module('palingram')
        }
    })
 
-   .controller('profileController' , function($scope ,$state, User  ,Auth){
+   .controller('profileController' , function($scope , $rootScope , $state, User  ,Auth){
        if(! Auth.isAuth()){
              $state.go('out.signin');
         }  
@@ -566,8 +628,10 @@ angular.module('palingram')
 
         //Logging out a user 
         $scope.logout = function(){
+            $rootScope.$broadcast('loading:start' , {});
             Auth.logout().then(
               function(status){
+                  $rootScope.$broadcast('loading:end' , {});
                   $state.go('out.homepage');
               } ,
               function(err){
@@ -577,9 +641,15 @@ angular.module('palingram')
         };
 
         $scope.save = function(){
-           User.update($scope.user).then(function(result){
-                alert(result);
-           });
+           if(User.get().firstname == 'guest'){
+               alert('log in to save your preferences');
+           }
+           else{
+             $rootScope.$broadcast('loading:start' , {});
+             User.update($scope.user).then(function(result){
+                  $rootScope.$broadcast('loading:end' , {});
+             });
+           }  
         }
         
    })
@@ -623,25 +693,29 @@ angular.module('palingram')
         
          //this sends post to the server
         $scope.save = function(){
-           if(option == 'new'){
-             $scope.post.views = 0;
-             $scope.post.bio = User.get().bio;
-             Posts.post($scope.post).then(function(data){
-                alert('success');
-                User.get().favourites.push(data._id);
-             }, function(err){
-                 alert('something went wrong');
-             });
-           }
-           else {
-              $scope.post.date = Date.now();
-              Posts.update($scope.post).then(function(result){
-                alert(result);
-             }, function(err){
-                 console.log(err);
-             });
-           } 
-        };
-
-
+          if(User.get().firstname == 'guest'){
+              alert('Log in to save your articles');
+          }
+          else{
+            $rootScope.$broadcast('loading:start' , {});
+             if(option == 'new'){
+               $scope.post.views = 0;
+               $scope.post.bio = User.get().bio;
+               Posts.post($scope.post).then(function(data){
+                  $rootScope.$broadcast('loading:end' , {});
+                  User.get().favourites.push(data._id);
+               }, function(err){
+                   alert('something went wrong');
+               });
+             }
+             else {
+                $scope.post.date = Date.now();
+                Posts.update($scope.post).then(function(result){
+                  $rootScope.$broadcast('loading:end' , {});
+               }, function(err){
+                   console.log(err);
+               });
+             } 
+        }
+      };
    });

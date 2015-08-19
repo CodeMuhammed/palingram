@@ -51,25 +51,50 @@
 
 
 body{
-  a{
-     outline:none;
-  }
+   a{
+      outline:none;
+   }
+   .loader {
+     position : fixed;
+     min-height: 10em;
+     background : hsla(0 , 0 , 0 , .7);
+     z-index:2000000;
+     border-radius:10px;
+     text-align:center;
+     i{
+        font-size: 3em;
+        color:#fff;
+     }
+     span{
+        color:#fff;
+     }
+   }
  }
 .homepage{
     padding:0; 
     margin:0;
   .navbar {
      button{
-        padding: 1em 2em;
+        padding: 1em 3em;
         background:transparent;
         border: 3px solid;
-         &:first-child{
-           margin-right:1em;  
+        margin-right:1em; 
+         &:last-child{
+            margin-right:0;
+         }
+     }
+
+     @media (max-width: @screen-sm) {
+         button{
+             &:last-child{
+                margin-top:2em;
+             }
          }
      }
   }
   .header{
      padding:0; 
+     padding-bottom:6em;
      background: @brand-primary;
      .inner{
         .text{
@@ -77,7 +102,7 @@ body{
            color:#fff;
            text-shadow: .2em .2em @gray;
            h1{
-              font-size: 6em;
+              font-size: 5em;
            }
         } 
      }
@@ -85,7 +110,7 @@ body{
          .inner{
              .text{
                 h1{
-                    font-size: 4em;
+                    font-size: 3em;
                 }
              }
          }
@@ -95,7 +120,7 @@ body{
   .body{
       padding:0;
      .feature{   
-         background:lighten(@brand-primary , 30%);
+         background:lighten(@brand-primary , 0%);
          border-bottom:10px solid #ccc;
          margin-top:0em;
          maargin-bottom:2em;
@@ -103,7 +128,9 @@ body{
            .text{
               text-align:right;
               padding : .5em;
-              font-size:4em; 
+              font-size:3em; 
+               text-shadow: .1em .1em @gray;
+              color:#fff;
            }
 
            .image{
