@@ -1,7 +1,7 @@
 <div class="container posts-container clearfix">
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
 
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas side-menu bs-sidebar hidden-print panel panel-default" role="complementary" data-offset-top="-100">
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas side-menu panel panel-default"  bs-affix data-offset-top="200" data-offset-bottom="300">
              <h3>Favourite Topics <br>
 			    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
 			 </h3>
@@ -43,7 +43,7 @@
 					<div class="col-xs-12 img-div" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
 						
 					</div>
-					<div class="col-xs-11 content">
+					<div class="col-xs-12 content">
 						<h3>{{post.title}}</h3>
 						<p>
 							{{post.description | limitTo : 90}}{{post.description.length>90? '...' : ''}}

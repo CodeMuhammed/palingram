@@ -56,10 +56,10 @@ body{
    }
    .loader {
      position : fixed;
-     min-height: 10em;
+     min-height: 5em;
      background : hsla(0 , 0 , 0 , .7);
      z-index:2000000;
-     border-radius:10px;
+     border-radius:0 0 10px 10px;
      text-align:center;
      i{
         font-size: 3em;
@@ -123,20 +123,23 @@ body{
          background:lighten(@brand-primary , 0%);
          border-bottom:10px solid #ccc;
          margin-top:0em;
-         maargin-bottom:2em;
+         margin-bottom:2em;
          padding:0;
            .text{
-              text-align:right;
+              border-right:1px solid darken(@brand-primary , 20%);
+              min-height: 10em;
+              text-align:center;
               padding : .5em;
               font-size:3em; 
-               text-shadow: .1em .1em @gray;
+               text-shadow: .05em .05em @gray;
               color:#fff;
            }
 
            .image{
               padding : .5em;
+              border-right:1px solid darken(@brand-success , 20%);
               background-color: #ccc;
-              height: 30em;
+              min-height: 30em;
            }
 
            &:hover{
@@ -147,6 +150,7 @@ body{
                margin-top:0;
                .text{
                   margin-bottom:1em;
+                  min-height:5em;
                }
            }
      }
@@ -208,8 +212,17 @@ body{
 
 }
 
-.navbar {
+nav {
+    background:#fff !important;
+    border-bottom:2px solid #ccc; 
+    padding-right:2.1em !important;
+    @media (max-width: @screen-sm-max) {
+        padding-right:0 !important;
+    }
+ }
 
+.navbar {
+   box-shadow : .0em .1em #ccc;
    .navbar-header{
      @media (max-width: @screen-sm) {
         a{
@@ -221,15 +234,15 @@ body{
       
       font-weight:bold;
       a{
-         .icon{
-            font-size:2em;
-         }
+         .icon{ 
+            font-size:2em !important;
+         } 
          &:hover{
             color:@brand-danger !important;
           }
       }
       .active{
-           color:@brand-primary !important;
+           border-top:5px solid @brand-primary;
         }
    }
 }
@@ -270,14 +283,6 @@ body{
 .main-view-area{
    background: #F5F8FA;
    min-height:60em;
-   nav {
-      background:#f8f8f8;
-      border-bottom:2px solid #ccc; 
-      padding-right:2.1em !important;
-      @media (max-width: @screen-sm-max) {
-          padding-right:0 !important;
-      }
-   }
 }
 
 .posts-container{
@@ -309,7 +314,8 @@ body{
    .panel-body{
      .img-div{
          min-height: 20em;
-         border:1px solid #f8f8f8;
+         border:1px solid #ccc;
+         border-radius: 5px;
      }
      .content {
         padding-left:0;
@@ -591,11 +597,12 @@ body{
     border-radius: 0px;
     height:3.7em;
     position:fixed;
-    top:57px; 
+    top:70px; 
     z-index:100002;
     @media (max-width: @screen-sm-max) {
         padding-top:.4em;
         width:100%;
+        top:57px;
         border-radius: 0px;
     }
 }
@@ -633,7 +640,6 @@ body{
     font-size:1.2em;
     padding: 3em;
     margin-top:80px;
-    border-top:10px solid @brand-primary;
     box-shadow: .0em .3em .1em #ccc;
     .bio{
        margin-bottom:2em;
@@ -642,7 +648,6 @@ body{
        border-radius: 5px;
     }
     @media (max-width: @screen-sm-max) {
-       padding:0;
        margin-top: 130px;
        border-top:none;
     }

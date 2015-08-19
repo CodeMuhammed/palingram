@@ -18,10 +18,10 @@ var palingramapi = 'https://palingramapi.herokuapp.com/api';
 
 
 //ONLINE MODE
-var BaseUrl = 'http://www.palingram.com';
+//var BaseUrl = 'http://www.palingram.com';
 
 //OFFLINE MODE
-//var BaseUrl = 'http://localhost:3002';
+var BaseUrl = 'http://localhost:3002';
 
 //Instantiate a new express app
 var app = express();
@@ -77,8 +77,8 @@ app.use(express.static(path.join(__dirname , 'public')));
 
 //configure router to use cookie-parser  ,body-parser 
 app.get('/allPosts' , function(req , res){ 
-	 console.log('gotten all');
-	 request.get(palingramapi+'/allPosts' , function(err , response , body){
+	 if(req.query._escaped_fragment_){
+  	 request.get(palingramapi+'/allPosts' , function(err , response , body){
          if(err){
               var all = require('fs').readFileSync('all.txt');
               res.render('all.ejs' , {posts:JSON.parse(all) , BaseUrl : BaseUrl});
@@ -86,7 +86,11 @@ app.get('/allPosts' , function(req , res){
          else {
          	res.render('all.ejs' , {posts:JSON.parse(body) , BaseUrl : BaseUrl});
          }
-	 });
+  	 });
+   }
+   else {
+     res.status(404).send('Not found!! ');
+   }
 });
 
 //Start the app

@@ -6552,10 +6552,10 @@ body a {
 }
 body .loader {
   position: fixed;
-  min-height: 10em;
+  min-height: 5em;
   background: rgba(0, 0, 0, 0.7);
   z-index: 2000000;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
   text-align: center;
 }
 body .loader i {
@@ -6608,20 +6608,23 @@ body .loader span {
   background: #337ab7;
   border-bottom: 10px solid #ccc;
   margin-top: 0em;
-  maargin-bottom: 2em;
+  margin-bottom: 2em;
   padding: 0;
 }
 .homepage .body .feature .text {
-  text-align: right;
+  border-right: 1px solid #1d4568;
+  min-height: 10em;
+  text-align: center;
   padding: .5em;
   font-size: 3em;
-  text-shadow: 0.1em 0.1em #555555;
+  text-shadow: 0.05em 0.05em #555555;
   color: #fff;
 }
 .homepage .body .feature .image {
   padding: .5em;
+  border-right: 1px solid #357935;
   background-color: #ccc;
-  height: 30em;
+  min-height: 30em;
 }
 .homepage .body .feature:hover {
   color: #337ab7;
@@ -6632,6 +6635,7 @@ body .loader span {
   }
   .homepage .body .feature .text {
     margin-bottom: 1em;
+    min-height: 5em;
   }
 }
 .homepage .footer {
@@ -6721,6 +6725,19 @@ fieldset[disabled] .transition #body button:hover.active {
   padding-top: 1em;
   border-top: 3px solid #ccc;
 }
+nav {
+  background: #fff !important;
+  border-bottom: 2px solid #ccc;
+  padding-right: 2.1em !important;
+}
+@media (max-width: 991px) {
+  nav {
+    padding-right: 0 !important;
+  }
+}
+.navbar {
+  box-shadow: .0em .1em #ccc;
+}
 @media (max-width: 768px) {
   .navbar .navbar-header a {
     padding-left: 0 !important;
@@ -6730,13 +6747,13 @@ fieldset[disabled] .transition #body button:hover.active {
   font-weight: bold;
 }
 .navbar li a .icon {
-  font-size: 2em;
+  font-size: 2em !important;
 }
 .navbar li a:hover {
   color: #d9534f !important;
 }
 .navbar li .active {
-  color: #337ab7 !important;
+  border-top: 5px solid #337ab7;
 }
 .subnav {
   min-height: 4.2em;
@@ -6770,16 +6787,6 @@ fieldset[disabled] .transition #body button:hover.active {
   background: #F5F8FA;
   min-height: 60em;
 }
-.main-view-area nav {
-  background: #f8f8f8;
-  border-bottom: 2px solid #ccc;
-  padding-right: 2.1em !important;
-}
-@media (max-width: 991px) {
-  .main-view-area nav {
-    padding-right: 0 !important;
-  }
-}
 .posts-container {
   margin-top: 57px;
   padding: 0;
@@ -6811,7 +6818,8 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .panel .panel-body .img-div {
   min-height: 20em;
-  border: 1px solid #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .panel .panel-body .content {
   padding-left: 0;
@@ -7100,7 +7108,7 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   border-radius: 0px;
   height: 3.7em;
   position: fixed;
-  top: 57px;
+  top: 70px;
   z-index: 100002;
 }
 .tool-set .pager {
@@ -7110,6 +7118,7 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   .tool-set {
     padding-top: .4em;
     width: 100%;
+    top: 57px;
     border-radius: 0px;
   }
 }
@@ -7141,7 +7150,6 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   font-size: 1.2em;
   padding: 3em;
   margin-top: 80px;
-  border-top: 10px solid #337ab7;
   box-shadow: .0em .3em .1em #ccc;
 }
 .profile .bio {
@@ -7152,7 +7160,6 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
 }
 @media (max-width: 991px) {
   .profile {
-    padding: 0;
     margin-top: 130px;
     border-top: none;
   }

@@ -125,24 +125,26 @@ angular.module('palingram')
 
    //Logged in state
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
-        $rootScope.$broadcast('loading:start' , {});
-        //implement auto login for when page refreshes
-        Auth.signin().then(function(status){
-            Tags.set(User.get().tags_id).then(function(stats){
-                  Posts.set(Tags.get()).then(function(status){
-                      if($state.is('in.posts')){
-                           $rootScope.$broadcast('posts' , {});
-                        }
-                      else {
-                        $state.go('in.posts');
-                      }
-                      $rootScope.$broadcast('loading:end' , {});
-                 });
+         //implement auto login for when page refreshes
+         if(! Auth.isAuth()){
+            $rootScope.$broadcast('loading:start' , {});
+            Auth.signin().then(function(status){
+                Tags.set(User.get().tags_id).then(function(stats){
+                      Posts.set(Tags.get()).then(function(status){
+                          $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
+                     });
+                });
+            } , function(err){
+                  Auth.signin({"username":"palingram@gmail.com" , "password":"0000"}).then(function(status){
+                      Tags.set(User.get().tags_id).then(function(status){
+                            Posts.set(Tags.get()).then(function(status){
+                                $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
+                           });
+                      });
+                  });
             });
-        } , function(err){
-              $state.go('out.signin');
-        });
-   
+         }
+       
         $scope.search = false; 
         $scope.nav = 'posts';
         
@@ -189,8 +191,9 @@ angular.module('palingram')
                 }
             } 
             else if(nav=='editor'){
-                $state.go('in.editor');
+                $state.go('in.editor' , {"id":"1"});
             }
+
             else if(nav=='profile'){
                 $state.go('in.profile');
             } 
@@ -202,166 +205,173 @@ angular.module('palingram')
             return $scope.nav==item;
         }
 
-         $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-             if($scope.nav == 'editor'){
-                toState.data = {
-                   "author": User.get().firstname + ' '+ User.get().lastname,
-                   "username":User.get().username,
-                   "title":"This First Post Title",
-                   "date": Date.now(),
-                   "coverImage" : 'img/cover.jpg',
-                   "image" : User.get().image,
-                   "description":"A brief description of what the post is about",
-                   "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
-                   "comments_id":"",
-                   "tags":Tags.get()
-                 }; 
-               }
-           });
-
    })
 
    .controller('postsController' , function($scope ,$rootScope , $state , Tags  ,Posts , User, Auth){
-       if(! Auth.isAuth()){
-           $state.go('out.signin');
-       }  
+         
+         //
+         $scope.$on('loading:end' , function(e , a){
+             if(a.action == 'signedIn'){
+                  next();
+             }
+         });
 
-       $scope.posts = Posts.get();
-       $scope.tags = Tags.get();
-       $scope.sidebar = '';
-       $scope.user = User.get();
-
-       $scope.viewPost = function(post){
+         $scope.$on('favourites' ,  function(e , a){
             $rootScope.$broadcast('loading:start' , {});
-            Tags.update(post.tags , User.get().tags_id).then(function(result){
-                console.log(result);
-                $state.current.data.post = post;
-                $rootScope.$broadcast('loading:end' , {});
-                $state.go('in.posts.post' , {id : post._id});
+            Posts.setFavs(User.get().favourites).then(function(data){
+                 $rootScope.$broadcast('loading:end' , {});
+                 $scope.posts = data;
             });
-       };
+         });
 
-       $scope.clearTags = function(){
+         $scope.$on('posts' ,  function(e , a){
             $rootScope.$broadcast('loading:start' , {});
-            $scope.tags = ['general'];
-            Posts.set($scope.tags).then(
-                function(result){
-                    $rootScope.$broadcast('loading:end' , {});
-                    $scope.posts = Posts.get();
-                },
-                function(err){
-                    alert(err);
-                }
-            );
-       };
+            $scope.posts = Posts.get();
+            $scope.tags = Tags.get();
+            $rootScope.$broadcast('loading:end' , {});
+         });
 
-       $scope.addTag = function(newTag){
-           if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
+         $scope.$on('toggle:posts' ,  function(e , a){
+            toggleSidebar();
+         });
+
+
+        if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
+             next();
+        }
+        
+        function next(){
+           $scope.posts = Posts.get();
+           $scope.tags = Tags.get();
+           $scope.sidebar = '';
+           $scope.user = User.get();
+
+           $scope.viewPost = function(post){
                 $rootScope.$broadcast('loading:start' , {});
-                $scope.tags.push(newTag);
-                $scope.newTag = '';
+                Tags.update(post.tags , User.get().tags_id).then(function(result){
+                    console.log(result);
+                    $state.current.data.post = post;
+                    $rootScope.$broadcast('loading:end' , {});
+                    $state.go('in.posts.post' , {id : post._id});
+                });
+           };
 
+           $scope.clearTags = function(){
+                $rootScope.$broadcast('loading:start' , {});
+                $scope.tags = ['general'];
                 Posts.set($scope.tags).then(
                     function(result){
                         $rootScope.$broadcast('loading:end' , {});
                         $scope.posts = Posts.get();
+                    },
+                    function(err){
+                        alert(err);
                     }
                 );
-           }
-           else{
-              alert('tag not valid either the limit of ten tags has reached or the tag already exists');
-           }
-       };
+           };
 
-       $scope.deleteTag = function(tag){
-          var permitted = false;
+           $scope.addTag = function(newTag){
+               if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
+                    $rootScope.$broadcast('loading:start' , {});
+                    $scope.tags.push(newTag);
+                    $scope.newTag = '';
 
-          var refresh = function(){
-            $rootScope.$broadcast('loading:start' , {});
-            Posts.set($scope.tags).then(
-                  function(result){
-                      $scope.posts = Posts.get();
-                      if($scope.posts.length==0){
-                         Tags.set(['general']);
-                         $scope.tags = Tags.get();
+                    Posts.set($scope.tags).then(
+                        function(result){
+                            $rootScope.$broadcast('loading:end' , {});
+                            $scope.posts = Posts.get();
+                        }
+                    );
+               }
+               else{
+                  alert('tag not valid either the limit of ten tags has reached or the tag already exists');
+               }
+           };
+
+           $scope.deleteTag = function(tag){
+              var permitted = false;
+
+              var refresh = function(){
+                $rootScope.$broadcast('loading:start' , {});
+                Posts.set($scope.tags).then(
+                      function(result){
+                          $scope.posts = Posts.get();
+                          if($scope.posts.length==0){
+                             Tags.set(['general']);
+                             $scope.tags = Tags.get();
+                             refresh();
+                          }
+                          else {
+                            $rootScope.$broadcast('loading:end' , {});
+                          }
+                      },
+                      function(err){
+                          alert(err);
+                      }
+                  );
+              };
+
+              if(tag){
+                  if($scope.tags.length > 1){
+                    $scope.tags.splice($scope.tags.indexOf(tag) , 1);
+                    refresh();
+                  } 
+                  else{
+                      if(tag == 'general'){
+                          alert('already showing all posts');
+                      }
+                      else{
+                         $scope.tags[0] = 'general';
                          refresh();
                       }
-                      else {
-                        $rootScope.$broadcast('loading:end' , {});
-                      }
-                  },
-                  function(err){
-                      alert(err);
-                  }
-              );
-          };
-
-          if(tag){
-              if($scope.tags.length > 1){
-                $scope.tags.splice($scope.tags.indexOf(tag) , 1);
-                refresh();
-              } 
-              else{
-                  if(tag == 'general'){
-                      alert('already showing all posts');
-                  }
-                  else{
-                     $scope.tags[0] = 'general';
-                     refresh();
                   }
               }
-          }
-       };
-      
-       var toggleSidebar = function(){
-           $scope.sidebar == '' ? $scope.sidebar = 'active' : $scope.sidebar = '';
-       }
-      //
-      $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-          toState.data.post = fromState.data.post;
-      });
-
-       //
-       $scope.$on('searchText' , function(e , a){
-          $rootScope.$broadcast('loading:start' , {});
-          if(angular.isArray(a.query) && a.query[0]){
-              $scope.tags = a.query;
-              Posts.set($scope.tags).then(
-                  function(result){
-                      $rootScope.$broadcast('loading:end' , {});
-                      $scope.posts = Posts.get();
-                  }
-              );
-          }
-          else {
-            alert('enter a valid search string');
-        }
-       });
-
-       //
-       $scope.$on('favourites' ,  function(e , a){
-          $rootScope.$broadcast('loading:start' , {});
-          Posts.setFavs(User.get().favourites).then(function(data){
-               $rootScope.$broadcast('loading:end' , {});
-               $scope.posts = data;
+           };
+          
+           var toggleSidebar = function(){
+               $scope.sidebar == '' ? $scope.sidebar = 'active' : $scope.sidebar = '';
+           }
+          //
+          $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
+              toState.data.post = fromState.data.post;
           });
-       });
 
-       $scope.$on('posts' ,  function(e , a){
-          $rootScope.$broadcast('loading:start' , {});
-          $scope.posts = Posts.get();
-          $scope.tags = Tags.get();
-          $rootScope.$broadcast('loading:end' , {});
-       });
+           //
+           $scope.$on('searchText' , function(e , a){
+              $rootScope.$broadcast('loading:start' , {});
+              if(angular.isArray(a.query) && a.query[0]){
+                  $scope.tags = a.query;
+                  Posts.set($scope.tags).then(
+                      function(result){
+                          $rootScope.$broadcast('loading:end' , {});
+                          $scope.posts = Posts.get();
+                      }
+                  );
+              }
+              else {
+                alert('enter a valid search string');
+              }
+           });
 
-       $scope.$on('toggle:posts' ,  function(e , a){
-          toggleSidebar();
-       });
-
+        } //next function ends here
    })
 
-   .controller('postController' , function($scope , $rootScope ,  $state ,$filter , Tags , Posts , User , Auth , Comments){
-        if(Auth.isAuth()){
+   .controller('postController' , function($scope , $rootScope ,$stateParams ,  $state ,$filter , Tags , Posts , User , Auth , Comments){
+        //
+        $scope.$on('loading:end' , function(e , a){
+             if(a.action == 'signedIn'){
+                 Posts.previewArticle($state.params.id , Auth.isAuth()).then(function(data){
+                   $state.current.data.post = data;
+                   next();
+                 });
+             }
+        });
+
+        if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
+             next();
+        }
+        
+        function next(){
             $rootScope.$broadcast('loading:start' , {});
             $scope.post = $state.current.data.post;
             $scope.owned = User.get().username==$scope.post.username;
@@ -406,7 +416,7 @@ angular.module('palingram')
                      User.get().favourites.push($scope.post._id);
                  }
                  
-                 if(permitted){
+                 if(permitted && User.get().firstname != 'guest'){
                     User.update(User.get()).then(function(result){
                          Posts.setFavs(User.get().favourites , true).then(function(result){
                          });
@@ -426,7 +436,7 @@ angular.module('palingram')
 
              //edit handler
              $scope.edit = function(){
-                  $state.go('in.editor');
+                  $state.go('in.editor' ,  {"id":$scope.post._id});
               };
 
               $scope.delete = function(){
@@ -437,10 +447,6 @@ angular.module('palingram')
                   });
               };
 
-               $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-                  toState.data = angular.copy($scope.post);
-               });
-            
             //comment handler 
             $scope.postComment = function(){ 
                if(User.get().firstname == 'guest'){
@@ -577,7 +583,7 @@ angular.module('palingram')
             };
 
             //This takes care of socialshare button
-            $scope.link = '\'www.palingram.com/#!/out/preview/\''+$scope.post._id;
+            $scope.link = 'www.palingram.com/#!/in/posts/'+$scope.post._id;
             $scope.share = function(socialtype){
                  switch(socialtype){
                      case 'link': {
@@ -591,18 +597,8 @@ angular.module('palingram')
             };
 
            //This computes and return the text to be shared
-           $scope.shareText = function(network){
-                switch(network){
-                     case 'twitter': {
-                         return  '@palingram'+' '+$scope.post.description.substr(0 , 100)+' '+$scope.link;
-                     }
-                     case 'facebook': {
-                         return $scope.post.description+' '+$scope.link;
-                     }
-                     default:{
-                        break;
-                     }
-                 }
+           $scope.shareText = function(){
+                return $scope.post.description+' '+$scope.link;
            };
 
            $scope.viewPost = function(post){
@@ -613,110 +609,149 @@ angular.module('palingram')
                     $state.go('in.posts.post' , {id : post._id});
                 });
            };
-
-           $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
-               toState.data.post = $scope.nextView;
-           });
        }
    })
 
    .controller('profileController' , function($scope , $rootScope , $state, User  ,Auth){
-       if(! Auth.isAuth()){
-             $state.go('out.signin');
-        }  
-        $scope.user =User.get();
+         //
+        $scope.$on('loading:end' , function(e , a){
+             if(a.action == 'signedIn'){
+                next();
+             }
+        });
 
-        //Logging out a user 
-        $scope.logout = function(){
-            $rootScope.$broadcast('loading:start' , {});
-            Auth.logout().then(
-              function(status){
-                  $rootScope.$broadcast('loading:end' , {});
-                  $state.go('out.homepage');
-              } ,
-              function(err){
-                  alert('something went wrong while doing logout');
-              }
-           );
-        };
-
-        $scope.save = function(){
-           if(User.get().firstname == 'guest'){
-               alert('log in to save your preferences');
-           }
-           else{
-             $rootScope.$broadcast('loading:start' , {});
-             User.update($scope.user).then(function(result){
-                  $rootScope.$broadcast('loading:end' , {});
-             });
-           }  
+        if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
+             next();
         }
-        
+
+        function next(){ 
+            $scope.user =User.get();
+
+            //Logging out a user 
+            $scope.logout = function(){
+                $rootScope.$broadcast('loading:start' , {});
+                Auth.logout().then(
+                  function(status){
+                      $rootScope.$broadcast('loading:end' , {});
+                      $state.go('out.homepage');
+                  } ,
+                  function(err){
+                      alert('something went wrong while doing logout');
+                  }
+               );
+            };
+
+            $scope.save = function(){
+               if(User.get().firstname == 'guest'){
+                   alert('log in to save your preferences');
+               }
+               else{
+                 $rootScope.$broadcast('loading:start' , {});
+                 User.update($scope.user).then(function(result){
+                      $rootScope.$broadcast('loading:end' , {});
+                 });
+               }  
+            }
+         }   
    })
    
-   .controller('editorController' , function($scope ,$rootScope ,$state , User , Posts){
-
-         $scope.post = $state.current.data;
-         $scope.tags = $scope.post.tags;
-         var option = $scope.post.comments_id == '' ? 'new' : 'old';
-
-         $scope.clearTags = function(){
-              $scope.tags = [];
-         };
-
-         $scope.addTag = function(newTag){
-             if(newTag && $scope.tags.length < 7 && $scope.tags.indexOf(newTag) < 0){
-                  $scope.tags.push(newTag);
-                  $scope.newTag = '';
-             }
-         };
-
-         $scope.deleteTag = function(tag){
-            if(tag){
-              var index = $scope.tags.indexOf(tag);
-              $scope.tags.splice(index , 1);
+   .controller('editorController' , function($scope ,$rootScope ,$state , $stateParams , User , Posts , Auth , Tags){ 
+         function initData(){
+             if($stateParams.id == '1' && Auth.isAuth()){
+               $state.current.data =  {
+                   "author": User.get().firstname + ' '+ User.get().lastname,
+                   "username":User.get().username,
+                   "title":"This First Post Title",
+                   "date": Date.now(),
+                   "coverImage" : 'img/cover.jpg',
+                   "image" : User.get().image,
+                   "description":"A brief description of what the post is about",
+                   "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
+                   "comments_id":"",
+                   "tags":Tags.get()
+               }; 
+               next();
             }
-         };
-
-         $scope.edit = false;
-         $scope.cancelEdit = function(){
-            $state.go('in.posts');
-         };
-
-         $scope.next = function(){
-              $scope.edit = true;
-         }
-
-        $scope.back = function(){
-            $scope.edit = false;   
-        }
-        
-         //this sends post to the server
-        $scope.save = function(){
-          if(User.get().firstname == 'guest'){
-              alert('Log in to save your articles');
-          }
-          else{
-            $rootScope.$broadcast('loading:start' , {});
-             $scope.post.bio = User.get().bio;
-             $scope.post.image = User.get().image;
-             if(option == 'new'){
-               $scope.post.views = 0;
-               Posts.post($scope.post).then(function(data){
-                  $rootScope.$broadcast('loading:end' , {});
-                  User.get().favourites.push(data._id);
-               }, function(err){
-                   alert('something went wrong');
+            else if($stateParams.id.length == '24'){
+                Posts.previewArticle($state.params.id , Auth.isAuth()).then(function(data){
+                   $state.current.data = data;
+                   if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
+                         next();
+                    }
                });
+            }
+        }  initData();
+
+        //
+        $scope.$on('loading:end' , function(e , a){
+             if(a.action == 'signedIn'){
+                 initData();
              }
-             else {
-                $scope.post.date = Date.now();
-                Posts.update($scope.post).then(function(result){
-                  $rootScope.$broadcast('loading:end' , {});
-               }, function(err){
-                   console.log(err);
-               });
-             } 
+        });
+
+        function next(){
+             $scope.post = $state.current.data;
+             $scope.tags = $scope.post.tags;
+             var option = $scope.post.comments_id == '' ? 'new' : 'old';
+
+             $scope.clearTags = function(){
+                  $scope.tags = [];
+             };
+
+             $scope.addTag = function(newTag){
+                 if(newTag && $scope.tags.length < 7 && $scope.tags.indexOf(newTag) < 0){
+                      $scope.tags.push(newTag);
+                      $scope.newTag = '';
+                 }
+             };
+
+             $scope.deleteTag = function(tag){
+                if(tag){
+                  var index = $scope.tags.indexOf(tag);
+                  $scope.tags.splice(index , 1);
+                }
+             };
+
+             $scope.edit = false;
+             $scope.cancelEdit = function(){
+                $state.go('in.posts');
+             };
+
+             $scope.next = function(){
+                  $scope.edit = true;
+             }
+
+            $scope.back = function(){
+                $scope.edit = false;   
+            }
+            
+             //this sends post to the server
+            $scope.save = function(){
+              if(User.get().firstname == 'guest'){
+                  alert('Log in to save your articles');
+              }
+              else{
+                $rootScope.$broadcast('loading:start' , {});
+                 $scope.post.bio = User.get().bio;
+                 $scope.post.image = User.get().image;
+                 if(option == 'new'){
+                   $scope.post.views = 0;
+                   Posts.post($scope.post).then(function(data){
+                      $rootScope.$broadcast('loading:end' , {});
+                      User.get().favourites.push(data._id);
+                   }, function(err){
+                       alert('something went wrong');
+                   });
+                 }
+                 else {
+                    $scope.post.date = Date.now();
+                    Posts.update($scope.post).then(function(result){
+                      $rootScope.$broadcast('loading:end' , {});
+                   }, function(err){
+                       console.log(err);
+                   });
+                 } 
+            }
+          };
         }
-      };
    });

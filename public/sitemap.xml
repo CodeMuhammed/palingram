@@ -19,7 +19,12 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.palingram.com/allPosts</loc>
+  <loc>http://www.palingram.com/allPosts/#!</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.palingram.com/allPosts/?_escaped_fragment_=/</loc>
   <changefreq>always</changefreq>
   <priority>1.00</priority>
 </url>

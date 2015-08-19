@@ -1,4 +1,4 @@
-angular.module('palingram' , ['ngResource' ,'ngRoute' , 'ngSanitize', 'ngAnimate', 'mgcrea.ngStrap' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
+angular.module('palingram' , ['ngResource' ,'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 // cors configurations to enable consuming the rest api
 .config(function($httpProvider){
    $httpProvider.defaults.useXDomain = true;
@@ -89,7 +89,7 @@ angular.module('palingram' , ['ngResource' ,'ngRoute' , 'ngSanitize', 'ngAnimate
          data :{}  
      })
     .state('in.editor' , {
-         url : '/editor',
+         url : '/editor/:id',
          views : {
             'inSpace@in' : {
                templateUrl : 'views/in.editor.tpl.html',
