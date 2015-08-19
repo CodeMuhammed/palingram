@@ -210,7 +210,7 @@ angular.module('palingram')
                    "title":"This First Post Title",
                    "date": Date.now(),
                    "coverImage" : 'img/cover.jpg',
-                   "image" : 'img/img.png',
+                   "image" : User.get().image,
                    "description":"A brief description of what the post is about",
                    "body":"Lorem ipsun is the very best way if addressinnng werer ftroo mrtilllik just premore juwwer awasfff ghill jilll eueuhhfidn jdnggd",
                    "comments_id":"",
@@ -698,9 +698,9 @@ angular.module('palingram')
           }
           else{
             $rootScope.$broadcast('loading:start' , {});
+             $scope.post.bio = User.get().bio;
              if(option == 'new'){
                $scope.post.views = 0;
-               $scope.post.bio = User.get().bio;
                Posts.post($scope.post).then(function(data){
                   $rootScope.$broadcast('loading:end' , {});
                   User.get().favourites.push(data._id);
