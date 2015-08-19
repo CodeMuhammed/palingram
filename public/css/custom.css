@@ -6811,6 +6811,7 @@ fieldset[disabled] .transition #body button:hover.active {
 }
 .panel .panel-body .img-div {
   min-height: 20em;
+  border: 1px solid #f8f8f8;
 }
 .panel .panel-body .content {
   padding-left: 0;
