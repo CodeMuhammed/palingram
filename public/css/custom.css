@@ -6832,6 +6832,9 @@ nav {
   font-size: 1.7em;
   color: #555555;
 }
+.panel:hover {
+  background: #f8f8f8;
+}
 .article {
   background: #fff;
   padding-left: 0;

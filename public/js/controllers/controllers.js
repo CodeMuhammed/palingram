@@ -199,7 +199,7 @@ angular.module('palingram')
             } 
         };
 
-
+        
 
         $scope.active = function(item){
             return $scope.nav==item;
@@ -234,7 +234,9 @@ angular.module('palingram')
          $scope.$on('toggle:posts' ,  function(e , a){
             toggleSidebar();
          });
-
+         var toggleSidebar = function(){
+               $scope.sidebar == '' ? $scope.sidebar = 'active' : $scope.sidebar = '';
+         }
 
         if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
              next();
@@ -360,17 +362,25 @@ angular.module('palingram')
         //
         $scope.$on('loading:end' , function(e , a){
              if(a.action == 'signedIn'){
-                 Posts.previewArticle($state.params.id , Auth.isAuth()).then(function(data){
-                   $state.current.data.post = data;
-                   next();
-                 });
+                 init();
              }
         });
-
-        if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
-             next();
+        
+        if($state.current.data.post == undefined){
+            init();
         }
         
+        else if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
+             init();
+        }
+        
+        function init(){
+            Posts.previewArticle($state.params.id , Auth.isAuth()).then(function(data){
+               $state.current.data.post = data;
+               next();
+            });
+        }
+
         function next(){
             $rootScope.$broadcast('loading:start' , {});
             $scope.post = $state.current.data.post;
@@ -602,10 +612,7 @@ angular.module('palingram')
            };
 
            $scope.viewPost = function(post){
-                $rootScope.$broadcast('loading:start' , {});
                 Tags.update(post.tags , User.get().tags_id).then(function(result){
-                    $rootScope.$broadcast('loading:end' , {});
-                    $scope.nextView = post;
                     $state.go('in.posts.post' , {id : post._id});
                 });
            };
