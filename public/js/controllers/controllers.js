@@ -366,11 +366,8 @@ angular.module('palingram')
              }
         });
         
-        if($state.current.data.post == undefined){
-            init();
-        }
-
-        else if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
+        
+        if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
              init();
         }
         
