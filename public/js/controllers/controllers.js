@@ -369,7 +369,7 @@ angular.module('palingram')
         if($state.current.data.post == undefined){
             init();
         }
-        
+
         else if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
              init();
         }
@@ -608,7 +608,7 @@ angular.module('palingram')
 
            //This computes and return the text to be shared
            $scope.shareText = function(){
-                return $scope.post.description+' '+$scope.link;
+                return $scope.post.description.substr(0 , 100)+' '+$scope.link;
            };
 
            $scope.viewPost = function(post){
