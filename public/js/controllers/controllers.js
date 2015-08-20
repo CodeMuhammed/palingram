@@ -62,6 +62,7 @@ angular.module('palingram')
             newUser.pageViews = 0;
             newUser.lastViewed = '';
             newUser.bio = 'Write about your self here';
+            newUser.emailVerified = false;
             Auth.signup(newUser).then(function(){
                 $rootScope.$broadcast('loading:end' , {});
                 $state.go('out.transition');
@@ -97,10 +98,17 @@ angular.module('palingram')
                 
 
                Tags.set($scope.selected).then(function(status){
-                   alert(status);
                     Posts.set(Tags.get()).then(function(status){
                         $rootScope.$broadcast('loading:end' , {});
-                        $state.go('in.posts');
+                        Auth.sendEmail('emailVerification').then(function(status){
+                             var temp = User.get();
+                             temp.emailVerified = true;
+                             User.set(temp);
+                             $state.go('in.posts');
+                        } , function(err){
+                             $state.go('in.posts');
+                        });
+                        
                    });
                 });
             }
@@ -132,6 +140,7 @@ angular.module('palingram')
                 Tags.set(User.get().tags_id).then(function(stats){
                       Posts.set(Tags.get()).then(function(status){
                           $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
+                          next();
                      });
                 });
             } , function(err){
@@ -139,70 +148,95 @@ angular.module('palingram')
                       Tags.set(User.get().tags_id).then(function(status){
                             Posts.set(Tags.get()).then(function(status){
                                 $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
+                                next();
                            });
                       });
                   });
             });
+         } else {
+            next();
          }
-       
-        $scope.search = false; 
-        $scope.nav = 'posts';
-        
-        $scope.toggleSearch = function(){
-             $scope.search =! $scope.search ;
-        }
 
-        $scope.searchForTopic = function(searchText){
-            var query = searchText.split(' ');
-            newArr = [];
-            angular.forEach(query , function(item){
-                item = item.trim();
-                if(! item==''){
-                     newArr.push(item);
-                }
-            });
-
-            $rootScope.$broadcast('searchText' , {query : newArr});
-        };
-        
-        
-
-        $scope.toggle = function(view){
-            $rootScope.$broadcast('toggle:'+ $scope.nav , {});
-        }
-
-        $scope.goto = function(nav){
-            $scope.nav = nav;
-            if(nav=='favourites'){
-                if($state.is('in.posts')){
-                   $rootScope.$broadcast('favourites' , {});
-                }
-                else {
-                   $state.go('in.posts');
-                }
-               
-            }
-            else if(nav=='posts'){
-                if($state.is('in.posts')){
-                   $rootScope.$broadcast('posts' , {});
-                }
-                else {
-                  $state.go('in.posts');
-                }
-            } 
-            else if(nav=='editor'){
-                $state.go('in.editor' , {"id":"1"});
+        function next(){   
+            $scope.search = false; 
+            $scope.nav = 'posts';
+            
+            $scope.toggleSearch = function(){
+                 $scope.search =! $scope.search ;
             }
 
-            else if(nav=='profile'){
-                $state.go('in.profile');
-            } 
-        };
+            $scope.searchForTopic = function(searchText){
+                var query = searchText.split(' ');
+                newArr = [];
+                angular.forEach(query , function(item){
+                    item = item.trim();
+                    if(! item==''){
+                         newArr.push(item);
+                    }
+                });
 
+                $rootScope.$broadcast('searchText' , {query : newArr});
+            };
         
+            if(Auth.isAuth() && User.get().firstname != 'guest' &&  User.get().emailVerified == false){
+               $scope.alert = {
+                  "visible":true, 
+                  "message":"Please verify your email by clicking the link we sent to your mailbox"
+               };
+            }
+              
 
-        $scope.active = function(item){
-            return $scope.nav==item;
+            $scope.closeAlert = function(){
+                $scope.alert.visible = false;
+            };
+
+            $scope.sendEmail = function(){
+                 Auth.sendEmail('emailVerification').then(function(status){
+                     $scope.alert.visible = true;
+                     $scope.alert.message = status;
+                 } , function(err){
+                     $scope.alert.visible = true;
+                     $scope.alert.message = err;
+                 });
+            };
+
+            $scope.toggle = function(view){
+                $rootScope.$broadcast('toggle:'+ $scope.nav , {});
+            }
+
+            $scope.goto = function(nav){
+                $scope.nav = nav;
+                if(nav=='favourites'){
+                    if($state.is('in.posts')){
+                       $rootScope.$broadcast('favourites' , {});
+                    }
+                    else {
+                       $state.go('in.posts');
+                    }
+                   
+                }
+                else if(nav=='posts'){
+                    if($state.is('in.posts')){
+                       $rootScope.$broadcast('posts' , {});
+                    }
+                    else {
+                      $state.go('in.posts');
+                    }
+                } 
+                else if(nav=='editor'){
+                    $state.go('in.editor' , {"id":"1"});
+                }
+
+                else if(nav=='profile'){
+                    $state.go('in.profile');
+                } 
+            };
+
+            
+
+            $scope.active = function(item){
+                return $scope.nav==item;
+            }
         }
 
    })

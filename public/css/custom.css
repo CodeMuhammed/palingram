@@ -6594,7 +6594,7 @@ body .loader span {
   text-shadow: 0.2em 0.2em #555555;
 }
 .homepage .header .inner .text h1 {
-  font-size: 5em;
+  font-size: 4em;
 }
 @media (max-width: 768px) {
   .homepage .header .inner .text h1 {
@@ -6608,15 +6608,14 @@ body .loader span {
   background: #337ab7;
   border-bottom: 10px solid #ccc;
   margin-top: 0em;
-  margin-bottom: 2em;
   padding: 0;
 }
 .homepage .body .feature .text {
   border-right: 1px solid #1d4568;
   min-height: 10em;
-  text-align: center;
+  text-align: left;
   padding: .5em;
-  font-size: 3em;
+  font-size: 2em;
   text-shadow: 0.05em 0.05em #555555;
   color: #fff;
 }
@@ -6728,7 +6727,6 @@ fieldset[disabled] .transition #body button:hover.active {
 nav {
   background: #fff !important;
   border-bottom: 2px solid #ccc;
-  padding-right: 2.1em !important;
 }
 @media (max-width: 991px) {
   nav {

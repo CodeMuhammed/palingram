@@ -59,6 +59,23 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
             return promise.promise;
         }
 
+        function sendEmail (action) {
+            var promise = $q.defer();
+            $http({
+                method : 'POST',
+                url : BaseUrl+'/api/sendEmail',
+                data : {}
+            })
+            .success(function(status){
+                promise.resolve(status);
+            })
+            .error(function(err){
+                 promise.reject(err);
+            });
+
+            return promise.promise;
+        }
+
         function isAuth(){
             return isSignedIn;
         };
@@ -67,6 +84,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
              signup : signup,
              signin : signin,
              logout : logout,
+             sendEmail : sendEmail,
              isAuth : isAuth
          };
    });
