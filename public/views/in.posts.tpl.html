@@ -2,9 +2,7 @@
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas side-menu panel panel-default"  bs-affix data-offset-top="200" data-offset-bottom="300">
-             <h3>Favourite Topics <br>
-			    <i style="font-size:.8em;" class="icon fa fa-times" ng-click="clearTags()"> clear all</i>
-			 </h3>
+             <h3>Favourite Topics</h3>
 			 <hr />
 
 			 <div class="input-group" style="padding-bottom:.4em;">
@@ -13,7 +11,8 @@
 					<i class="icon fa fa-plus"> add</i>
 				  </span>
 			 </div>
-
+             <hr />
+             
 			 <div class="tag-buttons">
 				<button class="btn btn-default btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
 				   <span>{{tag}}</span>

@@ -6586,7 +6586,7 @@ body .loader span {
 .homepage .header {
   padding: 0;
   padding-bottom: 6em;
-  background: #337ab7;
+  background: linear-gradient(75deg, #337ab7, #78acd9 50%, #a0c4e4);
 }
 .homepage .header .inner .text {
   margin-top: 5em;
@@ -6605,7 +6605,7 @@ body .loader span {
   padding: 0;
 }
 .homepage .body .feature {
-  background: #337ab7;
+  background: linear-gradient(75deg, #337ab7, #78acd9 50%, #a0c4e4);
   border-bottom: 10px solid #ccc;
   margin-top: 0em;
   padding: 0;
@@ -6742,13 +6742,16 @@ nav {
   }
 }
 .navbar li {
-  font-weight: bold;
+  font-weight: bolder !important;
+}
+.navbar li a {
+  color: #555555 !important;
 }
 .navbar li a .icon {
-  font-size: 2em !important;
+  font-size: 1.6em !important;
 }
 .navbar li a:hover {
-  color: #d9534f !important;
+  color: #337ab7 !important;
 }
 .navbar li .active {
   border-top: 5px solid #337ab7;
@@ -6804,6 +6807,7 @@ nav {
   margin-right: 1em;
 }
 .panel {
+  margin-bottom: 0;
   padding: 0;
   box-shadow: none;
   padding-bottom: 1em;
@@ -6831,7 +6835,7 @@ nav {
   color: #555555;
 }
 .panel:hover {
-  background: #f8f8f8;
+  background: #f5f8fA;
 }
 .article {
   background: #fff;

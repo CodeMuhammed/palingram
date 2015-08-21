@@ -60,11 +60,18 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
         }
 
         function sendEmail (action) {
+            var query = {
+                action : action ,
+                firstname : User.get().firstname,
+                lastname : User.get().lastname,
+                username : User.get().username
+            };
+            
             var promise = $q.defer();
             $http({
                 method : 'POST',
                 url : BaseUrl+'/api/sendEmail',
-                data : {}
+                data : query
             })
             .success(function(status){
                 promise.resolve(status);

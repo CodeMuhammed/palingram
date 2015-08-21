@@ -18,7 +18,7 @@ angular.module('palingram')
        $scope.hello = 'out homepage controller says hello';
        $scope.guestLogin = function(){
            $rootScope.$broadcast('loading:start' , {});
-           Auth.signin({"username":"palingram@gmail.com" , "password":"0000"}).then(function(status){
+           Auth.signin({"username":"palingramblog@gmail.com" , "password":"0000"}).then(function(status){
                 Tags.set(User.get().tags_id).then(function(status){
                       Posts.set(Tags.get()).then(function(status){
                           $rootScope.$broadcast('loading:end' , {});
@@ -144,7 +144,7 @@ angular.module('palingram')
                      });
                 });
             } , function(err){
-                  Auth.signin({"username":"palingram@gmail.com" , "password":"0000"}).then(function(status){
+                  Auth.signin({"username":"palingramblog@gmail.com" , "password":"0000"}).then(function(status){
                       Tags.set(User.get().tags_id).then(function(status){
                             Posts.set(Tags.get()).then(function(status){
                                 $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
@@ -211,6 +211,7 @@ angular.module('palingram')
                        $rootScope.$broadcast('favourites' , {});
                     }
                     else {
+                       $scope.nav = 'posts';
                        $state.go('in.posts');
                     }
                    

@@ -2,7 +2,7 @@
    <!-- Static navbar -->
   
 	   <nav class="navbar navbar-default navbar-fixed-top">
-	   	<div class="alert alert-warning text-center" ng-show="alert.visible" style="font-weight:bolder">
+	   	<div class="alert alert-warning text-center" ng-show="alert.visible" style="font-weight:bolder; margin-bottom:0;">
 	   	    {{alert.message}} <a ng-click="sendEmail()">Click here to RESEND email</a>
 	   	    <i class="icon fa fa-times fa-lg pull-right" ng-click = "closeAlert()"></i>
 	   	</div>
@@ -28,13 +28,8 @@
 				  </span>
 			   </div>
 	          </form>
-			  <ul class="nav navbar-nav">
-				<li ng-click="goto('editor')" class="">
-					<a ng-class="{'active' : active('editor')}">
-						<i class="icon fa fa-plus-square" style="font-size:1.4em;"></i> 
-						Write new article
-					</a>
-				</li>
+			  <ul class="nav navbar-nav navbar-right">
+				
 				<li ng-click="goto('posts')" class="">
 					<a ng-class="{'active' : active('posts')}">
 						<i class="icon fa fa-list-alt" style="font-size:1.4em;"></i> 
@@ -51,6 +46,14 @@
 					<a ng-class="{'active' : active('profile')}">
 						<i class="icon fa fa-user" style="font-size:1.4em;"></i> Profile</a>
 				</li>
+
+				<li ng-click="goto('editor')" class="">
+					<a ng-class="{'active' : active('editor')}">
+						<i class="icon fa fa-plus-square" style="font-size:1.4em;"></i> 
+						Write new article
+					</a>
+				</li>
+
 			  </ul> 
 			  
 	       </div>

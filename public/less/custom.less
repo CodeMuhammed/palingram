@@ -95,7 +95,8 @@ body{
   .header{
      padding:0; 
      padding-bottom:6em;
-     background: @brand-primary;
+    // background: @brand-primary;
+     background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
      .inner{
         .text{
            margin-top: 5em;
@@ -120,7 +121,7 @@ body{
   .body{
       padding:0;
      .feature{   
-         background:lighten(@brand-primary , 0%);
+         background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
          border-bottom:10px solid #ccc;
          margin-top:0em;
          padding:0;
@@ -229,14 +230,14 @@ nav {
      }
    }
    li{
-      
-      font-weight:bold;
+      font-weight:bolder !important;
       a{
          .icon{ 
-            font-size:2em !important;
+            font-size:1.6em !important;
          } 
+        color :@gray !important;
          &:hover{
-            color:@brand-danger !important;
+            color:@brand-primary !important;
           }
       }
       .active{
@@ -300,6 +301,7 @@ nav {
     }
 }
 .panel{
+    margin-bottom:0;
     padding:0;
     box-shadow:none;
     padding-bottom:1em;
@@ -329,7 +331,7 @@ nav {
      
    }
 &:hover{
-         background:#f8f8f8;
+         background:#f5f8fA;
      }
 }
 

@@ -5,7 +5,10 @@
 	  <hr>
 	 <p>Favourites : {{user.favourites.length}}</p>
 	  <hr>
-	 <p>Total ammount: NGN {{(user.pageViews*10)/100}}</p>
+	 <p>
+	 	Total ammount: NGN {{(user.pageViews*10)/100}}
+        <button class="btn btn-primary btn-sm pull-right disabled"> withdraw </button>
+	 </p>
 	  <hr>
 	 <p>First name {{user.firstname}}</p>
 	  
@@ -15,6 +18,7 @@
 	  <hr>
 	 <p>
 	 	Password: {{'******'}}
+	 	<button class="btn btn-primary btn-sm pull-right"> reset </button>
 	 </p>
 	  <hr>
 	 <p>
