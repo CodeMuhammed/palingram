@@ -21,32 +21,14 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-8 col-sm-offset-2 body">
-		 <div class="col-xs-12 col-sm-4 feature">
-		 	   
-		 	   <div class=" image" style="background: url('img/community.png') center center no-repeat;
+		 <div class="col-xs-12 col-sm-4 feature" ng-repeat = "feature in features">
+		 	   <div class=" image" style="background: url({{feature.img}}) center center no-repeat;
 	             background-size: cover;">
 		 	   </div>
 		 	   <div class=" text">
-		 	   	   <p>Engage and share ideas with a teeming community</p>
-		 	   </div>
-		 </div>
-
-		 
-		 <div class="col-xs-12  col-sm-4  feature">   
-		 	   <div class=" image" style="background: url('img/money.png') center center no-repeat;
-	             background-size: cover;">
-		 	   </div>
-		 	   <div class=" text">
-		 	   	   <p>Earn money by integrating ads in your articles</p>
-		 	   </div>
-		 </div>
-		 <div class="col-xs-12  col-sm-4  feature">
-		 	  
-		 	   <div class=" image" style="background: url('img/platforms.png') center center no-repeat;
-	             background-size: cover;">
-		 	   </div>
-		 	    <div class=" text">
-		 	   	   <p>Start blogging immediately with no setups required</p>
+		 	   	   <p>{{feature.text}}</p>
+		 	   	   <button class="btn-xs btn btn-warning">{{feature.buttonText}}</button>
+		 	   	   <button class="btn-xs btn btn-default" ng-click="getStarted()">learn more</button>
 		 	   </div>
 		 </div>
 	</div>

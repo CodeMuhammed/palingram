@@ -6619,6 +6619,9 @@ body .loader span {
   text-shadow: 0.05em 0.05em #555555;
   color: #fff;
 }
+.homepage .body .feature .text p {
+  min-height: 7em;
+}
 .homepage .body .feature .image {
   padding: .5em;
   border-right: 1px solid #357935;
@@ -6801,41 +6804,40 @@ nav {
 }
 .posts-container .side-menu {
   background: #fff;
-  padding-left: 0;
-  margin-left: -1em;
-  padding: 1em;
+  padding: 0;
   margin-right: 1em;
 }
-.panel {
+.posts-body {
   margin-bottom: 0;
   padding: 0;
+  border-bottom: 3px solid #337ab7;
   box-shadow: none;
   padding-bottom: 1em;
 }
-.panel .header {
+.posts-body .header {
   padding-top: 2em;
 }
-.panel .header h5 {
+.posts-body .header h5 {
   font-size: 1.3em;
 }
-.panel .panel-body .img-div {
+.posts-body .panel-body .img-div {
   min-height: 20em;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.panel .panel-body .content {
+.posts-body .panel-body .content {
   padding-left: 0;
   padding-right: 0;
 }
-.panel .panel-body .content h3 {
+.posts-body .panel-body .content h3 {
   font-size: 3em;
 }
-.panel .panel-body .content p {
+.posts-body .panel-body .content p {
   font-size: 1.7em;
   color: #555555;
 }
-.panel:hover {
-  background: #f5f8fA;
+.posts-body:hover {
+  border-bottom: 3px solid #f0ad4e;
 }
 .article {
   background: #fff;
@@ -6983,12 +6985,12 @@ nav {
 .tag-buttons .btn {
   margin-right: .5em;
   margin-bottom: .5em;
-  border-radius: 30px;
+  border-radius: 0px;
 }
 .tag-buttons .btn:hover {
   color: #ffffff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  background-color: #f0ad4e;
+  border-color: #eea236;
 }
 .tag-buttons .btn:hover:hover,
 .tag-buttons .btn:hover:focus,
@@ -6997,8 +6999,8 @@ nav {
 .tag-buttons .btn:hover.active,
 .open > .dropdown-toggle.tag-buttons .btn:hover {
   color: #ffffff;
-  background-color: #c9302c;
-  border-color: #ac2925;
+  background-color: #ec971f;
+  border-color: #d58512;
 }
 .tag-buttons .btn:hover:active,
 .tag-buttons .btn:hover.active,
@@ -7023,11 +7025,11 @@ fieldset[disabled] .tag-buttons .btn:hover:active,
 .tag-buttons .btn:hover.disabled.active,
 .tag-buttons .btn:hover[disabled].active,
 fieldset[disabled] .tag-buttons .btn:hover.active {
-  background-color: #d9534f;
-  border-color: #d43f3a;
+  background-color: #f0ad4e;
+  border-color: #eea236;
 }
 .tag-buttons .btn:hover .badge {
-  color: #d9534f;
+  color: #f0ad4e;
   background-color: #ffffff;
 }
 .new-post {
@@ -7192,21 +7194,11 @@ footer {
     -o-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
   }
-  .row-offcanvas-right {
-    right: 0;
-  }
   .row-offcanvas-left {
     left: 0;
   }
-  .row-offcanvas-right .sidebar-offcanvas {
-    right: -93.7%;
-  }
-  .row-offcanvas-right.active {
-    right: 100%;
-    /* 6 columns */
-  }
   .row-offcanvas-left .sidebar-offcanvas {
-    left: -95%;
+    left: -100%;
   }
   .row-offcanvas-left.active {
     left: 100%;
@@ -7214,21 +7206,6 @@ footer {
   .sidebar-offcanvas {
     position: absolute;
     top: 0;
-    width: 50%;
-  }
-}
-@media screen and (max-width: 992px) and (max-width: 991px) {
-  .row-offcanvas-right.active {
-    right: 100%;
-  }
-}
-@media screen and (max-width: 992px) and (max-width: 991px) {
-  .row-offcanvas-left.active {
-    left: 100%;
-  }
-}
-@media screen and (max-width: 992px) and (max-width: 991px) {
-  .sidebar-offcanvas {
     width: 100%;
   }
 }

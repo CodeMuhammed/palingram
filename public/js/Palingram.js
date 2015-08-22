@@ -24,12 +24,7 @@ angular.module('palingram' , ['ngResource' , 'ngSanitize','720kb.socialshare' ,'
          controller  : 'homepageController',
          data :{}
      })
-     .state('out.preview' , {
-         url : '/preview/:post_id',
-         templateUrl : 'views/out.preview.tpl.html',
-         controller  : 'previewController',
-         data :{}
-     })
+
      .state('out.signup' , {
          url : '/signup',
          templateUrl : 'views/out.signup.tpl.html',
@@ -99,5 +94,5 @@ angular.module('palingram' , ['ngResource' , 'ngSanitize','720kb.socialshare' ,'
          data :{}  
      });
     
-     $urlRouterProvider.otherwise('/out/homepage');
+     $urlRouterProvider.otherwise('/in/posts');
 }); 

@@ -1,32 +1,49 @@
 <div class="container posts-container clearfix">
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
 
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas side-menu panel panel-default"  bs-affix data-offset-top="200" data-offset-bottom="300">
-             <h3>Favourite Topics</h3>
-			 <hr />
-
-			 <div class="input-group" style="padding-bottom:.4em;">
-				  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag" style="border-radius: 15px 0 0 15px;" >
-				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0 15px 15px 0">
-					<i class="icon fa fa-plus"> add</i>
-				  </span>
+        <div class="col-xs-6 col-sm-4 sidebar-offcanvas">
+            <div class="side-menu panel panel-default">
+	        	<div class="panel-heading">
+	        		
+	        		<h3>Filter posts based on tags</h3>
+	        	</div>
+	             <div class="panel-body">
+					 <div class="input-group">
+						  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
+						  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
+							<i class="icon fa fa-plus"> add</i>
+						  </span>
+					 </div>
+		             <hr />
+		             
+					 <div class="tag-buttons">
+						<button class="btn btn-info btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
+						   <span>{{tag}}</span>
+						   <a class="badge">X</a>
+						</button>
+					 </div>
+				 </div>
 			 </div>
-             <hr />
-             
-			 <div class="tag-buttons">
-				<button class="btn btn-default btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
-				   <span>{{tag}}</span>
-				   <a class="badge">X</a>
-				</button>
-			 </div>
-			 
-			 <div class="copy-right" style="margin-top:3em;"><i class="icon fa fa-copyright"></i>
-			  palingram.com 2015
+			 <div class="side-menu panel panel-default">
+	        	<div class="panel-heading">
+	        		<h3>Popular tags</h3>
+	        	</div>
+	             <div class="panel-body">
+					
+					 <div class="tag-buttons">
+						<button class="btn btn-info btn-sm" ng-repeat="tag in allTags" ng-click="addTag(tag)">
+						   <span>{{tag}}</span>
+						</button>
+					 </div>
+					 <div class="copy-right" style="margin-top:3em;"><i class="icon fa fa-copyright"></i>
+					  palingram.com 2015
+					 </div>
+				 </div>
 			 </div>
         </div><!--/.sidebar-offcanvas-->
 		
         <div class="col-sm-7"  style="padding:0">
-		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default" ng-click="viewPost(post)">
+		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default posts-body" ng-click="viewPost(post)">
 				<div class="col-xs-12 header">
 				   <div class="col-xs-12 col-sm-1" style="padding-right:1em; padding-left:0;">
 				   	    <img ng-src= {{post.image}} height="40" width="40" class="img-rounded"></img>

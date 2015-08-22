@@ -27,31 +27,28 @@ angular.module('palingram')
                 });
             });
        };
-   })
 
-   .controller('previewController' , function($scope , $rootScope ,  $state , Posts , Comments , Auth){
-        //implement auto login for when page refreshes
-        $rootScope.$broadcast('loading:start' , {});
-        Auth.signin().then(function(status){
-            previewStart();
-        } , function(err){
-            previewStart();
-        });
-       function previewStart(){
-        $scope.auth = Auth.isAuth() == false || Auth.isAuth() == undefined ? false : true;
-         Posts.previewArticle($state.params.post_id , Auth.isAuth()).then(function(data){
-             $scope.post = data;
-              Comments.get($scope.post.comments_id).then(function(comments){
-                   $rootScope.$broadcast('loading:end' , {});
-                   console.log(comments);
-                   $scope.comments = comments;
-              });
-         });
+       $scope.features =[
+           {
+              text : 'Collaborative Blogging Engage and share ideas with a teeming community',
+              buttonText  : 'beta test',
+              img : "img/community.png"
+           },
+           {
+              text : 'Earn money by writing articles on palingram',
+              buttonText  : 'strictly by invitation',
+              img : "img/money.png"
+           },
+           {
+              text : 'Start blogging immediately with no setups required',
+              buttonText  : 'beta test',
+              img : "img/platforms.png"
+           }
+       ];
 
-         $scope.back = function(toState){
-            $state.go(toState);
-         };
-       }
+       $scope.getStarted = function(){
+           $state.go('in.posts.post' , {"id":"55d7d9d3f1fc3750112b805b"});
+       };
    })
 
    .controller('signupController' , function($scope , $rootScope , $state , Auth){
@@ -280,8 +277,13 @@ angular.module('palingram')
         function next(){
            $scope.posts = Posts.get();
            $scope.tags = Tags.get();
+           
            $scope.sidebar = '';
            $scope.user = User.get();
+
+           Tags.queryAll().then(function(data){
+               $scope.allTags = data;
+           });
 
            $scope.viewPost = function(post){
                 $rootScope.$broadcast('loading:start' , {});
@@ -407,7 +409,7 @@ angular.module('palingram')
         }
         
         function init(){
-            Posts.previewArticle($state.params.id , Auth.isAuth()).then(function(data){
+            Posts.previewArticle($state.params.id).then(function(data){
                $state.current.data.post = data;
                next();
             });

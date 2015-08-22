@@ -23,36 +23,16 @@ footer {
             transition: all .25s ease-out;
   }
 
-  .row-offcanvas-right {
-    right: 0;
-  }
-
   .row-offcanvas-left {
     left: 0;
   }
 
-  .row-offcanvas-right
-  .sidebar-offcanvas {
-    right: -93.7%;
-
-  }
-.row-offcanvas-right.active {
-    right: 100%; /* 6 columns */
-    @media (max-width: @screen-sm-max) {
-     right: 100%;
-  }
-  }
-
-
   .row-offcanvas-left
   .sidebar-offcanvas {
-    left: -95%;
+    left: -100%;
   }
   .row-offcanvas-left.active {
     left: 100%;
-  @media (max-width: @screen-sm-max) {
-     left: 100%;
-  }
   }
   
 
@@ -62,9 +42,6 @@ footer {
     position: absolute;
     top: 0;
 	
-    width: 50%;
-	@media (max-width: @screen-sm-max) {
-	   width: 100%;
-	}
+    width: 100%;
   }
 }
