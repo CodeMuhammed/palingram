@@ -9,7 +9,7 @@
       <meta name="author" content="">
       <meta name="fragment" content="!">
 
-      <title>Collaborative Blogging Platform</title>
+      <title>Collaborative Blogging</title>
 
      <script src="js/ng_modules/angular.min.js"></script>
      <script src="js/ng_modules/angular-ui-router.min.js"></script>
@@ -21,12 +21,15 @@
 	  <script src="js/ng_modules/angular-medium-editor.min.js"></script>
       <script src="js/ng_modules/angular-sanitize.min.js"></script>
 	  <script src="js/ng_modules/angular-resource.min.js"></script>
+    <script src="js/ng_modules/angular-animate.min.js"></script>
 
       <!--Angularjs social share components-->
       <script src="js/ng_modules/angular-socialshare.min.js"></script>
    
       <!--Angular bootstrap affix components-->
-    
+      <script src="js/ng_modules/angular-strap.min.js"></script>
+      <script src="js/ng_modules/angular-strap.tpl.min.js"></script>
+      
     	<!--My Custom JS  main entry and configurations-->
     	<script src="js/Palingram.js"></script>
 
@@ -52,10 +55,11 @@
   </head>
 
   <body>
-     <div class="col-xs-4 col-sm-1 col-sm-offset-5 col-xs-offset-4 loader" ng-controller="loaderController" ng-show="loading">
-          <i class="icon fa fa-spinner fa-spin "></i>
-          <span>Loading..</span>
-     </div>
+     <span class="loader" ng-controller="loaderController" ng-show="loading">
+          <span>
+             {{message == '' ? 'loading...' : message}}
+          </span>
+     </span>
      <ui-view></ui-view>
   </body>
 

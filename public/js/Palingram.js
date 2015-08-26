@@ -1,4 +1,4 @@
-angular.module('palingram' , ['ngResource' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
+angular.module('palingram' , ['ngResource' , 'ngAnimate' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 // cors configurations to enable consuming the rest api
 .config(function($httpProvider){
    $httpProvider.defaults.useXDomain = true;
@@ -23,6 +23,12 @@ angular.module('palingram' , ['ngResource' , 'ngSanitize','720kb.socialshare' ,'
          templateUrl : 'views/out.homepage.tpl.html',
          controller  : 'homepageController',
          data :{}
+     })
+
+     .state('out.gamblr' , {
+         url : '/gamblr',
+         templateUrl : 'views/gamblr.tpl.html',
+         controller  : 'gamblrCtrl'
      })
 
      .state('out.signup' , {
@@ -94,5 +100,5 @@ angular.module('palingram' , ['ngResource' , 'ngSanitize','720kb.socialshare' ,'
          data :{}  
      });
     
-     $urlRouterProvider.otherwise('/in/posts');
+     $urlRouterProvider.otherwise('/out/gamblr');
 }); 

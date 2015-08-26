@@ -14,11 +14,11 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
             .success(function(data){
                 User.set(data);
                 isSignedIn = true;
-                promise.resolve('sign up done');
+                promise.resolve('sign up successful');
             })
 
             .error(function(err){
-                alert('error in auth signup');
+               promise.reject('invalid credentials');
             });
 
             return promise.promise;
@@ -59,28 +59,47 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
             return promise.promise;
         }
 
-        function sendEmail (action) {
-            var query = {
-                action : action ,
-                firstname : User.get().firstname,
-                lastname : User.get().lastname,
-                username : User.get().username
+        function sendEmail (action , data) {
+            var query;
+            switch(action) {
+                case 'emailVerification' : {
+                    query = {
+                        action : action ,
+                        firstname : User.get().firstname,
+                        lastname : User.get().lastname,
+                        username : User.get().username
+                    };
+                    break;
+                }
+                case 'writerApplication' : {
+                    query = data;
+                    query.username = User.get().username;
+                    query.action   = action
+                    break;
+                }
+                default : {
+                    break;
+                }
             };
             
-            var promise = $q.defer();
-            $http({
-                method : 'POST',
-                url : BaseUrl+'/api/sendEmail',
-                data : query
-            })
-            .success(function(status){
-                promise.resolve(status);
-            })
-            .error(function(err){
-                 promise.reject(err);
-            });
-
-            return promise.promise;
+            if(query){
+                var promise = $q.defer();
+                $http({
+                    method : 'POST',
+                    url : BaseUrl+'/api/sendEmail',
+                    data : query
+                })
+                .success(function(status){
+                    promise.resolve(status);
+                })
+                .error(function(err){
+                     promise.reject(err);
+                });
+                return promise.promise;
+            }
+            else {
+                alert('invalid options');
+            } 
         }
 
         function isAuth(){

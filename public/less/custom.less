@@ -54,22 +54,20 @@ body{
    a{
       outline:none;
    }
+
    .loader {
      position : fixed;
-     min-height: 5em;
-     background : hsla(0 , 0 , 0 , .7);
+     padding:1em 2em;
+     margin-left:40%;
+     color: #880000;
+     background-color: rgba(255 , 255  , 102 , .9) !important; 
+     box-shadow: 0 6px 12px rgba(0,0,0,.175);
      z-index:2000000;
-     border-radius:0 0 10px 10px;
+     border-radius:0 0 3px 3px;
      text-align:center;
-     i{
-        font-size: 3em;
-        color:#fff;
-     }
-     span{
-        color:#fff;
-     }
    }
  }
+
 .homepage{
     padding:0; 
     margin:0;
@@ -140,13 +138,39 @@ body{
 
            .image{
               padding : .5em;
-              border-right:1px solid darken(@brand-success , 20%);
+              border-right:1px solid darken(@brand-success , 20%); 
               background-color: #ccc;
               min-height: 30em;
+           } 
+
+           .questioneer {
+              color : #fff;
+              padding : .5em;
+              border-right:1px solid darken(@brand-success , 20%);
+              background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
+
+              min-height:50em;
+              input, textarea {
+                 margin-bottom: 1em;
+              }
+              textarea {
+                  min-height:10em;
+              }
+              .btn {
+                 margin-right:.5em;
+                 margin-bottom:.5em;
+                 &:hover{
+                    .btn-success;
+                 }
+              }
+              .interest {
+                  background: #fff;
+                  color:#000;
+              }
            }
 
            &:hover{
-              color:@brand-primary;
+              //color:@brand-primary;
            }
 
            @media (max-width: @screen-sm) {
@@ -244,7 +268,10 @@ nav {
           }
       }
       .active{
-           border-top:5px solid @brand-primary;
+           border:4px solid @brand-info;
+           padding: .6em .3em;
+           margin-top:.3em;
+           border-radius: 10px;
         }
    }
 }
@@ -288,7 +315,7 @@ nav {
 }
 
 .posts-container{
-   margin-top: 57px;
+   margin-top: 52px;
    padding:0;
    padding-top:2em;
    @media (max-width: @screen-sm-max) {
@@ -472,7 +499,6 @@ nav {
 }
 
 .side-items{
-     padding-right:0;
       .ad-box {
           background-color:#ccf;
           height:20em;
@@ -503,7 +529,7 @@ nav {
    .btn{
       margin-right: .5em;
       margin-bottom: .5em;
-      border-radius:0px;
+      border-radius:5px;
       &:hover{
        .btn-warning;
     }
@@ -603,7 +629,7 @@ nav {
     border-radius: 0px;
     height:3.7em;
     position:fixed;
-    top:70px; 
+    top:60px; 
     z-index:100002;
     @media (max-width: @screen-sm-max) {
         padding-top:.4em;

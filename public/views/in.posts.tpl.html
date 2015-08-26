@@ -5,7 +5,7 @@
             <div class="side-menu panel panel-default">
 	        	<div class="panel-heading">
 	        		
-	        		<h3>Filter posts based on tags</h3>
+	        		<h4>Filter posts based on tags</h4>
 	        	</div>
 	             <div class="panel-body">
 					 <div class="input-group">
@@ -29,7 +29,6 @@
 	        		<h3>Popular tags</h3>
 	        	</div>
 	             <div class="panel-body">
-					
 					 <div class="tag-buttons">
 						<button class="btn btn-info btn-sm" ng-repeat="tag in allTags" ng-click="addTag(tag)">
 						   <span>{{tag}}</span>
@@ -40,13 +39,19 @@
 					 </div>
 				 </div>
 			 </div>
+			 <div class="side-menu panel panel-default">
+	             <div class="panel-body">
+	                 <a ui-sref="out.homepage"><b>Apply as a writer on palingram</b></a>
+				 </div>
+			 </div>
         </div><!--/.sidebar-offcanvas-->
-		
-        <div class="col-sm-7"  style="padding:0">
+		<div class="col-sm-1" style="float:right"></div>
+        <div class="col-sm-7"  style="padding:0; float:right">
+           
 		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default posts-body" ng-click="viewPost(post)">
 				<div class="col-xs-12 header">
 				   <div class="col-xs-12 col-sm-1" style="padding-right:1em; padding-left:0;">
-				   	    <img ng-src= {{post.image}} height="40" width="40" class="img-rounded"></img>
+				   	    <img ng-src= {{post.image}} height="40" width="40" class="img-rounded">
 				   </div>
 				   <div class="col-xs-12 col-sm-11" style="padding:0;">
 				   	   <span style="color:#ccc; margin-right:1.5em; font-size:1.4em"><a>{{post.author}}</a> on {{post.date | date:'fullDate'}}
@@ -76,7 +81,7 @@
 				</div>
 			 </div>
 	    </div>
-
+       
       </div><!--/row-->
 
     </div><!--/.container-->

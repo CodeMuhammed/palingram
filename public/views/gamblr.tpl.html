@@ -1,0 +1,66 @@
+<div style="padding:1em">
+	<div class="side-menu panel panel-default col-sm-4 col-sm-offset-4" style="padding:0">
+		<div class="panel-heading">
+			<button class="btn btn-default pull-">{{title}}</button>
+			<button class="btn btn-default pull-right" ng-click="toggleSetting()">
+				<i class="icon fa fa-cog"></i>
+			</button>
+			<button class="btn btn-default pull-right" ng-click="reset()" style="margin-right:1em">
+				<i class="icon fa fa-spinner"></i>
+			</button>
+		</div>
+		<div class="panel-heading" ng-show = "setting">
+			  <div class="input-group">
+				  <input class="form-control input-tag" placeholder="Initial amount here" ng-model="NBR" style="border-radius:0;">
+				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
+					<i ng-click="save(NBR)">save</i>
+				  </span>
+			 </div>
+		</div>
+		<div class="panel-heading" style="background-color:#fff;">
+			<button class="btn btn-primary">{{bankroll | currency:'NGN '}}</button>
+
+			<button class="btn btn-default pull-right">{{basebet | currency:'NGN '}}</button>
+		</div>
+		<div class="panel-heading" style=" background-color: rgba(255 , 255  , 102 , .9)">
+			 <div class="input-group">
+				  <input class="form-control input-tag" placeholder="Enter odd here" ng-model="odd" style="border-radius:0;" >
+				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
+					<i class="icon fa fa-plus" ng-click = "bet(odd)"> bet</i>
+				  </span>
+			 </div>
+		</div>
+		<div class="panel-heading" style="background-color:#fff;">
+			 <form class="searchbox">
+			  	<div class="input-group" style="padding-bottom:.4em;">
+			  		<span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(false)">
+					<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:red"></i>
+				  </span>
+				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Ammount to bet displays here"
+				  ng-model="currentBet.stake">
+				  <span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(true)">
+					<i class="icon fa fa-check" style="font-size:1.5em; font-weight:bold; color:green"></i>
+				  </span>
+			   </div>
+			 </form>
+		</div>
+         
+         <div class="panel-heading" style="background-color:#fff;">
+			  <div class="alert text-center">
+			  	   <button class="btn btn-default pull-left">Stake</button>
+			  	   <button class="btn btn-default">Gross</button>
+			  	   <button class="btn btn-default pull-right">Profit</button>
+			  </div>
+		 </div>
+
+
+	     <div class="panel-body">
+			  <div class="alert text-center" ng-class="item.status ? 'alert-success' : 'alert-danger'" ng-repeat = "item in completed | orderBy:'-date'">
+			  	   <button class="btn btn-default pull-left">{{item.stake | currency: 'NGN '}}</button>
+			  	   <button class="btn btn-default">{{item.gross | currency: 'NGN '}}</button>
+			  	   <button class="btn btn-default pull-right">{{item.net | currency: 'NGN '}}</button>
+			  </div>
+		 </div>
+	 </div>
+	 <a ui-sref="out.homepage">exit</a>
+</div>

@@ -14,7 +14,7 @@
 			  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="toggleSearch()" style="margin-left:.2em">
 				<i class="icon fa fa-search" style="font-size:1.4em;"></i>
 			  </button>
-			  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="goto('editor')">
+			  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="goto('editor')" ng-show="writer">
 				<i class="icon fa fa-edit" style="font-size:1.4em;"></i></button>
 			</li>
 		   </div>
@@ -28,9 +28,9 @@
 				  </span>
 			   </div>
 	          </form>
-			  <ul class="nav navbar-nav navbar-right">
+			  <ul class="nav navbar-nav">
 				
-				<li ng-click="goto('posts')" class="">
+				<li ng-click="goto('posts')" class="" style="margin-left:4em">
 					<a ng-class="{'active' : active('posts')}">
 						<i class="icon fa fa-list-alt" style="font-size:1.4em;"></i> 
 						All Posts
@@ -42,12 +42,12 @@
 						Favourites
 					</a>
 				</li>
-				<li  ng-click="goto('profile')" class="" >
+				<li  ng-click="goto('profile')" class="">
 					<a ng-class="{'active' : active('profile')}">
 						<i class="icon fa fa-user" style="font-size:1.4em;"></i> Profile</a>
 				</li>
 
-				<li ng-click="goto('editor')" class="">
+				<li ng-click="goto('editor')" class="" ng-show="writer">
 					<a ng-class="{'active' : active('editor')}">
 						<i class="icon fa fa-plus-square" style="font-size:1.4em;"></i> 
 						Write new article
@@ -71,7 +71,7 @@
 		<li class="navbar-right" ng-click="goto('favourites')">
 			<a ng-class="{'active' : active('favourites')}"><i class="icon fa fa-heart" style="font-size:1.4em;"></i> Favourites</a>
 		</li>
-		<li ng-click="goto('profile')"  class="navbar-right">
+		<li ng-click="goto('profile')"  class="navbar-right" >
 			<a ng-class="{'active' : active('profile')}">
 				<i class="icon fa fa-user" style="font-size:1.4em;"></i> 
 				Profile</a>

@@ -3,34 +3,34 @@ angular.module('palingram')
        $scope.loading = false;
       
        $rootScope.$on('loading:start' , function(e , a){
+            $scope.message = '';
             $scope.loading = true;
        });
        
         $rootScope.$on('loading:end' , function(e , a){
+            $scope.message = a.msg;
             $timeout(function() {
                 $scope.loading = false;
-            }, 2000);
+            }, 5000);
        });
 
   })
 
-  .controller('homepageController' , function($scope , $rootScope , $state , Auth , Tags , Posts , User){
-       $scope.hello = 'out homepage controller says hello';
+  .controller('homepageController' , function($scope , $rootScope , $state ,$timeout, Auth , Tags , Posts , User){
+      
        $scope.guestLogin = function(){
-           $rootScope.$broadcast('loading:start' , {});
-           Auth.signin({"username":"palingramblog@gmail.com" , "password":"0000"}).then(function(status){
-                Tags.set(User.get().tags_id).then(function(status){
-                      Posts.set(Tags.get()).then(function(status){
-                          $rootScope.$broadcast('loading:end' , {});
-                          $state.go('in.posts');
-                     });
-                });
-            });
+           $state.go('in.posts');
        };
+
+       $scope.form = false;
+       $scope.selected = [];
+       $scope.apply = {};
+       $scope.interests = [];
+       $scope.checked = [false , false , false];
 
        $scope.features =[
            {
-              text : 'Collaborative Blogging Engage and share ideas with a teeming community',
+              text : 'Engage and share ideas with a teeming community',
               buttonText  : 'beta test',
               img : "img/community.png"
            },
@@ -46,11 +46,71 @@ angular.module('palingram')
            }
        ];
 
-       $scope.getStarted = function(){
-           $state.go('in.posts.post' , {"id":"55d7d9d3f1fc3750112b805b"});
-       };
+       $scope.tags= [
+             'technology',
+             'startup',
+             'bitcoin',
+             'gadgets',
+             'programming',
+             'general topics',
+       ];
+       
+       
+       $scope.toggleCheck = function(item , index){
+              $scope.checked = [false , false , false];
+              $scope.checked[index] = true;
+              $scope.apply.freq = item;
+       }
+
+       $scope.checks  = [
+             'Twice a day',
+             'Three times a week',
+             'Any time i feel like writing'
+        ];
+
+        
+        $scope.select = function(tag){
+           
+           if($scope.selected.indexOf(tag) < 0){
+                $scope.selected.push(tag);
+           }
+           else{
+              $scope.selected.splice($scope.selected.indexOf(tag) , 1);
+           };
+       }
+
+       $scope.isSelected = function(tag){
+           return $scope.selected.indexOf(tag) >= 0;
+       }
+
+     
+       $scope.submit = function(){
+           $rootScope.$broadcast('loading:start' , {});
+
+           $scope.apply.interests = $scope.selected;
+           $scope.apply.username = User.get().username;
+           $scope.apply.lastname = User.get().lastname;
+           $scope.apply.firstname = User.get().firstname;
+
+           Auth.sendEmail('writerApplication' , $scope.apply).then(function(status){
+               $rootScope.$broadcast('loading:end' , {msg : status});
+               $scope.form = false;
+           }, function(err){
+               $rootScope.$broadcast('loading:end' , {msg : err});
+           });
+       }
+
+       $scope.applyNow = function(){
+           if(Auth.isAuth() && User.get().firstname != 'guest'){
+               $scope.form = true;
+           }
+           else {
+              alert('You must be signed in to apply');
+           }
+       }
    })
 
+   //This ccontroller takes care of signing up as a fresh user
    .controller('signupController' , function($scope , $rootScope , $state , Auth){
        $scope.signup = function(newUser){
             $rootScope.$broadcast('loading:start' , {});
@@ -60,24 +120,29 @@ angular.module('palingram')
             newUser.lastViewed = '';
             newUser.bio = 'Write about your self here';
             newUser.emailVerified = false;
-            Auth.signup(newUser).then(function(){
-                $rootScope.$broadcast('loading:end' , {});
+            newUser.writer = false;
+            Auth.signup(newUser).then(function(status){
+                $rootScope.$broadcast('loading:end' , {msg : status});
                 $state.go('out.transition');
+            } , function(err){
+                $rootScope.$broadcast('loading:end' , {msg : err});
             });
        }
    })
 
    .controller('signinController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
        $scope.signin = function(credentials){
-          $rootScope.$broadcast('loading:start' , {});
+           $rootScope.$broadcast('loading:start' , {});
            Auth.signin(credentials).then(function(status){
                 Tags.set(User.get().tags_id).then(function(status){
                       Posts.set(Tags.get()).then(function(status){
-                          $rootScope.$broadcast('loading:end' , {});
+                          $rootScope.$broadcast('loading:end' , {msg : 'sign in completed'});
                           $state.go('in.posts');
                      });
                 });
-            });
+            } , function(err){
+                $rootScope.$broadcast('loading:end' , {msg : 'signin error'});
+            }); 
        }
    })
 
@@ -127,7 +192,6 @@ angular.module('palingram')
        }
    })
 
-
    //Logged in state
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
          //implement auto login for when page refreshes
@@ -136,7 +200,7 @@ angular.module('palingram')
             Auth.signin().then(function(status){
                 Tags.set(User.get().tags_id).then(function(stats){
                       Posts.set(Tags.get()).then(function(status){
-                          $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
+                          $rootScope.$broadcast('loading:end' , {"action":"signedIn" , msg : 'auto signed in successfully'});
                           next();
                      });
                 });
@@ -144,7 +208,7 @@ angular.module('palingram')
                   Auth.signin({"username":"palingramblog@gmail.com" , "password":"0000"}).then(function(status){
                       Tags.set(User.get().tags_id).then(function(status){
                             Posts.set(Tags.get()).then(function(status){
-                                $rootScope.$broadcast('loading:end' , {"action":"signedIn"});
+                                $rootScope.$broadcast('loading:end' , {"action":"signedIn" , msg : 'logged in as guest'});
                                 next();
                            });
                       });
@@ -154,7 +218,10 @@ angular.module('palingram')
             next();
          }
 
-        function next(){   
+        function next(){  
+           
+            $scope.writer = User.get().writer;
+            User.get().firstname =='guest' ? $scope.admin = false : $scope.admin = true ; 
             $scope.search = false; 
             $scope.nav = 'posts';
             
@@ -188,12 +255,12 @@ angular.module('palingram')
             };
 
             $scope.sendEmail = function(){
+                 $rootScope.$broadcast('loading:start' , {});
                  Auth.sendEmail('emailVerification').then(function(status){
-                     $scope.alert.visible = true;
-                     $scope.alert.message = status;
+                     $scope.alert.visible = false;
+                     $rootScope.$broadcast('loading:end' , {msg : status});
                  } , function(err){
-                     $scope.alert.visible = true;
-                     $scope.alert.message = err;
+                     $rootScope.$broadcast('loading:end' , {msg : err});
                  });
             };
 
@@ -250,8 +317,8 @@ angular.module('palingram')
 
          $scope.$on('favourites' ,  function(e , a){
             $rootScope.$broadcast('loading:start' , {});
-            Posts.setFavs(User.get().favourites).then(function(data){
-                 $rootScope.$broadcast('loading:end' , {});
+            Posts.setFavs(User.get().favourites , false).then(function(data){
+                 $rootScope.$broadcast('loading:end' , {msg : 'viewing favourites'});
                  $scope.posts = data;
             });
          });
@@ -260,7 +327,7 @@ angular.module('palingram')
             $rootScope.$broadcast('loading:start' , {});
             $scope.posts = Posts.get();
             $scope.tags = Tags.get();
-            $rootScope.$broadcast('loading:end' , {});
+            $rootScope.$broadcast('loading:end' , {msg : 'viewing all posts'});
          });
 
          $scope.$on('toggle:posts' ,  function(e , a){
@@ -290,7 +357,7 @@ angular.module('palingram')
                 Tags.update(post.tags , User.get().tags_id).then(function(result){
                     console.log(result);
                     $state.current.data.post = post;
-                    $rootScope.$broadcast('loading:end' , {});
+                    $rootScope.$broadcast('loading:end' , {msg : 'viewing post'});
                     $state.go('in.posts.post' , {id : post._id});
                 });
            };
@@ -317,13 +384,13 @@ angular.module('palingram')
 
                     Posts.set($scope.tags).then(
                         function(result){
-                            $rootScope.$broadcast('loading:end' , {});
+                            $rootScope.$broadcast('loading:end' , {msg : 'tag added'});
                             $scope.posts = Posts.get();
                         }
                     );
                }
                else{
-                  alert('tag not valid either the limit of ten tags has reached or the tag already exists');
+                  $rootScope.$broadcast('loading:end' , {msg : 'tags limit reached or alredy added'});
                }
            };
 
@@ -341,7 +408,7 @@ angular.module('palingram')
                              refresh();
                           }
                           else {
-                            $rootScope.$broadcast('loading:end' , {});
+                            $rootScope.$broadcast('loading:end' , {msg : 'tag deleted'});
                           }
                       },
                       function(err){
@@ -357,7 +424,7 @@ angular.module('palingram')
                   } 
                   else{
                       if(tag == 'general'){
-                          alert('already showing all posts');
+                          $rootScope.$broadcast('loading:end' , {msg : 'already showing all posts'});
                       }
                       else{
                          $scope.tags[0] = 'general';
@@ -382,13 +449,13 @@ angular.module('palingram')
                   $scope.tags = a.query;
                   Posts.set($scope.tags).then(
                       function(result){
-                          $rootScope.$broadcast('loading:end' , {});
+                          $rootScope.$broadcast('loading:end' , {msg : 'search complete'});
                           $scope.posts = Posts.get();
                       }
                   );
               }
               else {
-                alert('enter a valid search string');
+                 $rootScope.$broadcast('loading:end' , {msg : 'enter a valid search string'});
               }
            });
 
@@ -441,7 +508,7 @@ angular.module('palingram')
 
             Comments.get($scope.post.comments_id).then(function(comments){
                  $scope.comments = comments;
-                 $rootScope.$broadcast('loading:end' , {});
+                 $rootScope.$broadcast('loading:end' , {msg : 'action complete'});
             });
 
             //favourite handler
@@ -469,7 +536,7 @@ angular.module('palingram')
                      });
                  } 
                  else{
-                    alert('you cannot unfavourite your post');
+                    $rootScope.$broadcast('loading:end' , {msg : 'you cannot unfavourite your post'});
                  }                 
              };
 
@@ -486,7 +553,7 @@ angular.module('palingram')
               $scope.delete = function(){
                   $rootScope.$broadcast('loading:start' , {});
                   Posts.deleteArticle($scope.post).then(function(status){
-                      $rootScope.$broadcast('loading:end' , {});
+                      $rootScope.$broadcast('loading:end' , {msg : status});
                       $state.go('in.posts');
                   });
               };
@@ -518,7 +585,7 @@ angular.module('palingram')
                 var isMyPost = User.get().username == comment.username;
                 if(isMyPost){
                      Comments.deleteComment(comment).then(function(status){
-                        $rootScope.$broadcast('loading:end' , {});
+                        $rootScope.$broadcast('loading:end' , {msg : status});
                     });
                 }
                 else {
@@ -568,13 +635,12 @@ angular.module('palingram')
                  
                  if(permitted && User.get().firstname != 'guest'){
                    Comments.updateComment(temp).then(function(status){
-                       $rootScope.$broadcast('loading:end' , {});
+                       $rootScope.$broadcast('loading:end' , {msg:'voted successfully'});
                        var index = $scope.comments.indexOf(comment);
                        $scope.comments[index] = temp;
                    });
                  } else{
-                    $rootScope.$broadcast('loading:end' , {});
-                    alert('not allowed');
+                    $rootScope.$broadcast('loading:end' , {msg:'action not allowed'});
                  }
                  
             };
@@ -673,11 +739,11 @@ angular.module('palingram')
                 $rootScope.$broadcast('loading:start' , {});
                 Auth.logout().then(
                   function(status){
-                      $rootScope.$broadcast('loading:end' , {});
+                      $rootScope.$broadcast('loading:end' , {msg : status});
                       $state.go('out.homepage');
                   } ,
                   function(err){
-                      alert('something went wrong while doing logout');
+                      $rootScope.$broadcast('loading:end' , {msg : err});
                   }
                );
             };
@@ -778,7 +844,7 @@ angular.module('palingram')
                  if(option == 'new'){
                    $scope.post.views = 0;
                    Posts.post($scope.post).then(function(data){
-                      $rootScope.$broadcast('loading:end' , {});
+                      $rootScope.$broadcast('loading:end' , {msg : 'post saved successfully'});
                       User.get().favourites.push(data._id);
                    }, function(err){
                        alert('something went wrong');
@@ -787,7 +853,7 @@ angular.module('palingram')
                  else {
                     $scope.post.date = Date.now();
                     Posts.update($scope.post).then(function(result){
-                      $rootScope.$broadcast('loading:end' , {});
+                      $rootScope.$broadcast('loading:end' , {msg : 'post updated'});
                    }, function(err){
                        console.log(err);
                    });
@@ -795,4 +861,97 @@ angular.module('palingram')
             }
           };
         }
+   })
+
+   .controller('gamblrCtrl' , function($scope , $timeout, $q){
+          $scope.title = 'Gamblr.pw';
+          $scope.setting = false;
+          $scope.bankroll = 0;
+          $scope.basebet =  0;
+          $scope.lossAccumulator  = [];
+          $scope.completed = [];
+
+          $scope.currentbetTpl = {
+            stake : '0',
+            status: '',
+            gross : '0',
+            net : '0',
+            date: '',
+            played: false
+          };
+
+          $scope.currentBet = angular.copy($scope.currentbetTpl);
+
+          $scope.toggleSetting = function(){
+              $scope.setting = ! $scope.setting;
+          };
+
+          $scope.save = function(bankroll){
+              $scope.bankroll = bankroll;
+              $scope.setting = false;
+              $scope.basebet  = $scope.bankroll / 200;
+          };
+
+         
+          $scope.reset = function(){
+              $scope.currentBet = angular.copy($scope.currentbetTpl);
+              $scope.bankroll = 0;
+              $scope.basebet = 0;
+              $scope.odd = 0;
+              $scope.lossAccumulator  = [];
+              $scope.completed = [];
+          };
+
+          $scope.refresh = function(){
+              $scope.currentBet = angular.copy($scope.currentbetTpl);
+          };
+          
+          $scope.bet =  function(odd){
+              $scope.currentBet.stake =  $scope.stakeAggregator(odd);
+              $scope.currentBet.played = true;
+              $scope.bankroll -= $scope.currentBet.stake;
+          };
+           
+          $scope.record = function (status){
+               if($scope.currentBet.played){
+                   $scope.currentBet.status = status;
+                   $scope.currentBet.date =  Date.now();
+                   $scope.currentBet.gross = $scope.currentBet.stake * $scope.currentBet.odd;
+                   $scope.currentBet.net = $scope.currentBet.gross - $scope.currentBet.stake;
+
+                   if(! status){
+                       $scope.lossAccumulator.push($scope.currentBet.stake);
+                   } 
+                   else {
+                       $scope.bankroll += $scope.currentBet.gross; 
+                       $scope.lossAccumulator  = [];
+                       $scope.basebet  = $scope.bankroll/200;
+                   }
+
+                   $scope.completed .push(angular.copy($scope.currentBet));
+
+                   $scope.refresh();
+               } 
+               else {
+                   alert('No active bet slip');
+               }
+               
+          };
+          //************************Algorithm core************************//
+
+          $scope.stakeAggregator = function(odd){
+               $scope.currentBet.odd = odd;
+               if($scope.lossAccumulator.length == 0){
+                   return odd * $scope.basebet;
+               }
+               else {
+                   var totalLoss=0;
+                   angular.forEach($scope.lossAccumulator , function(loss){
+                        totalLoss+=loss;
+                   });
+
+                   return totalLoss / (odd - 1);
+               }
+          };
+
    });

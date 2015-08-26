@@ -6552,18 +6552,14 @@ body a {
 }
 body .loader {
   position: fixed;
-  min-height: 5em;
-  background: rgba(0, 0, 0, 0.7);
+  padding: 1em 2em;
+  margin-left: 40%;
+  color: #880000;
+  background-color: rgba(255, 255, 102, 0.9) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   z-index: 2000000;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 3px 3px;
   text-align: center;
-}
-body .loader i {
-  font-size: 3em;
-  color: #fff;
-}
-body .loader span {
-  color: #fff;
 }
 .homepage {
   padding: 0;
@@ -6628,8 +6624,72 @@ body .loader span {
   background-color: #ccc;
   min-height: 30em;
 }
-.homepage .body .feature:hover {
-  color: #337ab7;
+.homepage .body .feature .questioneer {
+  color: #fff;
+  padding: .5em;
+  border-right: 1px solid #357935;
+  background: linear-gradient(75deg, #337ab7, #78acd9 50%, #a0c4e4);
+  min-height: 50em;
+}
+.homepage .body .feature .questioneer input,
+.homepage .body .feature .questioneer textarea {
+  margin-bottom: 1em;
+}
+.homepage .body .feature .questioneer textarea {
+  min-height: 10em;
+}
+.homepage .body .feature .questioneer .btn {
+  margin-right: .5em;
+  margin-bottom: .5em;
+}
+.homepage .body .feature .questioneer .btn:hover {
+  color: #ffffff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.homepage .body .feature .questioneer .btn:hover:hover,
+.homepage .body .feature .questioneer .btn:hover:focus,
+.homepage .body .feature .questioneer .btn:hover.focus,
+.homepage .body .feature .questioneer .btn:hover:active,
+.homepage .body .feature .questioneer .btn:hover.active,
+.open > .dropdown-toggle.homepage .body .feature .questioneer .btn:hover {
+  color: #ffffff;
+  background-color: #449d44;
+  border-color: #398439;
+}
+.homepage .body .feature .questioneer .btn:hover:active,
+.homepage .body .feature .questioneer .btn:hover.active,
+.open > .dropdown-toggle.homepage .body .feature .questioneer .btn:hover {
+  background-image: none;
+}
+.homepage .body .feature .questioneer .btn:hover.disabled,
+.homepage .body .feature .questioneer .btn:hover[disabled],
+fieldset[disabled] .homepage .body .feature .questioneer .btn:hover,
+.homepage .body .feature .questioneer .btn:hover.disabled:hover,
+.homepage .body .feature .questioneer .btn:hover[disabled]:hover,
+fieldset[disabled] .homepage .body .feature .questioneer .btn:hover:hover,
+.homepage .body .feature .questioneer .btn:hover.disabled:focus,
+.homepage .body .feature .questioneer .btn:hover[disabled]:focus,
+fieldset[disabled] .homepage .body .feature .questioneer .btn:hover:focus,
+.homepage .body .feature .questioneer .btn:hover.disabled.focus,
+.homepage .body .feature .questioneer .btn:hover[disabled].focus,
+fieldset[disabled] .homepage .body .feature .questioneer .btn:hover.focus,
+.homepage .body .feature .questioneer .btn:hover.disabled:active,
+.homepage .body .feature .questioneer .btn:hover[disabled]:active,
+fieldset[disabled] .homepage .body .feature .questioneer .btn:hover:active,
+.homepage .body .feature .questioneer .btn:hover.disabled.active,
+.homepage .body .feature .questioneer .btn:hover[disabled].active,
+fieldset[disabled] .homepage .body .feature .questioneer .btn:hover.active {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.homepage .body .feature .questioneer .btn:hover .badge {
+  color: #5cb85c;
+  background-color: #ffffff;
+}
+.homepage .body .feature .questioneer .interest {
+  background: #fff;
+  color: #000;
 }
 @media (max-width: 768px) {
   .homepage .body .feature {
@@ -6757,7 +6817,10 @@ nav {
   color: #337ab7 !important;
 }
 .navbar li .active {
-  border-top: 5px solid #337ab7;
+  border: 4px solid #5bc0de;
+  padding: .6em .3em;
+  margin-top: .3em;
+  border-radius: 10px;
 }
 .subnav {
   min-height: 4.2em;
@@ -6792,7 +6855,7 @@ nav {
   min-height: 60em;
 }
 .posts-container {
-  margin-top: 57px;
+  margin-top: 52px;
   padding: 0;
   padding-top: 2em;
 }
@@ -6955,9 +7018,6 @@ nav {
 .article #comment .comment-body .vote-box > div:last-child:hover {
   color: #d9534f;
 }
-.side-items {
-  padding-right: 0;
-}
 .side-items .ad-box {
   background-color: #ccf;
   height: 20em;
@@ -6985,7 +7045,7 @@ nav {
 .tag-buttons .btn {
   margin-right: .5em;
   margin-bottom: .5em;
-  border-radius: 0px;
+  border-radius: 5px;
 }
 .tag-buttons .btn:hover {
   color: #ffffff;
@@ -7115,7 +7175,7 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
   border-radius: 0px;
   height: 3.7em;
   position: fixed;
-  top: 70px;
+  top: 60px;
   z-index: 100002;
 }
 .tool-set .pager {
