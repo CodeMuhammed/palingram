@@ -100,5 +100,5 @@ angular.module('palingram' , ['ngResource' , 'ngAnimate' ,'mgcrea.ngStrap' , 'ng
          data :{}  
      });
     
-     $urlRouterProvider.otherwise('/out/gamblr');
+     $urlRouterProvider.otherwise('/out/homepage');
 }); 

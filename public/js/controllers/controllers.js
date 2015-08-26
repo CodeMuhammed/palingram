@@ -195,7 +195,10 @@ angular.module('palingram')
    //Logged in state
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
          //implement auto login for when page refreshes
-         if(! Auth.isAuth()){
+         if(Auth.isAuth() && User.get().firstname != 'guest'){
+            next();
+         }
+         else {
             $rootScope.$broadcast('loading:start' , {});
             Auth.signin().then(function(status){
                 Tags.set(User.get().tags_id).then(function(stats){
@@ -214,9 +217,7 @@ angular.module('palingram')
                       });
                   });
             });
-         } else {
-            next();
-         }
+         } 
 
         function next(){  
            
