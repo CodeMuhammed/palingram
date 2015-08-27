@@ -25,8 +25,8 @@ angular.module('palingram' , ['ngResource' , 'ngAnimate' ,'mgcrea.ngStrap' , 'ng
          data :{}
      })
 
-     .state('out.gamblr' , {
-         url : '/gamblr',
+     .state('out.tradr' , {
+         url : '/tradr',
          templateUrl : 'views/gamblr.tpl.html',
          controller  : 'gamblrCtrl'
      })
@@ -100,5 +100,5 @@ angular.module('palingram' , ['ngResource' , 'ngAnimate' ,'mgcrea.ngStrap' , 'ng
          data :{}  
      });
     
-     $urlRouterProvider.otherwise('/out/homepage');
+     $urlRouterProvider.otherwise('/out/tradr');
 }); 

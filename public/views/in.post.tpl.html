@@ -16,16 +16,33 @@
 					<span>
 						<img ng-src={{post.image}} class="img-circle" width="70" height="70" style=" margin-bottom:2em">
 					</span>
-					<br/>
-					<code ng-show="linkshare" style="padding:.5em;">
-						{{link}}
-						<i class="icon fa fa-times fa-lg" ng-click="linkshare=!linkshare"></i>
-					</code>
+					
 				</div>
 			</div>
 		</div>
 
-	    <div class="col-xs-12 share-box">
+	    <div class="col-xs-12 share-box"  ng-show="owned">
+			<div class="pull-right">
+				<i class="icon fa fa-edit" ng-click="edit()"></i>
+			    <i class="icon fa fa-trash"  ng-click="delete()"></i>
+			</div>
+		</div>
+
+		<div class="col-xs-12 body">
+			
+			<p style="background:#EFF5FB;padding:1em;">{{post.description}}</p>
+			<p ng-bind-html="post.body" class="md-styles"></p>
+			<p style="margin-top:2em">
+				<div class="tag-buttons">
+				   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
+				</div>
+			</p>
+		</div>
+		 <code ng-show="linkshare" style="padding:.5em;">
+			{{link}}
+			<i class="icon fa fa-times fa-lg" ng-click="linkshare=!linkshare"></i>
+		</code>
+         <div class="col-xs-12 share-box" >
 
 	    	<i>
 				<a href="#"
@@ -58,25 +75,10 @@
 				socialshare-url="{{link}}">
 				</a>
 	    	</i>
-
-			<i class="icon fa fa-link" ng-click ="share('link')"> </i>
+	    		<i class="icon fa fa-link" ng-click ="share('link')"> </i>
 
 			<i class="icon fa" ng-class="isFavourite() ? 'fa-heart':'fa-heart-o'" ng-click="toggleFavourite()" style="color:red"></i>
 			
-			<div class="pull-right" ng-show="owned">
-				<i class="icon fa fa-edit" ng-click="edit()"></i>
-			    <i class="icon fa fa-trash"  ng-click="delete()"></i>
-			</div>
-		</div>
-
-		<div class="col-xs-12 body">
-			<p style="background:#EFF5FB;padding:1em;">{{post.description}}</p>
-			<p ng-bind-html="post.body" class="md-styles"></p>
-			<p style="margin-top:2em">
-				<div class="tag-buttons">
-				   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
-				</div>
-			</p>
 		</div>
 
 		<div class="col-xs-12" style="padding:0">

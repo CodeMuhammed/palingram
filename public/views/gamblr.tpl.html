@@ -1,5 +1,6 @@
 <div style="padding:1em">
 	<div class="side-menu panel panel-default col-sm-4 col-sm-offset-4" style="padding:0">
+		<a ui-sref="out.homepage">exit</a>
 		<div class="panel-heading">
 			<button class="btn btn-default pull-">{{title}}</button>
 			<button class="btn btn-default pull-right" ng-click="toggleSetting()">
@@ -11,7 +12,7 @@
 		</div>
 		<div class="panel-heading" ng-show = "setting">
 			  <div class="input-group">
-				  <input class="form-control input-tag" placeholder="Initial amount here" ng-model="NBR" style="border-radius:0;">
+				  <input class="form-control input-tag" placeholder="Initial capital here" ng-model="NBR" style="border-radius:0;">
 				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
 					<i ng-click="save(NBR)">save</i>
 				  </span>
@@ -20,13 +21,14 @@
 		<div class="panel-heading" style="background-color:#fff;">
 			<button class="btn btn-primary">{{bankroll | currency:'NGN '}}</button>
 
-			<button class="btn btn-default pull-right">{{basebet | currency:'NGN '}}</button>
+			<!--<button class="btn btn-default pull-right">{{basebet | currency:'NGN '}}</button>-->
+			<button class="btn btn-default pull-right">{{counter}}</button>
 		</div>
 		<div class="panel-heading" style=" background-color: rgba(255 , 255  , 102 , .9)">
 			 <div class="input-group">
-				  <input class="form-control input-tag" placeholder="Enter odd here" ng-model="odd" style="border-radius:0;" >
+				  <input class="form-control input-tag" placeholder="Enter pip here" ng-model="odd" style="border-radius:0;" >
 				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
-					<i class="icon fa fa-plus" ng-click = "bet(odd)"> bet</i>
+					<i class="icon fa fa-plus" ng-click = "bet(odd)"> trade</i>
 				  </span>
 			 </div>
 		</div>
@@ -36,8 +38,8 @@
 			  		<span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(false)">
 					<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:red"></i>
 				  </span>
-				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Ammount to bet displays here"
-				  ng-model="currentBet.stake">
+				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Investment displays here"
+				  ng-model="currentBet.stake" read-only>
 				  <span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(true)">
 					<i class="icon fa fa-check" style="font-size:1.5em; font-weight:bold; color:green"></i>
 				  </span>
@@ -62,5 +64,5 @@
 			  </div>
 		 </div>
 	 </div>
-	 <a ui-sref="out.homepage">exit</a>
+	 
 </div>

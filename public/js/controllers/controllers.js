@@ -537,6 +537,7 @@ angular.module('palingram')
                      });
                  } 
                  else{
+                    $rootScope.$broadcast('loading:start' , {});
                     $rootScope.$broadcast('loading:end' , {msg : 'you cannot unfavourite your post'});
                  }                 
              };
@@ -865,7 +866,8 @@ angular.module('palingram')
    })
 
    .controller('gamblrCtrl' , function($scope , $timeout, $q){
-          $scope.title = 'Gamblr.pw';
+          $scope.counter = 0;
+          $scope.title = 'Tradr.pw';
           $scope.setting = false;
           $scope.bankroll = 0;
           $scope.basebet =  0;
@@ -890,7 +892,7 @@ angular.module('palingram')
           $scope.save = function(bankroll){
               $scope.bankroll = bankroll;
               $scope.setting = false;
-              $scope.basebet  = $scope.bankroll / 200;
+              $scope.basebet  = ($scope.bankroll/200) + 5;
           };
 
          
@@ -908,9 +910,14 @@ angular.module('palingram')
           };
           
           $scope.bet =  function(odd){
-              $scope.currentBet.stake =  $scope.stakeAggregator(odd);
-              $scope.currentBet.played = true;
-              $scope.bankroll -= $scope.currentBet.stake;
+              if($scope.counter == 10){
+                  alert('You have already won 10 games !!');
+              } else {
+                $scope.currentBet.stake =  $scope.stakeAggregator(odd);
+                $scope.currentBet.played = true;
+                $scope.bankroll -= $scope.currentBet.stake;
+              }
+             
           };
            
           $scope.record = function (status){
@@ -924,9 +931,10 @@ angular.module('palingram')
                        $scope.lossAccumulator.push($scope.currentBet.stake);
                    } 
                    else {
+                       $scope.counter ++;
                        $scope.bankroll += $scope.currentBet.gross; 
                        $scope.lossAccumulator  = [];
-                       $scope.basebet  = $scope.bankroll/200;
+                       $scope.basebet  = ($scope.bankroll/200) + 5;
                    }
 
                    $scope.completed .push(angular.copy($scope.currentBet));
@@ -943,15 +951,16 @@ angular.module('palingram')
           $scope.stakeAggregator = function(odd){
                $scope.currentBet.odd = odd;
                if($scope.lossAccumulator.length == 0){
-                   return odd * $scope.basebet;
+                   var temp = Math.floor($scope.basebet / (odd - 1.01));
+                   return temp;
                }
                else {
                    var totalLoss=0;
                    angular.forEach($scope.lossAccumulator , function(loss){
                         totalLoss+=loss;
                    });
-
-                   return totalLoss / (odd - 1);
+                   var temp =  Math.floor( (totalLoss +  $scope.basebet) / (odd - 1.01));
+                   return temp;
                }
           };
 
