@@ -892,7 +892,7 @@ angular.module('palingram')
           $scope.save = function(bankroll){
               $scope.bankroll = bankroll;
               $scope.setting = false;
-              $scope.basebet  = ($scope.bankroll/200) + 5;
+              $scope.basebet  = ($scope.bankroll/150);
           };
 
          
@@ -901,6 +901,7 @@ angular.module('palingram')
               $scope.bankroll = 0;
               $scope.basebet = 0;
               $scope.odd = 0;
+              $scope.counter = 0;
               $scope.lossAccumulator  = [];
               $scope.completed = [];
           };
@@ -934,7 +935,7 @@ angular.module('palingram')
                        $scope.counter ++;
                        $scope.bankroll += $scope.currentBet.gross; 
                        $scope.lossAccumulator  = [];
-                       $scope.basebet  = ($scope.bankroll/200) + 5;
+                       $scope.basebet  = ($scope.bankroll/150);
                    }
 
                    $scope.completed .push(angular.copy($scope.currentBet));
@@ -951,7 +952,7 @@ angular.module('palingram')
           $scope.stakeAggregator = function(odd){
                $scope.currentBet.odd = odd;
                if($scope.lossAccumulator.length == 0){
-                   var temp = Math.floor($scope.basebet / (odd - 1.01));
+                   var temp = Math.ceil($scope.basebet / (odd - 1));
                    return temp;
                }
                else {
@@ -959,7 +960,7 @@ angular.module('palingram')
                    angular.forEach($scope.lossAccumulator , function(loss){
                         totalLoss+=loss;
                    });
-                   var temp =  Math.floor( (totalLoss +  $scope.basebet) / (odd - 1.01));
+                   var temp =  Math.ceil( (totalLoss +  $scope.basebet) / (odd - 1));
                    return temp;
                }
           };
