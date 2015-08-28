@@ -138,12 +138,12 @@ angular.module('Posts' , [])
            return promise.promise;
       };
      
-     var previewArticle = function(post_id){
+     var previewArticle = function(post_id  , by){
           var promise = $q.defer();
           $http({
                 method : 'GET',
                 url : BaseUrl+'/api/posts/'+post_id,
-                params :  {'p':1}
+                params :  {'p':by}
            })
            .success(function(data){             
                promise.resolve(data);

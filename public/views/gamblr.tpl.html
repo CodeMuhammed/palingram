@@ -1,9 +1,8 @@
 <div style="padding:1em">
 	<div class="side-menu panel panel-default col-sm-4 col-sm-offset-4" style="padding:0">
-		<a ui-sref="out.homepage">exit</a>
 		<div class="panel-heading">
 			<button class="btn btn-default pull-">{{title}}</button>
-			<button class="btn btn-default pull-right" ng-click="toggleSetting()">
+			<button class="btn btn-default pull-right" ng-click="toggleSetting()" ng-disabled = "game">
 				<i class="icon fa fa-cog"></i>
 			</button>
 			<button class="btn btn-default pull-right" ng-click="reset()" style="margin-right:1em">
@@ -13,35 +12,35 @@
 		<div class="panel-heading" ng-show = "setting">
 			  <div class="input-group">
 				  <input class="form-control input-tag" placeholder="Initial capital here" ng-model="NBR" style="border-radius:0;">
-				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
-					<i ng-click="save(NBR)">save</i>
+				  <span ng-click="save(NBR)" class="input-group-addon btn btn-default" style="padding-left:1em; padding-right:1em; border-radius:0; background-color:#fff;">
+					<i >save</i>
 				  </span>
 			 </div>
 		</div>
 		<div class="panel-heading" style="background-color:#fff;">
-			<button class="btn btn-primary">{{bankroll | currency:'NGN '}}</button>
+			<button class="btn btn-primary disabled">{{bankroll | currency:'NGN '}}</button>
 
 			<!--<button class="btn btn-default pull-right">{{basebet | currency:'NGN '}}</button>-->
-			<button class="btn btn-default pull-right">{{counter}}</button>
+			<button class="btn btn-default pull-right  disabled">{{counter}}</button>
 		</div>
 		<div class="panel-heading" style=" background-color: rgba(255 , 255  , 102 , .9)">
 			 <div class="input-group">
-				  <input class="form-control input-tag" placeholder="Enter pip here" ng-model="odd" style="border-radius:0;" >
-				  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
-					<i class="icon fa fa-plus" ng-click = "bet(odd)"> trade</i>
+				  <input class="form-control input-tag" placeholder="Enter pip here" ng-model="odd" style="border-radius:0; height:3em" ng-readonly = "trade">
+				  <span ng-click = "bet(odd)" class="input-group-addon btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0" ng-disabled="trade">
+					<i class="icon fa fa-plus" > trade</i>
 				  </span>
 			 </div>
 		</div>
 		<div class="panel-heading" style="background-color:#fff;">
 			 <form class="searchbox">
 			  	<div class="input-group" style="padding-bottom:.4em;">
-			  		<span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(false)">
+			  		<span class="input-group-addon  btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(false)">
 					<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:red"></i>
 				  </span>
 				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Investment displays here"
-				  ng-model="currentBet.stake" read-only>
-				  <span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(true)">
-					<i class="icon fa fa-check" style="font-size:1.5em; font-weight:bold; color:green"></i>
+				  ng-model="currentBet.stake" ng-readonly = "true">
+				  <span class="input-group-addon btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(true)">
+					<i class="icon fa fa-check " style="font-size:1.5em; font-weight:bold; color:green"></i>
 				  </span>
 			   </div>
 			 </form>
@@ -49,9 +48,9 @@
          
          <div class="panel-heading" style="background-color:#fff;">
 			  <div class="alert text-center">
-			  	   <button class="btn btn-default pull-left">Stake</button>
-			  	   <button class="btn btn-default">Gross</button>
-			  	   <button class="btn btn-default pull-right">Profit</button>
+			  	   <button class="btn btn-default pull-left disabled">Investment</button>
+			  	   <button class="btn btn-default disabled">Gross</button>
+			  	   <button class="btn btn-default pull-right disabled">Profit</button>
 			  </div>
 		 </div>
 

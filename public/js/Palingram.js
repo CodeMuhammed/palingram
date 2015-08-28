@@ -1,4 +1,4 @@
-angular.module('palingram' , ['ngResource' , 'ngAnimate' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
+angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 // cors configurations to enable consuming the rest api
 .config(function($httpProvider){
    $httpProvider.defaults.useXDomain = true;
@@ -100,5 +100,5 @@ angular.module('palingram' , ['ngResource' , 'ngAnimate' ,'mgcrea.ngStrap' , 'ng
          data :{}  
      });
     
-     $urlRouterProvider.otherwise('/out/tradr');
+     $urlRouterProvider.otherwise('/in/posts');
 }); 

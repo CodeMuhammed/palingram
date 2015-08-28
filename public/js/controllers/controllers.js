@@ -477,7 +477,7 @@ angular.module('palingram')
         }
         
         function init(){
-            Posts.previewArticle($state.params.id).then(function(data){
+            Posts.previewArticle($state.params.id , User.get().username).then(function(data){
                $state.current.data.post = data;
                next();
             });
@@ -871,8 +871,11 @@ angular.module('palingram')
           $scope.setting = false;
           $scope.bankroll = 0;
           $scope.basebet =  0;
+          $scope.odd = '';
           $scope.lossAccumulator  = [];
           $scope.completed = [];
+          $scope.trade = false;
+          $scope.game = false;
 
           $scope.currentbetTpl = {
             stake : '0',
@@ -890,9 +893,16 @@ angular.module('palingram')
           };
 
           $scope.save = function(bankroll){
-              $scope.bankroll = bankroll;
-              $scope.setting = false;
-              $scope.basebet  = ($scope.bankroll/150);
+              if(bankroll >= 15800){
+                 $scope.game = true;
+                 $scope.bankroll = bankroll;
+                 $scope.setting = false;
+                 $scope.basebet  = ($scope.bankroll/150);
+              }
+              else {
+                  alert('insufficient capital'); 
+              }
+             
           };
 
          
@@ -900,10 +910,12 @@ angular.module('palingram')
               $scope.currentBet = angular.copy($scope.currentbetTpl);
               $scope.bankroll = 0;
               $scope.basebet = 0;
-              $scope.odd = 0;
+              $scope.odd = '';
               $scope.counter = 0;
               $scope.lossAccumulator  = [];
               $scope.completed = [];
+              $scope.trade = false;
+              $scope.game = false;
           };
 
           $scope.refresh = function(){
@@ -913,7 +925,11 @@ angular.module('palingram')
           $scope.bet =  function(odd){
               if($scope.counter == 10){
                   alert('You have already won 10 games !!');
-              } else {
+              } 
+              else if($scope.odd <= 1 ){
+                  alert('invalid pip');
+              }else {
+                $scope.trade = true;
                 $scope.currentBet.stake =  $scope.stakeAggregator(odd);
                 $scope.currentBet.played = true;
                 $scope.bankroll -= $scope.currentBet.stake;
@@ -922,6 +938,8 @@ angular.module('palingram')
           };
            
           $scope.record = function (status){
+               $scope.trade = false;
+               $scope.odd  = '';
                if($scope.currentBet.played){
                    $scope.currentBet.status = status;
                    $scope.currentBet.date =  Date.now();
@@ -943,7 +961,7 @@ angular.module('palingram')
                    $scope.refresh();
                } 
                else {
-                   alert('No active bet slip');
+                   alert('No active trade');
                }
                
           };
