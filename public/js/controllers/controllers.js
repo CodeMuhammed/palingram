@@ -882,7 +882,7 @@ angular.module('palingram')
           $scope.completed = [];
           $scope.trade = false;
           $scope.game = false;
-          $scope.teams = ['VFL Warri' , 'VFL Lagos' , 'VFL Ibadan'];
+          $scope.teams = ['VFL Warri' , 'VFL Kaduna' , 'VFL Sagamu' , 'VFL Abuja' , 'VFL Lagos' , 'VFL Makurdi'];
           $scope.teamMenu = false;
           $scope.selectedTeam = 'Select Team';
 
