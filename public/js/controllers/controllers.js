@@ -3,7 +3,12 @@ angular.module('palingram')
        $scope.loading = false;
       
        $rootScope.$on('loading:start' , function(e , a){
-            $scope.message = '';
+            if(a.msg){
+                $scope.message = a.msg;
+            }
+            else {
+                $scope.message = '';
+            }
             $scope.loading = true;
        });
        
@@ -865,10 +870,11 @@ angular.module('palingram')
         }
    })
 
-   .controller('gamblrCtrl' , function($scope , $timeout, $q){
-          $scope.counter = 0;
+   .controller('gamblrCtrl' , function($scope , $timeout, $rootScope , $q , $http  , BaseUrl){
           $scope.title = 'Tradr.pw';
           $scope.setting = false;
+
+          $scope.counter = 0;
           $scope.bankroll = 0;
           $scope.basebet =  0;
           $scope.odd = '';
@@ -876,6 +882,9 @@ angular.module('palingram')
           $scope.completed = [];
           $scope.trade = false;
           $scope.game = false;
+          $scope.teams = ['VFL Warri' , 'VFL Lagos' , 'VFL Ibadan'];
+          $scope.teamMenu = false;
+          $scope.selectedTeam = 'Select Team';
 
           $scope.currentbetTpl = {
             stake : '0',
@@ -894,10 +903,17 @@ angular.module('palingram')
 
           $scope.save = function(bankroll){
               if(bankroll >= 15800){
-                 $scope.game = true;
-                 $scope.bankroll = bankroll;
-                 $scope.setting = false;
-                 $scope.basebet  = ($scope.bankroll/150);
+                 if( $scope.selectedTeam == 'Select Team'){
+                     alert('please select a team first');
+                 }
+                 else {
+
+
+                   $scope.game = true;
+                   $scope.bankroll = bankroll;
+                   $scope.setting = false;
+                   $scope.basebet  = ($scope.bankroll/150); 
+                 }
               }
               else {
                   alert('insufficient capital'); 
@@ -916,6 +932,8 @@ angular.module('palingram')
               $scope.completed = [];
               $scope.trade = false;
               $scope.game = false;
+              $scope.selectedTeam = 'Select Team';
+              $scope.teamMenu = false;
           };
 
           $scope.refresh = function(){
@@ -924,7 +942,13 @@ angular.module('palingram')
           
           $scope.bet =  function(odd){
               if($scope.counter == 10){
-                  alert('You have already won 10 games !!');
+                  $rootScope.$broadcast('loading:start' , {msg : 'updating results on server....'});
+                  $scope.updateTradrServer().then(function(status){
+                      $rootScope.$broadcast('loading:end' , {msg : status});
+                      $scope.reset();
+                  } , function(err){
+                      $rootScope.$broadcast('loading:end' , {msg : err});
+                  });
               } 
               else if($scope.odd <= 1 ){
                   alert('invalid pip');
@@ -956,7 +980,7 @@ angular.module('palingram')
                        $scope.basebet  = ($scope.bankroll/150);
                    }
 
-                   $scope.completed .push(angular.copy($scope.currentBet));
+                   $scope.completed.push(angular.copy($scope.currentBet));
 
                    $scope.refresh();
                } 
@@ -982,5 +1006,40 @@ angular.module('palingram')
                    return temp;
                }
           };
+
+        //Team selecctor
+         $scope.toggleTeamMenu = function(){
+              $scope.teamMenu = !$scope.teamMenu;
+         }
+
+         $scope.selectTeam = function (team){
+             $scope.selectedTeam = team;
+             $scope.teamMenu = false;
+         };
+
+         //Data synchroniser
+        $scope.updateTradrServer = function(){
+            var promise = $q.defer();
+
+            var query = {
+               bets : angular.copy($scope.completed),
+               team : $scope.selectedTeam,
+               date : Date.now()
+            };
+
+            $http({
+               method : 'POST',
+               url : BaseUrl+'/tradr/update',
+               data : query
+            })
+            .success(function(result){
+                promise.resolve(result);
+            })
+            .error(function(err){
+                promise.resolve(err);
+            });
+            
+            return promise.promise;
+        };
 
    });

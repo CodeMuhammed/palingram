@@ -1,11 +1,26 @@
 <div style="padding:1em">
 	<div class="side-menu panel panel-default col-sm-4 col-sm-offset-4" style="padding:0">
-		<div class="panel-heading">
-			<button class="btn btn-default pull-">{{title}}</button>
-			<button class="btn btn-default pull-right" ng-click="toggleSetting()" ng-disabled = "game">
+		<div class="panel-heading text-center">
+			<button class="btn btn-default btn-sm pull-left">{{title}}</button>
+			<!-- Split button -->
+			<div class="btn-group" >
+				  <button type="button" class="btn btn-default btn-sm" ng-click="toggleTeamMenu()" ng-disabled = "game">
+				  	{{selectedTeam}} 
+				  	<i class="caret"></i>
+				  </button>
+				  <div class="dropdown" ng-class="{'open' : teamMenu}">
+				  	<ul class="dropdown-menu">
+				    <li ng-repeat="team in teams" ng-click = "selectTeam(team)">
+				    	<a>{{team}}</a>
+				    </li>
+				  </ul>
+				  </div>
+				  
+			</div>
+			<button class="btn btn-default pull-right btn-sm" ng-click="toggleSetting()" ng-disabled = "game">
 				<i class="icon fa fa-cog"></i>
 			</button>
-			<button class="btn btn-default pull-right" ng-click="reset()" style="margin-right:1em">
+			<button class="btn btn-default pull-right btn-sm" ng-click="reset()" style="margin-right:1em">
 				<i class="icon fa fa-spinner"></i>
 			</button>
 		</div>
@@ -18,10 +33,10 @@
 			 </div>
 		</div>
 		<div class="panel-heading" style="background-color:#fff;">
-			<button class="btn btn-primary disabled">{{bankroll | currency:'NGN '}}</button>
+			<span class=""><b>{{bankroll | currency:'NGN '}}</b></span>
 
 			<!--<button class="btn btn-default pull-right">{{basebet | currency:'NGN '}}</button>-->
-			<button class="btn btn-default pull-right  disabled">{{counter}}</button>
+			<span class="pull-right"><b>Won {{counter}}</b></span>
 		</div>
 		<div class="panel-heading" style=" background-color: rgba(255 , 255  , 102 , .9)">
 			 <div class="input-group">
@@ -37,8 +52,8 @@
 			  		<span class="input-group-addon  btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(false)">
 					<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:red"></i>
 				  </span>
-				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Investment displays here"
-				  ng-model="currentBet.stake" ng-readonly = "true">
+				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em; box-shadow:none" placeholder="Investment displays here"
+				  ng-model="currentBet.stake" ng-readonly = "true" >
 				  <span class="input-group-addon btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(true)">
 					<i class="icon fa fa-check " style="font-size:1.5em; font-weight:bold; color:green"></i>
 				  </span>
