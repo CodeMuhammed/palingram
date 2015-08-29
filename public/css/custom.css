@@ -7231,6 +7231,14 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
     border-top: none;
   }
 }
+.tradr-results {
+  padding-left: .05em;
+  padding-right: .05em;
+}
+.tradr-results .alert {
+  padding-left: .05em;
+  padding-right: .05em;
+}
 @media (max-width: 991px) {
   .tradr-results .btn {
     padding: 1px 5px !important;
