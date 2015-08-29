@@ -941,7 +941,7 @@ angular.module('palingram')
           };
           
           $scope.bet =  function(odd){
-              if($scope.counter == 10){
+              if($scope.counter == 8){
                   $rootScope.$broadcast('loading:start' , {msg : 'updating results on server....'});
                   $scope.updateTradrServer().then(function(status){
                       $rootScope.$broadcast('loading:end' , {msg : status});
