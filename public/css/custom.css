@@ -7231,6 +7231,14 @@ fieldset[disabled] .tag-buttons .btn:hover.active {
     border-top: none;
   }
 }
+@media (max-width: 991px) {
+  .tradr-results .btn {
+    padding: 1px 5px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+    border-radius: 3px !important;
+  }
+}
 /*
  * Style tweaks
  * --------------------------------------------------
