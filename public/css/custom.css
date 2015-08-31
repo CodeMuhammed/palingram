@@ -6691,6 +6691,7 @@ fieldset[disabled] .homepage .body .feature .questioneer .btn:hover.active {
 .homepage .body .feature .questioneer .interest {
   background: #fff;
   color: #000;
+  outline: none;
 }
 @media (max-width: 768px) {
   .homepage .body .feature {
@@ -6870,10 +6871,13 @@ nav {
   background: #fff;
   padding: 0;
 }
+.posts-container .side-menu .wobble:hover a {
+  color: #fff;
+  font-size: 1.2em;
+}
 .posts-body {
   margin-bottom: 0;
   padding: 0;
-  border-bottom: 3px solid #337ab7;
   box-shadow: none;
   padding-bottom: 1em;
 }
@@ -6886,7 +6890,7 @@ nav {
 .posts-body .panel-body .img-div {
   min-height: 20em;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 .posts-body .panel-body .content {
   padding-left: 0;
@@ -6899,14 +6903,12 @@ nav {
   font-size: 1.7em;
   color: #555555;
 }
-.posts-body:hover {
-  border-bottom: 3px solid #f0ad4e;
-}
 .article {
   background: #fff;
   padding-left: 0;
   padding-right: 0;
   margin-top: 30px;
+  box-shadow: 0 0 .4em #ccc;
 }
 @media (max-width: 991px) {
   .article {
@@ -6914,12 +6916,12 @@ nav {
   }
 }
 .article .header {
-  height: 30em;
   padding: 0;
+  position: relative;
 }
 .article .header .inner {
   height: 30em;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .article .header .inner .text {
   text-align: center;
@@ -6929,8 +6931,24 @@ nav {
 .article .header .inner .text h1 {
   font-size: 3em;
 }
-.article .share-box {
-  background: #ccc;
+.article .header .inner .author-icons {
+  padding-right: 1em;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.article .header .inner .author-icons i {
+  font-size: 3em;
+  color: #fff;
+}
+.article .header .inner .author-icons i:first-child {
+  margin-right: .5em;
+}
+.article .header .inner .author-icons .fa-edit:hover {
+  color: #5cb85c;
+}
+.article .header .inner .author-icons .fa-times:hover {
+  color: #d9534f;
 }
 .article .share-box i {
   padding: .5em;
@@ -6938,6 +6956,12 @@ nav {
 }
 .article .share-box i:hover {
   color: #337ab7;
+}
+.article .share-box i a {
+  text-decoration: none;
+}
+.article .share-box .des {
+  font-size: 1.2em;
 }
 .article .body {
   margin-top: 2em;
@@ -6975,7 +6999,7 @@ nav {
   margin-top: -1px;
 }
 .article #comment {
-  padding: 1em;
+  padding: 1em 0;
 }
 .article #comment hr {
   padding: 1em;
@@ -7043,54 +7067,58 @@ nav {
   }
 }
 .tag-buttons .btn {
+  color: #333333;
+  background-color: #e7e7e7;
+  border-color: #dbdbdb;
   margin-right: .5em;
   margin-bottom: .5em;
   border-radius: 5px;
 }
-.tag-buttons .btn:hover {
-  color: #ffffff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+.tag-buttons .btn:hover,
+.tag-buttons .btn:focus,
+.tag-buttons .btn.focus,
+.tag-buttons .btn:active,
+.tag-buttons .btn.active,
+.open > .dropdown-toggle.tag-buttons .btn {
+  color: #333333;
+  background-color: #cecece;
+  border-color: #bcbcbc;
 }
-.tag-buttons .btn:hover:hover,
-.tag-buttons .btn:hover:focus,
-.tag-buttons .btn:hover.focus,
-.tag-buttons .btn:hover:active,
-.tag-buttons .btn:hover.active,
-.open > .dropdown-toggle.tag-buttons .btn:hover {
-  color: #ffffff;
-  background-color: #ec971f;
-  border-color: #d58512;
-}
-.tag-buttons .btn:hover:active,
-.tag-buttons .btn:hover.active,
-.open > .dropdown-toggle.tag-buttons .btn:hover {
+.tag-buttons .btn:active,
+.tag-buttons .btn.active,
+.open > .dropdown-toggle.tag-buttons .btn {
   background-image: none;
 }
-.tag-buttons .btn:hover.disabled,
-.tag-buttons .btn:hover[disabled],
+.tag-buttons .btn.disabled,
+.tag-buttons .btn[disabled],
+fieldset[disabled] .tag-buttons .btn,
+.tag-buttons .btn.disabled:hover,
+.tag-buttons .btn[disabled]:hover,
 fieldset[disabled] .tag-buttons .btn:hover,
-.tag-buttons .btn:hover.disabled:hover,
-.tag-buttons .btn:hover[disabled]:hover,
-fieldset[disabled] .tag-buttons .btn:hover:hover,
-.tag-buttons .btn:hover.disabled:focus,
-.tag-buttons .btn:hover[disabled]:focus,
-fieldset[disabled] .tag-buttons .btn:hover:focus,
-.tag-buttons .btn:hover.disabled.focus,
-.tag-buttons .btn:hover[disabled].focus,
-fieldset[disabled] .tag-buttons .btn:hover.focus,
-.tag-buttons .btn:hover.disabled:active,
-.tag-buttons .btn:hover[disabled]:active,
-fieldset[disabled] .tag-buttons .btn:hover:active,
-.tag-buttons .btn:hover.disabled.active,
-.tag-buttons .btn:hover[disabled].active,
-fieldset[disabled] .tag-buttons .btn:hover.active {
-  background-color: #f0ad4e;
-  border-color: #eea236;
+.tag-buttons .btn.disabled:focus,
+.tag-buttons .btn[disabled]:focus,
+fieldset[disabled] .tag-buttons .btn:focus,
+.tag-buttons .btn.disabled.focus,
+.tag-buttons .btn[disabled].focus,
+fieldset[disabled] .tag-buttons .btn.focus,
+.tag-buttons .btn.disabled:active,
+.tag-buttons .btn[disabled]:active,
+fieldset[disabled] .tag-buttons .btn:active,
+.tag-buttons .btn.disabled.active,
+.tag-buttons .btn[disabled].active,
+fieldset[disabled] .tag-buttons .btn.active {
+  background-color: #e7e7e7;
+  border-color: #dbdbdb;
 }
-.tag-buttons .btn:hover .badge {
-  color: #f0ad4e;
-  background-color: #ffffff;
+.tag-buttons .btn .badge {
+  color: #e7e7e7;
+  background-color: #333333;
+}
+.tag-buttons .btn:hover {
+  background-color: #cecece;
+}
+.tag-buttons .btn:hover a.delete {
+  color: #d9534f;
 }
 .new-post {
   margin-top: 10em;

@@ -118,7 +118,7 @@ angular.module('palingram')
    //This ccontroller takes care of signing up as a fresh user
    .controller('signupController' , function($scope , $rootScope , $state , Auth){
        $scope.signup = function(newUser){
-            $rootScope.$broadcast('loading:start' , {});
+            $rootScope.$broadcast('loading:start' , {msg : 'loading please wait...'});
             newUser.favourites = [];
             newUser.image = 'img/img.png';
             newUser.pageViews = 0;
@@ -137,7 +137,7 @@ angular.module('palingram')
 
    .controller('signinController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
        $scope.signin = function(credentials){
-           $rootScope.$broadcast('loading:start' , {});
+           $rootScope.$broadcast('loading:start' , {msg : 'loading .. please wait'});
            Auth.signin(credentials).then(function(status){
                 Tags.set(User.get().tags_id).then(function(status){
                       Posts.set(Tags.get()).then(function(status){
@@ -152,12 +152,14 @@ angular.module('palingram')
    })
 
    .controller('transitionController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
-       
+     $rootScope.$broadcast('loading:start' , {msg : 'loading..'});
      Tags.queryAll().then(function(data){
+           $rootScope.$broadcast('loading:end' , {msg : 'done'});
            $scope.tags = data;
            $scope.selected = [];
 
            $scope.proceed = function(){
+               $rootScope.$broadcast('loading:start' , {msg : 'loading .. please wait'});
                $rootScope.$broadcast('loading:start' , {});
                if($scope.selected.length==0){
                   $scope.selected = ['general'];
@@ -168,11 +170,13 @@ angular.module('palingram')
                     Posts.set(Tags.get()).then(function(status){
                         $rootScope.$broadcast('loading:end' , {});
                         Auth.sendEmail('emailVerification').then(function(status){
+                             $rootScope.$broadcast('loading:end' , {msg : status});
                              var temp = User.get();
                              temp.emailVerified = true;
                              User.set(temp);
                              $state.go('in.posts');
                         } , function(err){
+                             $rootScope.$broadcast('loading:end' , {msg : status});
                              $state.go('in.posts');
                         });
                         
@@ -361,7 +365,6 @@ angular.module('palingram')
            $scope.viewPost = function(post){
                 $rootScope.$broadcast('loading:start' , {});
                 Tags.update(post.tags , User.get().tags_id).then(function(result){
-                    console.log(result);
                     $state.current.data.post = post;
                     $rootScope.$broadcast('loading:end' , {msg : 'viewing post'});
                     $state.go('in.posts.post' , {id : post._id});
@@ -538,7 +541,7 @@ angular.module('palingram')
                          Posts.setFavs(User.get().favourites , true).then(function(result){
                          });
                      } , function(err){
-                         console.log(err);
+                         alert(err);
                      });
                  } 
                  else{
@@ -573,12 +576,12 @@ angular.module('palingram')
                else{
                   $rootScope.$broadcast('loading:start' , {});
                   if($scope.comment.body.trim()  == ''){
-                      alert('you have to type your comment into the box first');
+                       $rootScope.$broadcast('loading:end' , {msg : 'type your comment into the box first'});
                   }
                   else{
                       $scope.comment.date = Date.now();
                       Comments.postComment(angular.copy($scope.comment)).then(function(status){
-                         $rootScope.$broadcast('loading:end' , {});
+                         $rootScope.$broadcast('loading:end' , {msg : 'status'});
                          $scope.comment.body  = '';
                       } , function(err){
                            alert(err);
@@ -862,7 +865,7 @@ angular.module('palingram')
                     Posts.update($scope.post).then(function(result){
                       $rootScope.$broadcast('loading:end' , {msg : 'post updated'});
                    }, function(err){
-                       console.log(err);
+                       alert(err);
                    });
                  } 
             }
@@ -902,13 +905,11 @@ angular.module('palingram')
           };
 
           $scope.save = function(bankroll){
-              if(bankroll >= 15800){
+              if(true/*bankroll >= 15800*/){
                  if( $scope.selectedTeam == 'Select Team'){
                      alert('please select a team first');
                  }
                  else {
-
-
                    $scope.game = true;
                    $scope.bankroll = bankroll;
                    $scope.setting = false;
@@ -995,6 +996,9 @@ angular.module('palingram')
                $scope.currentBet.odd = odd;
                if($scope.lossAccumulator.length == 0){
                    var temp = Math.ceil($scope.basebet / (odd - 1));
+                   if(temp < 50){
+                     return 50;
+                   }
                    return temp;
                }
                else {

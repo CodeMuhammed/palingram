@@ -167,11 +167,8 @@ body{
               .interest {
                   background: #fff;
                   color:#000;
+                  outline:none;
               }
-           }
-
-           &:hover{
-              //color:@brand-primary;
            }
 
            @media (max-width: @screen-sm) {
@@ -326,12 +323,21 @@ nav {
     .side-menu{
        background: #fff;
        padding:0;
+       .wobble{
+         &:hover{
+            a{
+               color:#fff;
+            font-size : 1.2em;
+            }
+            
+         }
+       }
+
     }
 }
 .posts-body{
     margin-bottom:0;
     padding:0;
-    border-bottom: 3px solid @brand-primary;
     box-shadow:none;
     padding-bottom:1em;
    .header{
@@ -344,7 +350,7 @@ nav {
      .img-div{
          min-height: 20em;
          border:1px solid #ccc;
-         border-radius: 5px;
+         border-radius: 0px;
      }
      .content {
         padding-left:0;
@@ -359,9 +365,6 @@ nav {
      }
      
    }
-&:hover{
-        border-bottom: 3px solid @brand-warning;
-     }
 }
 
 .article {
@@ -369,15 +372,16 @@ nav {
     padding-left:0;
     padding-right:0;
     margin-top:30px;
+    box-shadow: 0 0 .4em #ccc;
     @media (max-width: @screen-sm-max) {
         margin-top:85px;
     }
   .header{
-     height:30em; 
      padding:0; 
+     position:relative;
      .inner{
         height:30em;
-        background-color:hsla(0 , 0 , 0 , .6);
+        background-color:hsla(0 , 0 , 0 , .5);
         .text{
            text-align:center;
            margin-top: 5em;
@@ -386,16 +390,44 @@ nav {
               font-size: 3em;
            }
         }
+        .author-icons {
+             padding-right:1em;
+             position:absolute;
+             bottom:0;
+             right:0;
+             i{
+                &:first-child{
+                   margin-right:.5em;
+                }
+                font-size:3em;
+                color:#fff;
+             }
+             .fa-edit{
+                &:hover{
+                   color:@brand-success;
+                }
+             }
+             .fa-times{
+                &:hover{
+                   color:@brand-danger;
+                }
+             }
+        }
      }
   }
   .share-box{
-     background:#ccc;
      i{
         padding:.5em;
         font-size:1.5em;
         &:hover{
           color:@brand-primary;
         }
+        a {
+          text-decoration:none;
+        }
+     }
+     .des {
+        font-size:1.2em;
      }
   }
   .body{
@@ -434,7 +466,7 @@ nav {
      }
   }
   #comment{
-      padding:1em;
+      padding:1em 0;
       hr {
          padding:1em;
          z-index: 10000000;
@@ -527,12 +559,16 @@ nav {
 
 .tag-buttons{
    .btn{
+     .button-variant(@btn-default-color; #E7E7E7 ; #DBDBDB);
       margin-right: .5em;
       margin-bottom: .5em;
       border-radius:5px;
-      &:hover{
-       .btn-warning;
-    }
+      &:hover {
+       background-color : darken(#E7E7E7 , 10%);
+       a.delete{
+          color : @brand-danger;
+       }
+      } 
    }
 }
 

@@ -1,4 +1,4 @@
-<div class="container" style="padding:0">
+<div class="col-sm-10 col-sm-offset-1" style="padding:0">
 	<nav class="col-sm-10 col-sm-offset-1 tool-set visible-xs">
 	  <ul class="pager">
 	    <li class="previous" ng-click="back()"><a><span aria-hidden="true">&larr;</span> Back to posts</a></li>
@@ -18,13 +18,10 @@
 					</span>
 					
 				</div>
-			</div>
-		</div>
-
-	    <div class="col-xs-12 share-box"  ng-show="owned">
-			<div class="pull-right">
-				<i class="icon fa fa-edit" ng-click="edit()"></i>
-			    <i class="icon fa fa-trash"  ng-click="delete()"></i>
+				<div class="author-icons">
+					<i class="icon fa fa-edit" ng-click="edit()"></i>
+				    <i class="icon fa fa-times"  ng-click="delete()"></i>
+				</div>
 			</div>
 		</div>
 
@@ -37,15 +34,15 @@
 				   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
 				</div>
 			</p>
+			<hr />
 		</div>
 		 <code ng-show="linkshare" style="padding:.5em;">
 			{{link}}
 			<i class="icon fa fa-times fa-lg" ng-click="linkshare=!linkshare"></i>
 		</code>
          <div class="col-xs-12 share-box" >
-
-	    	<i>
-				<a href="#"
+            <i class="des"> share </i>
+	    	<i
 				class="icon fa fa-twitter"
 				socialshare
 				socialshare-provider="twitter"
@@ -53,37 +50,34 @@
 				socialshare-text="{{shareText()}}"
 				socialshare-hashtags="palingramblog"
 				socialshare-url="{{link}}">
-				</a>
 	    	</i>
 
-			<i>
-				<a href="#"
+			<i
 				class="icon fa fa-facebook"
 				socialshare
 				socialshare-provider="facebook"
 				socialshare-text="{{shareText()}}"
 				socialshare-url="{{link}}">
-				</a>
 	    	</i>
 
-	    	<i>
-				<a href="#"
+	    	<i
 				class="icon fa fa-google-plus"
 				socialshare
 				socialshare-provider="google+"
 				socialshare-text="{{shareText()}}"
 				socialshare-url="{{link}}">
-				</a>
 	    	</i>
-	    		<i class="icon fa fa-link" ng-click ="share('link')"> </i>
-
+	    	<i class="des"> copy link </i>
+	    	<i class="icon fa fa-link" ng-click ="share('link')"> </i>
+            
+            <i class="des"> favourite </i>
 			<i class="icon fa" ng-class="isFavourite() ? 'fa-heart':'fa-heart-o'" ng-click="toggleFavourite()" style="color:red"></i>
-			
+			<hr >
 		</div>
 
 		<div class="col-xs-12" style="padding:0">
-			<div class="col-xs-12 comment-box" >
-	            <textarea class="form-control" placeholder="Comment on this article ..." ng-model="comment.body" style="border-radius:0;">
+			<div class="col-xs-12 comment-box hvr-curl-top-right" >
+	            <textarea class="form-control" placeholder="Comment on this article ..." ng-model="comment.body" style="border-radius:0; border:none; box-shadow:none">
 	            </textarea>
 	            <div class="col-xs-12 footer" >
 	            	<!-- Split button -->
@@ -122,21 +116,12 @@
 				    </div>
 			   </div>
 				<div class="col-xs-12 comment-body">	 
-					 <div class="col-xs-1 vote-box"> 
-					 	  <div ng-class="getVoteClass(item , 1)">
-					 	  	   <i class="icon fa fa-chevron-up" ng-click = "vote(item , 1)"></i>
-					 	  </div>
-				         
-				          <div>
-	                        {{item.voters.up.length-item.voters.down.length}}
-					 	 </div>
-					 	 <div ng-class="getVoteClass(item , -1)">
-				          <i class="icon fa fa-chevron-down" ng-click = "vote(item , -1)"></i>
-				         </div>
-					 </div> 
-					 <div class="col-xs-11" style="margin-bottom:1em;padding-right:1em;">
-					 	{{item.body}} <br/>
-					 	<i class="icon fa fa-trash" ng-click="deleteComment(item)" ng-show="myComment(item)"></i>
+					 <div class="col-xs-11 col-xs-offset-1" style="margin-bottom:1em;padding-right:1em;">
+					 	{{item.body}} <br/><br />
+					 	<i class="icon fa fa-times" ng-click="deleteComment(item)" ng-show="myComment(item)"></i>
+					 	<button class="btn btn-default icon fa fa-arrow-down" ng-click="vote(item , 1)" ng-show="myComment(item)"> votes {{item.voters.up.length}}
+					 	</button>
+					 	<button class="btn btn-default icon fa fa-arrow-up" ng-click="vote(item , -1)" ng-show="myComment(item)"> votes {{item.voters.down.length}}</button>
 					 </div>
 
 				</div>
@@ -146,7 +131,7 @@
 		</div>
 	</div>
 	<div class="col-sm-3 side-items" style="float:right">
-          <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
+          <div class="col-xs-12 ad-box hvr-pulse-grow grow-active" style="padding:3em 2em; text-align:center; font-weight:bolder">
           	   <h2>Place your ad here for free !!</h2>
           	   <p>
           	   	  Send your ad in the format<br>
@@ -170,14 +155,14 @@
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
 	          	  	  <h4>{{item.title | limitTo : 40}}</h4>
 	          	  	  <h5 class="visible-xs">
-	          	  	  	  {{post.description}}
+	          	  	  	  {{item.description | limitTo : 80}}
 	          	  	  </h5>
 	          	  </div>
 	           </a>
           </div>
           
           <hr />
-          <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
+          <div class="col-xs-12 ad-box hvr-buzz buzz-active" style="padding:3em 2em; text-align:center; font-weight:bolder">
           	   <h2>Place your ad here for free !!</h2>
           	   <p>
           	   	  Send your ad in the format<br>
@@ -199,7 +184,7 @@
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
 	          	  	  <h4>{{item.title | limitTo : 40}}</h4>
 	          	  	  <h5 class="visible-xs">
-	          	  	  	  {{post.description}}
+	          	  	  	  {{item.description | limitTo : 80 }}
 	          	  	  </h5>
 	          	  </div>
 	           </a>

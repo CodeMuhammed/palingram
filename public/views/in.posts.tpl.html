@@ -1,4 +1,4 @@
-<div class="container posts-container clearfix">
+<div class="col-sm-10 col-sm-offset-1 posts-container clearfix">
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
 
         <div class="col-xs-6 col-sm-4 sidebar-offcanvas">
@@ -17,9 +17,9 @@
 		             <hr />
 		             
 					 <div class="tag-buttons">
-						<button class="btn btn-info btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
-						   <span>{{tag}}</span>
-						   <a class="badge">X</a>
+						<button class="btn btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
+						   <span>{{tag}} </span>
+						   <a class="icon fa fa-times delete"></a>
 						</button>
 					 </div>
 				 </div>
@@ -30,7 +30,7 @@
 	        	</div>
 	             <div class="panel-body">
 					 <div class="tag-buttons">
-						<button class="btn btn-info btn-sm" ng-repeat="tag in allTags" ng-click="addTag(tag)">
+						<button class="btn btn-sm" ng-repeat="tag in allTags" ng-click="addTag(tag)">
 						   <span>{{tag}}</span>
 						</button>
 					 </div>
@@ -39,16 +39,15 @@
 					 </div>
 				 </div>
 			 </div>
-			 <div class="side-menu panel panel-default">
-	             <div class="panel-body">
-	                 <a ui-sref="out.homepage"><b>Apply as a writer on palingram</b></a>
+			 <div class="col-xs-12 side-menu panel panel-default hvr-shutter-out-vertical">
+	             <div class="panel-body hvr-wobble-vertical wobble " >
+	                 <a style="text-decoration:none;" ui-sref="out.homepage"><b>Apply as a writer on palingram</b></a>
 				 </div>
 			 </div>
         </div><!--/.sidebar-offcanvas-->
-		<div class="col-sm-1" style="float:right"></div>
-        <div class="col-sm-7"  style="padding:0; float:right">
+        <div class="col-sm-6"  style="padding:0;">
            
-		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default posts-body" ng-click="viewPost(post)">
+		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default posts-body hvr-underline-reveal" ng-click="viewPost(post)">
 				<div class="col-xs-12 header">
 				   <div class="col-xs-12 col-sm-1" style="padding-right:1em; padding-left:0;">
 				   	    <img ng-src= {{post.image}} height="40" width="40" class="img-rounded">
@@ -80,6 +79,14 @@
 					
 				</div>
 			 </div>
+	    </div>
+	    <div class="col-sm-1 hidden-xs ad-box hvr-pulse-grow grow-active" style="padding:3em 2em; text-align:center; font-weight:bolder" bs-affix>
+	    	 <h2>Place your ad here for free !!</h2>
+          	   <p>
+          	   	  Send your ad in the format<br>
+                  image url :: caption text :: category  : website url<br>
+                  to palingramblog@gmail.com
+          	   </p>
 	    </div>
        
       </div><!--/row-->
