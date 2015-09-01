@@ -6853,8 +6853,10 @@ nav {
   margin-top: .5em;
 }
 .main-view-area {
-  background: #F5F8FA;
+  background: url('../img/paper-texture-21_MJM45SKO.jpg') center center no-repeat fixed;
+  background-size: cover;
   min-height: 60em;
+  overflow: auto;
 }
 .posts-container {
   margin-top: 52px;
@@ -6982,6 +6984,7 @@ nav {
   padding-right: 0;
   font-size: 1.3em;
   margin-top: 2em;
+  margin-bottom: 3em;
 }
 .article .comment-box > div {
   padding: 1em;

@@ -120,7 +120,7 @@ angular.module('palingram')
        $scope.signup = function(newUser){
             $rootScope.$broadcast('loading:start' , {msg : 'loading please wait...'});
             newUser.favourites = [];
-            newUser.image = 'img/img.png';
+            newUser.image = 'img/logo_s.png';
             newUser.pageViews = 0;
             newUser.lastViewed = '';
             newUser.bio = 'Write about your self here';
@@ -168,7 +168,7 @@ angular.module('palingram')
 
                Tags.set($scope.selected).then(function(status){
                     Posts.set(Tags.get()).then(function(status){
-                        $rootScope.$broadcast('loading:end' , {});
+                        $rootScope.$broadcast('loading:end' , {msg : status});
                         Auth.sendEmail('emailVerification').then(function(status){
                              $rootScope.$broadcast('loading:end' , {msg : status});
                              var temp = User.get();
@@ -376,7 +376,7 @@ angular.module('palingram')
                 $scope.tags = ['general'];
                 Posts.set($scope.tags).then(
                     function(result){
-                        $rootScope.$broadcast('loading:end' , {});
+                        $rootScope.$broadcast('loading:end' , {msg : 'done'});
                         $scope.posts = Posts.get();
                     },
                     function(err){
@@ -763,9 +763,11 @@ angular.module('palingram')
                    alert('log in to save your preferences');
                }
                else{
-                 $rootScope.$broadcast('loading:start' , {});
+                 $rootScope.$broadcast('loading:start' , {msg : 'updating profile'});
                  User.update($scope.user).then(function(result){
-                      $rootScope.$broadcast('loading:end' , {});
+                      $rootScope.$broadcast('loading:end' , {msg : result});
+                 } , function(err){
+                      $rootScope.$broadcast('loading:end' , {msg : err});
                  });
                }  
             }
@@ -849,8 +851,6 @@ angular.module('palingram')
               }
               else{
                 $rootScope.$broadcast('loading:start' , {});
-                 $scope.post.bio = User.get().bio;
-                 $scope.post.image = User.get().image;
                  if(option == 'new'){
                    $scope.post.views = 0;
                    Posts.post($scope.post).then(function(data){

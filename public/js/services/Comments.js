@@ -113,6 +113,7 @@ angular.module('Comments' , [])
                         return item.voters.up.length;
                    }
                    sorted =  $filter('orderBy')(data , customSort);
+                   return sorted;
                 }
 
                 else if(criteria == 'Most Recent'){
