@@ -128,6 +128,9 @@ angular.module('Posts' , [])
                if(favourites){
                  favourites.splice(favourites.indexOf(article) , 1);  
                }
+               else {
+                   posts.splice(posts.indexOf(article) , 1);
+               }
                             
                promise.resolve(data);
            })

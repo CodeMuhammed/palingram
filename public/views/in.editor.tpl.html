@@ -17,16 +17,20 @@
 		 <div class="tag-buttons">
 			<button class="btn btn-default btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
 			   <span>{{tag}}</span> 
-			   <a class="badge">X</a>
+			   <a class="icon fa fa-times delete"></a>
 			</button>
+			
 		 </div>
-
-		 <div class="input-group" style="padding-bottom:.4em; margin-top:2em;">
-			  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag" style="border-radius: 15px 0 0 15px;" >
-			  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0 15px 15px 0">
+		 <div class="col-xs-12 input-group" style="padding-bottom:.4em; margin-top:2em;">
+			  <input class="form-control input-tag" type="text" list="tags" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
+			  <datalist id="tags">
+			        <option value="{{tag}}" ng-repeat="tag in allTags">
+			  </datalist>
+			   <span ng-click="addTag(newTag)" class="btn btn-default input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
 				<i class="icon fa fa-plus"> add</i>
 			  </span>
 		 </div>
+
 	</div>
 
 	<div class="col-sm-6 col-sm-offset-3 new-post" ng-show="edit" style="margin-bottom:5em;">

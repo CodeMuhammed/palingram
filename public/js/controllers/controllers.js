@@ -386,8 +386,8 @@ angular.module('palingram')
            };
 
            $scope.addTag = function(newTag){
-               if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0){
-                    $rootScope.$broadcast('loading:start' , {});
+               $rootScope.$broadcast('loading:start' , {});
+               if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0 && $scope.allTags.indexOf(newTag) > 0){
                     $scope.tags.push(newTag);
                     $scope.newTag = '';
 
@@ -399,7 +399,7 @@ angular.module('palingram')
                     );
                }
                else{
-                  $rootScope.$broadcast('loading:end' , {msg : 'tags limit reached or alredy added'});
+                  $rootScope.$broadcast('loading:end' , {msg : 'tags limit reached or already added or invalid'});
                }
            };
 
@@ -811,12 +811,17 @@ angular.module('palingram')
         function next(){
              $scope.post = $state.current.data;
              $scope.tags = $scope.post.tags;
+             Tags.queryAll().then(function(data){
+                 $scope.allTags = data;
+             });
              var option = $scope.post.comments_id == '' ? 'new' : 'old';
 
              $scope.clearTags = function(){
                   $scope.tags = [];
              };
 
+
+             //Watch $scope.newTag and add a tag every time a space is entered 
              $scope.addTag = function(newTag){
                  if(newTag && $scope.tags.length < 7 && $scope.tags.indexOf(newTag) < 0){
                       $scope.tags.push(newTag);
@@ -853,6 +858,7 @@ angular.module('palingram')
                 $rootScope.$broadcast('loading:start' , {});
                  if(option == 'new'){
                    $scope.post.views = 0;
+                   $scope.post.bio = User.get().bio;
                    Posts.post($scope.post).then(function(data){
                       $rootScope.$broadcast('loading:end' , {msg : 'post saved successfully'});
                       User.get().favourites.push(data._id);

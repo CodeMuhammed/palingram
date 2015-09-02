@@ -9,7 +9,10 @@
 	        	</div>
 	             <div class="panel-body">
 					 <div class="input-group">
-						  <input class="form-control input-tag" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
+						  <input class="form-control input-tag" type="text" list="music" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
+						  <datalist id="music">
+						        <option value="{{tag}}" ng-repeat="tag in allTags">
+						  </datalist>
 						  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
 							<i class="icon fa fa-plus"> add</i>
 						  </span>
@@ -30,7 +33,7 @@
 	        	</div>
 	             <div class="panel-body">
 					 <div class="tag-buttons">
-						<button class="btn btn-sm" ng-repeat="tag in allTags" ng-click="addTag(tag)">
+						<button class="btn btn-sm" ng-repeat="tag in allTags | limitTo:20" ng-click="addTag(tag)">
 						   <span>{{tag}}</span>
 						</button>
 					 </div>
