@@ -724,7 +724,7 @@ angular.module('palingram')
 
            //This computes and return the text to be shared
            $scope.shareText = function(){
-                return $scope.post.description.substr(0 , 100)+' '+$scope.link;
+                return $scope.post.description.substr(0 , 100);
            };
 
            $scope.viewPost = function(post){
