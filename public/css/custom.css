@@ -6918,6 +6918,7 @@ nav {
 @media (max-width: 991px) {
   .article {
     margin-top: 85px;
+    min-height: 40em;
   }
 }
 .article .header {
