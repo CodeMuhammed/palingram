@@ -1,5 +1,5 @@
 angular.module('Posts' , [])
- .factory('Posts' , function($http , $q , BaseUrl){
+ .factory('Posts' , function($http , $q , BaseUrl , googl_key){
  	 var posts;
  	 var favourites;
  	 var set = function (tags){
@@ -173,6 +173,23 @@ angular.module('Posts' , [])
          return promise.promise;
      };
 
+     var shortenUrl = function(url){
+         var promise = $q.defer();
+         $http({
+             method : 'POST',
+             url : 'https://www.googleapis.com/urlshortener/v1/url?key='+ googl_key,
+             data : {longUrl: url}
+         })
+         .success(function(data){             
+               promise.resolve(data.id);
+         })
+         .error(function(err){
+               alert(angular.toJson(err));
+         });
+
+         return promise.promise;
+     }
+
    	return {
           set : set,
           get : get,
@@ -181,6 +198,7 @@ angular.module('Posts' , [])
           update: updateArticle,
           deleteArticle : deleteArticle,
           previewArticle: previewArticle,
-          getAuthorPosts : getAuthorPosts
+          getAuthorPosts : getAuthorPosts,
+          shortenUrl : shortenUrl
    	}
  });

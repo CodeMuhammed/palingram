@@ -702,7 +702,14 @@ angular.module('palingram')
             };
 
             //This takes care of socialshare button
-            $scope.link = 'www.palingram.com/#!/in/posts/'+$scope.post._id;
+            Posts.shortenUrl('www.palingram.com/#!/in/posts/'+$scope.post._id).then(
+              function(shortenedUrl){
+                 $scope.link = shortenedUrl;
+              } ,
+              function(err){
+                 alert(err);
+              })
+            
             $scope.share = function(socialtype){
                  switch(socialtype){
                      case 'link': {
