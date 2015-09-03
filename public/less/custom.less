@@ -54,7 +54,10 @@ body{
    a{
       outline:none;
    }
-
+  background: url('../img/cartoon-background-blue-wavy-comic-background_MyTudJ_O.jpg') center center no-repeat fixed; 
+   background-size: cover;
+   min-height:60em;
+   overflow:auto;
    .loader {
      position : fixed;
      padding:1em 2em;
@@ -95,7 +98,7 @@ body{
      padding:0; 
      padding-bottom:6em;
     // background: @brand-primary;
-     background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
+     //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
      .inner{
         .text{
            margin-top: 5em;
@@ -120,12 +123,13 @@ body{
   .body{
       padding:0;
      .feature{   
-         background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
-         border-bottom:10px solid #ccc;
+         //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
+         //border-bottom:10px solid #ccc;
+         margin-bottom: 2em;
          margin-top:0em;
          padding:0;
            .text{
-              border-right:1px solid darken(@brand-primary , 20%);
+              //border-right:1px solid darken(@brand-primary , 20%);
               min-height: 10em;
               text-align:left;
               padding : .5em;
@@ -139,16 +143,17 @@ body{
 
            .image{
               padding : .5em;
-              border-right:1px solid darken(@brand-success , 20%); 
+              border-radius:10px;
+              //border-right:1px solid darken(@brand-success , 20%); 
               background-color: #ccc;
-              min-height: 30em;
+              min-height: 20em;
            } 
 
            .questioneer {
               color : #fff;
               padding : .5em;
-              border-right:1px solid darken(@brand-success , 20%);
-              background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
+              //border-right:1px solid darken(@brand-success , 20%);
+              //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
 
               min-height:50em;
               input, textarea {
@@ -168,6 +173,7 @@ body{
                   background: #fff;
                   color:#000;
                   outline:none;
+                  margin-right:.2em; 
               }
            }
 
@@ -578,6 +584,9 @@ nav {
 
 .new-post{
     margin-top:10em;
+    input {
+       margin-bottom:1em;
+    }
     padding:0;
    .post-title{
       width:100%;
@@ -699,11 +708,17 @@ nav {
     }
 
     blockquote {
-        border-left: 5px solid #555;
-        margin-left: -15px;
-        padding-left: 15px;
+        border-left: 5px solid lighten(@brand-primary , 30%);
+        padding-left: 20px;
         font-style: italic;
-        color: #555;
+    }
+
+    img{
+       width:100%;
+    }
+
+    a {
+        //color: lighten(@brand-primary , 30%);
     }
 
 }

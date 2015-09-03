@@ -6547,6 +6547,12 @@ button.close {
     display: none !important;
   }
 }
+body {
+  background: url('../img/cartoon-background-blue-wavy-comic-background_MyTudJ_O.jpg') center center no-repeat fixed;
+  background-size: cover;
+  min-height: 60em;
+  overflow: auto;
+}
 body a {
   outline: none;
 }
@@ -6583,7 +6589,6 @@ body .loader {
 .homepage .header {
   padding: 0;
   padding-bottom: 6em;
-  background: linear-gradient(75deg, #337ab7, #78acd9 50%, #a0c4e4);
 }
 .homepage .header .inner .text {
   margin-top: 5em;
@@ -6602,13 +6607,11 @@ body .loader {
   padding: 0;
 }
 .homepage .body .feature {
-  background: linear-gradient(75deg, #337ab7, #78acd9 50%, #a0c4e4);
-  border-bottom: 10px solid #ccc;
+  margin-bottom: 2em;
   margin-top: 0em;
   padding: 0;
 }
 .homepage .body .feature .text {
-  border-right: 1px solid #1d4568;
   min-height: 10em;
   text-align: left;
   padding: .5em;
@@ -6621,15 +6624,13 @@ body .loader {
 }
 .homepage .body .feature .image {
   padding: .5em;
-  border-right: 1px solid #357935;
+  border-radius: 10px;
   background-color: #ccc;
-  min-height: 30em;
+  min-height: 20em;
 }
 .homepage .body .feature .questioneer {
   color: #fff;
   padding: .5em;
-  border-right: 1px solid #357935;
-  background: linear-gradient(75deg, #337ab7, #78acd9 50%, #a0c4e4);
   min-height: 50em;
 }
 .homepage .body .feature .questioneer input,
@@ -6692,6 +6693,7 @@ fieldset[disabled] .homepage .body .feature .questioneer .btn:hover.active {
   background: #fff;
   color: #000;
   outline: none;
+  margin-right: .2em;
 }
 @media (max-width: 768px) {
   .homepage .body .feature {
@@ -7128,6 +7130,9 @@ fieldset[disabled] .tag-buttons .btn.active {
   margin-top: 10em;
   padding: 0;
 }
+.new-post input {
+  margin-bottom: 1em;
+}
 .new-post .post-title {
   width: 100%;
   border: none;
@@ -7239,11 +7244,12 @@ fieldset[disabled] .tag-buttons .btn.active {
   line-height: 32px;
 }
 .md-styles blockquote {
-  border-left: 5px solid #555;
-  margin-left: -15px;
-  padding-left: 15px;
+  border-left: 5px solid #a0c4e4;
+  padding-left: 20px;
   font-style: italic;
-  color: #555;
+}
+.md-styles img {
+  width: 100%;
 }
 .profile {
   font-size: 1.2em;

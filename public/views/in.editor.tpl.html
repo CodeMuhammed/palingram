@@ -1,4 +1,4 @@
-<div class="clearfix" style="background:#fff; min-height:60em;">
+<div class="clearfix" style="min-height:60em;">
 	<nav class="col-sm-6 col-sm-offset-3 tool-set">
 	  <ul class="pager">
 	    <li class="previous" ng-click="back()" ng-show="edit"><a><span aria-hidden="true">&larr;</span> Back</a></li>
@@ -35,11 +35,8 @@
 
 	<div class="col-sm-6 col-sm-offset-3 new-post" ng-show="edit" style="margin-bottom:5em;">
 		 <input class="post-title" placeholder="Enter title of post here" ng-model="post.title">
-		 <hr />
 		 <input class="post-title" placeholder="Cover image url" ng-model="post.coverImage">
-		 <hr />
 		 <input class="post-title" placeholder="Caption of post" ng-model="post.description">
-		 <hr />
 	      <form name="demo" style="background:#fff;" class="md-styles">
             <div ng-model="post.body" medium-editor options='{"placeholder": "Start typing your article body here" , "buttons":["bold", "italic","underline", "anchor", "header1", "header2", "quote" , "orderedlist" ,  "unorderedlist" , "pre" , "indent" , "outdent" , "justifyCenter" , "justifyLeft" , "justifyRight" , "justifyFull" , "subscript" , "superscript" , "image"]}'></div>
          </form>

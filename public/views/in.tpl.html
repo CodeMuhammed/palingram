@@ -71,7 +71,7 @@
 		<li class="navbar-right" ng-click="goto('favourites')">
 			<a ng-class="{'active' : active('favourites')}"><i class="icon fa fa-heart" style="font-size:1.4em;"></i> Favourites</a>
 		</li>
-		<li ng-click="goto('profile')"  class="navbar-right" >
+		<li ng-click="goto('profile')"  class="navbar-right" ng-show="writer">
 			<a ng-class="{'active' : active('profile')}">
 				<i class="icon fa fa-user" style="font-size:1.4em;"></i> 
 				Profile</a>

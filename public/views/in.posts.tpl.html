@@ -9,8 +9,8 @@
 	        	</div>
 	             <div class="panel-body">
 					 <div class="input-group">
-						  <input class="form-control input-tag" type="text" list="music" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
-						  <datalist id="music">
+						  <input class="form-control input-tag" type="text" list="tags" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
+						  <datalist id="tags">
 						        <option value="{{tag}}" ng-repeat="tag in allTags">
 						  </datalist>
 						  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
@@ -80,6 +80,15 @@
 					   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
 					</div>
 					
+				</div>
+			 </div>
+
+			  <div class="col-xs-12 panel panel-default posts-body hvr-underline-reveal text-center" ng-show="posts.length==0">
+				<div class="col-xs-12 header">
+				      NO POSTS HAVE BEEN FAVOURITED BY YOU YET!
+				</div>
+				<div class="col-xs-12 col-sm-offset-1 col-sm-11 panel-body" >
+					 <img src="img/logo_s.png" class = "col-xs-5" style="width:100%">
 				</div>
 			 </div>
 	    </div>
