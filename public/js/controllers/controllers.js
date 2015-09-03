@@ -21,8 +21,7 @@ angular.module('palingram')
 
   })
 
-  .controller('homepageController' , function($scope , $rootScope , $state ,$timeout, Auth , Tags , Posts , User){
-      
+  .controller('homepageController' , function($scope , $rootScope , $state ,$timeout , Auth , Tags , Posts , User){
        $scope.guestLogin = function(){
            $state.go('in.posts');
        };

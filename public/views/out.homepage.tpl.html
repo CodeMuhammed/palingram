@@ -22,12 +22,12 @@
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-6 col-sm-offset-3 body">
-		 <div class="col-xs-12 feature" ng-repeat = "feature in features" ng-hide="form">
-		 	   <div class="col-sm-6 image" style="background: url({{feature.img}}) center center no-repeat;
+		 <div class="col-xs-12 col-sm-6 col-sm-offset-3 feature" ng-repeat = "feature in features" ng-hide="form">
+		 	   <div class="col-xs-12 image" style="background: url({{feature.img}}) center center no-repeat;
 	             background-size: cover;">
 		 	   </div>
 
-		 	   <div class="col-sm-6 text hvr-bubble-float-left">
+		 	   <div class="col-xs-12 text hvr-bubble-top">
 		 	   	   <p>{{feature.text}}</p>
 		 	   	   <button class="btn-xs btn btn-warning">{{feature.buttonText}}</button>
 		 	   	   <button class="btn-xs btn btn-default hvr-glow" ng-click="applyNow()" ng-if="$index == 1">Apply now</button>

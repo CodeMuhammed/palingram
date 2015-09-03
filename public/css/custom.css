@@ -6624,7 +6624,6 @@ body .loader {
 }
 .homepage .body .feature .image {
   padding: .5em;
-  border-radius: 10px;
   background-color: #ccc;
   min-height: 20em;
 }

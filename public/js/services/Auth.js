@@ -1,5 +1,5 @@
 angular.module('Auth' , ['User', 'Tags' , 'Posts'])
- //  .constant('BaseUrl' , 'http://localhost:3000')
+    //.constant('BaseUrl' , 'http://localhost:3000')
     .constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
    .factory('Auth' , function($http , $q ,$state ,$rootScope ,  Posts , Tags , User , BaseUrl){
          var isSignedIn;
