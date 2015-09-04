@@ -29,7 +29,7 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
   .run([
     'myGoogleAnalytics', 
     function(myGoogleAnalytics) {
-        
+         (adsbygoogle = window.adsbygoogle || []).push({});
     }
   ])
 
@@ -135,4 +135,20 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
             
              $urlRouterProvider.otherwise('/in/posts');
         }
-]); 
+])
+
+.directive('googleAds' , function(){
+     return {
+         link : function(scope , elem , attrs){
+              scope.adname = attrs['adname'];
+         },
+         templateUrl : 'views/ads.tpl.html',
+         controller : function($scope){
+             $scope.getAd = function () {
+                 return 'views/ads.'+$scope.adname+ '.tpl.html';
+             };
+         },
+         restrict : 'E',
+         scope : true
+     }
+}); 
