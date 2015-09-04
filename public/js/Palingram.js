@@ -29,7 +29,6 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
   .run([
     'myGoogleAnalytics', 
     function(myGoogleAnalytics) {
-         (adsbygoogle = window.adsbygoogle || []).push({});
     }
   ])
 
@@ -144,6 +143,7 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
          },
          templateUrl : 'views/ads.tpl.html',
          controller : function($scope){
+             (adsbygoogle = window.adsbygoogle || []).push({});
              $scope.getAd = function () {
                  return 'views/ads.'+$scope.adname+ '.tpl.html';
              };
