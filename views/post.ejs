@@ -5,10 +5,11 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <meta name="description" content="">
-      <meta name="author" content="">
+      <meta name="description" content="<%=post.description%>" >
+      <meta name="author" content="<%=post.author%>" >
+      <meta name="robots" content="nofollow">
 
-      <title>Collaborative Blogging Platform</title>
+      <title><%=post.description%>...Engage Write Read... Everything Interesting </title>
 			
 	    <!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +38,7 @@
               by <a><%=post.author%></a>
             </h3>
             <span>
-              <img ng-src=<%=post.image%> class="img-circle" width="70" height="70">
+              <img src="<%=post.image%>" class="img-circle" alt = "<%=post.description%>" width="70" height="70">
             </span>
           </div>
         </div>

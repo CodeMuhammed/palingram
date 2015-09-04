@@ -1,5 +1,5 @@
 angular.module('Auth' , ['User', 'Tags' , 'Posts'])
-   // .constant('BaseUrl' , 'http://localhost:3000')
+     //.constant('BaseUrl' , 'http://localhost:3000')
     .constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
     .constant('googl_key' , 'AIzaSyBFgXT17fbaEr-POzSmbLzdzMGlKEoUH44')
    .factory('Auth' , function($http , $q ,$state ,$rootScope ,  Posts , Tags , User , BaseUrl , googl_key){

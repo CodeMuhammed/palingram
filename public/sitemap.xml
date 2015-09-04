@@ -6,12 +6,6 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 <url>
-  <loc>http://www.palingram.com/?_escaped_fragment_=/homepage</loc>
-  <lastmod>2015-08-15T14:10:48+00:00</lastmod>
-  <changefreq>always</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>http://www.palingram.com/allPosts/#!</loc>
   <changefreq>always</changefreq>
   <priority>1.00</priority>
