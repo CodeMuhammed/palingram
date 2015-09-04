@@ -136,14 +136,20 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
         }
 ])
 
-.directive('googleAds' , function(){
+.directive('googleAds' , function($window){
      return {
          link : function(scope , elem , attrs){
               scope.adname = attrs['adname'];
+               if (!$window.adsbygoogle) {
+                    $window.adsbygoogle = [];
+                }
+                try{
+                   $window.adsbygoogle.push({});
+                }catch(ex){}
+                               
          },
          templateUrl : 'views/ads.tpl.html',
          controller : function($scope){
-             (adsbygoogle = window.adsbygoogle || []).push({});
              $scope.getAd = function () {
                  return 'views/ads.'+$scope.adname+ '.tpl.html';
              };
