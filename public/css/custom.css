@@ -6568,146 +6568,117 @@ body .loader {
   border-radius: 0 0 3px 3px;
   text-align: center;
 }
-.homepage {
-  padding: 0;
-  margin: 0;
-}
-.homepage .navbar button {
-  padding: 1em 3em;
-  background: transparent;
-  border: 3px solid;
-  margin-right: 1em;
-}
-.homepage .navbar button:last-child {
-  margin-right: 0;
-}
-@media (max-width: 768px) {
-  .homepage .navbar button:last-child {
-    margin-top: 2em;
-  }
-}
-.homepage .header {
-  padding: 0;
-  padding-bottom: 6em;
-}
-.homepage .header .inner .text {
-  margin-top: 5em;
-  color: #fff;
-  text-shadow: 0.2em 0.2em #555555;
-}
-.homepage .header .inner .text h1 {
-  font-size: 4em;
-}
-@media (max-width: 768px) {
-  .homepage .header .inner .text h1 {
-    font-size: 3em;
-  }
-}
-.homepage .body {
-  padding: 0;
-}
-.homepage .body .feature {
-  margin-bottom: 2em;
-  margin-top: 0em;
-  padding: 0;
-}
-.homepage .body .feature .text {
-  min-height: 10em;
-  text-align: left;
-  padding: .5em;
-  font-size: 2em;
-  text-shadow: 0.05em 0.05em #555555;
-  color: #fff;
-}
-.homepage .body .feature .text p {
-  min-height: 7em;
-}
-.homepage .body .feature .image {
-  padding: .5em;
-  background-color: #ccc;
-  min-height: 20em;
-}
-.homepage .body .feature .questioneer {
-  color: #fff;
+.questioneer {
   padding: .5em;
   min-height: 50em;
 }
-.homepage .body .feature .questioneer input,
-.homepage .body .feature .questioneer textarea {
+.questioneer input,
+.questioneer textarea {
   margin-bottom: 1em;
 }
-.homepage .body .feature .questioneer textarea {
+.questioneer textarea {
   min-height: 10em;
 }
-.homepage .body .feature .questioneer .btn {
+.questioneer .btn {
   margin-right: .5em;
   margin-bottom: .5em;
 }
-.homepage .body .feature .questioneer .btn:hover {
+.questioneer .btn:hover {
   color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-.homepage .body .feature .questioneer .btn:hover:hover,
-.homepage .body .feature .questioneer .btn:hover:focus,
-.homepage .body .feature .questioneer .btn:hover.focus,
-.homepage .body .feature .questioneer .btn:hover:active,
-.homepage .body .feature .questioneer .btn:hover.active,
-.open > .dropdown-toggle.homepage .body .feature .questioneer .btn:hover {
+.questioneer .btn:hover:hover,
+.questioneer .btn:hover:focus,
+.questioneer .btn:hover.focus,
+.questioneer .btn:hover:active,
+.questioneer .btn:hover.active,
+.open > .dropdown-toggle.questioneer .btn:hover {
   color: #ffffff;
   background-color: #449d44;
   border-color: #398439;
 }
-.homepage .body .feature .questioneer .btn:hover:active,
-.homepage .body .feature .questioneer .btn:hover.active,
-.open > .dropdown-toggle.homepage .body .feature .questioneer .btn:hover {
+.questioneer .btn:hover:active,
+.questioneer .btn:hover.active,
+.open > .dropdown-toggle.questioneer .btn:hover {
   background-image: none;
 }
-.homepage .body .feature .questioneer .btn:hover.disabled,
-.homepage .body .feature .questioneer .btn:hover[disabled],
-fieldset[disabled] .homepage .body .feature .questioneer .btn:hover,
-.homepage .body .feature .questioneer .btn:hover.disabled:hover,
-.homepage .body .feature .questioneer .btn:hover[disabled]:hover,
-fieldset[disabled] .homepage .body .feature .questioneer .btn:hover:hover,
-.homepage .body .feature .questioneer .btn:hover.disabled:focus,
-.homepage .body .feature .questioneer .btn:hover[disabled]:focus,
-fieldset[disabled] .homepage .body .feature .questioneer .btn:hover:focus,
-.homepage .body .feature .questioneer .btn:hover.disabled.focus,
-.homepage .body .feature .questioneer .btn:hover[disabled].focus,
-fieldset[disabled] .homepage .body .feature .questioneer .btn:hover.focus,
-.homepage .body .feature .questioneer .btn:hover.disabled:active,
-.homepage .body .feature .questioneer .btn:hover[disabled]:active,
-fieldset[disabled] .homepage .body .feature .questioneer .btn:hover:active,
-.homepage .body .feature .questioneer .btn:hover.disabled.active,
-.homepage .body .feature .questioneer .btn:hover[disabled].active,
-fieldset[disabled] .homepage .body .feature .questioneer .btn:hover.active {
+.questioneer .btn:hover.disabled,
+.questioneer .btn:hover[disabled],
+fieldset[disabled] .questioneer .btn:hover,
+.questioneer .btn:hover.disabled:hover,
+.questioneer .btn:hover[disabled]:hover,
+fieldset[disabled] .questioneer .btn:hover:hover,
+.questioneer .btn:hover.disabled:focus,
+.questioneer .btn:hover[disabled]:focus,
+fieldset[disabled] .questioneer .btn:hover:focus,
+.questioneer .btn:hover.disabled.focus,
+.questioneer .btn:hover[disabled].focus,
+fieldset[disabled] .questioneer .btn:hover.focus,
+.questioneer .btn:hover.disabled:active,
+.questioneer .btn:hover[disabled]:active,
+fieldset[disabled] .questioneer .btn:hover:active,
+.questioneer .btn:hover.disabled.active,
+.questioneer .btn:hover[disabled].active,
+fieldset[disabled] .questioneer .btn:hover.active {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
-.homepage .body .feature .questioneer .btn:hover .badge {
+.questioneer .btn:hover .badge {
   color: #5cb85c;
   background-color: #ffffff;
 }
-.homepage .body .feature .questioneer .interest {
-  background: #fff;
-  color: #000;
-  outline: none;
-  margin-right: .2em;
+.questioneer .interest {
+  color: #333333;
+  background-color: #e7e7e7;
+  border-color: #dbdbdb;
+  margin-right: .5em;
+  margin-bottom: .5em;
+  border-radius: 5px;
 }
-@media (max-width: 768px) {
-  .homepage .body .feature {
-    margin-top: 0;
-  }
-  .homepage .body .feature .text {
-    margin-bottom: 1em;
-    min-height: 5em;
-  }
+.questioneer .interest:hover,
+.questioneer .interest:focus,
+.questioneer .interest.focus,
+.questioneer .interest:active,
+.questioneer .interest.active,
+.open > .dropdown-toggle.questioneer .interest {
+  color: #333333;
+  background-color: #cecece;
+  border-color: #bcbcbc;
 }
-.homepage .footer {
-  padding-top: 2em;
-  margin-bottom: 3em;
+.questioneer .interest:active,
+.questioneer .interest.active,
+.open > .dropdown-toggle.questioneer .interest {
+  background-image: none;
+}
+.questioneer .interest.disabled,
+.questioneer .interest[disabled],
+fieldset[disabled] .questioneer .interest,
+.questioneer .interest.disabled:hover,
+.questioneer .interest[disabled]:hover,
+fieldset[disabled] .questioneer .interest:hover,
+.questioneer .interest.disabled:focus,
+.questioneer .interest[disabled]:focus,
+fieldset[disabled] .questioneer .interest:focus,
+.questioneer .interest.disabled.focus,
+.questioneer .interest[disabled].focus,
+fieldset[disabled] .questioneer .interest.focus,
+.questioneer .interest.disabled:active,
+.questioneer .interest[disabled]:active,
+fieldset[disabled] .questioneer .interest:active,
+.questioneer .interest.disabled.active,
+.questioneer .interest[disabled].active,
+fieldset[disabled] .questioneer .interest.active {
+  background-color: #e7e7e7;
+  border-color: #dbdbdb;
+}
+.questioneer .interest .badge {
+  color: #e7e7e7;
+  background-color: #333333;
 }
 .auth {
+  background-color: #fff;
+  padding: 1em;
   text-align: center;
   margin-top: 5em;
 }
@@ -7244,12 +7215,16 @@ fieldset[disabled] .tag-buttons .btn.active {
   line-height: 32px;
 }
 .md-styles blockquote {
-  border-left: 5px solid #a0c4e4;
+  border-left: 5px solid #78acd9;
   padding-left: 20px;
   font-style: italic;
+  background: #c7ddef;
 }
 .md-styles img {
   width: 100%;
+}
+.md-styles outdent {
+  color: red;
 }
 .profile {
   font-size: 1.2em;

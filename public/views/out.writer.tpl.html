@@ -1,0 +1,30 @@
+<div class="col-sm-4 col-sm-offset-4" style="margin-top:0" >
+	 <form class="questioneer" name="applicationForm" novalidate >
+		   <div style="padding:0" ng-hide="submitted">
+	   	     <hr>
+	   	        <h4>Why do you want to write for palingram</h4>
+	   	     <hr>
+	     <textarea class="form-control col-xs-12 hvr-grow" placeholder="What makes you a great writer" ng-model="apply.why" required type="text">
+		         </textarea>
+		         <div clear="clearfix"></div>
+	   	    <hr>
+	   	       <h4>Choose topics you want to write about</h4>
+	   	    <hr>
+	   	    <button class="btn btn-xs interest" ng-repeat="tag in tags" ng-click="select(tag)"> 
+	   	    	 {{tag}}
+	   	    	 <i class="icon fa fa-check" ng-show="isSelected(tag)"></i>
+	   	    </button>
+	   	   <hr>
+	   	       <h4>How often do you post</h4>
+	   	   <hr>
+	   	   <div class="checkbox" ng-repeat="check in checks">
+		   <label class="checkbox">
+		      <input name="agreed" type="checkbox" ng-click="toggleCheck(check , $index)" ng-model = "checked[$index]">
+		       {{check}}
+		    </label>
+		</div>
+		<hr>
+		 <button class="btn btn-primary btn-block hvr-bounce-to-bottom" ng-click="submit()"  ng-disabled="applicationForm.$invalid">Apply now</button>
+	 </div>
+	</form>
+</div>

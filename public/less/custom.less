@@ -72,128 +72,37 @@ body{
    }
  }
 
-.homepage{
-    padding:0; 
-    margin:0;
-  .navbar {
-     button{
-        padding: 1em 3em;
-        background:transparent;
-        border: 3px solid;
-        margin-right:1em; 
-         &:last-child{
-            margin-right:0;
-         }
-     }
+ .questioneer {
+    padding : .5em;
+    //border-right:1px solid darken(@brand-success , 20%);
+    //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
 
-     @media (max-width: @screen-sm) {
-         button{
-             &:last-child{
-                margin-top:2em;
-             }
-         }
-     }
-  }
-  .header{
-     padding:0; 
-     padding-bottom:6em;
-    // background: @brand-primary;
-     //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
-     .inner{
-        .text{
-           margin-top: 5em;
-           color:#fff;
-           text-shadow: .2em .2em @gray;
-           h1{
-              font-size: 4em;
-           }
-        } 
-     }
-     @media (max-width: @screen-sm) {
-         .inner{
-             .text{
-                h1{
-                    font-size: 3em;
-                }
-             }
-         }
-     }
-  }
+    min-height:50em;
+    input, textarea {
+       margin-bottom: 1em;
+    }
+    textarea {
+        min-height:10em;
+    }
+    .btn {
+       margin-right:.5em;
+       margin-bottom:.5em;
+       &:hover{
+          .btn-success;
+       }
+    }
+    .interest {
+         .button-variant(@btn-default-color; #E7E7E7 ; #DBDBDB);
+          margin-right: .5em;
+          margin-bottom: .5em;
+          border-radius:5px;
 
-  .body{
-      padding:0;
-     .feature{   
-         //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
-         //border-bottom:10px solid #ccc;
-         margin-bottom: 2em;
-         margin-top:0em;
-         padding:0;
-           .text{
-              //border-right:1px solid darken(@brand-primary , 20%);
-              min-height: 10em;
-              text-align:left;
-              padding : .5em;
-              font-size:2em; 
-              text-shadow: .05em .05em @gray;
-              color:#fff;
-              p{
-                 min-height:7em;
-              }
-           }
-
-           .image{
-              padding : .5em;
-              //border-radius:10px;
-              //border-right:1px solid darken(@brand-success , 20%); 
-              background-color: #ccc;
-              min-height: 20em;
-           } 
-
-           .questioneer {
-              color : #fff;
-              padding : .5em;
-              //border-right:1px solid darken(@brand-success , 20%);
-              //background : linear-gradient(75deg, @brand-primary , lighten(@brand-primary , 20%) 50%, lighten(@brand-primary , 30%));
-
-              min-height:50em;
-              input, textarea {
-                 margin-bottom: 1em;
-              }
-              textarea {
-                  min-height:10em;
-              }
-              .btn {
-                 margin-right:.5em;
-                 margin-bottom:.5em;
-                 &:hover{
-                    .btn-success;
-                 }
-              }
-              .interest {
-                  background: #fff;
-                  color:#000;
-                  outline:none;
-                  margin-right:.2em; 
-              }
-           }
-
-           @media (max-width: @screen-sm) {
-               margin-top:0;
-               .text{
-                  margin-bottom:1em;
-                  min-height:5em;
-               }
-           }
-     }
-  }
-
-  .footer{
-     padding-top:2em;
-     margin-bottom:3em;
-  }
-}
+    }
+ }
 
 .auth {
+ background-color:#fff;
+ padding:1em;
  text-align:center;
   margin-top: 5em;
     >form {
@@ -709,9 +618,10 @@ nav {
     }
 
     blockquote {
-        border-left: 5px solid lighten(@brand-primary , 30%);
+        border-left: 5px solid lighten(@brand-primary , 20%);
         padding-left: 20px;
         font-style: italic;
+        background: lighten(@brand-primary , 40%);
     }
 
     img{
@@ -722,6 +632,9 @@ nav {
         //color: lighten(@brand-primary , 30%);
     }
 
+    outdent {
+       color : red;
+    }
 }
 
 .profile{

@@ -184,7 +184,7 @@ angular.module('Posts' , [])
                promise.resolve(data.id);
          })
          .error(function(err){
-               alert(angular.toJson(err));
+              // alert(angular.toJson(err));
          });
 
          return promise.promise;

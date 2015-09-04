@@ -1,5 +1,5 @@
 <div class="auth col-sm-4 col-sm-offset-4" >
-	<form name="signUpForm" novalidate ng-submit="signup(newUser)">
+	<form name="signUpForm" novalidate ng-submit="signup(newUser)" ng-if="view=='signup'">
 	 	   <div classs="col-xs-12" style="margin-bottom:3em;">
 		      <a ui-sref="out.homepage">
 		      	 <img src="img/logo.png" height="50px" class="img-rounded"/>
@@ -35,7 +35,7 @@
 
 	        <div class="form-group">
 			   <label>
-			       Already have an account ? <a ui-sref="out.signin">sign in</a>
+			       Already have an account ? <a ng-click="switch('signin')">sign in</a>
 			    </label>
 			</div>
 			<div class="checkbox">
@@ -49,6 +49,40 @@
 	 		<button type="submit" class="btn btn-primary btn-block"
 			    ng-disabled="signUpForm.$invalid">
 			    Sign Up
+			</button>
+	</form>
+	<form name="signInForm" novalidate ng-submit="signin(user)" ng-if="view=='signin'">
+		    <div classs="col-xs-12" style="margin-bottom:3em;">
+		      <a ui-sref="out.homepage">
+		      	 <img src="img/logo.png" height="50px" class="img-rounded"/>
+		      </a>
+		    </div>
+		  
+            <div class="form-group col-xs-12 " style=" border:1px solid #ccc;">
+			    <label>Email:</label>
+			    <input name="userEmail" type="email" class="form-control"
+			    required ng-model="user.username" placeholder="Enter email">
+			</div>
+			<div class="clearfix"></div>
+
+			<div class="form-group col-xs-12 " >
+			    <label>Password:</label>
+			    <input name="userEmail" type="password" class="form-control"
+			    required ng-model="user.password" placeholder="enter password">
+			</div>
+			
+			
+			<div class="clearfix"></div>
+
+            <div class="form-group">
+			   <label>
+			       Don't have an account ? <a ng-click="switch('signup')">sign up</a>
+			    </label>
+			</div>
+           
+			<button type="submit" class="btn btn-primary btn-block hvr-bounce-to-bottom"
+			    ng-disabled="signInForm.$invalid">
+			    Sign In
 			</button>
 	</form>
 </div>

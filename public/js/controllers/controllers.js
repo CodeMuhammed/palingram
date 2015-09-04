@@ -21,34 +21,12 @@ angular.module('palingram')
 
   })
 
-  .controller('homepageController' , function($scope , $rootScope , $state ,$timeout , Auth , Tags , Posts , User){
-       $scope.guestLogin = function(){
-           $state.go('in.posts');
-       };
-
+  .controller('writerController' , function($scope , $rootScope , $state ,$timeout , Auth , Tags , Posts , User){
        $scope.form = false;
        $scope.selected = [];
        $scope.apply = {};
        $scope.interests = [];
        $scope.checked = [false , false , false];
-
-       $scope.features =[
-           {
-              text : 'Engage and share ideas with a teeming community',
-              buttonText  : 'beta test',
-              img : "img/community.png"
-           },
-           {
-              text : 'Earn money by writing articles on palingram',
-              buttonText  : 'strictly by invitation',
-              img : "img/money.png"
-           },
-           {
-              text : 'Start blogging immediately with no setups required',
-              buttonText  : 'beta test',
-              img : "img/platforms.png"
-           }
-       ];
 
        $scope.tags= [
              'technology',
@@ -115,7 +93,7 @@ angular.module('palingram')
    })
 
    //This ccontroller takes care of signing up as a fresh user
-   .controller('signupController' , function($scope , $rootScope , $state , Auth){
+   .controller('authController' , function($scope , $rootScope , $state , Auth , Tags , User , Posts){
        $scope.signup = function(newUser){
             $rootScope.$broadcast('loading:start' , {msg : 'loading please wait...'});
             newUser.favourites = [];
@@ -132,10 +110,8 @@ angular.module('palingram')
                 $rootScope.$broadcast('loading:end' , {msg : err});
             });
        }
-   })
 
-   .controller('signinController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
-       $scope.signin = function(credentials){
+        $scope.signin = function(credentials){
            $rootScope.$broadcast('loading:start' , {msg : 'loading .. please wait'});
            Auth.signin(credentials).then(function(status){
                 Tags.set(User.get().tags_id).then(function(status){
@@ -148,6 +124,11 @@ angular.module('palingram')
                 $rootScope.$broadcast('loading:end' , {msg : 'signin error'});
             }); 
        }
+       
+       $scope.view = 'signup';
+       $scope.switch =function(view){
+            $scope.view = view;
+       };
    })
 
    .controller('transitionController' , function($scope , $rootScope , $state , Auth , Posts , Tags , User){
@@ -204,6 +185,7 @@ angular.module('palingram')
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
          //implement auto login for when page refreshes
          if(Auth.isAuth() && User.get().firstname != 'guest'){
+
             next();
          }
          else {
@@ -369,6 +351,17 @@ angular.module('palingram')
                     $state.go('in.posts.post' , {id : post._id});
                 });
            };
+            
+           $scope.register =  function(){
+               Auth.logout().then(
+                  function(status){
+                      $state.go('out.auth');
+                  } ,
+                  function(err){
+                      alert(err);
+                  }
+               );
+           }
 
            $scope.clearTags = function(){
                 $rootScope.$broadcast('loading:start' , {});
@@ -445,11 +438,13 @@ angular.module('palingram')
            var toggleSidebar = function(){
                $scope.sidebar == '' ? $scope.sidebar = 'active' : $scope.sidebar = '';
            }
+
+
           //
           $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
               toState.data.post = fromState.data.post;
           });
-
+           
            //
            $scope.$on('searchText' , function(e , a){
               $rootScope.$broadcast('loading:start' , {});
@@ -498,10 +493,8 @@ angular.module('palingram')
             $scope.posts = Posts.get().slice(0 , 5);
             Posts.getAuthorPosts($scope.post.username).then(function(result){
                $scope.authorPosts = result;
-               $rootScope.$broadcast('loading:end' , {});
             });
             
-            $rootScope.$broadcast('loading:start' , {});
             $scope.comment = {
                 body : '',
                 by : User.get().firstname+' '+User.get().lastname,
@@ -707,7 +700,7 @@ angular.module('palingram')
                  $scope.link = shortenedUrl;
               } ,
               function(err){
-                 alert(err);
+                 //alert(err);
               })
             
             $scope.share = function(socialtype){
@@ -756,7 +749,7 @@ angular.module('palingram')
                 Auth.logout().then(
                   function(status){
                       $rootScope.$broadcast('loading:end' , {msg : status});
-                      $state.go('out.homepage');
+                      $state.go('out.auth');
                   } ,
                   function(err){
                       $rootScope.$broadcast('loading:end' , {msg : err});

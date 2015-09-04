@@ -66,6 +66,8 @@
   </head>
 
   <body>
+    <!--Hidden link to all posts link for adsense  crawlers-->
+    <a href="/allPosts/?_escaped_fragment_=/" style="position:fixed">.</a>
      <span class="loader" ng-controller="loaderController" ng-show="loading">
           <span>
              {{message == '' ? 'loading...' : message}}

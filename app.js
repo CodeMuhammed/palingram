@@ -48,8 +48,9 @@ app.get('/' ,  function(req , res , next){
               request.get(palingramapi+'/posts/'+fragmentPathId , function(err , response , body){
                      if(err){
                           console.log('called');
-                          var post = require('fs').readFileSync('post.txt');
-                          res.render('post.ejs' , {post:JSON.parse(post) , BaseUrl:BaseUrl});
+                          var post = JSON.parse(require('fs').readFileSync('post.txt'));
+                          post.date = new Date(post.date);
+                          res.render('post.ejs' , {post:post , BaseUrl:BaseUrl});
                      } 
                      else {
                           res.render('post.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});

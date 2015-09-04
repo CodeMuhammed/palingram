@@ -57,12 +57,6 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
                  abstract : true,
                  templateUrl : 'views/out.tpl.html'
              })
-             .state('out.homepage' , {
-                 url : '/homepage',
-                 templateUrl : 'views/out.homepage.tpl.html',
-                 controller  : 'homepageController',
-                 data :{}
-             })
 
              .state('out.tradr' , {
                  url : '/tradr',
@@ -70,16 +64,16 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
                  controller  : 'gamblrCtrl'
              })
 
-             .state('out.signup' , {
-                 url : '/signup',
-                 templateUrl : 'views/out.signup.tpl.html',
-                 controller  : 'signupController',
+             .state('out.auth' , {
+                 url : '/auth',
+                 templateUrl : 'views/out.auth.tpl.html',
+                 controller  : 'authController',
                  data :{}
              })
-             .state('out.signin' , {
-                 url : '/signin',
-                 templateUrl : 'views/out.signin.tpl.html',
-                 controller  : 'signinController',
+             .state('out.writer' , {
+                 url : '/writer',
+                 templateUrl : 'views/out.writer.tpl.html',
+                 controller  : 'writerController',
                  data :{}
              })
              .state('out.transition' , {

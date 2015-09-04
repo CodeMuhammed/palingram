@@ -1,5 +1,5 @@
 angular.module('Auth' , ['User', 'Tags' , 'Posts'])
-    //.constant('BaseUrl' , 'http://localhost:3000')
+   // .constant('BaseUrl' , 'http://localhost:3000')
     .constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
     .constant('googl_key' , 'AIzaSyBFgXT17fbaEr-POzSmbLzdzMGlKEoUH44')
    .factory('Auth' , function($http , $q ,$state ,$rootScope ,  Posts , Tags , User , BaseUrl , googl_key){
@@ -26,6 +26,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
          }
 
          function signin(userCredential){
+            console.log(userCredential);
             var promise = $q.defer();
             $http({
                method : 'POST',
@@ -33,6 +34,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
                data : userCredential 
             })
             .success(function(data){
+                console.log(data);
                 User.set(data);
                 isSignedIn = true;
                 promise.resolve('sign in done');
