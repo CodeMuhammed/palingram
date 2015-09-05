@@ -73,11 +73,30 @@ angular.module('Tags' , [])
               return promise.promise;
           }
 
+          //
+          function getCategories() {
+              return [
+                   'technology',
+                   'startup',
+                   'programming',
+                   'analytics',
+                   'health',
+                   'general topics',
+                   'food',
+                   'lifestyle',
+                   'science',
+                   'facts',
+                   'travel',
+                   'biography'
+             ];
+          }
+
           //Public interface
           return {
         	 set : set,
         	 get : get,
            queryAll : queryAll,
-           update : update
+           update : update,
+           getCategories : getCategories
           }
     });

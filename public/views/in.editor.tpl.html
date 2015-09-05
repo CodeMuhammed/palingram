@@ -30,6 +30,20 @@
 				<i class="icon fa fa-plus"> add</i>
 			  </span>
 		 </div>
+		 <hr>
+
+		 <h1>
+	       	   Select a category that your post belong to. 
+	     </h1>
+
+	     <hr>
+	      <div class="tag-buttons">
+			<button class="btn btn-default btn-sm" ng-repeat="category in categories" ng-click="addCategory(category)">
+			   <span>{{category}}</span>
+			   <i class="icon fa fa-check" style="color:green" ng-show="category ==selectedCategory" ></i>
+			</button>
+			
+		 </div>
 
 	</div>
 

@@ -28,14 +28,7 @@ angular.module('palingram')
        $scope.interests = [];
        $scope.checked = [false , false , false];
 
-       $scope.tags= [
-             'technology',
-             'startup',
-             'bitcoin',
-             'gadgets',
-             'programming',
-             'general topics',
-       ];
+       $scope.categories= Tags.getCategories();
        
        
        $scope.toggleCheck = function(item , index){
@@ -333,9 +326,19 @@ angular.module('palingram')
         }
         
         function next(){
+           //taking care of side menu
+           $scope.sideView = 'popular';
+
+           $scope.view = function(view){
+               return $scope.sideView == view;
+           }
+           $scope.changeView = function(view){
+               $scope.sideView = view;
+           };
+
            $scope.posts = Posts.get();
            $scope.tags = Tags.get();
-           
+           $scope.categories= Tags.getCategories();
            $scope.sidebar = '';
            $scope.user = User.get();
 
@@ -363,9 +366,15 @@ angular.module('palingram')
                );
            }
 
-           $scope.clearTags = function(){
+           $scope.clearTags = function(category){
                 $rootScope.$broadcast('loading:start' , {});
-                $scope.tags = ['general'];
+                if(category){
+                   $scope.tags = [category]
+                }
+                else {
+                  $scope.tags = ['general'];
+                }
+                
                 Posts.set($scope.tags).then(
                     function(result){
                         $rootScope.$broadcast('loading:end' , {msg : 'done'});
@@ -822,7 +831,7 @@ angular.module('palingram')
 
              //Watch $scope.newTag and add a tag every time a space is entered 
              $scope.addTag = function(newTag){
-                 if(newTag && $scope.tags.length < 7 && $scope.tags.indexOf(newTag) < 0){
+                 if(newTag && $scope.tags.length < 6 && $scope.tags.indexOf(newTag) < 0){
                       $scope.tags.push(newTag);
                       $scope.newTag = '';
                  }
@@ -847,6 +856,23 @@ angular.module('palingram')
             $scope.back = function(){
                 $scope.edit = false;   
             }
+
+            //This takes care of including a category
+            $scope.categories = Tags.getCategories();
+            $scope.selectedCategory = '';
+
+            $scope.addCategory = function(category){
+                if($scope.selectedCategory== ''){
+                     $scope.selectedCategory = category;
+                     $scope.tags.push(category);
+                }
+                else {
+                   var index = $scope.tags.indexOf($scope.selectedCategory);
+                   $scope.tags.splice(index , 1);
+                   $scope.selectedCategory = '';
+                   $scope.addCategory(category);
+                }
+            };
             
              //this sends post to the server
             $scope.save = function(){

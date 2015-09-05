@@ -16,6 +16,10 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
           $window.ga('set', 'page', $location.path());
           $window.ga('send', 'pageview');
         }
+        $window.adsbygoogle = [];
+         try{
+             $window.adsbygoogle.push({});
+          }catch(ex){}
       }
 
       // subscribe to events
@@ -157,4 +161,4 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
          restrict : 'E',
          scope : true
      }
-}); 
+});
