@@ -133,7 +133,7 @@
 	</div>
 	<div class="col-sm-3 side-items" style="float:right; padding-right:0;margin-top:35px">
           <div class="col-xs-12 ad-box " style="padding:3em 2em; text-align:center; font-weight:bolder">
-				 <google-ads adname="four"></google-ads>
+				 <div  google-adsensetwo></div>
           </div>
           <div class="clearfix"></div>
 
@@ -146,7 +146,7 @@
           <hr />
 
           <div class="col-xs-12 suggestion clearfix" ng-repeat="item in posts">
-          	   <a ng-click="viewPost(item)">
+          	   <a href="http://www.palingram.com/#!/in/posts/{{item._id}}" target="_blank">
 	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
 	          	  	  <h4>{{item.title | limitTo : 40}}</h4>
@@ -159,7 +159,10 @@
           
           <hr />
           <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
-			    <google-ads adname="three"></google-ads>
+			    <div  google-adsensethree></div>
+          </div>
+          <div class="col-xs-12 ad-box " style="padding:3em 2em; text-align:center; font-weight:bolder">
+				 <div  google-adsenseone></div>
           </div>
           <div class="clearfix"></div>
            <hr />
@@ -170,7 +173,7 @@
 
           <hr />
          <div class="col-xs-12 suggestion clearfix" ng-repeat="item in authorPosts">
-          	   <a ng-click="viewPost(item)">
+          	   <a href="http://www.palingram.com/#!/in/posts/{{item._id}}" target="_blank">
 	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
 	          	  	  <h4>{{item.title | limitTo : 40}}</h4>

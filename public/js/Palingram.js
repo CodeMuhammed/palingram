@@ -1,3 +1,7 @@
+var adSenseTpl1 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="8313861460" data-ad-format="auto"></ins>';
+var adSenseTpl2 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="3744061064" data-ad-format="auto"></ins>';
+var adSenseTpl3 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="5220794266" data-ad-format="auto"></ins>';
+
 angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 
 //Google analytics configuration
@@ -27,8 +31,9 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
 
   // inject self
   .run([
-    'myGoogleAnalytics', 
-    function(myGoogleAnalytics) {
+    'myGoogleAnalytics' , '$window', 
+    function(myGoogleAnalytics , $window) {
+       $window.ad_init = false;
     }
   ])
 
@@ -136,22 +141,54 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
         }
 ])
 
-.directive('googleAds' , function($window){
-     return {
-         link : function(scope , elem , attrs){
-              scope.adname = attrs['adname'];
-               if (!$window.adsbygoogle) {
-                    $window.adsbygoogle = [];
+ .directive('googleAdsenseone', function($window, $compile) {
+
+        return {
+            restrict: 'A',
+            transclude: true,
+            template: adSenseTpl1,
+            replace: false,
+            link: function postLink(scope, element, iAttrs) {
+                    element.html("");
+                    element.append(angular.element($compile(adSenseTpl1)(scope)));
+                    if (!$window.adsbygoogle) {
+                        $window.adsbygoogle = [];
+                    }
                     $window.adsbygoogle.push({});
-                }         
-         },
-         templateUrl : 'views/ads.tpl.html',
-         controller : function($scope){
-             $scope.getAd = function () {
-                 return 'views/ads.'+$scope.adname+ '.tpl.html';
-             };
-         },
-         restrict : 'E',
-         scope : true
-     }
-});
+            }
+        };
+    })
+ .directive('googleAdsensetwo', function($window, $compile) {
+
+        return {
+            restrict: 'A',
+            transclude: true,
+            template: adSenseTpl2,
+            replace: false,
+            link: function postLink(scope, element, iAttrs) {
+                    element.html("");
+                    element.append(angular.element($compile(adSenseTpl2)(scope)));
+                    if (!$window.adsbygoogle) {
+                        $window.adsbygoogle = [];
+                    }
+                    $window.adsbygoogle.push({});
+            }
+        };
+    })
+ .directive('googleAdsensethree', function($window, $compile) {
+
+        return {
+            restrict: 'A',
+            transclude: true,
+            template: adSenseTpl3,
+            replace: false,
+            link: function postLink(scope, element, iAttrs) {
+                    element.html("");
+                    element.append(angular.element($compile(adSenseTpl3)(scope)));
+                    if (!$window.adsbygoogle) {
+                        $window.adsbygoogle = [];
+                    }
+                    $window.adsbygoogle.push({});
+            }
+        };
+    });
