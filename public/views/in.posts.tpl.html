@@ -71,15 +71,12 @@
 						  <a ng-click="selectedInfo = 0">About us</a>  |
 						   <a ng-click="selectedInfo = 1">Privacy policy</a>
 						 </div>
-						 <div class="well" style="background-color:#E9EAED; margin-top:2em;" ng-if="selectedInfo!=-1">
+						 <div class="well" style="background-color:#E9EAED; margin-top:2em;" ng-show="selectedInfo!=-1">
 						 	 {{info[selectedInfo]}}
 
 						 	 <div class="col-xs-12 share-box" style ="padding:0; margin-top:2em;" >
-						    	<i class="icon fa fa-twitter"> follow</i>
-
-								<i class="icon fa fa-facebook"> like</i>
-
-						    	<i class="icon fa fa-google-plus"> +1</i>
+						    	<!--twiter button-->
+                              <a href="https://twitter.com/palingram" class="twitter-follow-button" data-show-count="false" data-dnt="true">Follow @palingram</a>
 							</div>
 
 						 </div>
