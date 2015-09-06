@@ -145,8 +145,9 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
                 }
                 try{
                    $window.adsbygoogle.push({});
-                }catch(ex){}
-                               
+                }catch(ex){
+                   alert(ex);
+                }          
          },
          templateUrl : 'views/ads.tpl.html',
          controller : function($scope){

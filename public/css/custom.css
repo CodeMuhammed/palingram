@@ -11657,7 +11657,7 @@ nav {
   background: #fff;
   padding-left: 0;
   padding-right: 0;
-  margin-top: 30px;
+  margin-top: 50px;
   box-shadow: 0 0 .4em #ccc;
 }
 @media (max-width: 991px) {
@@ -11689,23 +11689,23 @@ nav {
   font-size: 1.3em;
   font-weight: bold;
 }
-.article .header .inner .author-icons {
+.article .header .inner .text .author-icons {
   padding-right: 1em;
   position: absolute;
   bottom: 0;
   right: 0;
 }
-.article .header .inner .author-icons i {
-  font-size: 3em;
+.article .header .inner .text .author-icons i {
+  font-size: 2em;
   color: #fff;
 }
-.article .header .inner .author-icons i:first-child {
+.article .header .inner .text .author-icons i:first-child {
   margin-right: .5em;
 }
-.article .header .inner .author-icons .fa-edit:hover {
+.article .header .inner .text .author-icons .fa-edit:hover {
   color: #5cb85c;
 }
-.article .header .inner .author-icons .fa-times:hover {
+.article .header .inner .text .author-icons .fa-times:hover {
   color: #d9534f;
 }
 .article .share-box i {

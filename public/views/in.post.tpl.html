@@ -17,11 +17,10 @@
 					<span class="user">
 						by <a>{{post.author}}</a> | {{post.date | date:'fullDate'}}
 					</span>
-					
-				</div>
-				<div class="author-icons" ng-show = "owned">
-					<i class="icon fa fa-edit" ng-click="edit()"></i>
-				    <i class="icon fa fa-times"  ng-click="delete()"></i>
+					<div class="author-icons" ng-show = "owned">
+						<i class="icon fa fa-edit" ng-click="edit()"></i>
+					    <i class="icon fa fa-times"  ng-click="delete()"></i>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -104,17 +103,19 @@
 	            </div>
 			</div>
 			<div class="col-xs-12" id="comment" ng-repeat = "item in comments | commentFilter:sortCriteria">
+
 				<div class="col-xs-12 comment-heading">
 					<div class="col-xs-1">
 						 <img ng-src={{item.image}} class="img-rounded">
 					</div>
 					<div class="col-xs-11">
 						<h5>
-							<a>{{item.by}}</a> | <span style="color:#CCE">{{item.date | date:'fullDate'}}</spam>
+							<a>{{item.by}}</a> | <span style="color:#CCE">{{item.date | date:'fullDate'}}</span>
 							
 						</h5>
 				    </div>
 			   </div>
+
 				<div class="col-xs-12 comment-body">	 
 					 <div class="col-xs-11 col-xs-offset-1" style="margin-bottom:1em;padding-right:1em;">
 					 	{{item.body}} <br/><br />
@@ -130,7 +131,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-3 side-items" style="float:right; padding-right:0;">
+	<div class="col-sm-3 side-items" style="float:right; padding-right:0;margin-top:35px">
           <div class="col-xs-12 ad-box " style="padding:3em 2em; text-align:center; font-weight:bolder">
 				 <google-ads adname="four"></google-ads>
           </div>
@@ -178,10 +179,6 @@
 	          	  	  </h5>
 	          	  </div>
 	           </a>
-          </div>
-          <hr />
-          <div class="col-xs-12 ad-box" style="padding:3em 2em; text-align:center; font-weight:bolder">
-				 <google-ads adname="two"></google-ads>
           </div>
 	</div>
 </div>
