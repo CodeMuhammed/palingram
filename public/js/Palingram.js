@@ -142,12 +142,8 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
               scope.adname = attrs['adname'];
                if (!$window.adsbygoogle) {
                     $window.adsbygoogle = [];
-                }
-                try{
-                   $window.adsbygoogle.push({});
-                }catch(ex){
-                   alert(ex);
-                }          
+                    $window.adsbygoogle.push({});
+                }         
          },
          templateUrl : 'views/ads.tpl.html',
          controller : function($scope){
