@@ -86,7 +86,7 @@
         </div><!--/.sidebar-offcanvas-->
         <div class="col-sm-5"  style="padding:0;">
            
-		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default posts-body hvr-underline-reveal">
+		   <div ng-repeat="post in posts | orderBy:'-date'" class="col-xs-12 panel panel-default posts-body hvr-underline-reveal" style="display:inline-block">
 				<div class="col-xs-12 header">
 				   <div class="col-xs-12 col-sm-1" style="padding-right:1em; padding-left:0;">
 				   	    <img ng-src= {{post.image}} height="40" width="40" class="img-rounded">
@@ -98,7 +98,8 @@
 				   	  
 				   </div>
 				</div>
-				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 col-sm-offset-1 col-sm-11 panel-body" style="text-decoration:none" target="_blank">
+				<div class="clearfix"></div>
+				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 col-sm-offset-1 col-sm-11 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank">
 					<div class="col-xs-12 img-div" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
 						
 					</div>
@@ -128,7 +129,7 @@
 				</div>
 			 </div>
 	    </div>
-	    <div class="side-items col-sm-3 " style="padding:0em 2em;" >
+	    <div class="side-items col-sm-3 hidden-xs" style="padding:0em 2em;">
 		    <div  google-adsenseone></div>
 		    <div  google-adsensetwo></div>
 		    <div  google-adsensethree></div>

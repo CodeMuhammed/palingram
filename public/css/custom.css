@@ -11652,6 +11652,9 @@ nav {
   font-size: 1.7em;
   color: #555555;
 }
+.posts-body:hover {
+  background-color: #f7f7f8;
+}
 .article {
   min-height: 400em;
   background: #fff;
