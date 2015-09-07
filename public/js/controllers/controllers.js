@@ -326,13 +326,6 @@ angular.module('palingram')
         }
         
         function next(){
-          //about views
-          $scope.selectedInfo = -1;
-          $scope.info = [
-             'Palingram is a blogging website that covers a wide range of topics. From social to educational',
-             'This website uses cookies to store user information in the browser and uses softwares both in-house and third party like google Analytics tools to monitor how users interact with the website'
-          ];
-
           
            //taking care of side menu
            $scope.sideView = 'popular';

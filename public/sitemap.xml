@@ -15,4 +15,19 @@
   <changefreq>always</changefreq>
   <priority>1.00</priority>
 </url>
+<url>
+  <loc>http://www.palingram.com/privacy.html</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.palingram.com/about.html</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://www.palingram.com/contact.html</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
 </urlset>
