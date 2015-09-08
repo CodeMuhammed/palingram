@@ -11656,10 +11656,18 @@ nav {
   background-color: #f7f7f8;
 }
 .article {
+<<<<<<< HEAD
   min-height: 200em;
   background: #fff;
   padding-left: 0;
   padding-right: 0;
+=======
+  min-height: 400em;
+  background: #fff;
+  padding-left: 0;
+  padding-right: 0;
+  margin-top: 50px;
+>>>>>>> 75351e958335692bdef9032b6e0bb89e0014911f
   box-shadow: 0 0 .4em #ccc;
 }
 @media (max-width: 991px) {
@@ -11677,7 +11685,10 @@ nav {
   height: 30em;
 }
 .article .header .inner .text {
+<<<<<<< HEAD
   float: right !important;
+=======
+>>>>>>> 75351e958335692bdef9032b6e0bb89e0014911f
   min-height: 15em;
   background-color: rgba(0, 0, 0, 0.8);
   text-align: left;

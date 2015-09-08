@@ -26,7 +26,7 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
       $rootScope.$on('$stateChangeSuccess', myGoogleAnalytics.sendPageview);
 
       return myGoogleAnalytics;
-    }
+    }  
   ])
 
   // inject self
