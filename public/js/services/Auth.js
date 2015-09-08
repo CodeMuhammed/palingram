@@ -22,7 +22,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
                promise.reject('invalid credentials');
             });
 
-            return promise.promise;     //
+            return promise.promise;
          }   
 
          function signin(userCredential){
