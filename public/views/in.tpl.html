@@ -1,0 +1,96 @@
+<div class="main-view-area">
+   <!-- Static navbar -->
+        <div class="alert alert-warning text-center" ng-show="alert.visible" style="font-weight:bolder; margin-bottom:0;">
+	   	    {{alert.message}} <a ng-click="sendEmail()">Click here to RESEND email</a>
+	   	    <i class="icon fa fa-times fa-lg pull-right" ng-click = "closeAlert()"></i>
+	   	</div>
+
+        <nav class="navbar navbar-fixed-top nav-me">
+	      <div class="">
+	      	<div class="navbar-header text-center">
+	      		   <a class="navbar-brand visible-xs" href="#" style="padding-top:.2em" ng-click="toggle()">
+			          	   <img src="img/logo.png" height="45" class="img-rounded">
+			          </a>
+				  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="toggleSearch()" style="margin-left:.2em">
+					<i class="icon fa fa-search" style="font-size:1.4em; color:#000"></i>
+				  </button>
+				  <button class="btn btn-default navbar-btn pull-right visible-xs" ng-click="goto('editor')" ng-show="writer">
+					<i class="icon fa fa-edit" style="font-size:1.4em;"></i></button>
+		       </div>
+	        <div class="navbar-header">
+	          <a class="navbar-brand" href="#" style="padding-top:.2em" ng-click="toggle()">
+	          	   <img src="img/logo.png" height="45" class="img-rounded">
+	          </a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            
+	            <li ng-click="goto('posts')" class="" ng-class="{'hvr-bubble-bottom' : active('posts')}">
+					<a >
+						
+						All Posts
+					</a>
+				</li>
+				<li ng-click="goto('favourites')"  class="" ng-class="{'hvr-bubble-bottom' : active('favourites')}">
+					<a >
+						
+						Favourites
+					</a>
+				</li>
+				<li  ng-click="goto('profile')"  class="" ng-class="{'hvr-bubble-bottom' : active('profile')}">
+					<a >
+						Profile</a>
+				</li>
+
+				<li ng-click="goto('editor')"  class="" ng-show="writer"  ng-class="{'hvr-bubble-bottom' : active('editor')}">
+					<a>
+						
+						Write new article
+					</a>
+				</li>
+	          </ul>
+	          <form class="nav navbar-nav pull-right navar-form" style="padding:0;">
+                 <gcse:search></gcse:search>
+	          </form>
+	          
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+	    <nav class="subnav  navbar nav-me visible-xs">
+	      <div class="container">
+	        <div id="navbar" class="">
+	          <ul class="nav navbar-nav" ng-hide="search">
+	            
+	            <li ng-click="goto('posts')" class="" ng-class="{'hvr-bubble-bottom' : active('posts')}">
+					<a >
+						
+						All Posts
+					</a>
+				</li>
+				<li ng-click="goto('favourites')"  class="" ng-class="{'hvr-bubble-bottom' : active('favourites')}">
+					<a >
+						
+						Favourites
+					</a>
+				</li>
+				<li  ng-click="goto('profile')"  class="" ng-class="{'hvr-bubble-bottom' : active('profile')}">
+					<a >
+						Profile</a>
+				</li>
+	          </ul>
+	          <form class="searchbox" ng-show="search">
+			  	<div class="input-group" style="padding-bottom:.4em;">
+			  		<span class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click="toggleSearch()">
+					<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:#ccc"></i>
+				  </span>
+				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Search palingram" ng-model="searchText">
+				  <span class="input-group-addon" style="background-color:#428bca; padding-left:1em; padding-right:1em" ng-click="searchForTopic(searchText)">
+					<i class="icon fa fa-search" style="font-size:1.5em; font-weight:bold; color:#fff"></i>
+				  </span>
+			   </div>
+			  </form>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+      <ui-view name="inSpace"></ui-view>
+</div>

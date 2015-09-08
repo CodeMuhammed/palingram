@@ -1,0 +1,82 @@
+<div style="padding:1em">
+	<div class="side-menu panel panel-default col-sm-4 col-sm-offset-4" style="padding:0">
+		<div class="panel-heading text-center">
+			<button class="btn btn-default btn-sm pull-left">{{title}}</button>
+			<!-- Split button -->
+			<div class="btn-group" >
+				  <button type="button" class="btn btn-default btn-sm" ng-click="toggleTeamMenu()" ng-disabled = "game">
+				  	{{selectedTeam}} 
+				  	<i class="caret"></i>
+				  </button>
+				  <div class="dropdown" ng-class="{'open' : teamMenu}">
+				  	<ul class="dropdown-menu">
+				    <li ng-repeat="team in teams" ng-click = "selectTeam(team)">
+				    	<a>{{team}}</a>
+				    </li>
+				  </ul>
+				  </div>
+				  
+			</div>
+			<button class="btn btn-default pull-right btn-sm" ng-click="toggleSetting()" ng-disabled = "game">
+				<i class="icon fa fa-cog"></i>
+			</button>
+			<button class="btn btn-default pull-right btn-sm" ng-click="reset()" style="margin-right:1em">
+				<i class="icon fa fa-spinner"></i>
+			</button>
+		</div>
+		<div class="panel-heading" ng-show = "setting">
+			  <div class="input-group">
+				  <input class="form-control input-tag" placeholder="Initial capital here" ng-model="NBR" style="border-radius:0;">
+				  <span ng-click="save(NBR)" class="input-group-addon btn btn-default" style="padding-left:1em; padding-right:1em; border-radius:0; background-color:#fff;">
+					<i >save</i>
+				  </span>
+			 </div>
+		</div>
+		<div class="panel-heading" style="background-color:#fff;">
+			<span class=""><b>{{bankroll | currency:'NGN '}}</b></span>
+
+			<!--<button class="btn btn-default pull-right">{{basebet | currency:'NGN '}}</button>-->
+			<span class="pull-right"><b>Won {{counter}}</b></span>
+		</div>
+		<div class="panel-heading" style=" background-color: rgba(255 , 255  , 102 , .9)">
+			 <div class="input-group">
+				  <input class="form-control input-tag" placeholder="Enter pip here" ng-model="odd" style="border-radius:0; height:3em" ng-readonly = "trade">
+				  <span ng-click = "bet(odd)" class="input-group-addon btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0" ng-disabled="trade">
+					<i class="icon fa fa-plus" > trade</i>
+				  </span>
+			 </div>
+		</div>
+		<div class="panel-heading" style="background-color:#fff;">
+			 <form class="searchbox">
+			  	<div class="input-group" style="padding-bottom:.4em;">
+			  		<span class="input-group-addon  btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(false)">
+					<i class="icon fa fa-times" style="font-size:1.5em; font-weight:bold; color:red"></i>
+				  </span>
+				  <input type="text" class="form-control" style="border-radius: 0px !important; height:3em; box-shadow:none" placeholder="Investment displays here"
+				  ng-model="currentBet.stake" ng-readonly = "true" >
+				  <span class="input-group-addon btn btn-default" style="background-color:#fff; padding-left:1em; padding-right:1em" ng-click = "record(true)">
+					<i class="icon fa fa-check " style="font-size:1.5em; font-weight:bold; color:green"></i>
+				  </span>
+			   </div>
+			 </form>
+		</div>
+         
+         <div class="panel-heading" style="background-color:#fff;">
+			  <div class="alert text-center">
+			  	   <button class="btn btn-default pull-left disabled">Investment</button>
+			  	   <button class="btn btn-default disabled">Gross</button>
+			  	   <button class="btn btn-default pull-right disabled">Profit</button>
+			  </div>
+		 </div>
+
+
+	     <div class="panel-body tradr-results">
+			  <div class="alert text-center" ng-class="item.status ? 'alert-success' : 'alert-danger'" ng-repeat = "item in completed | orderBy:'-date'">
+			  	   <button class="btn btn-default pull-left">{{item.stake | currency: 'NGN '}}</button>
+			  	   <button class="btn btn-default">{{item.gross | currency: 'NGN '}}</button>
+			  	   <button class="btn btn-default pull-right">{{item.net | currency: 'NGN '}}</button>
+			  </div>
+		 </div>
+	 </div>
+	 
+</div>
