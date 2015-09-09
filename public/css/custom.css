@@ -11582,7 +11582,7 @@ nav {
   width: 100%;
   top: 50px;
   z-index: 100001;
-  background: #fff;
+  background-color: #E9EAED !important;
 }
 .subnav ul {
   text-align: center;
@@ -11606,7 +11606,7 @@ nav {
   overflow: auto;
 }
 .posts-container {
-  margin-top: 52px;
+  margin-top: 30px;
   padding: 0;
   padding-top: 2em;
 }
@@ -11614,6 +11614,13 @@ nav {
   .posts-container {
     margin-top: 100px;
     padding: 0;
+  }
+  .posts-container ul {
+    text-align: center;
+  }
+  .posts-container ul li {
+    width: 33.3333%;
+    float: left;
   }
 }
 .posts-container .side-menu {
@@ -11711,16 +11718,6 @@ nav {
 .article .header .inner .text .author-icons .fa-times:hover {
   color: #d9534f;
 }
-.article .share-box i {
-  padding: .5em;
-  font-size: 1.5em;
-}
-.article .share-box i:hover {
-  color: #337ab7;
-}
-.article .share-box i a {
-  text-decoration: none;
-}
 .article .share-box .des {
   font-size: 1.2em;
 }
@@ -11731,6 +11728,14 @@ nav {
   font-size: 1.3em;
   line-height: 2em;
   letter-spacing: .02em;
+}
+@media (max-width: 991px) {
+  .article .body p {
+    padding: 0;
+    font-size: 1.1em;
+    line-height: 1.8em;
+    letter-spacing: .018em;
+  }
 }
 .article .body img {
   margin-top: 2em;
@@ -11772,6 +11777,9 @@ nav {
   height: 3em;
 }
 @media (max-width: 991px) {
+  .article #comment .comment-heading > div:first-child {
+    padding: 0;
+  }
   .article #comment .comment-heading > div:first-child img {
     width: 2.5em;
     height: 2.5em;
@@ -12045,6 +12053,7 @@ fieldset[disabled] .tag-buttons .btn.active {
   }
 }
 .gsc-control-cse {
+  max-width: 30em !important;
   padding: 0 !important;
 }
 .gsc-control-cse #gsc-i-id1 {

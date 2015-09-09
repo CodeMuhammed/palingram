@@ -213,18 +213,7 @@ angular.module('palingram')
                  $scope.search =! $scope.search ;
             }
 
-            $scope.searchForTopic = function(searchText){
-                var query = searchText.split(' ');
-                newArr = [];
-                angular.forEach(query , function(item){
-                    item = item.trim();
-                    if(! item==''){
-                         newArr.push(item);
-                    }
-                });
-
-                $rootScope.$broadcast('searchText' , {query : newArr});
-            };
+           
         
             if(Auth.isAuth() && User.get().firstname != 'guest' &&  User.get().emailVerified == false){
                $scope.alert = {
@@ -455,23 +444,6 @@ angular.module('palingram')
           $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
               toState.data.post = fromState.data.post;
           });
-           
-           //
-           $scope.$on('searchText' , function(e , a){
-              $rootScope.$broadcast('loading:start' , {});
-              if(angular.isArray(a.query) && a.query[0]){
-                  $scope.tags = a.query;
-                  Posts.set($scope.tags).then(
-                      function(result){
-                          $rootScope.$broadcast('loading:end' , {msg : 'search complete'});
-                          $scope.posts = Posts.get();
-                      }
-                  );
-              }
-              else {
-                 $rootScope.$broadcast('loading:end' , {msg : 'enter a valid search string'});
-              }
-           });
 
         } //next function ends here
    })

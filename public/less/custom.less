@@ -179,7 +179,7 @@ nav {
    width:100%;
    top:50px;
    z-index:100001;
-   background: #fff;
+   background-color: #E9EAED !important;
    ul{
       text-align:center;
       >li{
@@ -207,12 +207,20 @@ nav {
 }
 
 .posts-container{
-   margin-top: 52px;
+   margin-top: 30px;
    padding:0;
    padding-top:2em;
    @media (max-width: @screen-sm-max) {
         margin-top:100px;
          padding:0;
+         ul {
+          text-align:center;
+         li{
+         width:33.3333%;
+         float:left;
+         }
+         
+      }
     }
     .side-menu{
        background: #fff;
@@ -326,16 +334,6 @@ nav {
      }
   }
   .share-box{
-     i{
-        padding:.5em;
-        font-size:1.5em;
-        &:hover{
-          color:@brand-primary;
-        }
-        a {
-          text-decoration:none;
-        }
-     }
      .des {
         font-size:1.2em;
      }
@@ -346,6 +344,12 @@ nav {
         font-size:1.3em;
         line-height:2em;
         letter-spacing:.02em;
+         @media (max-width: @screen-sm-max) {
+            padding:0;
+            font-size:1.1em;
+            line-height:1.8em;
+            letter-spacing:.018em;
+         }
      }
      img{
         margin-top:2em;
@@ -389,10 +393,11 @@ nav {
                   width: 3em;
                   height:3em;
                 }
-                 @media (max-width: @screen-sm-max) {
+                 @media (max-width: @screen-sm-max) {padding:0;
                     img{
                       width: 2.5em;
                       height:2.5em;
+
                     }
                   }
              }
@@ -660,6 +665,7 @@ nav {
 }
 
 .gsc-control-cse {
+    max-width:30em !important;
     padding : 0 !important;
     #gsc-i-id1 {
        .form-control;
