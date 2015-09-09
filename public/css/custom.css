@@ -12052,11 +12052,17 @@ fieldset[disabled] .tag-buttons .btn.active {
     border-radius: 3px !important;
   }
 }
-.gsc-control-cse {
-  max-width: 30em !important;
-  padding: 0 !important;
+.gsc {
+  width: 30em !important;
 }
-.gsc-control-cse #gsc-i-id1 {
+.gsc .gsc-control-cse {
+  padding: 0;
+}
+.gsc .gsib_a {
+  padding: 0;
+}
+.gsc .gsc-input {
+  height: 2.5em;
   display: block;
   width: 100%;
   height: 34px;
@@ -12073,39 +12079,48 @@ fieldset[disabled] .tag-buttons .btn.active {
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  width: 20em !important;
+  border-radius: 0 !important;
 }
-.gsc-control-cse #gsc-i-id1:focus {
+.gsc .gsc-input:focus {
   border-color: #66afe9;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
-.gsc-control-cse #gsc-i-id1::-moz-placeholder {
+.gsc .gsc-input::-moz-placeholder {
   color: #999999;
   opacity: 1;
 }
-.gsc-control-cse #gsc-i-id1:-ms-input-placeholder {
+.gsc .gsc-input:-ms-input-placeholder {
   color: #999999;
 }
-.gsc-control-cse #gsc-i-id1::-webkit-input-placeholder {
+.gsc .gsc-input::-webkit-input-placeholder {
   color: #999999;
 }
-.gsc-control-cse #gsc-i-id1[disabled],
-.gsc-control-cse #gsc-i-id1[readonly],
-fieldset[disabled] .gsc-control-cse #gsc-i-id1 {
+.gsc .gsc-input[disabled],
+.gsc .gsc-input[readonly],
+fieldset[disabled] .gsc .gsc-input {
   background-color: #eeeeee;
   opacity: 1;
 }
-.gsc-control-cse #gsc-i-id1[disabled],
-fieldset[disabled] .gsc-control-cse #gsc-i-id1 {
+.gsc .gsc-input[disabled],
+fieldset[disabled] .gsc .gsc-input {
   cursor: not-allowed;
 }
-textarea.gsc-control-cse #gsc-i-id1 {
+textarea.gsc .gsc-input {
   height: auto;
 }
-.gsc-search-box {
-  margin-bottom: 0 !important;
+.gsc .gsc-input .gsc-i-id1 {
+  border: none !important;
+}
+.gsc .gsc-search-button {
+  margin: 0 1em;
+  margin-top: .3em;
+  padding: 0;
+}
+.gsc .gsc-search-button input {
+  height: 2.5em;
+  width: 2.5em;
 }
 /*
  * Style tweaks

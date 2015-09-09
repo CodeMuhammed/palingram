@@ -664,17 +664,32 @@ nav {
     }
 }
 
-.gsc-control-cse {
-    max-width:30em !important;
-    padding : 0 !important;
-    #gsc-i-id1 {
-       .form-control;
-        width:20em !important;
+.gsc {
+    width:30em !important;
+    .gsc-control-cse {
+        padding:0;
     }
+    .gsib_a {
+       padding:0;
+    }
+    .gsc-input {
+         height:2.5em;
+         .form-control;
+         border-radius:0 !important;
+         .gsc-i-id1{
+            border:none !important;
+         }
+     }
+    .gsc-search-button {
+       margin:0 1em;
+       margin-top:.3em;
+       padding:0;
+       input{
+          height:2.5em;
+          width:2.5em;
 
- }
- .gsc-search-box {
-    margin-bottom:0 !important;
+       }
+    }
  }
 //custom offcanvas .less a the bottom to prevent interference
 @import "offcanvas.less";
