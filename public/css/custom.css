@@ -11348,8 +11348,7 @@ button.close {
   height: 25px;
 }
 body {
-  background: url('../img/cartoon-background-blue-wavy-comic-background_MyTudJ_O.jpg') center center no-repeat fixed;
-  background-size: cover;
+  background-color: #FFF;
   min-height: 60em;
   overflow: auto;
 }
@@ -11603,8 +11602,6 @@ nav {
   margin-top: .5em;
 }
 .main-view-area {
-  background: url('../img/cartoon-background-blue-wavy-comic-background_MyTudJ_O.jpg') center center no-repeat fixed;
-  background-size: cover;
   min-height: 60em;
   overflow: auto;
 }
