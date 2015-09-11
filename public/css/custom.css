@@ -11577,6 +11577,9 @@ nav {
   font-weight: bolder;
   font-size: 1.3em;
 }
+.nav-me li:hover a {
+  background-color: #eff5fb !important;
+}
 .subnav {
   position: fixed;
   width: 100%;
