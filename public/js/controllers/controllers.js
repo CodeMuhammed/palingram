@@ -1012,6 +1012,9 @@ angular.module('palingram')
                         totalLoss+=loss;
                    });
                    var temp =  Math.ceil( (totalLoss +  $scope.basebet) / (odd - 1));
+                   if(temp < 50){
+                     return 50;
+                   }
                    return temp;
                }
           };
