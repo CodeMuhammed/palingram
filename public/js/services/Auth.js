@@ -3,7 +3,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
     .constant('BaseUrl' , 'https://palingramapi.herokuapp.com')
     .constant('googl_key' , 'AIzaSyBFgXT17fbaEr-POzSmbLzdzMGlKEoUH44')
    .factory('Auth' , function($http , $q ,$state ,$rootScope ,  Posts , Tags , User , BaseUrl , googl_key){
-         var isSignedIn;
+         var isSignedIn; 
 
          function signup(newUser){
             var promise = $q.defer();         
