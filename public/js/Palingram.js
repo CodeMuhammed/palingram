@@ -1,6 +1,6 @@
-var adSenseTpl1 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="8313861460" data-ad-format="auto"></ins>';
-var adSenseTpl2 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="3744061064" data-ad-format="auto"></ins>';
-var adSenseTpl3 = '<ins class="adsbygoogle" style="display:inline-block;width:100%;height:280px" data-ad-client="ca-pub-2725471983332791" data-ad-slot="9329923066"></ins>';
+var adSenseTpl1 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="2035375068" data-ad-format="auto"></ins>';
+var adSenseTpl2 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="3512108260" data-ad-format="auto"></ins>';
+var adSenseTpl3 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="4988841462" data-ad-format="auto"></ins>';
 angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 
 //Google analytics configuration
