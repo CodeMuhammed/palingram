@@ -861,6 +861,7 @@ angular.module('palingram')
                    Posts.post($scope.post).then(function(data){
                       $rootScope.$broadcast('loading:end' , {msg : 'post saved successfully'});
                       User.get().favourites.push(data._id);
+                      option = 'old';
                    }, function(err){
                        alert('something went wrong');
                    });
