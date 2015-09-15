@@ -181,9 +181,9 @@ nav {
 }
 
 .subnav{
-   position: fixed;
+
    width:100%;
-   top:50px;
+   
    z-index:100001;
    background-color: #E9EAED !important;
    ul{
@@ -203,6 +203,10 @@ nav {
    .searchbox{
       margin-top:.5em;
    }
+   @media (min-width: @screen-sm-max) {
+        position: fixed;
+        top:50px;
+    }
 }
 
 .main-view-area{
