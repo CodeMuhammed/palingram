@@ -6,7 +6,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
          var isSignedIn; 
 
          function signup(newUser){
-            var promise = $q.defer();         
+            var promise = $q.defer(); //        
             $http({
                method : 'POST',
                url : BaseUrl+'/auth/signup',

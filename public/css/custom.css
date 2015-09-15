@@ -11579,6 +11579,29 @@ nav {
 .nav-me li:hover a {
   background-color: #eff5fb !important;
 }
+@media (min-width: 991px) {
+  .nav-me {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    top: 0;
+    border-width: 0 0 1px;
+  }
+  .nav-me .navbar-collapse {
+    max-height: 340px;
+  }
+}
+@media (min-width: 991px) and (max-device-width: 480px) and (orientation: landscape) {
+  .nav-me .navbar-collapse {
+    max-height: 200px;
+  }
+}
+@media (min-width: 991px) and (min-width: 768px) {
+  .nav-me {
+    border-radius: 0;
+  }
+}
 .subnav {
   position: fixed;
   width: 100%;

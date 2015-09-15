@@ -162,11 +162,12 @@ nav {
  }
 
 .nav-me {
+  
    box-shadow : 0 0 .2em #ccc;
    li {
       a{
          font-weight: bolder;
-         font-size : 1.3em;
+         font-size : 1.3em; 
       }
       &:hover {
           a{
@@ -174,6 +175,9 @@ nav {
           }
       }
    }
+    @media (min-width: @screen-sm-max) {
+       .navbar-fixed-top; ;
+    }
 }
 
 .subnav{
