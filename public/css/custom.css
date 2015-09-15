@@ -11632,10 +11632,11 @@ nav {
   font-size: 1.2em;
 }
 .posts-body {
-  margin-bottom: 0;
+  margin-bottom: 1em;
   padding: 0;
   box-shadow: none;
   padding-bottom: 1em;
+  border-radius: 0;
 }
 .posts-body .header {
   padding-top: 2em;

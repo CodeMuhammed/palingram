@@ -64,7 +64,8 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
              .state('out.tradr' , {
                  url : '/tradr',
                  templateUrl : 'views/gamblr.tpl.html',
-                 controller  : 'gamblrCtrl'
+                 controller  : 'gamblrCtrl',
+                 data : {}
              })
 
              .state('out.auth' , {
