@@ -285,14 +285,15 @@ nav {
 }
 
 .article {
+
     min-height:200em;
     background:#fff;
     padding-left:0;
     padding-right:0;
     box-shadow: 0 0 .4em #ccc;
     @media (max-width: @screen-sm-max) {
-        margin-top:85px;
         min-height:40em;
+        margin-top:-50px;
     }
   .header{
 
@@ -343,6 +344,9 @@ nav {
         }
         
      }
+      @media (max-width: @screen-sm-max) {
+        margin-top:-50px;
+    }
   }
   .share-box{
      .des {
@@ -599,9 +603,10 @@ nav {
     top:60px; 
     z-index:100002;
     @media (max-width: @screen-sm-max) {
+        position:relative !important;
         padding-top:.4em;
         width:100%;
-        top:57px;
+        top:-50px;
         border-radius: 0px;
     }
 }

@@ -11701,8 +11701,8 @@ nav {
 }
 @media (max-width: 991px) {
   .article {
-    margin-top: 85px;
     min-height: 40em;
+    margin-top: -50px;
   }
 }
 .article .header {
@@ -11747,6 +11747,11 @@ nav {
 }
 .article .header .inner .text .author-icons .fa-times:hover {
   color: #d9534f;
+}
+@media (max-width: 991px) {
+  .article .header {
+    margin-top: -50px;
+  }
 }
 .article .share-box .des {
   font-size: 1.2em;
@@ -12017,9 +12022,10 @@ fieldset[disabled] .tag-buttons .btn.active {
 }
 @media (max-width: 991px) {
   .tool-set {
+    position: relative !important;
     padding-top: .4em;
     width: 100%;
-    top: 57px;
+    top: -50px;
     border-radius: 0px;
   }
 }
