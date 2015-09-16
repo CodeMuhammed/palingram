@@ -1,6 +1,7 @@
 var adSenseTpl1 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="2035375068" data-ad-format="auto"></ins>';
 var adSenseTpl2 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="3512108260" data-ad-format="auto"></ins>';
 var adSenseTpl3 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="4988841462" data-ad-format="auto"></ins>';
+
 angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 
 //Google analytics configuration
@@ -191,4 +192,11 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
                     $window.adsbygoogle.push({});
             }
         };
-    });
+    })
+ .directive('googleSearch', function($window, $compile) {
+
+        return {
+            restrict: 'A',
+            templateUrl: 'views/searchTpl.html'
+        };
+});

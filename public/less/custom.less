@@ -56,7 +56,7 @@ body{
       outline:none;
    }
    
-   background-color: #FFF;
+   background-color: lighten(#000 ,80%);
    min-height:60em;
    overflow:auto;
    .loader {
@@ -162,6 +162,7 @@ nav {
  }
 
 .nav-me {
+   height:40px;
    margin:0;
    box-shadow : 0 0 .2em #ccc;
    li {
@@ -183,6 +184,7 @@ nav {
 .subnav{
 
    width:100%;
+   height:2em;
    
    z-index:100001;
    background-color: #E9EAED !important;
@@ -200,9 +202,6 @@ nav {
       }
      
    }
-   .searchbox{
-      margin-top:.5em;
-   }
 }
 
 .main-view-area{
@@ -215,7 +214,7 @@ nav {
    padding:0;
    padding-top:2em;
    @media (max-width: @screen-sm-max) {
-        margin-top:100px;
+        margin-top:0px;
          padding:0;
          ul {
           text-align:center;
@@ -225,6 +224,11 @@ nav {
          }
          
       }
+    }
+    .sidemenu-container{
+         @media (max-width: @screen-sm-max) {
+             padding:0;
+         }
     }
     .side-menu{
        background: #fff;
@@ -238,7 +242,9 @@ nav {
             
          }
        }
-
+       .tags-nav{
+           padding:0;
+       }
     }
 }
 .posts-body{
@@ -479,6 +485,7 @@ nav {
 
 .tag-buttons{
    .btn{
+      .btn-xs;
      .button-variant(@btn-default-color; #E7E7E7 ; #DBDBDB);
       margin-right: .5em;
       margin-bottom: .5em;
@@ -490,6 +497,7 @@ nav {
        }
       } 
    }
+  
 }
 
 .new-post{

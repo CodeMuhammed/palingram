@@ -11348,7 +11348,7 @@ button.close {
   height: 25px;
 }
 body {
-  background-color: #FFF;
+  background-color: #cccccc;
   min-height: 60em;
   overflow: auto;
 }
@@ -11570,6 +11570,7 @@ nav {
   }
 }
 .nav-me {
+  height: 40px;
   margin: 0;
   box-shadow: 0 0 .2em #ccc;
 }
@@ -11605,6 +11606,7 @@ nav {
 }
 .subnav {
   width: 100%;
+  height: 2em;
   z-index: 100001;
   background-color: #E9EAED !important;
 }
@@ -11620,9 +11622,6 @@ nav {
 .subnav ul > li > a {
   outline: none;
 }
-.subnav .searchbox {
-  margin-top: .5em;
-}
 .main-view-area {
   min-height: 60em;
   overflow: auto;
@@ -11634,7 +11633,7 @@ nav {
 }
 @media (max-width: 991px) {
   .posts-container {
-    margin-top: 100px;
+    margin-top: 0px;
     padding: 0;
   }
   .posts-container ul {
@@ -11645,6 +11644,11 @@ nav {
     float: left;
   }
 }
+@media (max-width: 991px) {
+  .posts-container .sidemenu-container {
+    padding: 0;
+  }
+}
 .posts-container .side-menu {
   background: #fff;
   padding: 0;
@@ -11652,6 +11656,9 @@ nav {
 .posts-container .side-menu .wobble:hover a {
   color: #fff;
   font-size: 1.2em;
+}
+.posts-container .side-menu .tags-nav {
+  padding: 0;
 }
 .posts-body {
   margin-bottom: 1em;
@@ -11859,6 +11866,10 @@ nav {
   }
 }
 .tag-buttons .btn {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
   color: #333333;
   background-color: #e7e7e7;
   border-color: #dbdbdb;
