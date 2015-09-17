@@ -26,7 +26,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
          }   
 
          function signin(userCredential){
-            console.log(userCredential);
+           // console.log(userCredential);
             var promise = $q.defer();
             $http({
                method : 'POST',
@@ -34,7 +34,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
                data : userCredential 
             })
             .success(function(data){
-                console.log(data);
+                //console.log(data);
                 User.set(data);
                 isSignedIn = true;
                 promise.resolve('sign in done');

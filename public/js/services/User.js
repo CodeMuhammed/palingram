@@ -30,11 +30,32 @@ angular.module('User' , [])
             });
             return promise.promise;
          }
-         
+
+         function newsletter(email){
+            var promise = $q.defer();
+              if(angular.isDefined(email)){
+                  $http({
+                     method : 'GET',
+                     url : BaseUrl+'/api/newsletter/'+email
+                  })
+                  .success(function(status){
+                      promise.resolve(status);
+                  })
+                  .error(function(err){
+                      promise.reject(err);
+                  });
+            }
+            else{
+               promise.reject('invalid email format');
+            }
+            return promise.promise;
+         }
+
          return {
              set : set,
              unset:unset,
              get : get,
-             update : update
+             update : update,
+             newsletter : newsletter
          };
    });

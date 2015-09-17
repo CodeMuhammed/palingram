@@ -56,7 +56,8 @@ body{
       outline:none;
    }
    
-   background-color: lighten(#000 ,80%);
+   //background-color: lighten(#CCCCFF ,0%);
+   background: url('../img/bg.png');
    min-height:60em;
    overflow:auto;
    .loader {
@@ -176,16 +177,20 @@ nav {
           }
       }
    }
+   .nav-active{
+      a{
+         color:red !important;
+      }
+   }
     @media (min-width: @screen-sm-max) {
        .navbar-fixed-top;
     }
 }
 
 .subnav{
+  box-shadow: 0 .3em .1em #ccc;
 
    width:100%;
-   height:2em;
-   
    z-index:100001;
    background-color: #E9EAED !important;
    ul{

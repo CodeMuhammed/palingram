@@ -11348,7 +11348,7 @@ button.close {
   height: 25px;
 }
 body {
-  background-color: #cccccc;
+  background: url('../img/bg.png');
   min-height: 60em;
   overflow: auto;
 }
@@ -11581,6 +11581,9 @@ nav {
 .nav-me li:hover a {
   background-color: #eff5fb !important;
 }
+.nav-me .nav-active a {
+  color: red !important;
+}
 @media (min-width: 991px) {
   .nav-me {
     position: fixed;
@@ -11605,8 +11608,8 @@ nav {
   }
 }
 .subnav {
+  box-shadow: 0 .3em .1em #ccc;
   width: 100%;
-  height: 2em;
   z-index: 100001;
   background-color: #E9EAED !important;
 }

@@ -280,7 +280,15 @@ angular.module('palingram')
    })
 
    .controller('postsController' , function($scope ,$rootScope , $state , Tags  ,Posts , User, Auth){
-         
+         //subscribe user to mailing list
+          $scope.newsletter = function(email){
+               $rootScope.$broadcast('loading:start' , {});
+               User.newsletter(email).then(function(status){
+                    $rootScope.$broadcast('loading:end' , {msg : status});
+               } , function(err){
+                     $rootScope.$broadcast('loading:end' , {msg : err});
+               });
+          };
          //
          $scope.$on('loading:end' , function(e , a){
              if(a.action == 'signedIn'){
@@ -322,6 +330,7 @@ angular.module('palingram')
            $scope.view = function(view){
                return $scope.sideView == view;
            }
+
            $scope.changeView = function(view){
                $scope.sideView = view;
            };
@@ -444,8 +453,8 @@ angular.module('palingram')
           $scope.$on('$stateChangeStart'  , function(event , toState  ,toParams  ,fromState , fromParams){
               toState.data.post = fromState.data.post;
           });
-
-        } //next function ends here
+          
+      } //next function ends here
    })
 
    .controller('postController' , function($scope , $rootScope ,$stateParams ,  $state ,$filter , Tags , Posts , User , Auth , Comments){

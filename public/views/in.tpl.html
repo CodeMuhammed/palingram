@@ -25,24 +25,24 @@
 	        <div id="navbar" class="collapse navbar-collapse">
 	          <ul class="nav navbar-nav">
 	            
-	            <li ng-click="goto('posts')" class="" ng-class="{'hvr-bubble-bottom' : active('posts')}">
+	            <li ng-click="goto('posts')" class="" ng-class="{'nav-active' : active('posts')}">
 					<a >
 						
 						All Posts
 					</a>
 				</li>
-				<li ng-click="goto('favourites')"  class="" ng-class="{'hvr-bubble-bottom' : active('favourites')}">
+				<li ng-click="goto('favourites')" class="" ng-class="{'nav-active' : active('favourites')}">
 					<a >
 						
 						Favourites
 					</a>
 				</li>
-				<li  ng-click="goto('profile')"  class="" ng-class="{'hvr-bubble-bottom' : active('profile')}" ng-show="writer">
+				<li  ng-click="goto('profile')"  class="" ng-class="{'nav-active' : active('profile')}" ng-show="writer">
 					<a >
 						Profile</a>
 				</li>
 
-				<li ng-click="goto('editor')"  class="" ng-show="writer"  ng-class="{'hvr-bubble-bottom' : active('editor')}">
+				<li ng-click="goto('editor')"  ng-show="writer" class="" ng-class="{'nav-active' : active('editor')}">
 					<a>
 						
 						Write new article
@@ -54,24 +54,24 @@
 	        </div><!--/.nav-collapse -->
 	      </div>
 	    </nav>
-	    <nav class="subnav  navbar nav-me visible-xs">
+	    <nav class="subnav navbar nav-me visible-xs">
 	      <div class="">
 	        <div id="navbar" class="">
 	          <ul class="nav navbar-nav" style="margin:0" ng-hide="search">
 	            
-	            <li ng-click="goto('posts')" class="" ng-class="{'hvr-bubble-bottom' : active('posts')}">
+	            <li ng-click="goto('posts')" class="" ng-class="{'nav-active' :  active('posts')}">
 					<a >
 						
 						All Posts
 					</a>
 				</li>
-				<li ng-click="goto('favourites')"  class="" ng-class="{'hvr-bubble-bottom' : active('favourites')}">
+				<li ng-click="goto('favourites')" class="" ng-class="{'nav-active' :  active('favourites')}">
 					<a >
 						
 						Favourites
 					</a>
 				</li>
-				<li  ng-click="goto('profile')"  class="" ng-class="{'hvr-bubble-bottom' : active('profile')}">
+				<li  ng-click="goto('profile')" class="" ng-class="{'nav-active' :  active('profile')}">
 					<a >
 						Profile</a>
 				</li>
