@@ -45,19 +45,14 @@ app.use(express.static(path.join(__dirname , 'public')));
 
 //configure router to use cookie-parser  ,body-parser 
 app.get('/allPosts' , function(req , res){ 
-	 if(req.query._escaped_fragment_){
-  	 request.get(palingramapi+'/allPosts' , function(err , response , body){
+	 request.get(palingramapi+'/allPosts' , function(err , response , body){
          if(err){
              res.status(500).send('Internal server error');
          } 
          else {
-         	res.render('all.ejs' , {posts:body , BaseUrl : BaseUrl});
+          res.render('all.ejs' , {posts:body , BaseUrl : BaseUrl});
          }
-  	 });
-   }
-   else {
-     res.status(404).send('Not found!! ');
-   }
+     });
 });
 
 //Start the app
