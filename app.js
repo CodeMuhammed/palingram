@@ -50,7 +50,7 @@ app.get('/allPosts' , function(req , res){
              res.status(500).send('Internal server error');
          } 
          else {
-          res.render('all.ejs' , {posts:body , BaseUrl : BaseUrl});
+          res.render('all.ejs' , {posts:JSON.parse(body) , BaseUrl : BaseUrl});
          }
      });
 });
