@@ -1,4 +1,4 @@
-var adSenseTpl1 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="2035375068" data-ad-format="auto"></ins>';
+var adSenseTpl1 = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2725471983332791" data-ad-slot="9329923066" data-ad-format="auto"></ins>';
 angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720kb.socialshare' ,'angular-medium-editor' , 'ui.router' , 'Auth' , 'Comments'])
 
 //Google analytics configuration
@@ -139,7 +139,7 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
         }
 ])
 
- .directive('googleAdsenseone', function($window, $compile) {
+ .directive('googleAdsense', function($window, $compile) {
 
         return {
             restrict: 'A',
