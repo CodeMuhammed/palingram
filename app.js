@@ -38,40 +38,7 @@ app.use(favicon(path.join(__dirname , 'public', 'favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-
-app.get('/' ,  function(req , res , next){
-     if(req.query._escaped_fragment_){
-          console.log(req.query._escaped_fragment_);
-          var fragmentPathId = req.query._escaped_fragment_.split('/').reverse()[0].trim();
-
-          if(fragmentPathId.length > 15){
-              request.get(palingramapi+'/posts/'+fragmentPathId , function(err , response , body){
-                     if(err){
-                          console.log('called');
-                          var post = JSON.parse(require('fs').readFileSync('post.txt'));
-                          post.date = new Date(post.date);
-                          res.render('post.ejs' , {post:post , BaseUrl:BaseUrl});
-                     } 
-                     else {
-                          res.render('post.ejs' , {post:JSON.parse(body) , BaseUrl:BaseUrl});
-                     } 
-               });
-          }
- 
-          else{
-            //serves the index page for links that were
-            //accidentally included but not supposed to be 
-            //crawled by search engines
-            console.log(fragmentPathId);
-            res.render('index.ejs');
-          }    
-     }
-     else{
-         console.log('normal non crawler url requested');
-         next();
-     }
-     
-});
+app.use(require('prerender-node'));
 
 //configure express static
 app.use(express.static(path.join(__dirname , 'public')));
@@ -81,11 +48,10 @@ app.get('/allPosts' , function(req , res){
 	 if(req.query._escaped_fragment_){
   	 request.get(palingramapi+'/allPosts' , function(err , response , body){
          if(err){
-              var all = require('fs').readFileSync('all.txt');
-              res.render('all.ejs' , {posts:JSON.parse(all) , BaseUrl : BaseUrl});
+             res.status(500).send('Internal server error');
          } 
          else {
-         	res.render('all.ejs' , {posts:JSON.parse(body) , BaseUrl : BaseUrl});
+         	res.render('all.ejs' , {posts:body , BaseUrl : BaseUrl});
          }
   	 });
    }
