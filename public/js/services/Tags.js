@@ -87,7 +87,8 @@ angular.module('Tags' , [])
                    'science',
                    'facts',
                    'travel',
-                   'biography'
+                   'biography',
+                   'money'
              ];
           }
 

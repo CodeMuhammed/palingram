@@ -1,7 +1,6 @@
 angular.module('palingram')
   .controller('loaderController' , function($rootScope , $scope  , $timeout){
        $scope.loading = false;
-      
        $rootScope.$on('loading:start' , function(e , a){
             if(a.msg){
                 $scope.message = a.msg;
@@ -18,7 +17,20 @@ angular.module('palingram')
                 $scope.loading = false;
             }, 5000);
        });
+      
+      //Testing homepage pop up
+      $scope.meta = {
+          title : 'palingram homepage,Nigerian bitcoin blog,technological trends in 2015/2016',
+          description: 'Welcome to palingram, a place where the latest trends in technology is discussed, ranging from gadgets to Bitcoin',
+          author : 'palingram blog'
+      };
 
+      $rootScope.$on('post' , function(e , a){
+            $scope.meta.title = a.title;
+            $scope.meta.description = a.description;
+            $scope.meta.author = a.author;
+            console.log($scope.meta);
+       });
   })
 
   .controller('writerController' , function($scope , $rootScope , $state ,$timeout , Auth , Tags , Posts , User){
@@ -323,7 +335,12 @@ angular.module('palingram')
         }
         
         function next(){
-          
+           //takes care of pagination
+           $scope.viewLimit = 10;
+           $scope.loadMore = function(){
+              $scope.viewLimit+=3;
+           };
+
            //taking care of side menu
            $scope.sideView = 'popular';
 
@@ -365,11 +382,11 @@ angular.module('palingram')
                   }
                );
            }
-
-           $scope.clearTags = function(category){
-                $rootScope.$broadcast('loading:start' , {});
+           
+             $scope.clearTags = function(category){
+              $rootScope.$broadcast('loading:start' , {});
                 if(category){
-                   $scope.tags = [category]
+                  $scope.tags = [category]
                 }
                 else {
                   $scope.tags = ['general'];
@@ -396,6 +413,7 @@ angular.module('palingram')
                         function(result){
                             $rootScope.$broadcast('loading:end' , {msg : 'tag added'});
                             $scope.posts = Posts.get();
+                            $scope.viewLimit = 10;
                         }
                     );
                }
@@ -419,6 +437,7 @@ angular.module('palingram')
                           }
                           else {
                             $rootScope.$broadcast('loading:end' , {msg : 'tag deleted'});
+                            $scope.viewLimit = 10;
                           }
                       },
                       function(err){
@@ -435,6 +454,7 @@ angular.module('palingram')
                   else{
                       if(tag == 'general'){
                           $rootScope.$broadcast('loading:end' , {msg : 'already showing all posts'});
+                          $scope.viewLimit = 10;
                       }
                       else{
                          $scope.tags[0] = 'general';
@@ -480,8 +500,13 @@ angular.module('palingram')
         function next(){
             $rootScope.$broadcast('loading:start' , {});
             $scope.post = $state.current.data.post;
-            $scope.owned = User.get().username==$scope.post.username;
+            //send broadcast the post to the global scope to be used in the meta section of the page
+            $rootScope.$broadcast('post' , $scope.post);
 
+            //Sets the owner of the post for authorisation purposes
+            $scope.owned = User.get().username==$scope.post.username;
+            
+            //
             $scope.posts = Posts.get().slice(0 , 5);
             Posts.getAuthorPosts($scope.post.username).then(function(result){
                $scope.authorPosts = result;
