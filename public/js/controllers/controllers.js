@@ -24,7 +24,12 @@ angular.module('palingram')
           description: 'Welcome to palingram, a place where the latest trends in technology is discussed, ranging from gadgets to Bitcoin',
           author : 'palingram blog'
       };
-
+     
+      $scope.modal = {
+        "title": "Title",
+        "content": "Hello Modal<br />This is a multiline message!"
+      };
+      
       $rootScope.$on('post' , function(e , a){
             $scope.meta.title = a.title;
             $scope.meta.description = a.description;
