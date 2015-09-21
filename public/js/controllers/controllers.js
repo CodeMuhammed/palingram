@@ -21,7 +21,7 @@ angular.module('palingram')
       //Testing homepage pop up
       $scope.meta = {
           title : 'palingram homepage,Nigerian bitcoin blog,technological trends in 2015/2016',
-          description: 'Welcome to palingram, a place where the latest trends in technology is discussed, ranging from gadgets to Bitcoin',
+          description: 'Welcome to palingram, a place where the latest trends in technology is discussed, ranging from gadgets,Bitcoin to startups, ',
           author : 'palingram blog'
       };
       
