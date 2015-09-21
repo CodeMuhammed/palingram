@@ -1,5 +1,5 @@
 angular.module('palingram')
-  .controller('loaderController' , function($rootScope , $scope  , $timeout){
+  .controller('loaderController' , function($rootScope , $scope  , $timeout , $modal , User){
        $scope.loading = false;
        $rootScope.$on('loading:start' , function(e , a){
             if(a.msg){
@@ -24,12 +24,21 @@ angular.module('palingram')
           description: 'Welcome to palingram, a place where the latest trends in technology is discussed, ranging from gadgets to Bitcoin',
           author : 'palingram blog'
       };
-     
-      $scope.modal = {
-        "title": "Title",
-        "content": "Hello Modal<br />This is a multiline message!"
+      
+      
+      // Pre-fetch an external template populated with a custom scope
+      var Modal = $modal({scope: $scope, template: 'views/modal.tpl.html', show: false});
+      // Show when some event occurs (use $promise property to ensure the template has been loaded)
+      $scope.showModal = function() {
+        Modal.$promise.then(Modal.show);
+        User.modal(true);
       };
       
+      if(!User.modal()){
+         $scope.showModal();
+      }
+    
+      //Dynamically change the meta description tags when a post is loaded
       $rootScope.$on('post' , function(e , a){
             $scope.meta.title = a.title;
             $scope.meta.description = a.description;

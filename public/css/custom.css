@@ -11625,6 +11625,11 @@ nav {
 .subnav ul > li > a {
   outline: none;
 }
+@media (max-width: 991px) {
+  .subnav {
+    z-index: 1000;
+  }
+}
 .main-view-area {
   min-height: 60em;
   overflow: auto;
@@ -12030,6 +12035,7 @@ fieldset[disabled] .tag-buttons .btn.active {
     width: 100%;
     top: -50px;
     border-radius: 0px;
+    z-index: 1000;
   }
 }
 .md-styles {

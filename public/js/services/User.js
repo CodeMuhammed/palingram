@@ -1,6 +1,7 @@
 angular.module('User' , [])
    .factory('User' , function($http , $q , BaseUrl){
    	     var user;
+         modalStatus = false;
 
          function set(data){
               user = data;
@@ -50,12 +51,20 @@ angular.module('User' , [])
             }
             return promise.promise;
          }
+        
+         function modal (status){
+             if(status){
+                modalStatus = status;
+             }
+            return modalStatus;
+         }
 
          return {
              set : set,
              unset:unset,
              get : get,
              update : update,
-             newsletter : newsletter
+             newsletter : newsletter,
+             modal : modal
          };
    });
