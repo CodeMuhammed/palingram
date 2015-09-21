@@ -1,54 +1,25 @@
 <div class="col-sm-12 posts-container clearfix">
 	<script type='text/javascript' src='//eclkmpbn.com/adServe/banners?tid=62129_97096_0'></script>
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
-         <div class="side-items col-sm-3 hidden-xs" style="padding:0em 2em;">
-		    <div class="ad-box " style="text-align:center; font-weight:bolder">
-          	    <iframe data-aa='84538' src='https://ad.a-ads.com/84538?size=250x250' scrolling='no' style='width:250px; height:250px; border:0px; padding:0;overflow:hidden' allowtransparency='true' frameborder='0'></iframe>
-				 
-           </div>
-           <div class="ad-box " style="text-align:center; font-weight:bolder">
-				<a href="http://www.revenuehits.com/lps/v41/?ref=@RH@nSMfcbxO3vR50olA1eYhgw" target="_blank"><img src="http://revenuehits.com/publishers/media/img/v4/250x250_v4.jpg" border="0"></a>
-           </div>
-		   <div google-adsense></div>
-		   <div class="text-center">
-				    <span class=" " >
-					    <button class="btn btn-success hvr-pulse" ng-click="register()" style="margin-bottom:2em">REGISTER</button>
-					</span>
-
-		   </div>
-       </div>
-        <div class="col-sm-5"  style="padding:0;">
+        <div class="col-sm-8 row"  style="">
            
-		   <div ng-repeat="post in posts | orderBy:'-date' | limitTo:viewLimit" class="col-xs-12 panel panel-default posts-body hvr-underline-from-left" style="display:inline-block">
-				<div class="col-xs-12 header hidden-xs">
-				   <div class="col-xs-12 col-sm-1" style="padding-right:1em; padding-left:0;">
-				   	    <img ng-src= {{post.image}} alt="{{post.title}}" height="40" width="40" class="img-rounded">
-				   </div>
-				   <div class="col-xs-12 col-sm-11" style="padding:0;">
-				   	   <span style="color:#ccc; margin-right:1.5em; font-size:1.4em"><a>{{post.author}}</a> on {{post.date | date:'fullDate'}}
-				   	   </span><br />
-                       <span style="font-size:1.1em" ng-bind-html="post.bio"></span>
-				   	  
-				   </div>
-				</div>
-				<div class="clearfix"></div>
+		   <div ng-repeat="post in posts | orderBy:'-date' | limitTo:viewLimit" class="col-xs-12 col-sm-6 panel panel-default posts-body " style="display:inline-block">
 				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank">
 					<div class="col-xs-12 img-div" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
-						
 					</div>
-					<div class="col-xs-12 content">
-						<h3>{{post.title}}</h3>
-						<p>
-							{{post.description | limitTo : 90}}{{post.description.length>90? '...' : ''}}
-						</p>
+					<div class="panel-subheader clearfix" >
+						<b>by</b> {{post.author}} <b>{{post.date | date:'longDate'}}</b>
+					</div>
+					<div class="col-xs-12 content ">
 
+						<h3>{{post.title}}</h3>
+						<hr />
+						<div class="tag-buttons" style="padding:0">
+						   <button class="btn btn-primary btn-sm">{{post.views}} views</button>
+						   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
+						</div>
 					</div>
-					<div class="clearfix"></div>
-					<hr />
-					<div class="tag-buttons" style="padding:0">
-					   <button class="btn btn-primary btn-sm">{{post.views}} views</button>
-					   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
-					</div>
+					
 					
 				</a>
 			 </div>
@@ -65,7 +36,6 @@
 			 	  <button class="next btn btn-default" ng-click="loadMore()">Load more posts</button>
 			 </div>
 	    </div>
-	   
 
         <div class="col-xs-6 col-sm-4 sidebar-offcanvas sidemenu-container">
         	<div class="side-menu panel panel-default">
@@ -132,10 +102,8 @@
 						
 					 </div>
 			 </div>
-              <div class="panel panel-default">
-             	  
-             </div>
-             <div class="panel panel-default" bs-affix style="margin-top:50px;"> 
+              
+             <div class="panel panel-default" style="margin-top:50px;"> 
              	   <div class="panel-heading">
              	   	   <h2 style="font-size:1.5em">Never miss another story from palingram</h2>
              	   </div>
@@ -156,13 +124,32 @@
 					<a class="btn btn-danger pull-left" style="width:33.3%;border-radius:0;" href="https://plus.google.com/s/palingram"><i class="icon fa fa-google-plus"></i> +palingram </a>
              	   </div>
              	   
-             	    <div class="copy-right" style="margin-top:.5em; padding:1em;">
+                    
+             </div>
+             <div class = "panel panel-default" >
+             	   <div class="side-items hidden-xs" bs-affix>
+					    <div class="ad-box " style="text-align:center; font-weight:bolder">
+			          	    <iframe data-aa='84538' src='https://ad.a-ads.com/84538?size=250x250' scrolling='no' style='width:250px; height:250px; border:0px; padding:0;overflow:hidden' allowtransparency='true' frameborder='0'></iframe>
+							 
+			           </div>
+			           <div class="ad-box " style="text-align:center; font-weight:bolder">
+							<a href="http://www.revenuehits.com/lps/v41/?ref=@RH@nSMfcbxO3vR50olA1eYhgw" target="_blank"><img src="http://revenuehits.com/publishers/media/img/v4/250x250_v4.jpg" border="0"></a>
+			           </div>
+					   <div google-adsense></div>
+					   <div class="text-center" style="margin-top:2em;">
+							    <span class=" " >
+								    <button class="btn btn-success hvr-pulse" ng-click="register()" style="margin-bottom:2em">REGISTER</button>
+								</span>
+
+					   </div><div class="copy-right" style="margin-top:.5em; padding:1em;">
 					   	<i class="icon fa fa-copyright"></i>
 					           palingram.com 2015  |
 					    <a href = "about.html" >About</a>  |
 					    <a href = "privacy.html">Privacy policy</a> |
 					    <a href = "contact.html">Contact</a>
 					 </div>
+                    </div>
+                    
              </div>
             
 

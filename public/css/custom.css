@@ -11652,6 +11652,9 @@ nav {
     float: left;
   }
 }
+.posts-container .sidemenu-container {
+  padding-top: 1em;
+}
 @media (max-width: 991px) {
   .posts-container .sidemenu-container {
     padding: 0;
@@ -11670,7 +11673,9 @@ nav {
 }
 .posts-body {
   margin-bottom: 1em;
-  padding: 0;
+  background-color: transparent;
+  border: none;
+  padding: 1em;
   box-shadow: none;
   padding-bottom: 1em;
   border-radius: 0;
@@ -11681,24 +11686,29 @@ nav {
 .posts-body .header h5 {
   font-size: 1.3em;
 }
+.posts-body .panel-subheader {
+  padding: .5em 1em;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+.posts-body .panel-subheader b {
+  color: #ccc;
+}
+.posts-body .panel-body {
+  padding: 0;
+  min-height: 40em;
+  background-color: #fff;
+  box-shadow: 0 0 0.3em #b3b3b3;
+}
 .posts-body .panel-body .img-div {
   min-height: 20em;
   border: 1px solid #ccc;
   border-radius: 0px;
 }
-.posts-body .panel-body .content {
-  padding-left: 0;
-  padding-right: 0;
-}
 .posts-body .panel-body .content h3 {
-  font-size: 3em;
-}
-.posts-body .panel-body .content p {
-  font-size: 1.7em;
-  color: #555555;
-}
-.posts-body:hover {
-  background-color: #f7f7f8;
+  font-size: 2em;
+  color: #000;
+  font-weight: bolder;
 }
 .article {
   min-height: 200em;
@@ -11858,6 +11868,7 @@ nav {
   border: 4px solid #E9EAED;
   min-height: 20em;
   padding: .5em;
+  background: url('../img/bg-d.gif');
 }
 .side-items .suggestion {
   padding: 0;

@@ -419,7 +419,7 @@ angular.module('palingram')
 
            $scope.addTag = function(newTag){
                $rootScope.$broadcast('loading:start' , {});
-               if(newTag && $scope.tags.length < 10 && $scope.tags.indexOf(newTag) < 0 && $scope.allTags.indexOf(newTag) > 0){
+               if(newTag && $scope.tags.length < 5 && $scope.tags.indexOf(newTag) < 0 && $scope.allTags.indexOf(newTag) > 0){
                     $scope.tags.push(newTag);
                     $scope.newTag = '';
 
