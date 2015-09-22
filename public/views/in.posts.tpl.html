@@ -1,11 +1,13 @@
 <div class="col-sm-12 posts-container clearfix">
-	<script type='text/javascript' src='//eclkmpbn.com/adServe/banners?tid=62129_97096_0'></script>
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
         <div class="col-sm-8 row"  style="">
            
-		   <div ng-repeat="post in posts | orderBy:'-date' | limitTo:viewLimit" class="col-xs-12 col-sm-6 panel panel-default posts-body " style="display:inline-block">
+		   <div ng-repeat="post in posts | orderBy:'-date' | limitTo:viewLimit" class="col-xs-12 col-sm-6 panel panel-default posts-body " style="display:inline-block" ng-mouseenter="setHvrIndex($index)" ng-mouseleave="setHvrIndex(-1)">
 				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank">
 					<div class="col-xs-12 img-div" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
+						<div class="description col-xs-10 col-sm-offset-1 hidden-xs" ng-show="$index==hoverIndex">
+							  <span>{{post.description | limitTo:200}}{{post.description.length>200?'...' : ''}}</span>
+						</div>
 					</div>
 					<div class="panel-subheader clearfix" >
 						<b>by</b> {{post.author}} <b>{{post.date | date:'longDate'}}</b>
@@ -18,9 +20,7 @@
 						   <button class="btn btn-primary btn-sm">{{post.views}} views</button>
 						   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
 						</div>
-					</div>
-					
-					
+					</div>			
 				</a>
 			 </div>
             
@@ -130,6 +130,7 @@
              	   <div class="side-items hidden-xs" bs-affix>
 					    <div class="ad-box " style="text-align:center; font-weight:bolder">
 			          	    <iframe data-aa='84538' src='https://ad.a-ads.com/84538?size=250x250' scrolling='no' style='width:250px; height:250px; border:0px; padding:0;overflow:hidden' allowtransparency='true' frameborder='0'></iframe>
+			          	    <div js-loader source="//go.padstm.com/?id=398601"></div>
 							 
 			           </div>
 			           <div class="ad-box " style="text-align:center; font-weight:bolder">

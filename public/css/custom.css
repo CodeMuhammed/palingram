@@ -11705,6 +11705,15 @@ nav {
   border: 1px solid #ccc;
   border-radius: 0px;
 }
+.posts-body .panel-body .img-div .description {
+  padding: 1em;
+  min-height: 5em;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.posts-body .panel-body .img-div .description span {
+  color: #fff;
+  font-size: 1.1em;
+}
 .posts-body .panel-body .content h3 {
   font-size: 2em;
   color: #000;

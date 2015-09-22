@@ -355,6 +355,12 @@ angular.module('palingram')
               $scope.viewLimit+=3;
            };
 
+           //Takes care of hovering effect
+           $scope.hoverIndex = -1;
+           $scope.setHvrIndex =  function(index){
+                 $scope.hoverIndex = index;
+           }
+
            //taking care of side menu
            $scope.sideView = 'popular';
 

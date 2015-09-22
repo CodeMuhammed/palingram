@@ -157,28 +157,29 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
         };
     })
 
- .directive('amazonAd', function() {
-
-        return {
-            restrict: 'A',
-            controller : function($scope){
-                    amzn_assoc_placement = "adunit0";
-                    amzn_assoc_enable_interest_ads = "true";
-                    amzn_assoc_tracking_id = "palingram-20";
-                    amzn_assoc_ad_mode = "auto";
-                    amzn_assoc_ad_type = "smart";
-                    amzn_assoc_marketplace = "amazon";
-                    amzn_assoc_region = "US";
-                    amzn_assoc_linkid = "3cbf9fe92e01f9252ad41ed1b85670d8";
-                    amzn_assoc_emphasize_categories = "2617941011,979455011,172282,9003130011,2335752011,1000,3760911,3760901,3367581,284507,195209011,1064954,672123011,229534,468642,2619533011,13900861,13900871,15684181,165796011,36632,130,2238192011,16310101,51569011,2619525011,1055398,16310091,133140011,599858,10272111,301668,51575011,2972638011,3375251,228013,165793011,404272,16261631,377110011";
-            }
-        };
-    })
-
  .directive('googleSearch', function($window, $compile) {
 
         return {
             restrict: 'A',
             templateUrl: 'views/searchTpl.html'
         };
-});
+})
+ .directive('jsLoader', function($timeout , $http) {
+
+        return {
+            restrict: 'A',
+            replace: false,
+            link: function (scope, element, attrs) {
+                $http.get(attrs.source)
+                   .success(function(data){
+                        console.log(data);
+                        var f = new Function(data);
+                        (function(){
+                           f();
+                        })();
+                        
+                   })
+                 
+            }
+        };
+    });
