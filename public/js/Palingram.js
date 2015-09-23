@@ -170,16 +170,16 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
             restrict: 'A',
             replace: false,
             link: function (scope, element, attrs) {
-                $http.get(attrs.source)
-                   .success(function(data){
-                        console.log(data);
-                        var f = new Function(data);
-                        (function(){
-                           f();
-                        })();
-                        
-                   })
-                 
+                $http({
+                    method: 'GET',
+                    url : '/propeller.txt'
+                })
+                .success(function(data){
+                      var f = new Function(data);
+                      (function(){
+                         //f();
+                      })();
+                });   
             }
         };
     });
