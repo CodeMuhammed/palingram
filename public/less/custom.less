@@ -179,7 +179,7 @@ nav {
    }
    .nav-active{
       a{
-         color:red !important;
+         color:red !important; 
       }
    }
     @media (min-width: @screen-sm-max) {
@@ -188,20 +188,26 @@ nav {
 }
 
 .subnav{
-  box-shadow: 0 .3em .1em #ccc;
-
+  display:inline-block;
+  box-shadow: 0 .3em #fff;
    width:100%;
+   margin:0;
+   min-height:2em !important;
    z-index:100001;
    background-color: #E9EAED !important;
    ul{
+      padding:0;
       text-align:center;
       >li{
+        padding:.5em .3em;
         white-space:nowrap; 
         overflow:hidden;
         width:33.3333333%;
         float:left;
+        list-style:none;
         >a{
            outline:none;
+           text-decoration:none;
         }
 
       }
@@ -209,7 +215,7 @@ nav {
    }
    @media (max-width: @screen-sm-max) {
         z-index:1000;
-    }
+    } 
 }
 
 .main-view-area{
@@ -259,6 +265,19 @@ nav {
        }
        .tags-nav{
            padding:0;
+           ul{
+           padding:0;
+              li{
+                  width:33.33%;
+                  text-align:center;
+                  list-style:none;
+                  float:left; 
+                  padding:.5em;
+                  a{
+                     text-decoration:none;
+                  }
+              }
+           }
        }
     }
 }
@@ -312,6 +331,10 @@ nav {
      background-color:#fff;
      box-shadow:0 0 .3em lighten(#000 , 70%);
    }
+
+    @media (max-width: @screen-sm-max) {
+        padding:0;
+    }
 }
 
 .article {
@@ -323,7 +346,7 @@ nav {
     box-shadow: 0 0 .4em #ccc;
     @media (max-width: @screen-sm-max) {
         min-height:40em;
-        margin-top:-50px;
+        margin-top:-50px; 
     }
   .header{
 
@@ -502,12 +525,12 @@ nav {
           margin-bottom:1.5em;
           max-height:15em;
           .img-div{
-              height: 7em;
+              height: 10em;
               background: #ccc;
           }
           .text-b{
               over-flow:hidden;
-              height: 7em;
+              height: 10em;
               background: #cce;
           }
       }
@@ -519,7 +542,7 @@ nav {
 
 
 .tag-buttons{
-   .btn{
+   .btn{ 
       .btn-xs;
      .button-variant(@btn-default-color; #E7E7E7 ; #DBDBDB);
       margin-right: .5em;
@@ -626,6 +649,7 @@ nav {
       margin-top:0;
    }
     border-bottom:3px solid #ccc;
+    border-top:1px solid #ccc;
     padding:1em;
     background:#f8f8f8;
     border-radius: 0px;
@@ -637,7 +661,7 @@ nav {
         position:relative !important;
         padding-top:.4em;
         width:100%;
-        top:-50px;
+        top:-40px;
         border-radius: 0px;
         z-index:1000;
     }

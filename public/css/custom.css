@@ -11608,22 +11608,29 @@ nav {
   }
 }
 .subnav {
-  box-shadow: 0 .3em .1em #ccc;
+  display: inline-block;
+  box-shadow: 0 .3em #fff;
   width: 100%;
+  margin: 0;
+  min-height: 2em !important;
   z-index: 100001;
   background-color: #E9EAED !important;
 }
 .subnav ul {
+  padding: 0;
   text-align: center;
 }
 .subnav ul > li {
+  padding: .5em .3em;
   white-space: nowrap;
   overflow: hidden;
   width: 33.3333333%;
   float: left;
+  list-style: none;
 }
 .subnav ul > li > a {
   outline: none;
+  text-decoration: none;
 }
 @media (max-width: 991px) {
   .subnav {
@@ -11677,6 +11684,19 @@ nav {
 .posts-container .side-menu .tags-nav {
   padding: 0;
 }
+.posts-container .side-menu .tags-nav ul {
+  padding: 0;
+}
+.posts-container .side-menu .tags-nav ul li {
+  width: 33.33%;
+  text-align: center;
+  list-style: none;
+  float: left;
+  padding: .5em;
+}
+.posts-container .side-menu .tags-nav ul li a {
+  text-decoration: none;
+}
 .posts-body {
   margin-bottom: 1em;
   background-color: transparent;
@@ -11723,6 +11743,11 @@ nav {
   font-size: 2em;
   color: #000;
   font-weight: bolder;
+}
+@media (max-width: 991px) {
+  .posts-body {
+    padding: 0;
+  }
 }
 .article {
   min-height: 200em;
@@ -11890,12 +11915,12 @@ nav {
   max-height: 15em;
 }
 .side-items .suggestion .img-div {
-  height: 7em;
+  height: 10em;
   background: #ccc;
 }
 .side-items .suggestion .text-b {
   over-flow: hidden;
-  height: 7em;
+  height: 10em;
   background: #cce;
 }
 @media (max-width: 991px) {
@@ -12042,6 +12067,7 @@ fieldset[disabled] .tag-buttons .btn.active {
 }
 .tool-set {
   border-bottom: 3px solid #ccc;
+  border-top: 1px solid #ccc;
   padding: 1em;
   background: #f8f8f8;
   border-radius: 0px;
@@ -12058,7 +12084,7 @@ fieldset[disabled] .tag-buttons .btn.active {
     position: relative !important;
     padding-top: .4em;
     width: 100%;
-    top: -50px;
+    top: -40px;
     border-radius: 0px;
     z-index: 1000;
   }
