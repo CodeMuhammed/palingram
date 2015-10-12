@@ -1,21 +1,26 @@
 <div class="col-sm-12 posts-container clearfix">
-      <div class="row-offcanvas row-offcanvas-left {{sidebar}}">
+      <div class="row-offcanvas row-offcanvas-left {{sidebar}}" style='margin-top:2em'>
         <div class="col-sm-8 row"  style="">
 		   <div ng-repeat="post in posts | orderBy:'-views' | limitTo:viewLimit" class="col-xs-12 col-sm-6 panel panel-default posts-body " style="display:inline-block" ng-mouseenter="setHvrIndex($index)" ng-mouseleave="setHvrIndex(-1)">
-				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank">
+				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank" id={{$index}}>
+					<div class="panel-subheader clearfix" >
+						<span class="hidden-xs"><b>by</b> {{post.author}}</span> 
+						<span class="visible-xs"> 
+							Posted <b>{{post.date | date:'longDate'}}</b>
+						</span>
+						<b class="hidden-xs"> | {{post.date | date:'longDate'}}</b>
+						<h3>{{post.title}}</h3>
+					</div>
+					
 					<div class="col-xs-12 img-div" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
 						<div class="description col-xs-10 col-sm-offset-1 hidden-xs" ng-show="$index==hoverIndex">
 							  <span>{{post.description | limitTo:200}}{{post.description.length>200?'...' : ''}}</span>
 						</div>
 					</div>
 					<div class="clearfix"></div>
-					<div class="panel-subheader clearfix" >
-						<b>by</b> {{post.author}} <b>{{post.date | date:'longDate'}}</b>
-					</div>
+					
 					<div class="col-xs-12 content ">
-
-						<h3>{{post.title}}</h3>
-						<hr />
+						<hr>
 						<div class="tag-buttons" style="padding:0">
 						   <button class="btn btn-primary btn-sm">{{post.views}} views</button>
 						   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
@@ -32,8 +37,9 @@
 					 <img src="img/logo_s.png" class = "col-xs-5" style="width:100%">
 				</div>
 			 </div>
-			 <div class="pager" ng-show="posts.length>10 && viewLimit<=posts.length">
-			 	  <button class="next btn btn-default" ng-click="loadMore()">Load more posts</button>
+			 <div class="pager">
+			 	  <button class="next btn btn-default" ng-click="goUp()"> Top <i class="icon fa fa-arrow-up"></i></button>
+			 	  <button class="next btn btn-default"  ng-show="posts.length>10 && viewLimit<=posts.length" ng-click="loadMore()"> More posts <i class="icon fa fa-arrow-down"></i></button>
 			 </div>
 	    </div>
 

@@ -1,7 +1,7 @@
 angular.module('User' , [])
    .factory('User' , function($http , $q , BaseUrl){
    	     var user;
-         modalStatus = false;
+         modalStatus = true;
 
          function set(data){
               user = data;

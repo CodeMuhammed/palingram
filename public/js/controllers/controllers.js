@@ -305,7 +305,7 @@ angular.module('palingram')
 
    })
 
-   .controller('postsController' , function($scope ,$rootScope , $state , Tags  ,Posts , User, Auth){
+   .controller('postsController' , function($scope ,$rootScope , $location, $anchorScroll , $state , $timeout, Tags  ,Posts , User, Auth){
          //subscribe user to mailing list
           $scope.newsletter = function(email){
                $rootScope.$broadcast('loading:start' , {});
@@ -354,6 +354,14 @@ angular.module('palingram')
            $scope.loadMore = function(){
               $scope.viewLimit+=3;
            };
+
+           $scope.goUp  = function(){
+                $location.hash('4');
+                $timeout(function() {
+                   $location.hash('0');
+                }, 1000);
+                
+           }
 
            //Takes care of hovering effect
            $scope.hoverIndex = -1;

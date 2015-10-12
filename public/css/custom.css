@@ -11574,6 +11574,10 @@ nav {
   margin: 0;
   box-shadow: 0 0 .2em #ccc;
 }
+.nav-me > div .inner-nav .btn {
+  border: none;
+  box-shadow: none;
+}
 .nav-me li a {
   font-weight: bolder;
   font-size: 1.3em;
@@ -11609,7 +11613,7 @@ nav {
 }
 .subnav {
   display: inline-block;
-  box-shadow: 0 .3em #fff;
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   width: 100%;
   margin: 0;
   min-height: 2em !important;
@@ -11719,6 +11723,21 @@ nav {
 .posts-body .panel-subheader b {
   color: #ccc;
 }
+.posts-body .panel-subheader h3 {
+  font-size: 2em;
+  color: #555555;
+  font-weight: bolder;
+}
+@media (max-width: 991px) {
+  .posts-body .panel-subheader {
+    padding: .2em;
+  }
+  .posts-body .panel-subheader h3 {
+    font-size: 1.4em;
+    color: #555555;
+    font-weight: bolder;
+  }
+}
 .posts-body .panel-body {
   padding: 0;
   min-height: 40em;
@@ -11738,11 +11757,6 @@ nav {
 .posts-body .panel-body .img-div .description span {
   color: #fff;
   font-size: 1.1em;
-}
-.posts-body .panel-body .content h3 {
-  font-size: 2em;
-  color: #000;
-  font-weight: bolder;
 }
 @media (max-width: 991px) {
   .posts-body {
