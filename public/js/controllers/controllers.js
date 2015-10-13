@@ -359,7 +359,7 @@ angular.module('palingram')
                 $location.hash('4');
                 $timeout(function() {
                    $location.hash('0');
-                }, 1000);
+                }, 500);
                 
            }
 
