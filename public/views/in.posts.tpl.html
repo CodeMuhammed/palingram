@@ -2,7 +2,7 @@
       <div class="row-offcanvas row-offcanvas-left {{sidebar}}" style='margin-top:2em'>
         <div class="col-sm-8 row posts-padding">
 		     <div ng-repeat="post in posts | orderBy:'-views' | limitTo:viewLimit" class="col-xs-12 col-sm-6 panel panel-default posts-body " style="display:inline-block" ng-mouseenter="setHvrIndex($index)" ng-mouseleave="setHvrIndex(-1)">
-				<a href="http://localhost:3002/#!/in/posts/{{post._id}}" class="col-xs-12 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank" id="{{$index}}">
+				<a href="http://www.palingram.com/#!/in/posts/{{post._id}}" class="col-xs-12 panel-body" style="text-decoration:none; outline:none; display:inline-block" target="_blank" id="{{$index}}">
 					<div class="panel-subheader clearfix" >
 						<span class="hidden-xs"><b>by</b> {{post.author}}</span> 
 						<span class="visible-xs"> 
