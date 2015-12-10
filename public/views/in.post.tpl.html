@@ -1,10 +1,4 @@
-<div class="col-sm-12" style="padding:0">
-	<nav class="tool-set visible-xs">
-	  <ul class="pager">
-	    <li class="previous" ng-click="back()"><a><span aria-hidden="true">&larr;</span> Back to posts</a></li>
-	  </ul>
-	</nav>
-
+<div class="col-sm-12" style="padding:0;margin-top:7em">
 	<div class="col-sm-9 article clearfix">
 		<div class="col-xs-12 header" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
 			<div class="col-xs-12 inner" >
@@ -76,7 +70,7 @@
 			            <div class="col-xs-12 footer" >
 			            	<!-- Split button -->
 							<div class="btn-group">
-								  <button type="button" class="btn btn-default btn-sm">sort by</button>
+								  <button type="button" class="btn btn-default btn-sm">{{sortCriteria || 'sort by'}}</button>
 								  <button type="button" class="btn btn-danger btn-sm" ng-click="toggleSortMenu()">
 								    <span class="caret"></span>
 								  </button>
@@ -92,8 +86,6 @@
 							
 			            	<button ng-click="postComment()" class="btn btn-default btn-sm pull-right" style="margin-left:.2em;">comment</button>
 			                <button ng-click="comment.body=''" class="btn btn-default btn-sm pull-right">reset</button>
-			          
-			                <span style="font-size:1em; margin-left:2em;">{{sortCriteria}} posts
 							</span>
 			            </div>
 					</div>
@@ -127,7 +119,7 @@
 				</div>
 			</div>
 	</div>
-	<div class="col-sm-3 side-items" style="float:right; padding-right:0;margin-top:35px">
+	<div class="col-sm-3 side-items" style="float:right; padding-right:0;">
           <div class="col-xs-12 ad-box " style="padding:1em; text-align:center; font-weight:bolder">
           	    <a href="http://propellerads.com/?rfd=5oS"><img src="http://promo.propellerads.com/300x250_05.gif" alt="Propellerads"></a>
           </div>
