@@ -1,23 +1,20 @@
 <div class="col-sm-12" style="padding:0;margin-top:7em">
 	<div class="col-sm-9 article clearfix">
-		<div class="col-xs-12 header" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
-			<div class="col-xs-12 inner" >
-				<div class="col-sm-10 text">
-					<h1>{{post.title}}</h1>
-					
-					<span>
-						<img ng-src={{post.image}} class="img-circle" width="70" height="70" style=" margin-bottom:1em; margin-right:1.5em" alt="{{post.author}} image">
-					</span>
-					<span class="user">
-						by <a>{{post.author}}</a> | {{post.date | date:'fullDate'}}
-					</span>
-					<div class="author-icons" ng-show = "owned">
-						<i class="icon fa fa-edit" ng-click="edit()"></i>
-					    <i class="icon fa fa-times"  ng-click="delete()"></i>
-					</div>
-				</div>
+	    <div style="padding:0 .2em">
+			<h1>{{post.title}}</h1>
+	        <span class="user">
+				by <a>{{post.author}}</a> | {{post.date | date:'fullDate'}}
+			</span>
+			<div class="author-icons" ng-show = "owned" style="margin-bottom:1em">
+				<i class="icon fa fa-edit" ng-click="edit()"> edit</i>
+			    <i class="icon fa fa-times"  ng-click="delete()"> delete</i>
 			</div>
+			
 		</div>
+		<div class="col-xs-12 header" style="background: url({{post.coverImage}}) center center no-repeat; background-size: cover;">
+			
+		</div>
+
         <div class="col-xs-12 col-sm-10 col-sm-offset-2" style="padding:0">
 				<div class="col-xs-12 body">
 					<p style="background:#EFF5FB;padding:1em;">{{post.description}}</p>
@@ -127,13 +124,12 @@
 
           <hr />
 
-          <h4>
+         
+           <span style="padding:.5em ; font-size:bolder; font-size:2em">
           	 Related articles
-          </h4>
-
-          <hr />
-
+           </span>
           <div class="col-xs-12 suggestion clearfix" ng-repeat="item in posts">
+	          
           	   <a href="http://www.palingram.com/#!/in/posts/{{item._id}}" target="_blank">
 	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
@@ -145,20 +141,15 @@
 	           </a>
           </div>
           
-          <hr />
-          <div class="col-xs-12 ad-box" style="padding:1em; text-align:center; font-weight:bolder"> 
-          	   <a href="http://www.revenuehits.com/lps/v41/?ref=@RH@nSMfcbxO3vR50olA1eYhgw" target="_blank"><img src="http://revenuehits.com/publishers/media/img/v2/250x250_v2.png" border="0"></a>
-          </div>
-          
           <div class="clearfix"></div>
            <hr />
 
-          <h4>
+          <span style="padding:.5em ; font-size:bolder; font-size:1.5em">
           	 Latest from {{post.author}}
-          </h4>
+           </span>
 
           <hr />
-         <div class="col-xs-12 suggestion clearfix" ng-repeat="item in authorPosts">
+         <div class="col-xs-12 suggestion clearfix" ng-repeat="item in authorPosts" >
           	   <a href="http://www.palingram.com/#!/in/posts/{{item._id}}" target="_blank">
 	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
@@ -170,11 +161,8 @@
 	           </a>
           </div>
           <hr />
-          <div class="col-xs-12 ad-box " style="padding:1em; text-align:center; font-weight:bolder">
-				 <iframe data-aa='85374' src='https://ad.a-ads.com/85374?size=336x280' scrolling='no' style='width:100%; height:280px; border:0px; padding:0;overflow:hidden' allowtransparency='true' frameborder='0'></iframe>
-          </div>
-
-           <div class="clearfix"></div>
+          
+          <div class="clearfix"></div>
           <div class="copy-right" style="margin-top:5em; background-color:#fff; padding:.6em">
           	   <i class="icon fa fa-copyright"></i>
 			  palingram.com 2015  |

@@ -305,7 +305,10 @@ angular.module('palingram')
 
    })
 
-   .controller('postsController' , function($scope ,$rootScope , $location, $anchorScroll , $state , $timeout, Tags  ,Posts , User, Auth){
+   .controller('postsController' , function($scope ,$rootScope , $location, $anchorScroll , $state , $timeout, Tags  ,Posts , User, Auth , BaseUrl){
+         //
+         //$scope.workUrl = 'localhost:3002';
+         $scope.workUrl = 'www.palingram.com';
          //subscribe user to mailing list
           $scope.newsletter = function(email){
                $rootScope.$broadcast('loading:start' , {});
@@ -337,12 +340,15 @@ angular.module('palingram')
             $rootScope.$broadcast('loading:end' , {msg : 'viewing all posts'});
          });
 
-         $scope.$on('toggle:posts' ,  function(e , a){
-            toggleSidebar();
-         });
          var toggleSidebar = function(){
                $scope.sidebar == '' ? $scope.sidebar = 'active' : $scope.sidebar = '';
          }
+
+         $scope.$on('toggle:posts' ,  function(e , a){
+            toggleSidebar();
+         });
+
+        
 
         if(Auth.isAuth() ||(User.get() && User.get().username == 'guest')){
              next();
@@ -424,6 +430,7 @@ angular.module('palingram')
                     function(result){
                         $rootScope.$broadcast('loading:end' , {msg : 'done'});
                         $scope.posts = Posts.get();
+                        toggleSidebar();
                     },
                     function(err){
                         alert(err);

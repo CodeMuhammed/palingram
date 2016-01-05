@@ -11779,62 +11779,20 @@ nav {
 @media (max-width: 991px) {
   .article {
     min-height: 40em;
-    margin-top: -50px;
+    margin-top: -80px;
   }
 }
 .article .header {
   padding: 0;
   border-bottom: 5px solid #ccc;
   position: relative;
-}
-.article .header .inner {
-  height: 30em;
-}
-.article .header .inner .text {
-  padding-bottom: 1em;
-  float: right !important;
-  min-height: 15em;
-  background-color: rgba(0, 0, 0, 0.8);
-  text-align: left;
-  margin-top: 5em;
-  color: #fff;
-}
-.article .header .inner .text h1 {
-  font-size: 3em;
-  margin-bottom: 1em;
-}
-.article .header .inner .text .user {
-  font-size: 1.3em;
-  font-weight: bold;
-}
-.article .header .inner .text .author-icons {
-  padding-right: 1em;
-  position: absolute;
-  bottom: 1em;
-  right: 1em;
-}
-.article .header .inner .text .author-icons i {
-  font-size: 2em;
-  color: #fff;
-}
-.article .header .inner .text .author-icons i:first-child {
-  margin-right: .5em;
-}
-.article .header .inner .text .author-icons .fa-edit:hover {
-  color: #5cb85c;
-}
-.article .header .inner .text .author-icons .fa-times:hover {
-  color: #d9534f;
-}
-@media (max-width: 991px) {
-  .article .header {
-    margin-top: -50px;
-  }
+  height: 25em;
 }
 .article .share-box .des {
   font-size: 1.2em;
 }
 .article .body {
+  padding: .5em;
   margin-top: 2em;
 }
 .article .body p {
@@ -11931,7 +11889,7 @@ nav {
   background: url('../img/bg-d.gif');
 }
 .side-items .suggestion {
-  padding: 0;
+  padding: .5em;
   margin-bottom: 1.5em;
   max-height: 15em;
 }
@@ -12142,7 +12100,6 @@ fieldset[disabled] .tag-buttons .btn.active {
 .profile {
   font-size: 1.2em;
   padding: 3em;
-  margin-top: 80px;
   box-shadow: .0em .3em .1em #ccc;
 }
 .profile .bio {

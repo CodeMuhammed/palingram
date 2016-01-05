@@ -368,60 +368,14 @@ nav {
     box-shadow: 0 0 .4em #ccc;
     @media (max-width: @screen-sm-max) {
         min-height:40em;
-        margin-top:-50px; 
+        margin-top:-80px; 
     }
-  .header{
 
+  .header{
      padding:0; 
      border-bottom:5px solid #ccc;
      position:relative;
-     .inner{
-        height:30em;
-        .text{
-          padding-bottom:1em;
-          .pull-right;
-           min-height:15em;
-           background-color:hsla(0 , 0 , 0 , .8);
-           text-align:left;
-           margin-top: 5em;
-           color:#fff;
-           h1{
-              font-size: 3em;
-              margin-bottom:1em;
-           }
-           .user{
-               font-size : 1.3em;
-               font-weight: bold;
-           }
-           .author-icons {
-             padding-right:1em;
-             position:absolute;
-             bottom:1em;
-             right:1em;
-             i{
-                &:first-child{
-                   margin-right:.5em;
-                }
-                font-size:2em;
-                color:#fff;
-             }
-             .fa-edit{
-                &:hover{
-                   color:@brand-success;
-                }
-             }
-             .fa-times{
-                &:hover{
-                   color:@brand-danger;
-                }
-             }
-        }
-        }
-        
-     }
-      @media (max-width: @screen-sm-max) {
-        margin-top:-50px;
-    }
+     height:25em;   
   }
   .share-box{
      .des {
@@ -429,6 +383,7 @@ nav {
      }
   }
   .body{
+     padding:.5em;
      margin-top:2em;
      p{
         font-size:1.3em;
@@ -544,7 +499,7 @@ nav {
           background: url('../img/bg-d.gif');
       }
       .suggestion{
-          padding:0;
+          padding:.5em;
           margin-bottom:1.5em;
           max-height:15em;
           .img-div{
@@ -732,7 +687,7 @@ nav {
 .profile{
     font-size:1.2em;
     padding: 3em;
-    margin-top:80px;
+    //margin-top:80px;
     box-shadow: .0em .3em .1em #ccc;
     .bio{
        margin-bottom:2em;
