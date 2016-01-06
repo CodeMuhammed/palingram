@@ -520,8 +520,9 @@ nav {
 
 
 .tag-buttons{
+
    .btn{ 
-      .btn-xs;
+     .btn-xs;
      .button-variant(@btn-default-color; #E7E7E7 ; #DBDBDB);
       margin-right: .5em;
       margin-bottom: .5em;
@@ -533,11 +534,18 @@ nav {
        }
       } 
    }
+
+   .views {
+      .btn-primary;
+   }
   
 }
 
 .new-post{
     margin-top:10em;
+    @media (max-width: @screen-sm-max) {
+          margin-top:0em;
+    }
     input {
        margin-bottom:1em;
     }
@@ -633,7 +641,7 @@ nav {
     border-radius: 0px;
     height:3.7em;
     position:fixed;
-    top:60px; 
+    top:55px; 
     z-index:100002;
     @media (max-width: @screen-sm-max) {
         position:relative !important;
@@ -641,7 +649,7 @@ nav {
         width:100%;
         top:-40px;
         border-radius: 0px;
-        z-index:1000;
+        z-index:9999999 !important;
     }
 }
 

@@ -22,7 +22,7 @@
 					<div class="col-xs-12 content ">
 						<hr>
 						<div class="tag-buttons" style="padding:0">
-						   <button class="btn btn-primary btn-sm">{{post.views}} views</button>
+						   <button class="btn btn-primary btn-sm views">{{post.views}} views</button>
 						   <button class="btn btn-default btn-sm" ng-repeat="tag in post.tags">{{tag}}</button>
 						</div>
 					</div>			
@@ -51,19 +51,18 @@
 	            
 				            <li ng-click="changeView('popular')" class="" ng-class="{'hvr-bubble-bottom' : view('popular')}">
 								<a style="width:33.33%;">
-									
 									Popular Tags
 								</a>
 							</li>
 							<li ng-click="changeView('top')"  class="" ng-class="{'hvr-bubble-bottom' : view('top')}">
-								<a >
-									 
-									Top Categories
+								<a> 
+									Categories
 								</a>
 							</li>
 							<li  ng-click="changeView('custom')"  class="" ng-class="{'hvr-bubble-bottom' : view('custom')}">
 								<a >
-									Custom</a>
+									Custom
+								</a>
 							</li>
 				          </ul>
 	        		</div>

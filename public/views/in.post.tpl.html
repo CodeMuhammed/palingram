@@ -2,9 +2,9 @@
 	<div class="col-sm-9 article clearfix">
 	    <div style="padding:0 .2em">
 			<h1>{{post.title}}</h1>
-	        <span class="user">
-				by <a>{{post.author}}</a> | {{post.date | date:'fullDate'}}
-			</span>
+	        <div class="user" style="margin-bottom:1em">
+				<i style="font-weight:bolder">by <a>{{post.author}}</a> | {{post.date | date:'fullDate'}}</i>
+			</div>
 			<div class="author-icons" ng-show = "owned" style="margin-bottom:1em">
 				<i class="icon fa fa-edit" ng-click="edit()"> edit</i>
 			    <i class="icon fa fa-times"  ng-click="delete()"> delete</i>
@@ -134,8 +134,8 @@
 	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
 	          	  	  <h4>{{item.title | limitTo : 40}}</h4>
-	          	  	  <h5 class="visible-xs">
-	          	  	  	  {{item.description | limitTo : 80}}
+	          	  	  <h5>
+	          	  	  	  {{item.description | limitTo : 50}}
 	          	  	  </h5>
 	          	  </div>
 	           </a>
@@ -154,8 +154,8 @@
 	          	  <div class="col-xs-4 col-sm-6 img-div" style="background: url({{item.coverImage}}) center center no-repeat; background-size: cover;"></div>
 	          	  <div class="col-xs-8  col-sm-6 text-b" style="padding-top:.5em">
 	          	  	  <h4>{{item.title | limitTo : 40}}</h4>
-	          	  	  <h5 class="visible-xs">
-	          	  	  	  {{item.description | limitTo : 80 }}
+	          	  	  <h5>
+	          	  	  	  {{item.description | limitTo : 50 }}
 	          	  	  </h5>
 	          	  </div>
 	           </a>

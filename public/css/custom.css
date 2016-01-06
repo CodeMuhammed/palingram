@@ -11965,9 +11965,59 @@ fieldset[disabled] .tag-buttons .btn.active {
 .tag-buttons .btn:hover a.delete {
   color: #d9534f;
 }
+.tag-buttons .views {
+  color: #ffffff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.tag-buttons .views:hover,
+.tag-buttons .views:focus,
+.tag-buttons .views.focus,
+.tag-buttons .views:active,
+.tag-buttons .views.active,
+.open > .dropdown-toggle.tag-buttons .views {
+  color: #ffffff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+.tag-buttons .views:active,
+.tag-buttons .views.active,
+.open > .dropdown-toggle.tag-buttons .views {
+  background-image: none;
+}
+.tag-buttons .views.disabled,
+.tag-buttons .views[disabled],
+fieldset[disabled] .tag-buttons .views,
+.tag-buttons .views.disabled:hover,
+.tag-buttons .views[disabled]:hover,
+fieldset[disabled] .tag-buttons .views:hover,
+.tag-buttons .views.disabled:focus,
+.tag-buttons .views[disabled]:focus,
+fieldset[disabled] .tag-buttons .views:focus,
+.tag-buttons .views.disabled.focus,
+.tag-buttons .views[disabled].focus,
+fieldset[disabled] .tag-buttons .views.focus,
+.tag-buttons .views.disabled:active,
+.tag-buttons .views[disabled]:active,
+fieldset[disabled] .tag-buttons .views:active,
+.tag-buttons .views.disabled.active,
+.tag-buttons .views[disabled].active,
+fieldset[disabled] .tag-buttons .views.active {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.tag-buttons .views .badge {
+  color: #337ab7;
+  background-color: #ffffff;
+}
 .new-post {
   margin-top: 10em;
   padding: 0;
+}
+@media (max-width: 991px) {
+  .new-post {
+    margin-top: 0em;
+  }
 }
 .new-post input {
   margin-bottom: 1em;
@@ -12052,7 +12102,7 @@ fieldset[disabled] .tag-buttons .btn.active {
   border-radius: 0px;
   height: 3.7em;
   position: fixed;
-  top: 60px;
+  top: 55px;
   z-index: 100002;
 }
 .tool-set .pager {
@@ -12065,7 +12115,7 @@ fieldset[disabled] .tag-buttons .btn.active {
     width: 100%;
     top: -40px;
     border-radius: 0px;
-    z-index: 1000;
+    z-index: 9999999 !important;
   }
 }
 .md-styles {
