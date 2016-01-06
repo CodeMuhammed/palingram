@@ -230,7 +230,7 @@ angular.module('palingram')
 
         function next(){  
             var user = User.get();
-            $scope.writer = user.writer == 'true';
+            $scope.writer = user.writer;
             user.firstname =='guest' ? $scope.admin = false : $scope.admin = true ; 
             $scope.search = false; 
             $scope.nav = 'posts';
@@ -241,7 +241,7 @@ angular.module('palingram')
 
            
         
-            if(user.firstname !='guest' && user.emailVerified == "false"){
+            if(user.firstname !='guest' && user.emailVerified){
                alert('email not verified');
                $scope.alert = {
                   "visible":true, 
