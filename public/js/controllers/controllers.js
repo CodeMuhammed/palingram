@@ -241,8 +241,7 @@ angular.module('palingram')
 
            
         
-            if(user.firstname !='guest' && user.emailVerified){
-               alert('email not verified');
+            if(user.firstname !='guest' && !user.emailVerified){
                $scope.alert = {
                   "visible":true, 
                   "message":"Please verify your email by clicking the link we sent to your mailbox"
