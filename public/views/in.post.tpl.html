@@ -59,60 +59,13 @@
 					
 					<hr >
 				</div>
-
-				<div class="col-xs-12" style="padding:0">
-					<div class="col-xs-12 comment-box hvr-curl-top-right" >
-			            <textarea class="form-control" placeholder="Comment on this article ..." ng-model="comment.body" style="border-radius:0;">
-			            </textarea>
-			            <div class="col-xs-12 footer" >
-			            	<!-- Split button -->
-							<div class="btn-group">
-								  <button type="button" class="btn btn-default btn-sm">{{sortCriteria || 'sort by'}}</button>
-								  <button type="button" class="btn btn-danger btn-sm" ng-click="toggleSortMenu()">
-								    <span class="caret"></span>
-								  </button>
-								  <div class="dropdown" ng-class="{'open' : sortMenu}" style="z-index:200000">
-								  	<ul class="dropdown-menu">
-								    <li ng-repeat="option in sortOptions" ng-click="sort(option)">
-								    	<a>{{option}}</a>
-								    </li>
-								  </ul> 
-								  </div>
-								  
-							</div>
-							
-			            	<button ng-click="postComment()" class="btn btn-default btn-sm pull-right" style="margin-left:.2em;">comment</button>
-			                <button ng-click="comment.body=''" class="btn btn-default btn-sm pull-right">reset</button>
-							</span>
-			            </div>
-					</div>
-					<div class="col-xs-12" id="comment" ng-repeat = "item in comments | commentFilter:sortCriteria">
-
-						<div class="col-xs-12 comment-heading">
-							<div class="col-xs-1">
-								 <img ng-src={{item.image}} class="img-rounded">
-							</div>
-							<div class="col-xs-11">
-								<h5>
-									<a>{{item.by}}</a> | <span style="color:#CCE">{{item.date | date:'fullDate'}}</span>
-									
-								</h5>
-						    </div>
-					   </div>
-
-						<div class="col-xs-12 comment-body">	 
-							 <div class="col-xs-11 col-xs-offset-1" style="margin-bottom:1em;padding-right:1em;">
-							 	{{item.body}} <br/><br />
-							 	<button class="btn btn-default btn-sm icon fa fa-chevron-down" ng-click="vote(item , 1)"> votes {{item.voters.up.length}}
-							 	</button>
-							 	<button class="btn btn-default btn-sm icon fa fa-chevron-up" ng-click="vote(item , -1)"> votes {{item.voters.down.length}}</button>
-							 	<button class="btn btn-default btn-sm icon fa fa-times" ng-click="deleteComment(item)" ng-show="myComment(item)"> delete</button>
-							 </div>
-
-						</div>
-						<div class="clearfix"></div>
-						<hr / style="margin:0">
-					</div>
+                
+				<div style="padding:.5em">
+					<dir-disqus disqus-shortname="palingramdisqus"
+					         disqus-identifier="{{post._id}}"
+					         disqus-url="http://www.palingram.com/#!/in/posts/{{post._id}}"
+					         ready-to-bind="{{ contentLoaded }}">
+					</dir-disqus>
 				</div>
 			</div>
 	</div>

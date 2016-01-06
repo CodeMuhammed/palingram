@@ -513,8 +513,9 @@ angular.module('palingram')
       } //next function ends here
    })
 
-   .controller('postController' , function($scope , $rootScope ,$stateParams ,  $state ,$filter , Tags , Posts , User , Auth , Comments){
+   .controller('postController' , function($scope , $rootScope ,$stateParams ,  $state ,$filter , Tags , Posts , User , Auth){
         //
+        $scope.contentLoaded = false;
         $scope.$on('loading:end' , function(e , a){
              if(a.action == 'signedIn'){
                  init();
@@ -536,6 +537,8 @@ angular.module('palingram')
         function next(){
             $rootScope.$broadcast('loading:start' , {});
             $scope.post = $state.current.data.post;
+            $scope.contentLoaded = true;
+
             //send broadcast the post to the global scope to be used in the meta section of the page
             $rootScope.$broadcast('post' , $scope.post);
 
@@ -548,23 +551,7 @@ angular.module('palingram')
                $scope.authorPosts = result;
             });
             
-            $scope.comment = {
-                body : '',
-                by : User.get().firstname+' '+User.get().lastname,
-                image : User.get().image,
-                username: User.get().username,
-                date : '',
-                voters : {
-                   up : [],
-                   down:[]
-                }
-            };
-
-            Comments.get($scope.post.comments_id).then(function(comments){
-                 $scope.comments = comments;
-                 $rootScope.$broadcast('loading:end' , {msg : 'action complete'});
-            });
-
+           
             //favourite handler
             $scope.isFavourite = function(){ 
                return User.get().favourites.indexOf($scope.post._id)>=0;
@@ -613,125 +600,7 @@ angular.module('palingram')
                   });
               };
 
-            //comment handler 
-            $scope.postComment = function(){ 
-               if(User.get().firstname == 'guest'){
-                    alert('Sign up to comment on articles');
-               }
-               else{
-                  $rootScope.$broadcast('loading:start' , {});
-                  if($scope.comment.body.trim()  == ''){
-                       $rootScope.$broadcast('loading:end' , {msg : 'type your comment into the box first'});
-                  }
-                  else{
-                      $scope.comment.date = Date.now();
-                      Comments.postComment(angular.copy($scope.comment)).then(function(status){
-                         $rootScope.$broadcast('loading:end' , {msg : 'status'});
-                         $scope.comment.body  = '';
-                      } , function(err){
-                           alert(err);
-                      });
-                  }
-                }
-            }; 
-             
-            $scope.deleteComment = function(comment){
-                $rootScope.$broadcast('loading:start' , {});
-                var isMyPost = User.get().username == comment.username;
-                if(isMyPost){
-                     Comments.deleteComment(comment).then(function(status){
-                        $rootScope.$broadcast('loading:end' , {msg : status});
-                    });
-                }
-                else {
-                  alert('not yourr post');
-                }
-            };
-
-            $scope.vote  = function(comment , count){
-                 $rootScope.$broadcast('loading:start' , {});
-                 var permitted = false;
-                 var temp = angular.copy(comment);
-
-                 var status = $scope.voteStatus(comment);
-
-                 if(count == 1 && !status[0]){
-                     temp.voters.up.push(User.get().username);
-                     permitted = true;
-                 } 
-                 else if(count == -1 && !status[0]){
-                      temp.voters.down.push(User.get().username); 
-                      permitted = true;
-                 }
-                 else if(count == 1 && status[0]){
-                     if(count == status[1]){
-                        alert('already voted up');
-                        permitted = false;
-                     }
-                     else{
-                         var index = temp.voters.down.indexOf(User.get().username);
-                         temp.voters.down.splice(index , 1);
-                         temp.voters.up.push(User.get().username);
-                         permitted = true;
-                     }
-                 }
-                 else if(count == -1 && status[0]){
-                     if(count == status[1]){
-                        alert('already voted down');
-                        permitted = false;
-                     }
-                     else{
-                         var index = temp.voters.up.indexOf(User.get().username);
-                         temp.voters.up.splice(index , 1);
-                         temp.voters.down.push(User.get().username);
-                         permitted = true;
-                     }
-                 }
-                 
-                 if(permitted && User.get().firstname != 'guest'){
-                   Comments.updateComment(temp).then(function(status){
-                       $rootScope.$broadcast('loading:end' , {msg:'voted successfully'});
-                       var index = $scope.comments.indexOf(comment);
-                       $scope.comments[index] = temp;
-                   });
-                 } else{
-                    $rootScope.$broadcast('loading:end' , {msg:'action not allowed'});
-                 }
-                 
-            };
-
-            $scope.voteStatus = function(comment){
-                var up = comment.voters.up.indexOf(User.get().username) >=0;
-                var down = comment.voters.down.indexOf(User.get().username) >=0;
-
-                if(!up && !down){
-                    return [false , false];
-                }
-                else {
-                   return [
-                      true,
-                      up?'1':'-1'
-                   ]
-                }
-            };
-
-            $scope.myComment = function(comment){
-                return User.get().username == comment.username;
-            };
-
-            $scope.getVoteClass = function(comment , dir){
-                 var temp = $scope.voteStatus(comment);
-                 if(temp[1] == dir && dir==1){
-                    return 'up-vote';
-                 }
-                 else if(temp[1] == dir && dir==-1){
-                      return 'down-vote';
-                 }
-                 else{
-                    return '';
-                 }
-                
-            }
+        
 
             //controls sorting
             $scope.sortOptions = ['Most Popular' , 'Best Voted' , 'Most Recent'];
