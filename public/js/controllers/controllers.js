@@ -230,7 +230,7 @@ angular.module('palingram')
 
         function next(){  
             var user = User.get();
-            $scope.writer = user.writer;
+            $scope.writer = user.writer == 'true';
             user.firstname =='guest' ? $scope.admin = false : $scope.admin = true ; 
             $scope.search = false; 
             $scope.nav = 'posts';
