@@ -229,9 +229,9 @@ angular.module('palingram')
          } 
 
         function next(){  
-           
-            $scope.writer = User.get().writer;
-            User.get().firstname =='guest' ? $scope.admin = false : $scope.admin = true ; 
+            var user = User.get();
+            $scope.writer = user.writer;
+            user.firstname =='guest' ? $scope.admin = false : $scope.admin = true ; 
             $scope.search = false; 
             $scope.nav = 'posts';
             
@@ -241,11 +241,15 @@ angular.module('palingram')
 
            
         
-            if(Auth.isAuth() && User.get().firstname != 'guest' &&  User.get().emailVerified == false){
+            if(user.firstname !='guest' && user.emailVerified == "false"){
+               alert('email not verified');
                $scope.alert = {
                   "visible":true, 
                   "message":"Please verify your email by clicking the link we sent to your mailbox"
                };
+            }
+            else {
+                console.log(user);
             }
               
 
@@ -306,9 +310,7 @@ angular.module('palingram')
    })
 
    .controller('postsController' , function($scope ,$rootScope , $location, $anchorScroll , $state , $timeout, Tags  ,Posts , User, Auth , BaseUrl){
-         //
-         //$scope.workUrl = 'localhost:3002';
-         $scope.workUrl = 'www.palingram.com';
+         
          //subscribe user to mailing list
           $scope.newsletter = function(email){
                $rootScope.$broadcast('loading:start' , {});
