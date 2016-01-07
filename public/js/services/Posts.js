@@ -34,6 +34,7 @@ angular.module('Posts' , [])
                promise.resolve(favourites);
       	  }
       	  else{
+            console.log('fav_ids');
       	  	$http({
 	            method : 'POST',
 	            url : BaseUrl+'/api/allFavourites',
