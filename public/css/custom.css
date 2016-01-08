@@ -11752,7 +11752,9 @@ nav {
 }
 .posts-body .panel-body .img-div {
   min-height: 20em;
-  border: 1px solid #ccc;
+  border: 3px solid #ccc;
+  border-left: 0px solid #ccc;
+  border-right: 9px solid #ccc;
   border-radius: 0px;
 }
 .posts-body .panel-body .img-div .description {
