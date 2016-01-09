@@ -255,9 +255,9 @@ nav {
         margin-bottom:2em
     }
     .sidemenu-container{
-        padding-top:0em;
+        padding-left:2em !important;
          @media (max-width: @screen-sm-max) {
-             padding:0;
+             padding-left:.2em !important;
          }
     }
     .side-menu{
@@ -339,7 +339,7 @@ nav {
          min-height: 20em;
          border:3px solid #ccc;
          border-left:0px solid #ccc;
-         border-right:9px solid #ccc;
+         border-right:0px solid #ccc;
 
          border-radius: 0px;
          .description{
@@ -504,15 +504,18 @@ nav {
       .suggestion{
           padding:.5em;
           margin-bottom:1.5em;
-          max-height:15em;
           .img-div{
               height: 10em;
               background: #ccc;
+              @media (max-width: @screen-sm-max) {
+                  height: 15em;
+              }
           }
           .text-b{
               over-flow:hidden;
               height: 10em;
               background: #cce;
+              margin-bottom:1.5em;
           }
       }
       @media (max-width: @screen-sm-max) {

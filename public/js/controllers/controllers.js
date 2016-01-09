@@ -1000,4 +1000,11 @@ angular.module('palingram')
 
           $scope.links = fblinks.split(',');
 
-   });
+   })
+
+.directive('sideMenu' , function(){
+           return {
+              restrict: 'E',
+              templateUrl : 'views/sidemenu.tpl.html'
+           }
+});

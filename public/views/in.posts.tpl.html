@@ -43,113 +43,15 @@
 			 </div>
 	    </div>
 
-        <div class="col-xs-6 col-sm-4 sidebar-offcanvas sidemenu-container" style="padding:.2em">
-        	<div class="side-menu panel panel-default">
-	        	   <div class = "tags-nav panel-body" style="display:block ">
-	        			 <ul ng-hide="search">
-	            
-				            <li ng-click="changeView('popular')" class="" ng-class="{'hvr-bubble-bottom' : view('popular')}">
-								<a style="width:33.33%;">
-									Popular Tags
-								</a>
-							</li>
-							<li ng-click="changeView('top')"  class="" ng-class="{'hvr-bubble-bottom' : view('top')}">
-								<a> 
-									Categories
-								</a>
-							</li>
-							<li  ng-click="changeView('custom')"  class="" ng-class="{'hvr-bubble-bottom' : view('custom')}">
-								<a >
-									Custom
-								</a>
-							</li>
-				          </ul>
-	        		</div>
-	        	</div>
-            <div class="side-menu panel panel-default">
-	        	   
-		            <div class="panel-body" ng-if="view('custom')">
-						<div class="input-group">
-							  <input class="form-control input-tag" type="text" list="tags" placeholder="Add a tag" ng-model="newTag" style="border-radius:0;" >
-							  <datalist id="tags">
-							        <option value="{{tag}}" ng-repeat="tag in allTags"></option>
-							  </datalist>
-							  <span ng-click="addTag(newTag)" class="input-group-addon" style="background-color:#fff; padding-left:1em; padding-right:1em; border-radius:0">
-								<i class="icon fa fa-plus"> add</i>
-							  </span>
-						 </div>
-			             <hr /> 
-						 <div class="tag-buttons">
-							<button class="btn btn-sm" ng-repeat="tag in tags" ng-click="deleteTag(tag)">
-							   <span>{{tag}} </span>
-							   <a class="icon fa fa-times delete"></a>
-							</button>
-						 </div>
-					 </div>
-
-					 <div class="panel-body" ng-if="view('top')">
-						<input class="form-control input-tag" type="text" list="tags" placeholder="Search categories" ng-model="categorySearch" style="border-radius:0; margin-bottom:1em" >
-		             	 <hr>
-			             
-						 <div class="tag-buttons">
-							<button class="btn btn-sm" ng-repeat="category in categories | filter:categorySearch" ng-click="clearTags(category)">
-							   <span>{{category}}</span>
-							</button>
-						 </div>
-					 </div>
-
-					 <div class="panel-body" ng-if="view('popular')">
-		             	 <input class="form-control input-tag" type="text" list="tags" placeholder="Search tags" ng-model="tagSearch" style="border-radius:0; margin-bottom:1em" />
-		             	 <hr>
-						 <div class="tag-buttons">
-							<button class="btn btn-sm" ng-repeat="tag in allTags | filter:tagSearch | limitTo:20" ng-click="clearTags(tag)">
-							   <span>{{tag}}</span>
-							</button>
-						 </div>
-						
-					 </div>
-			 </div>
-              
-             <div class="panel panel-default" style="margin-top:50px;"> 
-             	   <div>
-						<iframe scrolling="no" src="//blockadz.com/ads/show/show.php?a=FQNEQU2V7AFDK&b=HCT9AFN2DAYJC" style="overflow:hidden;width:468px;height:60px;" frameborder="0"></iframe>
-					</div>
-             	   <div class="panel-heading">
-             	   	   <h2 style="font-size:1.5em">Never miss another story from palingram</h2>
-             	   </div>
-             	   <div class="panel-body">
-             	   	   <h3 style="font-size:1.2em">Subscribe to our weekly newsletter and follow us</h3>
-             	   	    <form class="searchbox" style="padding:1em 0;margin-top:0;">
-							<div class="input-group" style="padding-bottom:.4em;">
-							 
-							  <input type="email" ng-model="newsletterEmail"  class="form-control" style="border-radius: 0px !important; height:3em;" placeholder="Email Address">
-							  <span class="input-group-addon btn btn-default" style=" padding-left:1em; padding-right:1em;border-radius:0;" ng-click="newsletter(newsletterEmail)">
-								  subscribe
-							  </span>
-							</div>
-					    </form>
-					<a class="btn btn-primary pull-left" style="width:33.3%;border-radius:0;" href="https://www.facebook.com/pages/Palingram/468583489978467"><i class="icon fa fa-facebook"></i> /palingram </a>
-					<a class="btn btn-info pull-left" style="width:33.3%;border-radius:0;" href="https://twitter.com/palingram"><i class="icon fa fa-twitter"></i> @palingram</a>
-					<a class="btn btn-danger pull-left" style="width:33.3%;border-radius:0;" href="https://plus.google.com/s/palingram"><i class="icon fa fa-google-plus"></i> +palingram </a>
-             	   </div>  
-             </div>
-             <div class = "panel panel-default" >
-             	   <div class="side-items">
-					   <div class="copy-right" style="margin-top:3em; padding:1em;">
-					   	<i class="icon fa fa-copyright"></i>
-					           palingram.com 2015  |
-					    <a href = "about.html" >About</a>  |
-					    <a href = "privacy.html">Privacy policy</a> |
-					    <a href = "contact.html">Contact</a> |
-                        <a ng-click="register()">register</a>
-					 </div>
-                    </div>
-                    
-             </div>
-            
-
-			
-        </div><!--/.sidebar-offcanvas-->
+        <div class="col-xs-6 col-sm-4 hidden-xs">
+	        <div class="sidebar-offcanvas sidemenu-container s" style="padding:.2em" bs-affix data-offset-top="-55">
+				<side-menu></side-menu>
+	        </div>
+	    </div>
+	    <div class="sidebar-offcanvas sidemenu-container visible-xs" style="padding:.2em">
+			<side-menu></side-menu>
+        </div>
+	    <!--/.sidebar-offcanvas-->
        
       </div><!--/row-->
 

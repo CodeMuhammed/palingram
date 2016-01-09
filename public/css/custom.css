@@ -11670,11 +11670,11 @@ nav {
   margin-bottom: 2em;
 }
 .posts-container .sidemenu-container {
-  padding-top: 0em;
+  padding-left: 2em !important;
 }
 @media (max-width: 991px) {
   .posts-container .sidemenu-container {
-    padding: 0;
+    padding-left: .2em !important;
   }
 }
 .posts-container .side-menu {
@@ -11754,7 +11754,7 @@ nav {
   min-height: 20em;
   border: 3px solid #ccc;
   border-left: 0px solid #ccc;
-  border-right: 9px solid #ccc;
+  border-right: 0px solid #ccc;
   border-radius: 0px;
 }
 .posts-body .panel-body .img-div .description {
@@ -11893,16 +11893,21 @@ nav {
 .side-items .suggestion {
   padding: .5em;
   margin-bottom: 1.5em;
-  max-height: 15em;
 }
 .side-items .suggestion .img-div {
   height: 10em;
   background: #ccc;
 }
+@media (max-width: 991px) {
+  .side-items .suggestion .img-div {
+    height: 15em;
+  }
+}
 .side-items .suggestion .text-b {
   over-flow: hidden;
   height: 10em;
   background: #cce;
+  margin-bottom: 1.5em;
 }
 @media (max-width: 991px) {
   .side-items {
