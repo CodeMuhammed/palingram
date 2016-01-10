@@ -1,41 +1,46 @@
-<div class="col-sm-offset-3 col-sm-6 article profile" >
-	 <p>Total page views: {{user.pageViews}}</p>
-	 <hr>
-	 <p>Last viewed : {{user.lastViewed | date:'fullDate'}}</p>
-	  <hr>
-	 <p>Favourites : {{user.favourites.length}}</p>
-	  <hr>
-	 <p>
-	 	Total ammount: NGN {{(user.pageViews*10)/100}}
-        <button class="btn btn-primary btn-sm pull-right disabled"> withdraw </button>
-	 </p>
-	  <hr>
-	 <p>First name {{user.firstname}}</p>
-	  
-	 <p>Last name: {{user.lastname}}</p>
-        <hr>
-	 <p>Email | username : {{user.username}}</p>
-	  <hr>
-	 <p>
-	 	Password: {{'******'}}
-	 	<button class="btn btn-primary btn-sm pull-right"> reset </button>
-	 </p>
-	  <hr>
-	 <p>
-	 	<form>
-	 		<label>Profile image url</label>
-            <input ng-model="user.image" class="form-control" placeholder="Enter link of image">
-         </form>
-	 </p>
-	 <p>
-	 	<form name="demo" style="background:#fff;" class="md-styles bio">
-	 		<label>Bio</label>
-            <div ng-model="user.bio" medium-editor options='{"placeholder": "Edit your bio here" , "buttons":["bold", "italic","underline", "anchor", "header1", "header2", "quote"]}'></div>
-         </form>
-	 </p>
-	  <hr>
-	 <div>
-	   <button class="btn btn-default btn-sm" ng-click="logout()">logout</button>
-	   <button class="btn btn-default btn-sm btn-primary" ng-click="save()">save</button>
-     </div>
+<div class="col-xs-12 profile">
+	<div class="col-xs-12 header">
+		
+	</div>
+	<div class="col-sm-offset-3 col-sm-6" >
+		 <p>Total page views: {{user.pageViews}}</p>
+		 <hr>
+		 <p>Last viewed : {{user.lastViewed | date:'fullDate'}}</p>
+		  <hr>
+		 <p>Favourites : {{user.favourites.length}}</p>
+		  <hr>
+		 <p>
+		 	Total ammount: NGN {{(user.pageViews*10)/100}}
+	        <button class="btn btn-primary btn-sm pull-right disabled"> withdraw </button>
+		 </p>
+		  <hr>
+		 <p>First name {{user.firstname}}</p>
+		  
+		 <p>Last name: {{user.lastname}}</p>
+	        <hr>
+		 <p>Email | username : {{user.username}}</p>
+		  <hr>
+		 <p>
+		 	Password: {{'******'}}
+		 	<button class="btn btn-primary btn-sm pull-right"> reset </button>
+		 </p>
+		  <hr>
+		 <p>
+		 	<form>
+		 		<label>Profile image url</label>
+	            <input ng-model="user.image" class="form-control" placeholder="Enter link of image">
+	         </form>
+		 </p>
+		 <p>
+		 	<form name="demo" style="background:#fff;" class="md-styles bio">
+		 		<label>Bio</label>
+	            <div ng-model="user.bio" medium-editor options='{"placeholder": "Edit your bio here" , "buttons":["bold", "italic","underline", "anchor", "header1", "header2", "quote"]}'></div>
+	         </form>
+		 </p>
+		  <hr>
+		 <div>
+		   <button class="btn btn-default btn-sm" ng-click="logout()">logout</button>
+		   <button class="btn btn-default btn-sm btn-primary" ng-click="save()">save</button>
+	     </div>
+	</div>
 </div>

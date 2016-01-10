@@ -146,12 +146,6 @@ body{
      }
   }
 
-  .footer{
-     margin-top:3em;
-     padding-top:1em;
-     border-top:3px solid #ccc;
-  }
-
 }
 
 nav {
@@ -230,6 +224,15 @@ nav {
 .main-view-area{
    min-height:60em;
    overflow:auto;
+
+   .alert-msg {
+        font-weight:bolder; 
+        margin-bottom:0;
+        margin-top:80px;
+        @media (max-width: @screen-sm-max) {
+            margin-top:10px;
+        } 
+   }
 }
 
 .posts-container{
@@ -363,7 +366,7 @@ nav {
 }
 
 .article {
-
+    margin-top:60px; 
     min-height:200em;
     background:#fff;
     padding-left:0;
@@ -371,7 +374,7 @@ nav {
     box-shadow: 0 0 .4em #ccc;
     @media (max-width: @screen-sm-max) {
         min-height:40em;
-        margin-top:-80px; 
+        margin-top:2em; 
     }
 
   .header{
@@ -406,86 +409,8 @@ nav {
         max-height:100%;
      }
   }
-  .comment-box{
-     padding-left:0;
-     padding-right:0;
-     font-size:1.3em;
-     margin-top: 2em;
-     margin-bottom:3em;
-     >div{
-         padding: 1em;
-           background-color:lighten(@brand-primary , 50%);
-           textarea{
-               font-size:1em;
-               border-radius:0;
-               border:none;
-           }
-           .footer{
-              padding: .3em .2em .3em 0; 
-              background:#fff; 
-              border-top:none; 
-              margin-top:-1px;
-           }
-     }
-  }
-  #comment{
-      padding:1em 0;
-      hr {
-         padding:1em;
-         z-index: 10000000;
-      }
-      .comment-heading {
-          >div{
-             &:first-child{
-                img{
-                  width: 3em;
-                  height:3em;
-                }
-                 @media (max-width: @screen-sm-max) {padding:0;
-                    img{
-                      width: 2.5em;
-                      height:2.5em;
-
-                    }
-                  }
-             }
-             &:last-child{
-                margin-bottom:1em;
-                h5{
-                   font-size: 1.2em;
-                }
-             }
-
-          }
-      }
-      .comment-body{
-         .vote-box{
-            .up-vote{
-                  color:@brand-success;
-               }
-               .down-vote{
-                  color:@brand-danger;
-               }
-            >div{
-               
-               text-align:center;
-               font-size:1.1em;
-               &:first-child{
-                 &:hover{
-                     color: @brand-success;
-                 }
-               }
-               &:last-child{
-                 &:hover{
-                     color: @brand-danger;
-                 }
-               }
-            }
-         }
-         color:@gray;
-         font-size:1.3em;
-      }
-  }
+  
+ 
 
   @media (max-width: @screen-sm-max) {
        
@@ -494,7 +419,7 @@ nav {
 }
 
 .side-items{
-
+     margin-top:60px;
       .ad-box {
           border:4px solid #E9EAED;
           min-height:20em;
@@ -699,8 +624,13 @@ nav {
 }
 
 .profile{
+    .header {
+       height:20em;
+       margin-bottom:2em;
+       background: lighten(@brand-primary , 40%);
+    }
     font-size:1.2em;
-    padding: 3em;
+    padding: .5em;
     //margin-top:80px;
     box-shadow: .0em .3em .1em #ccc;
     .bio{
@@ -710,9 +640,52 @@ nav {
        border-radius: 5px;
     }
     @media (max-width: @screen-sm-max) {
-       margin-top: 130px;
        border-top:none;
     }
+}
+
+.footer {
+   width:100%; 
+   padding: 5px; 
+   background-color:#343742;
+   >div{
+      //background-color:#fff; 
+      width:100%;
+      padding:0;
+      .inner{
+          padding:.7em;
+          width:100%; 
+          text-align:center;
+          span { 
+             display:block;
+             &:first-child{
+                 margin-top:1em;
+                 color:#000;
+                 font-weight:light;
+                 font-size:1em;
+                 padding-bottom:.2em;
+             }
+             &:last-child{
+                color:#000; 
+                font-weight:light; 
+                font-size:1em;
+
+                a{
+                   outline:none;
+                     text-decoration:none !important;
+                   display:inline-block;
+                   font-weight:bold;
+                   color:#B0B5BE;
+                   margin-right:1em;
+                   margin-bottom:1em;
+                   &:hover{
+                      color:#689A5A;
+                   }
+                }
+             }
+          }
+       }
+   }
 }
 
 .tradr-results {

@@ -1,9 +1,4 @@
-<div class="main-view-area">
-   <!-- Static navbar -->
-        <div class="alert alert-warning text-center" ng-show="alert.visible" style="font-weight:bolder; margin-bottom:0;">
-	   	    {{alert.message}} <a ng-click="sendEmail()">Click here to RESEND email</a>
-	   	    <i class="icon fa fa-times fa-lg pull-right" ng-click = "closeAlert()"></i>
-	   	</div>
+<div class="main-view-area">       
 
         <nav class="navbar nav-me" >
 	      <div class="">
@@ -46,7 +41,7 @@
 						Favourites
 					</a>
 				</li>
-				<li  ng-click="goto('profile')"  class="" ng-class="{'nav-active' : active('profile')}" ng-show="writer">
+				<li  ng-click="goto('profile')"  class="" ng-class="{'nav-active' : active('profile')}">
 					<a>
 					   Stats
 					</a>
@@ -86,5 +81,34 @@
           <!--google custom search implementation-->
 		  <div google-search ng-show="search"></div>
 	    </nav>
-      <ui-view name="inSpace"></ui-view>
+        
+        <!-- Static navbar -->
+	    <div class="alert alert-warning text-center alert-msg" ng-show="alert.visible">
+        	<i class="icon fa fa-times fa-lg pull-left" ng-click = "closeAlert()"></i>
+	   	    {{alert.message}} <a ng-click="sendEmail()">Click here to RESEND email</a>
+	   	    
+	   	</div>
+
+        <ui-view name="inSpace"></ui-view>
+        <div class="clearfix"></div>
+        <div layout="row" layout-align="center center" class="footer">
+          <div flex-gt-sm="67"layout="column" layout-align="center center" >
+              <div class="md-whiteframe-0dp inner" >
+                 <span class="md-primary" style="color:#B0B5BE" >
+                     &copy; palingram, inc.
+                 </span><br />
+                 <span>
+                     <a  ng-href="about.html">About us</a>
+                     <a  ng-href="privacy.html">Privacy</a>
+                     <a>Blog</a>
+                     <a  ng-href="contact.html">FAQ</a>
+                     <a  ng-href="privacy.html">Disclaimer</a>
+                     <a  ng-href="http://www.upbunk.com">Developers</a>
+                     <a  ui-sref="out.auth">Register</a>
+                     <a  ng-href="">Jobs</a>
+                 </span>
+               </div>
+
+          </div>
+     </div>
 </div>

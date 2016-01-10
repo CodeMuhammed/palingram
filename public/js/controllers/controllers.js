@@ -113,6 +113,16 @@ angular.module('palingram')
 
    //This ccontroller takes care of signing up as a fresh user
    .controller('authController' , function($scope , $rootScope , $state , Auth , Tags , User , Posts){
+       //Logs out of the guest account before proceeding as usual
+       Auth.logout().then(
+          function(status){
+              console.log('logged out successfully: by visiting the auth page');
+          },
+          function(err){
+               console.log(err);
+          }
+       ); 
+
        $scope.signup = function(newUser){
             $rootScope.$broadcast('loading:start' , {msg : 'loading please wait...'});
             newUser.favourites = [];
@@ -133,9 +143,9 @@ angular.module('palingram')
         $scope.signin = function(credentials){
            $rootScope.$broadcast('loading:start' , {msg : 'loading .. please wait'});
            Auth.signin(credentials).then(function(status){
-                Tags.set(User.get().tags_id).then(function(status){
-                      Posts.set(Tags.get()).then(function(status){
-                          $rootScope.$broadcast('loading:end' , {msg : 'sign in completed'});
+                Tags.set(User.get().tags_id).then(function(status1){
+                      Posts.set(Tags.get()).then(function(status2){
+                          $rootScope.$broadcast('loading:end' , {msg : status});
                           $state.go('in.posts');
                      });
                 });
@@ -170,9 +180,6 @@ angular.module('palingram')
                         $rootScope.$broadcast('loading:end' , {msg : status});
                         Auth.sendEmail('emailVerification').then(function(status){
                              $rootScope.$broadcast('loading:end' , {msg : status});
-                             var temp = User.get();
-                             temp.emailVerified = true;
-                             User.set(temp);
                              $state.go('in.posts');
                         } , function(err){
                              $rootScope.$broadcast('loading:end' , {msg : status});
@@ -204,7 +211,6 @@ angular.module('palingram')
    .controller('inController' , function($scope ,$rootScope ,  $state , Auth , Tags , User , Posts){  
          //implement auto login for when page refreshes
          if(Auth.isAuth() && User.get().firstname != 'guest'){
-
             next();
          }
          else {

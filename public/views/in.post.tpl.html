@@ -1,4 +1,4 @@
-<div class="col-sm-12" style="padding:0;margin-top:7em">
+<div class="col-sm-12" style="padding:0">
 	<div class="col-sm-9 article clearfix">
 	    <div style="padding:0 .2em">
 			<h1><b style="font-weigh:bolder">{{post.title}}</b></h1>
@@ -69,7 +69,7 @@
 				</div>
 			</div>
 	</div>
-	<div class="col-sm-3 side-items" style="float:right; padding-right:0;">
+	<div class="col-sm-3 side-items" style="padding-right:0;">
           <div class="col-xs-12 ad-box " style="padding:1em; text-align:center; font-weight:bolder">
           	    
 				<iframe scrolling="no" src="//blockadz.com/ads/show/show.php?a=FQNEQU2V7AFDK&b=D0BRIG0SRYI7P" style="overflow:hidden;width:100%;height:250px;" frameborder="0"></iframe>
@@ -101,7 +101,7 @@
 
           <span style="padding:.5em ; font-size:bolder; font-size:1.5em">
           	 Latest from {{post.author}}
-           </span>
+          </span>
 
           <hr />
          <div class="col-xs-12 suggestion clearfix" ng-repeat="item in authorPosts" >
@@ -111,20 +111,11 @@
 	          	  	  <h4>{{item.title | limitTo : 40}} {{item.title.length > 40 ? '...' : ''}}</h4>
 	          	  	  <h5>
 	          	  	  	  {{item.description | limitTo : 50 }}
-	          	  	  	  {{item.title.description.length > 50 ? '...' : ''}}
+	          	  	  	  {{item.description.length > 50 ? '...' : ''}}
 	          	  	  </h5>
 	          	  </div>
 	           </a>
           </div>
-          <hr />
           
-          <div class="clearfix"></div>
-          <div class="copy-right" style="margin-top:5em; background-color:#fff; padding:.6em">
-          	   <i class="icon fa fa-copyright"></i>
-			  palingram.com 2015  |
-			  <a href = "about.html" >About</a>  |
-			  <a href = "privacy.html">Privacy policy</a> |
-			  <a href = "contact.html">Contact</a>
-		 </div>
 	</div>
 </div>
