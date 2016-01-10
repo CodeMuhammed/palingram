@@ -37,7 +37,7 @@ angular.module('Auth' , ['User', 'Tags' , 'Posts'])
                 //console.log(data);
                 User.set(data);
                 isSignedIn = true;
-                promise.resolve("Signin successful");
+                promise.resolve("Signin successful"); //
             })
             .error(function(err){
                 promise.reject(err);

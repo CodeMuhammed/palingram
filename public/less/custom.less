@@ -219,7 +219,7 @@ nav {
    @media (max-width: @screen-sm-max) {
         z-index:1000;
     } 
-}
+} 
 
 .main-view-area{
    min-height:60em;
@@ -236,12 +236,16 @@ nav {
 }
 
 .header-illustration {
-    background-color:#343742;
     height:15em;
     padding:0;
     margin-top:50px;
     @media (max-width: @screen-sm-max) {
         margin-top:0px;
+    }
+    .inner {
+        padding:0;
+        height:15em;
+        background:hsla(0 ,0 ,0 ,.4);
     }
 }
 
@@ -268,7 +272,7 @@ nav {
         margin-bottom:2em
     }
     .sidemenu-container{
-        padding-left:2em !important;
+         //padding-left:2em !important;
          @media (max-width: @screen-sm-max) {
              padding-left:.2em !important;
          }
@@ -279,7 +283,7 @@ nav {
        .wobble{
          &:hover{
             a{
-               color:#fff;
+               color:#fff; 
             font-size : 1.2em;
             }
             
@@ -327,7 +331,7 @@ nav {
    .panel-subheader{
       padding:.5em 1em;
       font-weight:bolder;
-      font-size:1.2em;
+      font-size:1.2em; 
       b{
          color:#ccc;
       }
@@ -353,7 +357,7 @@ nav {
          border:3px solid #ccc;
          border-left:0px solid #ccc;
          border-right:0px solid #ccc;
-
+ 
          border-radius: 0px;
          .description{
              padding:1em;
