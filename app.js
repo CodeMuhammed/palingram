@@ -55,6 +55,11 @@ app.get('/allPosts' , function(req , res){
      });
 });
 
+app.get('/test' , function(req , res){
+	 console.log('test requested');
+	 res.status(200).send('<a>For test</a>');
+});
+
 //Start the app
 app.listen(app.get('port') , function(){
 	console.log('Server running on port ' ,app.get('port'));
