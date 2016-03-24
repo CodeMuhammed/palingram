@@ -1,52 +1,29 @@
-frame.html<!DOCTYPE html>
-<html lang="en">
-   <head>
-       <title>Frame here</title>
-   </head>
-   <body>
-	      <div class="col-xs-12" style="min-height:20em; border:1px solid #ccc"> 
-	      	  <iframe src="http://linkshrink.net/7YYJHv" width="100%" height="1000"></iframe> 
-	      </div>
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My First jQuery Program</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" ></script>
+		 <script type="text/javascript">
+            
+			
+			var myFn = function(thisE){
+				$(document).ready(function() {
+			       console.log($(thisE).children().context.children() );
+				});
+			}
+        </script>
+    </head>
+	
+    <body>
+	    <a id="item">my item to click</a>
+        <div class="col-xs-12" style="min-height:20em; border:1px solid #ccc"> 
+		  <iframe id="frame" src="http://linkshrink.net/7YYJHv" width="100%" height="1000" onload='myFn(this)'>
+	    </div>
       
-     
-	      <!--shortest web script here-->
-	      <script type="text/javascript">//<![CDATA[ 
-			(function() {
-				var configuration = {
-				"token": "975a21feb61d3507cd64cd11aa98f192",
-				"excludeDomains": [
-					""
-				],
-				"capping": {
-					"limit": 5,
-					"timeout": 24
-				},
-				"entryScript": {
-					"type": "timeout",
-					"timeout": 3000,
-					"capping": {
-						"limit": 5,
-						"timeout": 24
-					}
-				},
-				"exitScript": {
-					"enabled": true
-				},
-				"popUnder": {
-					"enabled": true
-				}
-			};
-				var script = document.createElement('script');
-				script.async = true;
-				script.src = '//cdn.shorte.st/link-converter.min.js';
-				script.onload = script.onreadystatechange = function () {var rs = this.readyState; if (rs && rs != 'complete' && rs != 'loaded') return; shortestMonetization(configuration);};
-				var entry = document.getElementsByTagName('script')[0];
-				entry.parentNode.insertBefore(script, entry);
-			})();
-		</script>
-
-		<!--Linkshrink web script ghostip21-->
-		<script type="text/javascript">var lsKey = 'ENz';var lsDomain = 1;var lsFpE = false;var lsEnE = true;var lsEnT = 3000;var lsEnHr = 2;var lsExE = true;var exclude_domains = [];</script><script src="http://linkshrink.net/fp.js"></script>
+		
 		<!--popcash web script-->
 		<script type="text/javascript">
 			var uid = '102429';
@@ -54,6 +31,9 @@ frame.html<!DOCTYPE html>
 			</script>
 			<script type="text/javascript" src="http://cdn.popcash.net/pop.js">
 		</script> 
+	
+	    
+       
 
-   </body>
+    </body>
 </html>
