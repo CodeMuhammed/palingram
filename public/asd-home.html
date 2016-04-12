@@ -6,16 +6,17 @@
 	
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	
+	<script src="js/vendors/jquery.min.js"></script>
 </head>
 <body>
+    <a id="hidden" href="http://www.palingram.com">.</a>
 	<h4>Redirecting to website.... Please click the button below to continue manually</h4><br>
 	<div style="width:300px; border: 1px solid #fff; height:300px; position:relative">
 	    <div style="position:absolute; width:200px; height:100px; margin-left:15px; background-color:#fff;z-index:100000">
 		    <h4 style="color:green; margin-top:40px;margin-left:80px"><b>Continue</b></h4>
 		</div>
 		<div style="position:absolute; width:300px; height:100px; background-color:#fff;z-index:10000; border:1px solid #ccc">
-		    <ins class="bmadblock-56b0d16a0d21353354ff124e" style="display:inline-block;width:300px;height:100px;"></ins>
+		    <ins id="ad-btn" class="bmadblock-56b0d16a0d21353354ff124e" style="display:inline-block;width:300px;height:100px;"></ins>
             <script async type="application/javascript" src="//ad.bitmedia.io/js/adbybm.js/56b0d16a0d21353354ff124e"></script>
 		    
 		</div>
@@ -27,6 +28,32 @@
 		 <ins class="bmadblock-56d3783e30242d132c72284c" style="display:inline-block;width:300px;height:250px;"></ins>
          <script async type="application/javascript" src="//ad.bitmedia.io/js/adbybm.js/56d3783e30242d132c72284c"></script>
 	</div>
+	
+	<!--Custom scripts-->
+	<script>
+	     'use strict';
+	     $(document).ready(function(){
+		      function redirectOnce(){
+			     let called = false;
+			     function calledHere(){
+				     if(called){
+					     console.log('Redirecting please wait');
+					 }
+					 else{
+					    called = true;
+					    $('a#hidden').get(0).click();
+					 }
+				 }
+				 
+				 return calledHere;
+			  }
+			  
+			  var once = redirectOnce();
+		      $('#ad-btn').click(function(e){
+			       once();
+			  });
+		 });
+	</script>
 </body>
 </html>
 
