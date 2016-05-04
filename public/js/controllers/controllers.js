@@ -319,87 +319,51 @@ angular.module('palingram')
 		 $scope.Awebs = [
 		    {
 				title:'aa',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'aa',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/3472381'
 			},
 			{
 				title:'ab',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019488'
 			},
 			{
 				title:'ac',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019490'
 			},
 			{
 				title:'ad',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019491'
 			},
 			{
 				title:'ae',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019496'
 			},
 			{
 				title:'af',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019497'
 			},
 			{
 				title:'ag',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019498'
 			},
 			{
 				title:'ah',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019499'
 			},
 			{
 				title:'ai',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019500'
 			},
 			{
 				title:'aj',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019501'
 			},
 			{
 				title:'ak',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019502'
 			},
 			{
 				title:'al',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'am',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'an',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'ao',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'ap',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'aq',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'ar',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'as',
-				link:'https://adfoc.us/1234567'
-			},
-			{
-				title:'at',
-				link:'https://adfoc.us/1234567'
+				link:'http://adfoc.us/34723858019531'
 			}
 		 ];
          //subscribe user to mailing list
