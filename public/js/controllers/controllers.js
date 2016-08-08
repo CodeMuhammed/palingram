@@ -1050,12 +1050,6 @@ angular.module('palingram')
             return promise.promise;
         };
 
-
-
-        var fblinks = "SunCoastMLM/,423224154383506/,182333858497701/,136743439694235/,postyourbusiness/,pinoyonlinebusinessgroup/" ;
-
-          $scope.links = fblinks.split(',');
-
    })
 
 .directive('sideMenu' , function(){

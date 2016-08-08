@@ -62,22 +62,21 @@
 			 </form>
 		</div>
          
-         <div class="panel-heading" style="background-color:#fff;">
-			  <div class="alert text-center">
-			  	   <button class="btn btn-default pull-left disabled">Investment</button>
-			  	   <button class="btn btn-default disabled">Gross</button>
-			  	   <button class="btn btn-default pull-right disabled">Profit</button>
-			  </div>
-		 </div>
-
-
-	     <div class="panel-body tradr-results">
-			  <div class="alert text-center" ng-class="item.status ? 'alert-success' : 'alert-danger'" ng-repeat = "item in completed | orderBy:'-date'">
-			  	   <button class="btn btn-default pull-left">{{item.stake | currency: 'NGN '}}</button>
-			  	   <button class="btn btn-default">{{item.gross | currency: 'NGN '}}</button>
-			  	   <button class="btn btn-default pull-right">{{item.net | currency: 'NGN '}}</button>
-			  </div>
-		 </div>
+		 <table class="table table-striped">
+		     <thead>
+			    <th>Investment</th>
+				<th>Gross</th>
+				<th>Profit</th>
+			 </thead>
+			 <tbody>
+			     <tr class="alert text-center" ng-class="item.status ? 'alert-success' : 'alert-danger'" ng-repeat = "item in completed | orderBy:'-date'">
+				    <td>{{item.stake | currency: 'NGN '}}</td>
+					<td>{{item.gross | currency: 'NGN '}}</td>
+					<td>{{item.net | currency: 'NGN '}}</td>
+				 </tr>
+			 </tbody>
+		 </table>
+        
 	 </div>
 
 	 

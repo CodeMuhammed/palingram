@@ -164,7 +164,7 @@ angular.module('palingram' , ['ngResource' ,'mgcrea.ngStrap' , 'ngSanitize','720
             templateUrl: 'views/searchTpl.html'
         };
 })
- .directive('jsLoader', function($timeout , $http) {
+.directive('jsLoader', function($timeout , $http) {
 
         return {
             restrict: 'A',
