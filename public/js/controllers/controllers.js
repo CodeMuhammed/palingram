@@ -875,7 +875,7 @@ angular.module('palingram')
    })
 
    .controller('gamblrCtrl' , function($scope , $timeout, $rootScope , $q , $http  , BaseUrl){
-          $scope.title = 'Tradr.pw';
+          $scope.title = 'Tradr';
           $scope.setting = false;
 
           $scope.counter = 0;
@@ -943,14 +943,8 @@ angular.module('palingram')
           };
           
           $scope.bet =  function(odd){
-              if($scope.counter == 8){
-                  $rootScope.$broadcast('loading:start' , {msg : 'updating results on server....'});
-                  $scope.updateTradrServer().then(function(status){
-                      $rootScope.$broadcast('loading:end' , {msg : status});
-                      $scope.reset();
-                  } , function(err){
-                      $rootScope.$broadcast('loading:end' , {msg : err});
-                  });
+              if($scope.counter == 8) {
+                  $scope.reset();
               } 
               else if($scope.odd <= 1 ){
                   alert('invalid pip');
@@ -1024,32 +1018,6 @@ angular.module('palingram')
              $scope.selectedTeam = team;
              $scope.teamMenu = false;
          };
-
-         //Data synchroniser
-        $scope.updateTradrServer = function(){
-            var promise = $q.defer();
-
-            var query = {
-               bets : angular.copy($scope.completed),
-               team : $scope.selectedTeam,
-               date : Date.now()
-            };
-
-            $http({
-               method : 'POST',
-               url : BaseUrl+'/tradr/update',
-               data : query
-            })
-            .success(function(result){
-                promise.resolve(result);
-            })
-            .error(function(err){
-                promise.resolve(err);
-            });
-            
-            return promise.promise;
-        };
-
    })
 
 .directive('sideMenu' , function(){
